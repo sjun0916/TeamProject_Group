@@ -7,11 +7,14 @@
 	<!-- 여러가지 기본 옵션을 지정합니다. -->
 	<settings>
 		<!-- 오라클 필드 속성이 READ_COUNT 처럼 언더 스코어가 있을 때 VO 의 readCount 처럼 카멜 케이스로 변환 되게합니다. -->
+		<setting name="cacheEnable" value="false"/>
+		<setting name="useGeneratedKeys" value="false"/>
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 	</settings>
 	
+	<!-- VO에 등록한 별명을 등록 -->
 	<typeAliases>
-		<typeAlias alias="memberVO" type="com.group.vo.memberVO" />
+		<typeAlias alias="memberVO" type="com.group.vo.MemberVO" />
 	</typeAliases>
 	
 </configuration>

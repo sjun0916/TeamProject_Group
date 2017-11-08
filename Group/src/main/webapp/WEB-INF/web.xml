@@ -23,6 +23,8 @@
 			<!-- 설정에 사용되는 파일 경로 -->
 			<param-value>
 			/WEB-INF/spring/appServlet/servlet-context.xml
+			classpath:spring-controller.xml
+			classpath:service-dao.xml
 			</param-value>
 		</init-param>
 		<!-- 서버 실행 시 로드하도록 -->

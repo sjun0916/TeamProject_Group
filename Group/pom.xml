@@ -141,9 +141,15 @@
 		</dependency>
 		<!-- oracle: 오라클db와 연동하는 라이브러리 -->
 		<dependency>
-			<groupId>com.oracle</groupId>
+			<groupId>oracle</groupId>
 			<artifactId>ojdbc6</artifactId>
-			<version>12.1.0.2</version>
+			<version>11.2.0.3</version>
+		</dependency>
+		<!-- hibernate: 하이버네이트 의존 추가(자바에서 지원하는 유효성 검증기능) -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.1.3.Final</version>
 		</dependency>
 		
 		<!-- Test -->

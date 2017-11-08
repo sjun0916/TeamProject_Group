@@ -2,10 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!-- ex) -->
 <!-- 맵핑될 DAO 인터페이스의 name 을 줍니다. -->
 <mapper namespace="MemberDAO">
-	<!-- id 속성은 DAO 의 메소드와 같아야 한다. 여기의 MemberVO 는 mybatis-confg.xml 에 Alias 되어있습니다. -->
-	<select id="selectMemberList" resultType="MemberVO"> SELECT NUM , NAME ,
+	<!-- id 속성은 DAO 의 메소드와 같아야 한다. 여기의 memberVO 는 mybatis-confg.xml 에 Alias 되어있습니다. -->
+	<select id="selectMemberList" resultType="memberVO"> SELECT NUM , NAME ,
 		TITLE , CONTENT , READ_COUNT , WRITE_DATE FROM TB_BOARD ORDER BY NUM
 		DESC </select>
 </mapper>
+
+<!-- 다른 테이블 쿼리문은 이 파일 복붙해서 쓰기 -->
