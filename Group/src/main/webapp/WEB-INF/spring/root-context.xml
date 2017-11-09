@@ -51,5 +51,4 @@ http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	<!-- 아노테이션 기반의 트랜잭션을 사용합니다. -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-	<!-- 위에서 만든 Dao클래스를 이용하여 Bean 추가 (service-dao.xml) -->
 </beans>
