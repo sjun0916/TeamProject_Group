@@ -1,14 +1,21 @@
 package com.group.dao;
 
-import java.util.List;
+import javax.servlet.http.HttpSession;
 
 import com.group.vo.MemberVO;
 
+
+//sqlmap/sql_member.xml에 등록한 쿼리문 매핑 등록
 public interface MemberDao {
-	//sqlmap/sql_member.xml에 등록한 쿼리문 매핑 등록
-	public abstract List<MemberVO> list();
+	// 01. 로그인 체크
+	public boolean loginCheck(MemberVO vo);
 	
-	public abstract void insert(MemberVO memberVO);
+	// 02. 로그인 정보
+	public MemberVO veiwMember(MemberVO vo);
 	
-	public abstract MemberVO select(int membernum);
+	// 03. 로그아웃
+	public void logout(HttpSession session);
+	
+	
+
 }

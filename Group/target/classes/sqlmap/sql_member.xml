@@ -3,31 +3,18 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 맵핑될 DAO 인터페이스의 name 을 줍니다. -->
-<mapper namespace="MemberDAO">
+<mapper namespace="member">
 	<!-- id 속성은 DAO 의 메소드와 같아야 한다. 여기의 memberVO 는 Mybatis-confg.xml 에 Alias 되어있습니다. -->
 	
-	<!-- 등록된 사원 목록 보기 -->
-	<select id="list" resultType="memberVO">
-	select * from MEMBER
-	order by MEMBERNUM
+	<!-- 로그인 체크 -->
+	<select id="loginCheck" resultType="String">
+		select NAME from MEMBER where #{ID}, #{PASSWORD}
 	</select>
 	
-	<!-- 선택한 사원 보기 -->
-	<select id="select" parameterType="int" resultType="memberVO">
-	select * from MEMBER
-	where MEMBERNUM = #{MEMBERNUM}
+	<!-- 로그인 정보 -->
+	<select id="veiwMember" resultType="MemberVO">
+	select * from MEMBER where #{ID}, #{PASSWORD}
 	</select>
-	
-	<!-- 회원 등록 -->
-	<insert id="insert" parameterType="memberVO">
-	insert into MEMBER
-	(MEMBERNUM, RANKNAME, DEPARTNAME, ID, PASSWORD, NAME, EMAIL, PHONE, 
-	BRITH, ADDRESS1, ADDRESS2, JOIN, PHOTO, SIGN, MEMSTATUS, ADMIN)
-	values
-	(MEMBER_SEQ.nextval, #{RANKNAME}, #{DEPARTNAME}, #{ID}, #{PASSWORD}, 
-	#{NAME}, #{EMAIL}, #{PHONE}, #{BIRTH}, #{ADDRESS1}, #{ADDRESS2}, 
-	#{JOIN}, #{PHOTO}, #{SIGN}, 0, 0)
-	</insert>
 </mapper>
 
 <!-- 다른 테이블 쿼리문은 이 파일 복붙해서 쓰기 -->

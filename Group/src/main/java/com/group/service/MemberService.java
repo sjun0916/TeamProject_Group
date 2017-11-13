@@ -1,13 +1,18 @@
 package com.group.service;
 
-import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import com.group.vo.MemberVO;
 
 public interface MemberService {
-	public abstract List<MemberVO> list();
+	// 01. 로그인 체크
+	public boolean loginCheck(MemberVO vo, HttpSession session);
 	
-	public abstract void insert(MemberVO memberVO);
+	// 02. 로그인 정보
+	public MemberVO veiwMember(MemberVO vo);
 	
-	public abstract MemberVO select(int membernum);
+	// 03. 로그아웃
+	public void logout(HttpSession session);
+	
 }
