@@ -34,7 +34,7 @@
 	<!-- 매핑 설정 / 최상위 경로 요청을 appServlet으로 처리하도록 매핑 -->
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>list.do</url-pattern>
 	</servlet-mapping>
 
 	<!-- 인코딩 설정 -->

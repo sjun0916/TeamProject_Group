@@ -21,8 +21,12 @@
 	<!-- 회원 등록 -->
 	<insert id="insert" parameterType="memberVO">
 	insert into MEMBER
-	(MEMBERNUM, RANKNAME, DEPARTNAME, ID, PASSWORD, NAME, EMAIL, 
-	PHONE, BRITH, ADDRESS1)
+	(MEMBERNUM, RANKNAME, DEPARTNAME, ID, PASSWORD, NAME, EMAIL, PHONE, 
+	BRITH, ADDRESS1, ADDRESS2, JOIN, PHOTO, SIGN, MEMSTATUS, ADMIN)
+	values
+	(MEMBER_SEQ.nextval, #{RANKNAME}, #{DEPARTNAME}, #{ID}, #{PASSWORD}, 
+	#{NAME}, #{EMAIL}, #{PHONE}, #{BIRTH}, #{ADDRESS1}, #{ADDRESS2}, 
+	#{JOIN}, #{PHOTO}, #{SIGN}, 0, 0)
 	</insert>
 </mapper>
 
