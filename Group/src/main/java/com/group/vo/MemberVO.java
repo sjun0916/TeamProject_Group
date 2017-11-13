@@ -6,4 +6,5 @@ import org.apache.ibatis.type.Alias;
 public class MemberVO {
 	//dto와 같은 역할
 	//getter / setter 추가
+	
 }
