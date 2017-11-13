@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.group.controller">
+	<logger name="com.group">
 		<level value="info" />
 	</logger>
 	
