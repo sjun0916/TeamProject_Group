@@ -1,5 +1,8 @@
 package com.group.vo;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("calendarVO")
 public class CalendarVO {
 	private int calNum;	//seqence로 설정됨
 	private int memberNum;
@@ -11,7 +14,7 @@ public class CalendarVO {
 
 	//생성자
 	public CalendarVO() {}
-	//te
+	
 	//getter() /setter()
 	public int getCalNum() {
 		return calNum;

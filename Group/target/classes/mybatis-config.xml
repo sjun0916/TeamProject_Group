@@ -15,6 +15,7 @@
 	<!-- VO에 등록한 별명을 등록 -->
 	<typeAliases>
 		<typeAlias alias="memberVO" type="com.group.vo.MemberVO" />
+		<typeAlias alias="calendarVO" type="com.group.vo.CalendarVO" />
 	</typeAliases>
 	
 </configuration>

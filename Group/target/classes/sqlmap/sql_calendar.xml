@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 맵핑될 DAO 인터페이스의 name 을 줍니다. -->
+<mapper namespace="CalendarDao">
+	<!-- id 속성은 DAO 의 메소드와 같아야 한다. 여기의 memberVO 는 Mybatis-confg.xml 에 Alias 되어있습니다. -->
+	
+	<!-- 등록된 전체 일정 목록 보기 -->
+	<select id="list" resultType="CalendarVO">
+	select * from CALENDAR
+	order by CALENDARNUM
+	</select>
+	
+	<!-- 선택한 일정 보기 -->
+	<select id="select" parameterType="int" resultType="CalendarVO">
+	select * from CALENDAR
+	where CALENDARNUM = #{CALENDARNUM}
+	</select>
+	
+	<!-- 일정 등록 -->
+	<insert id="insert" parameterType="CalendarVO">
+	insert into CALENDAR
+	(CALENDARNUM, MEMBERNUM, STARTDATE, ENDDATE, TITLE, CONTENT, KIND)
+	</insert>
+	<!--일정 수정 -->
+	<update id="update" parameterType="CalendarVO">
+	update CALENDAR set STARTDATE=#{STARTDATE}, ENDDATE=#{ENDDATE}, TITLE=#{TITLE}, 
+	CONTENT=#{CONTENT}, KIND=#{KIND} where CALENDARNUM=#{CALENDARNUM}
+	</update>
+	<!-- 일정 삭제 -->
+	<delete id="delete" parameterType="CalendarVO">
+	delete from CALENDAR where CALENDARNUM=#{CALENDARNUM}
+	</delete>
+</mapper>
+
+<!-- 다른 테이블 쿼리문은 이 파일 복붙해서 쓰기 -->
