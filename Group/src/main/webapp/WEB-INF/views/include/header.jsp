@@ -3,6 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+function fn_formSubmit(){
+	document.form1.submit();	
+}
+</script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>HelloIT</title>
