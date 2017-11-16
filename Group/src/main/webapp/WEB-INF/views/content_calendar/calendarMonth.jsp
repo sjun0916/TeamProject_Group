@@ -23,7 +23,7 @@
 	<section class="content container-fluid">
 		
 		<table>
-			<c:forEach ${monthInfo}
+			
 			<tr>
 				<td>
 					<input type="button" value="회사" name="company">&nbsp;
