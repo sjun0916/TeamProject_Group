@@ -10,19 +10,17 @@ import com.group.vo.MonthVO;
 @Service // 현재 클래스를 스프링에서 관리하는 service bean으로 등록
 public class CalendarServiceImpl implements CalendarService{
 	
+	private MonthVO monthVO = null;
 	//month calendar view
 	@Override
-	public MonthVO monthView(String y, String m) {
-		MonthVO monthVO = null;
-		if(y != null && m != null) {
-			monthVO = new MonthVO(y, m);
-		}else {
-			monthVO = new MonthVO(y, m);
-		}
-		
+	public MonthVO monthView() {
+		this.monthVO = new MonthVO();
 		return monthVO;
 	}
-
+	public MonthVO monthView(String year, String month) {
+		this.monthVO = new MonthVO(year, month);
+		return monthVO;
+	}
 	@Override
 	public List<CalendarVO> viewList() {
 		// TODO Auto-generated method stub

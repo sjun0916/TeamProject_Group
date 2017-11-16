@@ -21,11 +21,25 @@
 
 	<!-- ì»¨íí¸ ë©ì¸ -->
 	<section class="content container-fluid">
-
-		<input type="button" value="회사" name="company">&nbsp;
-		<input type="button" value="부서" name="class">&nbsp;
-		<input type="button" value="개인" name="personal">
-
+		
+		<table>
+			<c:forEach ${monthInfo}
+			<tr>
+				<td>
+					<input type="button" value="회사" name="company">&nbsp;
+				</td>
+				<td>
+					<input type="button" value="부서" name="class">&nbsp;
+				</td>
+				<td>
+					<input type="button" value="개인" name="personal">
+				</td>
+				<td>
+				
+				</td>
+			</tr>
+		
+		</table>
 	</section>
 	<!-- /.content -->
 </div>

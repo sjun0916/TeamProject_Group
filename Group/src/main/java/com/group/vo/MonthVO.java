@@ -72,4 +72,7 @@ public class MonthVO {
 	public void setCal(Calendar cal) {
 		this.cal = cal;
 	}
+	public MonthVO monthInfo() {
+		return this;
+	}
 }

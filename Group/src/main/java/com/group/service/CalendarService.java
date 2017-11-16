@@ -22,6 +22,7 @@ public interface CalendarService {
 		
 	
 	// 01. 달력표시
+	public abstract MonthVO monthView();
 	public abstract MonthVO monthView(String year, String month);
 	
 	// 02. 공휴일 지정
