@@ -14,7 +14,7 @@ public class CalendarController {
 	
 	@RequestMapping(value="/calendar")
 	public String list(Model model) {
-		model.addAttribute("calendarList",calendarService.monthView(request, response, year, month));
+		model.addAttribute("monthInfo",calendarService.monthView(year, month));
 		return "content_calendar/calendarMonth";
 	}
 }

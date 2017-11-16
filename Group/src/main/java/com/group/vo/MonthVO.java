@@ -2,7 +2,7 @@ package com.group.vo;
 
 import java.util.Calendar;
 
-public class monthVO {
+public class MonthVO {
 	private int year;
 	private int month;
 	private int day;
@@ -12,12 +12,12 @@ public class monthVO {
 	
 	Calendar cal = Calendar.getInstance();
 	
-	public monthVO() {
+	public MonthVO() {
 		year = cal.get(Calendar.YEAR);
 		month = cal.get(Calendar.MONTH);
 		otherSet();
 	}
-	public monthVO(String year, String month) {
+	public MonthVO(String year, String month) {
 		this.year = Integer.parseInt(year);
 		this.month = Integer.parseInt(month);
 		otherSet();

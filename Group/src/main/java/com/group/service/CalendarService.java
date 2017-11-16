@@ -2,10 +2,8 @@ package com.group.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.group.vo.CalendarVO;
+import com.group.vo.MonthVO;
 
 public interface CalendarService {
 	
@@ -24,8 +22,7 @@ public interface CalendarService {
 		
 	
 	// 01. 달력표시
-	public abstract boolean monthView(
-			HttpServletRequest request, HttpServletResponse response, String year, String month);
+	public abstract MonthVO monthView(String year, String month);
 	
 	// 02. 공휴일 지정
 	
