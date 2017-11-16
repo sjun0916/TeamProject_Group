@@ -105,7 +105,7 @@
                     <a href="#">calendar</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="#">logout</a>
+                    <a href="login.jsp">logout</a>
                   </div>
                 </div>
               </li>
