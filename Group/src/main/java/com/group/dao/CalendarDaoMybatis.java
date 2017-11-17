@@ -12,6 +12,7 @@ import com.group.vo.CalendarVO;
 public class CalendarDaoMybatis implements CalendarDao{
 	
 	private SqlSessionTemplate sqlSessionTemp;
+	
 	public void CalendarDaoMybatis(SqlSessionTemplate sqlSessionTemp) {
 		this.sqlSessionTemp = sqlSessionTemp;
 	}

@@ -3,11 +3,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%@ include file ="/WEB-INF/views/include/header.jsp" %>
-<script>
-function fn_formSubmit(){
-	document.form1.submit();	
-}
-</script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- ì»¨íí¸ í¤ë -->

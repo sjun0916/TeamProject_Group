@@ -3,6 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+function fn_formSubmit(){
+	document.form1.submit();	
+}
+</script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>HelloIT</title>
@@ -105,7 +110,7 @@
                     <a href="#">calendar</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="#">logout</a>
+                    <a href="login.jsp">logout</a>
                   </div>
                 </div>
               </li>
@@ -195,7 +200,7 @@
             </li>
         
         <li>
-        	<a href="#">
+        	<a href="/group/calendar">
         	<i class="fa fa-calendar"></i>
         	<span>일정</span>
         	</a>
