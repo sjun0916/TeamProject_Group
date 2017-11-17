@@ -200,7 +200,7 @@ function fn_formSubmit(){
             </li>
         
         <li>
-        	<a href="#">
+        	<a href="/group/calendar">
         	<i class="fa fa-calendar"></i>
         	<span>일정</span>
         	</a>
