@@ -4,7 +4,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.group.service.CalendarService;
-import com.group.vo.MonthVO;
+
 
 public class CalendarController {
 	private CalendarService calendarService;
@@ -14,8 +14,8 @@ public class CalendarController {
 	}
 	
 	@RequestMapping(value="/calendar")
-	public String month(Model model, MonthVO monthVO) {
-		model.addAttribute("monthInfo",calendarService.monthView());
+	public String month(Model model) {
+		
 		return "content_calendar/calendarMonth";
 	}
 }

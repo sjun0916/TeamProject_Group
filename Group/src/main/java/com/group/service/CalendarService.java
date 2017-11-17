@@ -3,7 +3,6 @@ package com.group.service;
 import java.util.List;
 
 import com.group.vo.CalendarVO;
-import com.group.vo.MonthVO;
 
 public interface CalendarService {
 	
@@ -21,9 +20,7 @@ public interface CalendarService {
 	public abstract void update(CalendarVO cal);
 		
 	
-	// 01. 달력표시
-	public abstract MonthVO monthView();
-	public abstract MonthVO monthView(String year, String month);
+	
 	
 	// 02. 공휴일 지정
 	
