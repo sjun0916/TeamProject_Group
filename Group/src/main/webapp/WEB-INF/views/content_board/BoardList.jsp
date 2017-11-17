@@ -13,7 +13,7 @@ function fn_formSubmit(){
 	<!-- ì»¨íí¸ í¤ë -->
 	<section class="content-header">
 		<h1>
-			Page Header <small>Optional description</small>
+			부서 게시판 <small>Board List</small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -24,7 +24,7 @@ function fn_formSubmit(){
 	<!-- ì»¨íí¸ ë©ì¸ -->
 	<section class="content container-fluid">
 
-		<a href="board5Form">글쓰기</a>
+		<a href="BoardForm">글쓰기</a>
 					
 	<table border="1" style="width:650px">
 		<caption>게시판</caption>
@@ -48,7 +48,7 @@ function fn_formSubmit(){
 		</thead>
 		<tbody>
 			<c:forEach var="listview" items="${listview}" varStatus="status">	
-				<c:url var="link" value="board5Read">
+				<c:url var="link" value="BoardRead">
 					<c:param name="brdno" value="${listview.brdno}" />
 				</c:url>		
 										  				

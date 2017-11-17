@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>board5</title>
+<%@ include file ="/WEB-INF/views/include/header.jsp" %>
 <script>
 function fn_formSubmit(){
 	var form1 = document.form1;
@@ -29,7 +25,7 @@ function fn_replyDelete(reno){
 	}
 	var form = document.form2;
 
-	form.action="board5ReplyDelete";
+	form.action="boardReplyDelete";
 	form.reno.value=reno;
 	form.submit();	
 } 
@@ -64,7 +60,7 @@ function fn_replyUpdateSave(){
 		return;
 	}
 	
-	form.action="board5ReplySave";
+	form.action="boardReplySave";
 	form.submit();	
 } 
 
@@ -80,10 +76,22 @@ function fn_replyUpdateCancel(){
 } 
 
 </script>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+	<!-- ì»¨íí¸ í¤ë -->
+	<section class="content-header">
+		<h1>
+			부서 게시판 <small>Board Content</small>
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+			<li class="active">Here</li>
+		</ol>
+	</section>
 
-</head>
-<body>
-		<table border="1" style="width:600px">
+	<!-- ì»¨íí¸ ë©ì¸ -->
+	<section class="content container-fluid">
+	<table border="1" style="width:600px">
 			<caption>게시판</caption>
 			<colgroup>
 				<col width='15%' />
@@ -113,12 +121,12 @@ function fn_replyUpdateCancel(){
 				</tr>
 			</tbody>
 		</table>    
-		<a href="board5List">돌아가기</a>
-		<a href="board5Delete?brdno=<c:out value="${boardInfo.brdno}"/>">삭제</a>
-		<a href="board5Form?brdno=<c:out value="${boardInfo.brdno}"/>">수정</a>
+		<a href="BoardList">돌아가기</a>
+		<a href="BoardDelete?brdno=<c:out value="${boardInfo.brdno}"/>">삭제</a>
+		<a href="BoardForm?brdno=<c:out value="${boardInfo.brdno}"/>">수정</a>
 		<p>&nbsp;</p>
 		<div style="border: 1px solid; width: 600px; padding: 5px">
-			<form name="form1" action="board5ReplySave" method="post">
+			<form name="form1" action="BoardReplySave" method="post">
 				<input type="hidden" name="brdno" value="<c:out value="${boardInfo.brdno}"/>"> 
 				작성자: <input type="text" name="rewriter" size="20" maxlength="20"> <br/>
 				<textarea name="rememo" rows="3" cols="60" maxlength="500" placeholder="댓글을 달아주세요."></textarea>
@@ -137,14 +145,16 @@ function fn_replyUpdateCancel(){
 		</c:forEach>
 
 		<div id="replyDiv" style="width: 99%; display:none">
-			<form name="form2" action="board5ReplySave" method="post">
+			<form name="form2" action="BoardReplySave" method="post">
 				<input type="hidden" name="brdno" value="<c:out value="${boardInfo.brdno}"/>"> 
 				<input type="hidden" name="reno"> 
 				<textarea name="rememo" rows="3" cols="60" maxlength="500"></textarea>
 				<a href="#" onclick="fn_replyUpdateSave()">저장</a>
 				<a href="#" onclick="fn_replyUpdateCancel()">취소</a>
 			</form>
-		</div>
-							
-</body>
-</html>
+
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<%@ include file ="/WEB-INF/views/include/footer.jsp" %>
