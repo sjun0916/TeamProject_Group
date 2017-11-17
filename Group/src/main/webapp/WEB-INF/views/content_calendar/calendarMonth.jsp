@@ -38,13 +38,13 @@
 function month_onchange(){
 	var month = smonth.value;
 	var year = syear.value;
-	var addr = "NewFile.jsp?year="+year+"&month="+month;
+	var addr = "calendarMonth.jsp?year="+year+"&month="+month;
 	location.href=addr;
 }
 function year_onchange(){
 	var year = syear.value;
 	var month = smonth.value;
-	var addr = "NewFile.jsp?year="+year"&month="+month;
+	var addr = "calendarMonth.jsp?year="+year"&month="+month;
 	
 	location.href=addr;
 }
@@ -65,16 +65,16 @@ function year_onchange(){
 	<!-- ì»¨íí¸ ë©ì¸ -->
 	<section class="content container-fluid">
 		
-		<table>
+		<table border="1">
 			
 			<tr>
-				<td>
+				<td width="50">
 					<input type="button" value="회사" name="company">&nbsp;
 				</td>
-				<td>
+				<td width="50">
 					<input type="button" value="부서" name="class">&nbsp;
 				</td>
-				<td>
+				<td width="50">
 					<input type="button" value="개인" name="personal">
 				</td>
 				
@@ -98,7 +98,7 @@ function year_onchange(){
 				</td>
 		</table>
 		
-		<table>
+		<table border="1">
 		<tr>
 			
 			<td width="100" height="100">월</td>

@@ -1,11 +1,12 @@
 package com.group.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.group.service.CalendarService;
 
-
+@Controller
 public class CalendarController {
 	private CalendarService calendarService;
 	
