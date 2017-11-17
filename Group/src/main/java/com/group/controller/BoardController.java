@@ -15,22 +15,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.group.common.FileUtil;
 import com.group.common.FileVO;
 import com.group.common.SearchVO;
-import com.group.service.Board5Svc;
+import com.group.service.BoardService;
 import com.group.vo.BoardReplyVO;
 import com.group.vo.BoardVO;
 
 @Controller 
-public class Board5Ctr {
+public class BoardController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(Board5Ctr.class);
+	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 
     @Autowired
-    private Board5Svc boardSvc;
+    private BoardService boardSvc;
     
     /**
      * 리스트.
      */
-    @RequestMapping(value = "/board5List")
+    @RequestMapping(value = "/BoardList")
     public String boardList(SearchVO searchVO, ModelMap modelMap) {
 
         searchVO.pageCalculate( boardSvc.selectBoardCount(searchVO) ); // startRow, endRow
@@ -46,66 +46,66 @@ public class Board5Ctr {
     /** 
      * 글 쓰기. 
      */
-    @RequestMapping(value = "/board5Form")
+    @RequestMapping(value = "/BoardForm")
     public String boardForm(HttpServletRequest request, ModelMap modelMap) {
         String brdno = request.getParameter("brdno");
         if (brdno != null) {
             BoardVO boardInfo = boardSvc.selectBoardOne(brdno);
-            List<?> listview = boardSvc.selectBoard5FileList(brdno);
+            List<?> listview = boardSvc.selectBoardFileList(brdno);
         
             modelMap.addAttribute("boardInfo", boardInfo);
             modelMap.addAttribute("listview", listview);
         }
         
-        return "/content_board/BoardForm";
+        return "content_board/BoardForm";
     }
     
     /**
      * 글 저장.
      */
-    @RequestMapping(value = "/board5Save")
+    @RequestMapping(value = "/BoardSave")
     public String boardSave(HttpServletRequest request, BoardVO boardInfo) {
         String[] fileno = request.getParameterValues("fileno");
-        
+        System.out.println(boardInfo.getUploadfile());
         FileUtil fs = new FileUtil();
         List<FileVO> filelist = fs.saveAllFiles(boardInfo.getUploadfile());
 
         boardSvc.insertBoard(boardInfo, filelist, fileno);
 
-        return "redirect:/board5List";
+        return "redirect:/BoardList";
     }
 
     /**
      * 글 읽기.
      */
-    @RequestMapping(value = "/board5Read")
-    public String board5Read(HttpServletRequest request, ModelMap modelMap) {
+    @RequestMapping(value = "/BoardRead")
+    public String boardRead(HttpServletRequest request, ModelMap modelMap) {
         
         String brdno = request.getParameter("brdno");
         
-        boardSvc.updateBoard5Read(brdno);
+        boardSvc.updateBoardRead(brdno);
         BoardVO boardInfo = boardSvc.selectBoardOne(brdno);
-        List<?> listview = boardSvc.selectBoard5FileList(brdno);
-        List<?> replylist = boardSvc.selectBoard5ReplyList(brdno);
+        List<?> listview = boardSvc.selectBoardFileList(brdno);
+        List<?> replylist = boardSvc.selectBoardReplyList(brdno);
         
         modelMap.addAttribute("boardInfo", boardInfo);
         modelMap.addAttribute("listview", listview);
         modelMap.addAttribute("replylist", replylist);
         
-        return "/content_board/BoardRead";
+        return "content_board/BoardRead";
     }
     
     /**
      * 글 삭제.
      */
-    @RequestMapping(value = "/board5Delete")
+    @RequestMapping(value = "/BoardDelete")
     public String boardDelete(HttpServletRequest request) {
         
         String brdno = request.getParameter("brdno");
         
         boardSvc.deleteBoardOne(brdno);
         
-        return "redirect:/board5List";
+        return "redirect:/BoardList";
     }
 
     /* ===================================================================== */
@@ -113,22 +113,22 @@ public class Board5Ctr {
     /**
      * 댓글 저장.
      */
-    @RequestMapping(value = "/board5ReplySave")
-    public String board5ReplySave(HttpServletRequest request, BoardReplyVO boardReplyInfo) {
+    @RequestMapping(value = "/BoardReplySave")
+    public String boardReplySave(HttpServletRequest request, BoardReplyVO boardReplyInfo) {
         
         boardSvc.insertBoardReply(boardReplyInfo);
 
-        return "redirect:/board5Read?brdno=" + boardReplyInfo.getBrdno();
+        return "redirect:/BoardRead?brdno=" + boardReplyInfo.getBrdno();
     }
     
     /**
      * 댓글 삭제.
      */
-    @RequestMapping(value = "/board5ReplyDelete")
-    public String board5ReplyDelete(HttpServletRequest request, BoardReplyVO boardReplyInfo) {
+    @RequestMapping(value = "/BoardReplyDelete")
+    public String boardReplyDelete(HttpServletRequest request, BoardReplyVO boardReplyInfo) {
         
-        boardSvc.deleteBoard5Reply(boardReplyInfo.getReno());
+        boardSvc.deleteBoardReply(boardReplyInfo.getReno());
 
-        return "redirect:/board5Read?brdno=" + boardReplyInfo.getBrdno();
+        return "redirect:/BoardRead?brdno=" + boardReplyInfo.getBrdno();
     }      
 }

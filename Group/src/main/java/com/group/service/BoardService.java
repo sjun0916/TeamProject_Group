@@ -18,7 +18,7 @@ import com.group.vo.BoardReplyVO;
 import com.group.vo.BoardVO;
 
 @Service
-public class Board5Svc {
+public class BoardService {
 
     @Autowired
     private SqlSessionTemplate sqlSession;    
@@ -26,11 +26,11 @@ public class Board5Svc {
     private DataSourceTransactionManager txManager;
         
     public Integer selectBoardCount(SearchVO param) {
-        return sqlSession.selectOne("selectBoard5Count", param);
+        return sqlSession.selectOne("selectBoardCount", param);
     }
     
     public List<?> selectBoardList(SearchVO param) {
-        return sqlSession.selectList("selectBoard5List", param);
+        return sqlSession.selectList("selectBoardList", param);
     }
     
     /**
@@ -43,20 +43,20 @@ public class Board5Svc {
         
         try {
             if (param.getBrdno() == null || "".equals(param.getBrdno())) {
-                 sqlSession.insert("insertBoard5", param);
+                 sqlSession.insert("insertBoard", param);
             } else {
-                sqlSession.update("updateBoard5", param);
+                sqlSession.update("updateBoard", param);
             }
             
             if (fileno != null) {
                 HashMap<String, String[]> fparam = new HashMap<String, String[]>();
                 fparam.put("fileno", fileno);
-                sqlSession.insert("deleteBoard5File", fparam);
+                sqlSession.insert("deleteBoardFile", fparam);
             }
             
             for (FileVO f : filelist) {
                 f.setParentPK(param.getBrdno());
-                sqlSession.insert("insertBoard5File", f);
+                sqlSession.insert("insertBoardFile", f);
             }
             txManager.commit(status);
         } catch (TransactionException ex) {
@@ -66,38 +66,38 @@ public class Board5Svc {
     }
  
     public BoardVO selectBoardOne(String param) {
-        return sqlSession.selectOne("selectBoard5One", param);
+        return sqlSession.selectOne("selectBoardOne", param);
     }
     
-    public void updateBoard5Read(String param) {
-        sqlSession.insert("updateBoard5Read", param);
+    public void updateBoardRead(String param) {
+        sqlSession.insert("updateBoardRead", param);
     }
     
     public void deleteBoardOne(String param) {
-        sqlSession.delete("deleteBoard5One", param);
+        sqlSession.delete("deleteBoardOne", param);
     }
     
-    public List<?> selectBoard5FileList(String param) {
-        return sqlSession.selectList("selectBoard5FileList", param);
+    public List<?> selectBoardFileList(String param) {
+        return sqlSession.selectList("selectBoardFileList", param);
     }
     
     
     /**
      * 댓글. 
      */
-    public List<?> selectBoard5ReplyList(String param) {
-        return sqlSession.selectList("selectBoard5ReplyList", param);
+    public List<?> selectBoardReplyList(String param) {
+        return sqlSession.selectList("selectBoardReplyList", param);
     }
     
     public void insertBoardReply(BoardReplyVO param) {
         if (param.getReno()==null || "".equals(param.getReno())) {
-            sqlSession.insert("insertBoard5Reply", param);
+            sqlSession.insert("insertBoardReply", param);
         } else {
-            sqlSession.insert("updateBoard5Reply", param);
+            sqlSession.insert("updateBoardReply", param);
         }
     }   
     
-    public void deleteBoard5Reply(String param) {
-        sqlSession.delete("deleteBoard5Reply", param);
+    public void deleteBoardReply(String param) {
+        sqlSession.delete("deleteBoardReply", param);
     }    
 }

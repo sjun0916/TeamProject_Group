@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
-<mapper namespace="board5">
+<mapper namespace="Board">
     <sql id="includeBoard">
         WHERE BRDDELETEFLAG='N'
          <if test="searchKeyword!=null and searchKeyword!='' and searchType!=''">
@@ -11,13 +11,13 @@
         </if>               
     </sql>
 
-    <select id="selectBoard5Count" resultType="Integer" parameterType="com.group.common.SearchVO">
+    <select id="selectBoardCount" resultType="Integer" parameterType="com.group.common.SearchVO">
         SELECT COUNT(*)
           FROM TBL_BOARD
          <include refid="includeBoard"/>
     </select> 
     
-    <select id="selectBoard5List" resultType="com.group.vo.BoardVO" parameterType="com.group.common.SearchVO">
+    <select id="selectBoardList" resultType="com.group.vo.BoardVO" parameterType="com.group.common.SearchVO">
         SELECT BRDNO, BRDTITLE, BRDWRITER, TO_CHAR(BRDDATE,'yyyy-mm-dd') BRDDATE, BRDHIT
              , (SELECT COUNT(*) FROM TBL_BOARDFILE WHERE BRDNO=DS.BRDNO) FILECNT
              , (SELECT COUNT(*) FROM TBL_BOARDREPLY WHERE BRDNO=DS.BRDNO AND REDELETEFLAG='N') REPLYCNT
@@ -31,7 +31,7 @@
          ORDER BY BRDNO DESC
     </select> 
     
-    <insert id="insertBoard5" parameterType="com.group.vo.BoardVO" >
+    <insert id="insertBoard" parameterType="com.group.vo.BoardVO" >
     	<selectKey resultType="String" keyProperty="brdno" order="BEFORE">
             SELECT BRDNO_SEQ.NEXTVAL FROM DUAL
         </selectKey> 
@@ -39,7 +39,7 @@
         VALUES (#{brdno}, #{brdtitle}, #{brdwriter}, #{brdmemo}, SYSDATE, 0, 'N' )
     </insert>
     
-    <update id="updateBoard5" parameterType="com.group.vo.BoardVO">
+    <update id="updateBoard" parameterType="com.group.vo.BoardVO">
         UPDATE TBL_BOARD
            SET BRDTITLE=#{brdtitle}
              , BRDWRITER=#{brdwriter}
@@ -48,39 +48,39 @@
            AND BRDNO=#{brdno}
     </update> 
         
-    <select id="selectBoard5One" parameterType="String" resultType="com.group.vo.BoardVO">
+    <select id="selectBoardOne" parameterType="String" resultType="com.group.vo.BoardVO">
         SELECT BRDNO, BRDTITLE, BRDWRITER, BRDMEMO, TO_CHAR(BRDDATE,'yyyy-mm-dd') BRDDATE
           FROM TBL_BOARD
          WHERE BRDDELETEFLAG='N'
            AND BRDNO=#{brdno}
     </select> 
 
-    <update id="updateBoard5Read" parameterType="String">
+    <update id="updateBoardRead" parameterType="String">
         UPDATE TBL_BOARD
            SET BRDHIT = BRDHIT + 1 
          WHERE BRDNO=#{brdno}
     </update> 
 
-    <delete id="deleteBoard5One" parameterType="String">
+    <delete id="deleteBoardOne" parameterType="String">
         UPDATE TBL_BOARD
            SET BRDDELETEFLAG='Y' 
          WHERE BRDNO=#{brdno}
     </delete> 
 
     <!-- =============================================================================== -->
-    <select id="selectBoard5FileList" resultType="com.group.common.FileVO" parameterType="String">
+    <select id="selectBoardFileList" resultType="com.group.common.FileVO" parameterType="String">
         SELECT FILENO, FILENAME, REALNAME, FILESIZE
           FROM TBL_BOARDFILE
          WHERE BRDNO=#{brdno}
          ORDER BY FILENO DESC 
     </select> 
 
-    <insert id="insertBoard5File" parameterType="com.group.common.FileVO" >
+    <insert id="insertBoardFile" parameterType="com.group.common.FileVO" >
         INSERT INTO TBL_BOARDFILE (BRDNO, FILENO, FILENAME, REALNAME, FILESIZE)
         VALUES (#{parentPK}, FILENO_SEQ.NEXTVAL, #{filename}, #{realname}, #{filesize})
     </insert>
     
-    <delete id="deleteBoard5File" parameterType="hashmap"> 
+    <delete id="deleteBoardFile" parameterType="hashmap"> 
         DELETE 
           FROM TBL_BOARDFILE
          WHERE FILENO IN (
@@ -91,14 +91,14 @@
     </delete> 
 
     <!-- =============================================================================== -->
-    <select id="selectBoard5ReplyList" resultType="com.group.vo.BoardReplyVO" parameterType="String">
+    <select id="selectBoardReplyList" resultType="com.group.vo.BoardReplyVO" parameterType="String">
         SELECT BRDNO, RENO, REWRITER, REDELETEFLAG, REMEMO, REDATE 
           FROM TBL_BOARDREPLY
          WHERE BRDNO=#{brdno} AND REDELETEFLAG='N'
          ORDER BY RENO
     </select>
         
-    <insert id="insertBoard5Reply" parameterType="com.group.vo.BoardReplyVO" >
+    <insert id="insertBoardReply" parameterType="com.group.vo.BoardReplyVO" >
         <selectKey resultType="String" keyProperty="reno" order="BEFORE">
             SELECT NVL(MAX(RENO),0)+1 FROM TBL_BOARDREPLY
         </selectKey>
@@ -107,13 +107,13 @@
         VALUES (#{brdno}, #{reno}, #{rewriter}, 'N', #{rememo}, SYSDATE)
     </insert>
 
-    <update id="deleteBoard5Reply" parameterType="String"> 
+    <update id="deleteBoardReply" parameterType="String"> 
         UPDATE TBL_BOARDREPLY
            SET REDELETEFLAG='Y' 
          WHERE RENO=#{reno}       
     </update> 
 
-    <update id="updateBoard5Reply" parameterType="com.group.vo.BoardReplyVO">
+    <update id="updateBoardReply" parameterType="com.group.vo.BoardReplyVO">
         UPDATE TBL_BOARDREPLY
            SET REMEMO=#{rememo} 
          WHERE RENO=#{reno}
