@@ -27,7 +27,7 @@ function fn_formSubmit(){
 </script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-	<!-- ì»¨íí¸ í¤ë -->
+	<!-- Content 헤더 -->
 	<section class="content-header">
 		<h1>
 			부서 게시판 <small>Board Write</small>
@@ -38,7 +38,7 @@ function fn_formSubmit(){
 		</ol>
 	</section>
 
-	<!-- ì»¨íí¸ ë©ì¸ -->
+	<!-- Content 메인 -->
 	<section class="content container-fluid">
 
 	<form name="form1" action="BoardSave" method="post" enctype="multipart/form-data">
