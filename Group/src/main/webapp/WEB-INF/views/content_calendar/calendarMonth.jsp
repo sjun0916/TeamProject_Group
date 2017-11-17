@@ -32,6 +32,9 @@
 	
 	int endDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 	int week = cal.get(Calendar.DAY_OF_WEEK);
+	
+	request.setAttribute("nowYear", nowYear);
+	request.setAttribute("nowMonth", nowMonth);
 %>
 <script type="text/javascript">
 
@@ -68,39 +71,53 @@ function year_onchange(){
 		<table border="1">
 			
 			<tr>
-				<td width="50">
-					<input type="button" value="회사" name="company">&nbsp;
+				<td>
+					<label class="switch">
+  						<input type="checkbox" checked>
+  						<span class="slider round"></span>
+  						회사
+					</label>
+
 				</td>
-				<td width="50">
-					<input type="button" value="부서" name="class">&nbsp;
+				<td>
+					<label class="switch">
+  						<input type="checkbox" checked>
+  						<span class="slider round"></span>
+  						부서
+					</label>
 				</td>
-				<td width="50">
-					<input type="button" value="개인" name="personal">
+				<td>
+					<label class="switch">
+  						<input type="checkbox" checked>
+  						<span class="slider round"></span>
+  						개인
+					</label>
+				</td>
+				<td>
+					<input type="button" value="${nowYear-1}년" name="pre_year" onclick="">
+				</td>
+				<td>
+					<input type="button" value="${nowMonth-1}월" name="pre_month">
 				</td>
 				
 				<td>
 					<b>&nbsp;
-					<select id="syear" onchange="year_onchange()">
-					<%for(i=2015;i<=2025;i++) {%>
-						<option><% out.print(i+"년");%></option>
-						<%} %>
-					</select>
+					<input type="text" value="${nowYear}년" size="6" disabled>
 					</b>
 				</td>
 				<td>
-					<b>&nbsp;
-					<select id="smonth" onchange="month_onchange()" >
-					<%for(i=1;i<=12;i++){ %>
-						<option><%out.print(i+"월"); %></option>
-					<%} %>
-					</select>
-					</b>
+					<input type="text" value="${nowMonth}월" size="6" disabled>
+				</td>
+				<td>
+					<input type="button" value="${nowMonth+1}월" name="next_month">
+				</td>
+				<td>
+					<input type="button" value="${nowYear+1}년" name="next_year">
 				</td>
 		</table>
 		
 		<table border="1">
 		<tr>
-			
 			<td width="100" height="100">월</td>
 			<td width="100" height="100">화</td>
 			<td width="100" height="100">수</td>
@@ -120,7 +137,8 @@ function year_onchange(){
 			
 			for(i=startDay;i<=endDay;i++){
 				
-				out.print("<td width='100' height='100'>"+i+"</td>");
+				out.print("<td width='100' height='100'>"+
+				"<input type='button' value='"+i+"'></td>");
 				newLine++;
 				if(newLine==7 && i != endDay){
 					out.print("</tr><tr>");

@@ -25,9 +25,8 @@ public class CalendarDaoMybatis implements CalendarDao{
 		return sqlSessionTemp.selectList("list");
 	}
 	//num=1 회사; num=2 부서; num=3 개인
-	public List<CalendarVO> kindList(int num){
+	public List<CalendarVO> kindList(int num, List<CalendarVO> listTemp){
 		List<CalendarVO> list = viewList();
-		List<CalendarVO> listTemp = null;
 		CalendarVO temp = new CalendarVO();
 		Iterator<CalendarVO> it = list.iterator();
 		while(it.hasNext()) {

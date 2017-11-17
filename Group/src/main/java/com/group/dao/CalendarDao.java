@@ -9,6 +9,8 @@ public interface CalendarDao {
 	public abstract List<CalendarVO> viewList();
 	// select : selected schedule
 	public abstract List<CalendarVO> viewSelected(CalendarVO cal);
+	// select : kind schedule
+	public List<CalendarVO> kindList(int num, List<CalendarVO> listTemp);
 	// insert : schedule
 	public abstract void insert(CalendarVO cal);
 	// delete : schedule

@@ -12,6 +12,8 @@ public interface CalendarService {
 	public abstract List<CalendarVO> viewSelected(CalendarVO cal);
 	//select : list of kind
 	public List<CalendarVO> kindList(int num);
+	//select : list of kind2
+	public List<CalendarVO> kindList(int num, int num2);
 	// insert : schedule
 	public abstract void insert(CalendarVO cal);
 	// delete : schedule
