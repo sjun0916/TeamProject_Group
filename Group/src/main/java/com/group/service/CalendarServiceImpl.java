@@ -46,7 +46,5 @@ public class CalendarServiceImpl implements CalendarService{
 		// TODO Auto-generated method stub
 		
 	}
-	
-
 
 }
