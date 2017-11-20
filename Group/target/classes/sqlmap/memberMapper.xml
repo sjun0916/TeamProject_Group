@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="member">
+	<!-- 01. 회원목록 -->
+	<select id="memberList" resultType="com.study.groupware.vo.MemberVO">
+		SELECT * FROM MEMBER2
+	</select>
+	
+	<!-- 02. 회원 등록 -->
+	<insert id="insertMember" parameterType="com.study.groupware.vo.MemberVO">
+		INSERT INTO MEMBER2
+		(ID, PW, NAME, EMAIL, REGDATE)
+		VALUES
+		(#{id}, #{pw}, #{name}, #{email}, SYSDATE)
+	</insert>
+	
+	<!-- 03. 회원정보 상세조회 -->
+	<select id="viewMember" resultType="com.study.groupware.vo.MemberVO">
+		SELECT 
+		  (ID, NAME, EMAIL, REGDATE)
+		FROM MEMBER2
+		WHERE id = #{id}
+	</select>
+	
+	<!-- 04. 회원정보 수정처리 -->
+	<update id="updateMember">
+		UPDATE MEMBER2
+		SET
+			pw = #{Pw},
+			name = #{Name},
+			email = #{Email}
+		WHERE
+			id = #{Id}	
+	</update>
+	
+	<!-- 05. 회원정보 삭제 처리 -->
+	<delete id="deleteMember">
+		DELETE FROM MEMBER2
+		WHERE id = #{Id}
+	</delete>
+	
+	<!-- 06. 비밀번호 체크 -->
+	<select id="checkPw" resultType="int">
+		SELECT 
+			COUNT(*) 
+		FROM MEMBER2
+		WHERE id = #{Id} AND pw = #{Pw}
+	</select>
+</mapper>

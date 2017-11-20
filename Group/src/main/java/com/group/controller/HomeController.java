@@ -23,7 +23,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/")
+	@RequestMapping(value = "/home")
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -35,21 +35,5 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";
-	}
-	
-	@RequestMapping(value = "/", method = { RequestMethod.GET, RequestMethod.POST})
-	public String loginForm() throws Exception {
-
-		logger.info("-------------start loginForm [Connect IP : " + InetAddress.getLocalHost().getHostAddress() + "]");
-		
-		try {
-			
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-
-		logger.info("---------------end loginForm [Connect IP : " + InetAddress.getLocalHost().getHostAddress() + "]");
-		
-		return "loginForm";
 	}
 }
