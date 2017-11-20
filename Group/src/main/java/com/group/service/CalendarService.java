@@ -1,25 +1,27 @@
 package com.group.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.group.vo.CalendarVO;
+import com.group.vo.MemberVO;
 
 public interface CalendarService {
 	
 	// select : all schedule
 	public abstract List<CalendarVO> viewList();
 	// select : selected schedule
-	public abstract List<CalendarVO> viewSelected(CalendarVO cal);
+	public abstract CalendarVO viewSelected(CalendarVO cal);
+	// select : selected day
+	public abstract List<CalendarVO> viewDay(CalendarVO cal);
 	//select : list of kind
-	public List<CalendarVO> kindList(int num);
-	//select : list of kind2
-	public List<CalendarVO> kindList(int num, int num2);
+	public List<CalendarVO> kindList(int[] num, MemberVO member);
 	// insert : schedule
-	public abstract void insert(CalendarVO cal);
+	public abstract int insert(CalendarVO cal);
 	// delete : schedule
-	public abstract void delete(CalendarVO cal);
+	public abstract int delete(CalendarVO cal) throws SQLException;
 	// update : schedule
-	public abstract void update(CalendarVO cal);
+	public abstract int update(CalendarVO cal) throws SQLException;
 		
 	
 	
