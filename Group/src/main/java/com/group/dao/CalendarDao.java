@@ -1,20 +1,24 @@
 package com.group.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.group.vo.CalendarVO;
+import com.group.vo.MemberVO;
 
 public interface CalendarDao {
 	// select : all schedule
-	public abstract List<CalendarVO> viewList();
+	public abstract List<CalendarVO> viewList() throws SQLException;
 	// select : selected schedule
-	public abstract List<CalendarVO> viewSelected(CalendarVO cal);
+	public abstract CalendarVO viewSelected(CalendarVO cal) throws SQLException;
 	// select : kind schedule
-	public List<CalendarVO> kindList(int num, List<CalendarVO> listTemp);
+	public abstract List<CalendarVO> kindList(int[] num, MemberVO member) throws SQLException;
+	// select : day
+	public abstract List<CalendarVO> dayList(String day) throws SQLException;
 	// insert : schedule
-	public abstract void insert(CalendarVO cal);
+	public abstract int insert(CalendarVO cal) throws SQLException;
 	// delete : schedule
-	public abstract void delete(CalendarVO cal);
+	public abstract int delete(CalendarVO cal) throws SQLException;
 	// update : schedule
-	public abstract void update(CalendarVO cal);
+	public abstract int update(CalendarVO cal) throws SQLException;
 }

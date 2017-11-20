@@ -13,78 +13,78 @@
 
     <select id="selectBoardCount" resultType="Integer" parameterType="com.group.common.SearchVO">
         SELECT COUNT(*)
-          FROM TBL_BOARD
+          FROM BOARD
          <include refid="includeBoard"/>
     </select> 
     
     <select id="selectBoardList" resultType="com.group.vo.BoardVO" parameterType="com.group.common.SearchVO">
-        SELECT BRDNO, BRDTITLE, BRDWRITER, TO_CHAR(BRDDATE,'yyyy-mm-dd') BRDDATE, BRDHIT
-             , (SELECT COUNT(*) FROM TBL_BOARDFILE WHERE BRDNO=DS.BRDNO) FILECNT
-             , (SELECT COUNT(*) FROM TBL_BOARDREPLY WHERE BRDNO=DS.BRDNO AND REDELETEFLAG='N') REPLYCNT
+        SELECT BOARDNUM, TITLE, WRITER, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE, HIT
+             , (SELECT COUNT(*) FROM BOARDFILE WHERE BOARDNUM=DS.BOARDNUM) FILECNT
+             , (SELECT COUNT(*) FROM BOARDREPLY WHERE BOARDNUM=DS.BOARDNUM AND REDELETEFLAG='N') REPLYCNT
           FROM (
-            SELECT BRDNO, BRDTITLE, BRDWRITER, BRDDATE, BRDHIT
-              , ROW_NUMBER() OVER(ORDER BY BRDNO DESC) BRDNO_SEQ
-          FROM TBL_BOARD
+            SELECT BOARDNUM, TITLE, WRITER, REGDATE, HIT
+              , ROW_NUMBER() OVER(ORDER BY BOARDNUM DESC) BOARDNUM_SEQ
+          FROM BOARD
           <include refid="includeBoard"/>
           ) DS
-         WHERE BRDNO_SEQ BETWEEN ${rowStart} AND ${rowEnd}
-         ORDER BY BRDNO DESC
+         WHERE BOARDNUM_SEQ BETWEEN ${rowStart} AND ${rowEnd}
+         ORDER BY BOARDNUM DESC
     </select> 
     
     <insert id="insertBoard" parameterType="com.group.vo.BoardVO" >
-    	<selectKey resultType="String" keyProperty="brdno" order="BEFORE">
-            SELECT BRDNO_SEQ.NEXTVAL FROM DUAL
+    	<selectKey resultType="String" keyProperty="boardnum" order="BEFORE">
+            SELECT BOARDNUM_SEQ.NEXTVAL FROM DUAL
         </selectKey> 
-        INSERT INTO TBL_BOARD(BRDNO, BRDTITLE, BRDWRITER, BRDMEMO, BRDDATE, BRDHIT, BRDDELETEFLAG)
-        VALUES (#{brdno}, #{brdtitle}, #{brdwriter}, #{brdmemo}, SYSDATE, 0, 'N' )
+        INSERT INTO BOARD(BOARDNUM, TITLE, WRITER, CONTENT, REGDATE, HIT, BRDDELETEFLAG)
+        VALUES (#{boardnum}, #{title}, #{writer}, #{content}, SYSDATE, 0, 'N' )
     </insert>
     
     <update id="updateBoard" parameterType="com.group.vo.BoardVO">
-        UPDATE TBL_BOARD
-           SET BRDTITLE=#{brdtitle}
-             , BRDWRITER=#{brdwriter}
-             , BRDMEMO=#{brdmemo} 
+        UPDATE BOARD
+           SET TITLE=#{title}
+             , WRITER=#{writer}
+             , CONTENT=#{content} 
          WHERE BRDDELETEFLAG='N'
-           AND BRDNO=#{brdno}
+           AND BOARDNUM=#{boardnum}
     </update> 
         
     <select id="selectBoardOne" parameterType="String" resultType="com.group.vo.BoardVO">
-        SELECT BRDNO, BRDTITLE, BRDWRITER, BRDMEMO, TO_CHAR(BRDDATE,'yyyy-mm-dd') BRDDATE
-          FROM TBL_BOARD
+        SELECT BOARDNUM, TITLE, WRITER, CONTENT, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE
+          FROM BOARD
          WHERE BRDDELETEFLAG='N'
-           AND BRDNO=#{brdno}
+           AND BOARDNUM=#{boardnum}
     </select> 
 
     <update id="updateBoardRead" parameterType="String">
-        UPDATE TBL_BOARD
-           SET BRDHIT = BRDHIT + 1 
-         WHERE BRDNO=#{brdno}
+        UPDATE BOARD
+           SET HIT = HIT + 1 
+         WHERE BOARDNUM=#{boardnum}
     </update> 
 
     <delete id="deleteBoardOne" parameterType="String">
-        UPDATE TBL_BOARD
+        UPDATE BOARD
            SET BRDDELETEFLAG='Y' 
-         WHERE BRDNO=#{brdno}
+         WHERE BOARDNUM=#{boardnum}
     </delete> 
 
     <!-- =============================================================================== -->
     <select id="selectBoardFileList" resultType="com.group.common.FileVO" parameterType="String">
-        SELECT FILENO, FILENAME, REALNAME, FILESIZE
-          FROM TBL_BOARDFILE
-         WHERE BRDNO=#{brdno}
-         ORDER BY FILENO DESC 
+        SELECT FILENUM, FILENAME, REALNAME, FILESIZE
+          FROM BOARDFILE
+         WHERE BOARDNUM=#{boardnum}
+         ORDER BY FILENUM DESC 
     </select> 
 
     <insert id="insertBoardFile" parameterType="com.group.common.FileVO" >
-        INSERT INTO TBL_BOARDFILE (BRDNO, FILENO, FILENAME, REALNAME, FILESIZE)
-        VALUES (#{parentPK}, FILENO_SEQ.NEXTVAL, #{filename}, #{realname}, #{filesize})
+        INSERT INTO BOARDFILE (BOARDNUM, FILENUM, FILENAME, REALNAME, FILESIZE)
+        VALUES (#{parentPK}, FILENUM_SEQ.NEXTVAL, #{filename}, #{realname}, #{filesize})
     </insert>
     
     <delete id="deleteBoardFile" parameterType="hashmap"> 
         DELETE 
-          FROM TBL_BOARDFILE
-         WHERE FILENO IN (
-              <foreach item="item" index="index" collection="fileno" separator=",">
+          FROM BOARDFILE
+         WHERE FILENUM IN (
+              <foreach item="item" index="index" collection="filenum" separator=",">
                      ${item}
               </foreach>  
         )             
@@ -92,31 +92,31 @@
 
     <!-- =============================================================================== -->
     <select id="selectBoardReplyList" resultType="com.group.vo.BoardReplyVO" parameterType="String">
-        SELECT BRDNO, RENO, REWRITER, REDELETEFLAG, REMEMO, REDATE 
-          FROM TBL_BOARDREPLY
-         WHERE BRDNO=#{brdno} AND REDELETEFLAG='N'
-         ORDER BY RENO
+        SELECT BOARDNUM, RENUM, REWRITER, REDELETEFLAG, REMEMO, REDATE 
+          FROM BOARDREPLY
+         WHERE BOARDNUM=#{boardnum} AND REDELETEFLAG='N'
+         ORDER BY RENUM
     </select>
         
     <insert id="insertBoardReply" parameterType="com.group.vo.BoardReplyVO" >
-        <selectKey resultType="String" keyProperty="reno" order="BEFORE">
-            SELECT NVL(MAX(RENO),0)+1 FROM TBL_BOARDREPLY
+        <selectKey resultType="String" keyProperty="renum" order="BEFORE">
+            SELECT NVL(MAX(RENUM),0)+1 FROM BOARDREPLY
         </selectKey>
             
-        INSERT INTO TBL_BOARDREPLY(BRDNO, RENO, REWRITER, REDELETEFLAG, REMEMO, REDATE)
-        VALUES (#{brdno}, #{reno}, #{rewriter}, 'N', #{rememo}, SYSDATE)
+        INSERT INTO BOARDREPLY(BOARDNUM, RENUM, REWRITER, REDELETEFLAG, REMEMO, REDATE)
+        VALUES (#{boardnum}, #{renum}, #{rewriter}, 'N', #{rememo}, SYSDATE)
     </insert>
 
     <update id="deleteBoardReply" parameterType="String"> 
-        UPDATE TBL_BOARDREPLY
+        UPDATE BOARDREPLY
            SET REDELETEFLAG='Y' 
-         WHERE RENO=#{reno}       
+         WHERE RENUM=#{renum}       
     </update> 
 
     <update id="updateBoardReply" parameterType="com.group.vo.BoardReplyVO">
-        UPDATE TBL_BOARDREPLY
+        UPDATE BOARDREPLY
            SET REMEMO=#{rememo} 
-         WHERE RENO=#{reno}
+         WHERE RENUM=#{renum}
     </update> 
          
 </mapper>

@@ -1,10 +1,11 @@
-package com.group.service;
+package com.group.dao;
 
 import java.util.List;
 
 import com.group.vo.MemberVO;
 
-public interface MemberService {
+
+public interface MemberDAO {
 	// 회원 목록
 	public List<MemberVO> memberList();
 
@@ -16,7 +17,6 @@ public interface MemberService {
 
 	// 회원삭제
 	public void deleteMember(String Id);
-
 	// 회원정보 수정
 	public void updateMember(MemberVO vo);
 
