@@ -163,7 +163,7 @@ function fn_formSubmit(){
           	</a>
         	<ul class="treeview-menu">
             	<li><a href="#"><i class="fa fa-circle-o"></i> 공지사항</a></li>
-            	<li><a href="/group/board5List"><i class="fa fa-circle-o"></i> 부서게시판</a></li>
+            	<li><a href="/group/BoardList"><i class="fa fa-circle-o"></i> 부서게시판</a></li>
           	</ul>
         </li>
         
@@ -200,7 +200,7 @@ function fn_formSubmit(){
             </li>
         
         <li>
-        	<a href="#">
+        	<a href="/group/calendar">
         	<i class="fa fa-calendar"></i>
         	<span>일정</span>
         	</a>
