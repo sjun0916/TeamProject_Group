@@ -7,19 +7,19 @@
 function fn_formSubmit(){
 	var form1 = document.form1;
 	
-	if (form1.brdwriter.value=="") {
+	if (form1.writer.value=="") {
 		alert("작성자를 입력해주세요.");
-		form1.brdwriter.focus();
+		form1.writer.focus();
 		return;
 	}
-	if (form1.brdtitle.value=="") {
+	if (form1.title.value=="") {
 		alert("글 제목을 입력해주세요.");
-		form1.brdtitle.focus();
+		form1.title.focus();
 		return;
 	}
-	if (form1.brdmemo.value=="") {
+	if (form1.content.value=="") {
 		alert("글 내용을 입력해주세요.");
-		form1.brdmemo.focus();
+		form1.content.focus();
 		return;
 	}
 	document.form1.submit();	
@@ -51,21 +51,21 @@ function fn_formSubmit(){
 			<tbody>
 				<tr>
 					<td>작성자</td> 
-					<td><input type="text" name="brdwriter" size="20" maxlength="20" value="<c:out value="${boardInfo.brdwriter}"/>"></td> 
+					<td><input type="text" name="writer" size="20" maxlength="20" value="<c:out value="${boardInfo.writer}"/>"></td> 
 				</tr>
 				<tr>
 					<td>제목</td> 
-					<td><input type="text" name="brdtitle" size="70" maxlength="250" value="<c:out value="${boardInfo.brdtitle}"/>"></td> 
+					<td><input type="text" name="title" size="70" maxlength="250" value="<c:out value="${boardInfo.title}"/>"></td> 
 				</tr>
 				<tr>
 					<td>내용</td> 
-					<td><textarea name="brdmemo" rows="5" cols="60"><c:out value="${boardInfo.brdmemo}"/></textarea></td> 
+					<td><textarea name="content" rows="5" cols="60"><c:out value="${boardInfo.content}"/></textarea></td> 
 				</tr>
 				<tr>
 					<td>첨부</td> 
 					<td>
 						<c:forEach var="listview" items="${listview}" varStatus="status">
-							<input type="checkbox" name="fileno" value="<c:out value="${listview.fileno}"/>">	
+							<input type="checkbox" name="filenum" value="<c:out value="${listview.filenum}"/>">	
             				<a href="fileDownload?filename=<c:out value="${listview.filename}"/>&downname=<c:out value="${listview.realname }"/>"> 							 
 							<c:out value="${listview.filename}"/></a> <c:out value="${listview.size2String()}"/><br/>
 						</c:forEach>					
@@ -75,7 +75,7 @@ function fn_formSubmit(){
 				</tr>
 			</tbody>
 		</table>     
-		<input type="hidden" name="brdno" value="<c:out value="${boardInfo.brdno}"/>"> 
+		<input type="hidden" name="boardnum" value="<c:out value="${boardInfo.boardnum}"/>"> 
 		<a href="#" onclick="fn_formSubmit()">저장</a>
 	</form>	
 	</section>
