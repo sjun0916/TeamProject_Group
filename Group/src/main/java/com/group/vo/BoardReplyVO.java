@@ -2,27 +2,27 @@ package com.group.vo;
 
 public class BoardReplyVO {
 
-    private String brdno;
-    private String reno;
+    private String boardnum;
+    private String renum;
     private String rewriter;
     private String redeleteflag;
     private String rememo;
     private String redate;
     
-    public String getBrdno() {
-        return brdno;
+    public String getBoardnum() {
+        return boardnum;
     }
     
-    public void setBrdno(String brdno) {
-        this.brdno = brdno;
+    public void setBoardnum(String boardnum) {
+        this.boardnum = boardnum;
     }
     
-    public String getReno() {
-        return reno;
+    public String getRenum() {
+        return renum;
     }
     
-    public void setReno(String reno) {
-        this.reno = reno;
+    public void setRenum(String renum) {
+        this.renum = renum;
     }
     
     public String getRewriter() {
