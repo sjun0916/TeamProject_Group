@@ -4,12 +4,12 @@
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="member">
 	<!-- 01. 회원목록 -->
-	<select id="memberList" resultType="com.study.groupware.vo.MemberVO">
+	<select id="memberList" resultType="memberVO">
 		SELECT * FROM MEMBER2
 	</select>
 	
 	<!-- 02. 회원 등록 -->
-	<insert id="insertMember" parameterType="com.study.groupware.vo.MemberVO">
+	<insert id="insertMember" parameterType="memberVO">
 		INSERT INTO MEMBER2
 		(ID, PW, NAME, EMAIL, REGDATE)
 		VALUES
@@ -17,7 +17,7 @@
 	</insert>
 	
 	<!-- 03. 회원정보 상세조회 -->
-	<select id="viewMember" resultType="com.study.groupware.vo.MemberVO">
+	<select id="viewMember" resultType="memberVO">
 		SELECT 
 		  (ID, NAME, EMAIL, REGDATE)
 		FROM MEMBER2

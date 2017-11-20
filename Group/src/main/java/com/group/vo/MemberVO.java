@@ -2,6 +2,9 @@ package com.group.vo;
 
 import java.sql.Timestamp;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("memverVO")
 public class MemberVO {
 	private String id;
 	private String pw;

@@ -66,9 +66,9 @@ button {
 							class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></span> <input
 							type="password" class="form-control" id="pwd" placeholder="Password">
 					</div>
-				<div><a href="/groupware/memberjoin">REGISTER</a> | <a href="">ID찾기</a> | <a href="">PW찾기</a></div>
+				<div><a href="/group/memberjoin">REGISTER</a> || <a href="">비밀번호 찾기</a></div>
 				<div>
-					<a href="/groupware/home">MAIN(TEST)</a>
+					<a href="/group/home">MAIN(TEST)</a>
 				</div>
 				</div>
 				<button type="submit" class="btn btn-danger">Connection</button>
