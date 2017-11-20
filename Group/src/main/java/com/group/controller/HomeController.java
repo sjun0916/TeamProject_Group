@@ -1,5 +1,6 @@
 package com.group.controller;
 
+import java.net.InetAddress;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -36,18 +37,19 @@ public class HomeController {
 		return "home";
 	}
 	
-	
-	@RequestMapping(value = "/login")
-	public String login(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+	@RequestMapping(value = "/", method = { RequestMethod.GET, RequestMethod.POST})
+	public String loginForm() throws Exception {
+
+		logger.info("-------------start loginForm [Connect IP : " + InetAddress.getLocalHost().getHostAddress() + "]");
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		try {
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		logger.info("---------------end loginForm [Connect IP : " + InetAddress.getLocalHost().getHostAddress() + "]");
 		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "content_login/login";
+		return "loginForm";
 	}
 }
