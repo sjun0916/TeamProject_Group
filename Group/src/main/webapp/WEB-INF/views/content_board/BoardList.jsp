@@ -5,6 +5,42 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
+<style type="text/css">
+table, td, th {
+	text-align: center;
+height:50px;
+	
+}
+table,th {
+	border:1px solid;
+	width: 650px;
+}
+table,td{
+	background-color: white;
+}
+td {
+	max-width: 100px;
+	border: 1px solid black;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;	
+}
+th{
+background-color:gainsboro;
+}
+.tmptable,.tmptable td{
+border:0px;
+background-color:whitesmoke;
+}
+a:link{
+color:black;
+}
+a:visited{
+color:black;
+}
+
+</style>
+
 <script>
 	function categoryChange(value) {
 		
@@ -20,23 +56,21 @@
 <div class="content-wrapper">
 	<!-- ì»¨íí¸ í¤ë -->
 	<section class="content-header">
-		<h1>
-			부서 게시판 <small>Board List</small>
-		</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-			<li class="active">Here</li>
+		
+	<ol class="breadcrumb">
+			<a href="BoardList"><i class="fa fa-dashboard"></i> 게시판</a>
+			
 		</ol>
 	</section>
 
 	<!-- ì»¨íí¸ ë©ì¸ -->
 	<section class="content container-fluid">
 
-		<a href="BoardForm">글쓰기</a>
+
 
 		<form id="form1" name="form1" method="post">
-			<table border="1" style="width: 650px">
-				<caption>게시판</caption>
+			<table >
+				
 				<colgroup>
 					<col width='8%' />
 					<col width='8%' />
@@ -48,21 +82,21 @@
 				</colgroup>
 				<thead>
 					<tr>
-						<th>번호</th>
+						<th>NO</th>
 
 						<th><select id="category1" name="category1"
 							onchange="categoryChange(this.value);">
 								<option value="">카테고리</option>
 								<option value="">전체보기</option>
-								<option value="영업부">영업부</option>
-								<option value="인사부">인사부</option>
-								<option value="행정부">행정부</option>
-								<option value="개발부">개발부</option>
+								<option value="영업부">[영업부]</option>
+								<option value="인사부">[인사부]</option>
+								<option value="행정부">[행정부]</option>
+								<option value="개발부">[개발부]</option>
 						</select></th>
 
 						<th>제목</th>
 						<th>작성자</th>
-						<th>등록일</th>
+						<th>작성일</th>
 						<th>조회수</th>
 						<th>첨부</th>
 					</tr>
@@ -77,13 +111,11 @@
 							<td><c:out
 									value="${searchVO.totRow-((searchVO.page-1)*searchVO.displayRowCount + status.index)}" /></td>
 							<td><c:out value="${listview.departname}" /></td>
-							<td
-								style="max-width: 100px; border: 1px solid black; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-								<a href="${link}"><c:out value="${listview.title}" /></a> <c:if
+							<td><a href="${link}"><c:out
+										value="${listview.title}" /></a> <c:if
 									test="${listview.replycnt>0}">
 							(<c:out value="${listview.replycnt}" />)
-						</c:if>
-							</td>
+						</c:if></td>
 							<td><c:out value="${listview.writer}" /></td>
 							<td><c:out value="${listview.regdate}" /></td>
 							<td><c:out value="${listview.hit}" /></td>
@@ -92,9 +124,15 @@
 					</c:forEach>
 				</tbody>
 			</table>
-
+<table class="tmptable">
+<tr>
+<td>
 			<jsp:include page="/WEB-INF/views/common/pagingforSubmit.jsp" />
-
+			<a href="BoardForm"><p style="text-align: right">글작성</a>
+</td>
+</tr>
+<tr>
+<td>
 			<div>
 				<%-- <input type="hidden" name="category1" value="${searchVO.category1}"/>  --%>
 				<input type="checkbox" name="searchType" value="title"
@@ -108,7 +146,12 @@
 					onkeydown="if(event.keyCode == 13) { fn_formSubmit();}"> <input
 					name="btn_search" value="검색" class="btn_sch" type="button"
 					onclick="fn_formSubmit()" />
+
+
 			</div>
+</td>
+</tr>
+</table>
 		</form>
 
 	</section>
