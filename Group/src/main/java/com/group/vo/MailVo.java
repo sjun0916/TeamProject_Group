@@ -15,6 +15,9 @@ public class MailVo {
 	private int read;
 	private int status;
 	
+	private String mailID;
+	private String mailPW;
+	
 	public int getMailNum() {
 		return mailNum;
 	}
@@ -74,5 +77,18 @@ public class MailVo {
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	
+	public String getMailID() {
+		return mailID;
+	}
+	public void setMailID(String mailID) {
+		this.mailID = mailID;
+	}
+	public String getMailPW() {
+		return mailPW;
+	}
+	public void setMailPW(String mailPW) {
+		this.mailPW = mailPW;
 	}
 }
