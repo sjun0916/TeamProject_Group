@@ -4,10 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.group.vo.CalendarVO;
-<<<<<<< HEAD
-=======
 import com.group.vo.UserVO;
->>>>>>> branch 'master' of https://github.com/sjun0916/TeamProject_Group
+
 
 public interface CalendarService {
 	

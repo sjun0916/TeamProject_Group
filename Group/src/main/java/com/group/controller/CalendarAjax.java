@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.group.dao.UserDao;
 import com.group.service.CalendarService;
 import com.group.vo.CalendarVO;
-<<<<<<< HEAD
-=======
 import com.group.vo.UserVO;
 
 

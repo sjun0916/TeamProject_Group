@@ -10,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.group.vo.CalendarVO;
-<<<<<<< HEAD
-=======
 import com.group.vo.UserVO;
->>>>>>> branch 'master' of https://github.com/sjun0916/TeamProject_Group
+
 
 @Repository
 public class CalendarDaoMybatis implements CalendarDao{
