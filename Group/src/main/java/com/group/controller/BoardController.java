@@ -41,8 +41,8 @@ public class BoardController {
         modelMap.addAttribute("searchVO", searchVO);
         
         return "content_board/BoardList";
-    }
-    
+    }//사용자가 선택한 필드와 검색어가 전달됨(SearchVO)
+
     /** 
      * 글 쓰기. 
      */

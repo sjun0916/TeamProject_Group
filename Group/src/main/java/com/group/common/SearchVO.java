@@ -23,7 +23,11 @@ public class SearchVO extends  PageVO  {
     public void setSearchKeyword(String searchKeyword) {
         this.searchKeyword = searchKeyword;
     }
-    
+    public void setCategory(String category) {
+    	this.searchKeyword = category;
+    	this.searchType="department";
+    	System.out.println(this.searchKeyword+" "+this.searchType);
+    }
     public String getSearchType() {
         return searchType;
     }

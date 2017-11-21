@@ -12,7 +12,7 @@ import com.group.vo.UserVO;
 
 @Service("calendarService") // 현재 클래스를 스프링에서 관리하는 service bean으로 등록
 public class CalendarServiceImpl implements CalendarService{
-	
+	//..
 	@Autowired
 	private CalendarDao calendarDao;
 	
