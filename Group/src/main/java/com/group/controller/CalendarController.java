@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.group.dao.UserDao;
 import com.group.service.CalendarService;
 import com.group.vo.CalendarVO;
-import com.group.vo.MemberVO;
+import com.group.vo.UserVO;
+
 
 @Controller
 public class CalendarController {
@@ -27,56 +29,53 @@ public class CalendarController {
 	}
 	@RequestMapping(value = "/calendar/main",method=RequestMethod.POST)
 	public String savecalendar(HttpServletRequest request,
-			int[] calendar_memberId, int[] calendar_kind,
-			String[] calendar_start, String[] calendar_end,
-			String[] calendar_title, String[] calendar_content){ 
+			String calendar_memberId, int calendar_kind,
+			String calendar_start, String calendar_end,
+			String calendar_title, String calendar_content){ 
 		
 		CalendarVO vo = new CalendarVO();
-		MemberVO member = null;
-		int memberId=0;
-		System.out.println(calendar_title.length);
-		for (int i=0;i<calendar_title.length;i++) {
-			if(calendar_kind.length!=0){
-				vo.setKind(calendar_kind[i]);
-			}
-			if(calendar_start.length!=0){
-				vo.setStartDate(calendar_start[i]);
-			}
-			if(calendar_end.length!=0){
-				vo.setEndDate(calendar_end[i]);
-			}
-			if(calendar_title.length!=0){
-				vo.setTitle(calendar_title[i]);
-			}
-			if(calendar_content.length!=0){
-				vo.setContent(calendar_content[i]);
-			}
-			try {
-				//kind 별 schedule 추가
-				memberId= Integer.parseInt((String) SessionUtil.getAttribute("id"));
-				vo.setCalNum(memberId);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		UserDao userDao = new UserDao();
+		UserVO user = null;
+		String employee_no=null;
+		if(calendar_kind!=0){
+			vo.setKind(calendar_kind);
+		}
+		if(calendar_start!=null){
+			vo.setStartDate(calendar_start);
+		}
+		if(calendar_end!=null){
+			vo.setEndDate(calendar_end);
+		}
+		if(calendar_title!=null){
+			vo.setTitle(calendar_title);
+		}
+		if(calendar_content!=null){
+			vo.setContent(calendar_content);
+		}
+		try {
+			//kind 별 schedule 추가
+			employee_no= (String) SessionUtil.getAttribute("id");
+			userDao.get(employee_no);
+			vo.setEmployee_no(employee_no);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		service.insert(vo);
 		int[] num = (int[]) request.getAttribute("calendar_kind");
-		//미완: memberId를 이용하여 member 정보 set
 		
-		
-		request.setAttribute("calendarList",service.kindList(num, member));
+		request.setAttribute("calendarList",service.kindList(num, user));
 		return "content_calendar/calendarMonth";
 	}
 	@RequestMapping(value = "/calendar/update",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> modify
-		 (int calendar_id, int calendar_memberId, int calendar_kind,
+		 (int calendar_id, String employee_no, int calendar_kind,
 				 String calendar_start,String calendar_end,
 				 String calendar_title,String calendar_content) {
 		CalendarVO vo = new CalendarVO();
 		vo.setCalNum(calendar_id);
-		vo.setMemberNum(calendar_memberId);
+		vo.setEmployee_no(employee_no);
 		vo.setKind(calendar_kind);
 		vo.setStartDate(calendar_start);
 		vo.setEndDate(calendar_end);
@@ -120,9 +119,8 @@ public class CalendarController {
 			jsonObject.put("state", "fail");
 		}
 		try {
-			if(selectVo.getMemberNum()==
-					Integer.parseInt((String)SessionUtil.getAttribute("id")))
-			jsonObject.put("admin", "true");
+			if(selectVo.getEmployee_no().equals((String)SessionUtil.getAttribute("id")))
+				jsonObject.put("admin", "true");
 			
 			jsonObject.put("select", selectVo);
 		} catch (Exception e) {
@@ -138,7 +136,7 @@ public class CalendarController {
 		CalendarVO vo =new CalendarVO();
 		try {
 			vo.setStartDate(date);
-			vo.setMemberNum(Integer.parseInt((String)SessionUtil.getAttribute("id")));
+			vo.setEmployee_no((String)SessionUtil.getAttribute("id"));
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

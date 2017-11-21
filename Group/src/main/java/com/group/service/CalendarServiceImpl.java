@@ -3,19 +3,18 @@ package com.group.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.inject.Inject;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.group.dao.CalendarDao;
 import com.group.vo.CalendarVO;
-import com.group.vo.MemberVO;
+import com.group.vo.UserVO;
 
-@Service // 현재 클래스를 스프링에서 관리하는 service bean으로 등록
+@Service("calendarService") // 현재 클래스를 스프링에서 관리하는 service bean으로 등록
 public class CalendarServiceImpl implements CalendarService{
-	
-	@Inject
-	CalendarDao calendarDao;
+	//..
+	@Autowired
+	private CalendarDao calendarDao;
 	
 	@Override
 	public List<CalendarVO> viewList() {
@@ -56,11 +55,11 @@ public class CalendarServiceImpl implements CalendarService{
 		return tmp;
 	}
 	@Override
-	public List<CalendarVO> kindList(int[] num, MemberVO member) {
+	public List<CalendarVO> kindList(int[] num, UserVO user) {
 		// TODO Auto-generated method stub
 		List<CalendarVO> tmp = null;
 		try {
-			tmp = calendarDao.kindList(num, member);
+			tmp = calendarDao.kindList(num, user);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

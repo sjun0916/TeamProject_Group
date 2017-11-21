@@ -34,7 +34,7 @@ function fn_formSubmit(){
   <header class="main-header">
 
     <!-- 메인 로고 -->
-    <a href="index2.html" class="logo">
+    <a href="/group/home" class="logo">
       <!-- 메인바가 미니가 되었을때 로고 형태 -->
       <span class="logo-mini"><b>★</b></span>
       <!-- 로고 형태 -->
@@ -186,7 +186,7 @@ function fn_formSubmit(){
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> 메일쓰기</a></li>
+                <li><a href="/group/mail/mailForm"><i class="fa fa-circle-o"></i> 메일쓰기</a></li>
                 <li>
                   <a href="#"><i class="fa fa-circle-o"></i> 메일함 <i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
