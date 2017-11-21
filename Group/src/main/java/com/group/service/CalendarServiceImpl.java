@@ -8,10 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.group.dao.CalendarDao;
 import com.group.vo.CalendarVO;
-<<<<<<< HEAD
-=======
 import com.group.vo.UserVO;
->>>>>>> branch 'master' of https://github.com/sjun0916/TeamProject_Group
 
 @Service("calendarService") // 현재 클래스를 스프링에서 관리하는 service bean으로 등록
 public class CalendarServiceImpl implements CalendarService{
