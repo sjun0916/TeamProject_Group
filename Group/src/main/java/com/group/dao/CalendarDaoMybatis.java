@@ -9,7 +9,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.group.vo.CalendarVO;
-import com.group.vo.MemberVO;
 
 @Repository
 public class CalendarDaoMybatis implements CalendarDao{

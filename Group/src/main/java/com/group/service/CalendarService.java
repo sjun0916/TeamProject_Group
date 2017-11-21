@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.group.vo.CalendarVO;
-import com.group.vo.MemberVO;
 
 public interface CalendarService {
 	

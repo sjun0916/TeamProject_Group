@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.group.service.CalendarService;
 import com.group.vo.CalendarVO;
-import com.group.vo.MemberVO;
 
 @Controller
 public class CalendarController {
