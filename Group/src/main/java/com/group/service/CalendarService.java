@@ -4,6 +4,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.group.vo.CalendarVO;
+<<<<<<< HEAD
+=======
+import com.group.vo.UserVO;
+>>>>>>> branch 'master' of https://github.com/sjun0916/TeamProject_Group
 
 public interface CalendarService {
 	
@@ -14,7 +18,7 @@ public interface CalendarService {
 	// select : selected day
 	public abstract List<CalendarVO> viewDay(CalendarVO cal);
 	//select : list of kind
-	public List<CalendarVO> kindList(int[] num, MemberVO member);
+	public List<CalendarVO> kindList(int[] num, UserVO user);
 	// insert : schedule
 	public abstract int insert(CalendarVO cal);
 	// delete : schedule

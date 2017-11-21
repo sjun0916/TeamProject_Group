@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.group.service.CalendarService;
 import com.group.vo.CalendarVO;
+<<<<<<< HEAD
+=======
+import com.group.vo.UserVO;
+>>>>>>> branch 'master' of https://github.com/sjun0916/TeamProject_Group
 
 @Controller
 public class CalendarController {
@@ -31,7 +35,7 @@ public class CalendarController {
 			String[] calendar_title, String[] calendar_content){ 
 		
 		CalendarVO vo = new CalendarVO();
-		MemberVO member = null;
+		UserVO user = null;
 		int memberId=0;
 		System.out.println(calendar_title.length);
 		for (int i=0;i<calendar_title.length;i++) {
@@ -62,20 +66,18 @@ public class CalendarController {
 		
 		service.insert(vo);
 		int[] num = (int[]) request.getAttribute("calendar_kind");
-		//미완: memberId를 이용하여 member 정보 set
 		
-		
-		request.setAttribute("calendarList",service.kindList(num, member));
+		request.setAttribute("calendarList",service.kindList(num, user));
 		return "content_calendar/calendarMonth";
 	}
 	@RequestMapping(value = "/calendar/update",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> modify
-		 (int calendar_id, int calendar_memberId, int calendar_kind,
+		 (int calendar_id, String employee_no, int calendar_kind,
 				 String calendar_start,String calendar_end,
 				 String calendar_title,String calendar_content) {
 		CalendarVO vo = new CalendarVO();
 		vo.setCalNum(calendar_id);
-		vo.setMemberNum(calendar_memberId);
+		vo.setEmployee_no(employee_no);
 		vo.setKind(calendar_kind);
 		vo.setStartDate(calendar_start);
 		vo.setEndDate(calendar_end);
@@ -119,9 +121,8 @@ public class CalendarController {
 			jsonObject.put("state", "fail");
 		}
 		try {
-			if(selectVo.getMemberNum()==
-					Integer.parseInt((String)SessionUtil.getAttribute("id")))
-			jsonObject.put("admin", "true");
+			if(selectVo.getEmployee_no().equals((String)SessionUtil.getAttribute("id")))
+				jsonObject.put("admin", "true");
 			
 			jsonObject.put("select", selectVo);
 		} catch (Exception e) {
@@ -137,7 +138,7 @@ public class CalendarController {
 		CalendarVO vo =new CalendarVO();
 		try {
 			vo.setStartDate(date);
-			vo.setMemberNum(Integer.parseInt((String)SessionUtil.getAttribute("id")));
+			vo.setEmployee_no((String)SessionUtil.getAttribute("id"));
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

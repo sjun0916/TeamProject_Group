@@ -18,11 +18,11 @@
     </select> 
     
     <select id="selectBoardList" resultType="com.group.vo.BoardVO" parameterType="com.group.common.SearchVO">
-        SELECT BOARDNUM, TITLE, WRITER, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE, HIT
+        SELECT BOARDNUM, TITLE, DEPARTNAME, WRITER, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE, HIT
              , (SELECT COUNT(*) FROM BOARDFILE WHERE BOARDNUM=DS.BOARDNUM) FILECNT
              , (SELECT COUNT(*) FROM BOARDREPLY WHERE BOARDNUM=DS.BOARDNUM AND REDELETEFLAG='N') REPLYCNT
           FROM (
-            SELECT BOARDNUM, TITLE, WRITER, REGDATE, HIT
+            SELECT BOARDNUM, TITLE, DEPARTNAME, WRITER, REGDATE, HIT
               , ROW_NUMBER() OVER(ORDER BY BOARDNUM DESC) BOARDNUM_SEQ
           FROM BOARD
           <include refid="includeBoard"/>
@@ -35,8 +35,8 @@
     	<selectKey resultType="String" keyProperty="boardnum" order="BEFORE">
             SELECT BOARDNUM_SEQ.NEXTVAL FROM DUAL
         </selectKey> 
-        INSERT INTO BOARD(BOARDNUM, TITLE, WRITER, CONTENT, REGDATE, HIT, BRDDELETEFLAG)
-        VALUES (#{boardnum}, #{title}, #{writer}, #{content}, SYSDATE, 0, 'N' )
+        INSERT INTO BOARD(BOARDNUM, TITLE, DEPARTNAME, WRITER, CONTENT, REGDATE, HIT, BRDDELETEFLAG)
+        VALUES (#{boardnum}, #{title}, #{departname}, #{writer}, #{content}, SYSDATE, 0, 'N' )
     </insert>
     
     <update id="updateBoard" parameterType="com.group.vo.BoardVO">
