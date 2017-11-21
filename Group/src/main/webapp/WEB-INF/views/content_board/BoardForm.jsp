@@ -83,7 +83,7 @@
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td><textarea name="content" rows="5" cols="60"><c:out
+						<td><textarea name="content" rows="5" cols="60" placeholder = "내용을 입력해주세요."><c:out
 									value="${boardInfo.content}" /></textarea></td>
 					</tr>
 					

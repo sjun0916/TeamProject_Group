@@ -7,13 +7,13 @@
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 <script>
 	function categoryChange(value) {
-		alert("selectbox value: " + $("#category1 option:selected").val());
-		if (value == "전체") {
+		
+		/* alert("selectbox value: " + $("#category1 option:selected").val()); */
+		/* 	if (value == "전체") {
 			location.href("BoardList.jsp");
 		} else {
-
-			document.form1.submit();
-		}
+		 */
+		document.form1.submit();
 	}
 </script>
 <!-- Content Wrapper. Contains page content -->
@@ -52,7 +52,8 @@
 
 						<th><select id="category1" name="category1"
 							onchange="categoryChange(this.value);">
-								<option value="전체">전체</option>
+								<option value="">카테고리</option>
+								<option value="">전체보기</option>
 								<option value="영업부">영업부</option>
 								<option value="인사부">인사부</option>
 								<option value="행정부">행정부</option>
