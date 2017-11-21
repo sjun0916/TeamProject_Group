@@ -36,4 +36,20 @@ public class HomeController {
 		
 		return "home";
 	}
+	
+	@RequestMapping(value = "/", method = { RequestMethod.GET, RequestMethod.POST})
+	public String loginForm() throws Exception {
+
+		logger.info("-------------start loginForm [Connect IP : " + InetAddress.getLocalHost().getHostAddress() + "]");
+		
+		try {
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		logger.info("---------------end loginForm [Connect IP : " + InetAddress.getLocalHost().getHostAddress() + "]");
+		
+		return "user/login";
+	}
 }

@@ -36,26 +36,26 @@ public class BoardService {
     /**
      * 글 저장.
      */ 
-    public void insertBoard(BoardVO param, List<FileVO> filelist, String[] fileno) {
+    public void insertBoard(BoardVO param, List<FileVO> filelist, String[] filenum) {
         DefaultTransactionDefinition def = new DefaultTransactionDefinition();
         def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
         TransactionStatus status = txManager.getTransaction(def);
         
         try {
-            if (param.getBrdno() == null || "".equals(param.getBrdno())) {
+            if (param.getBoardnum() == null || "".equals(param.getBoardnum())) {
                  sqlSession.insert("insertBoard", param);
             } else {
                 sqlSession.update("updateBoard", param);
             }
             
-            if (fileno != null) {
+            if (filenum != null) {
                 HashMap<String, String[]> fparam = new HashMap<String, String[]>();
-                fparam.put("fileno", fileno);
+                fparam.put("filenum", filenum);
                 sqlSession.insert("deleteBoardFile", fparam);
             }
             
             for (FileVO f : filelist) {
-                f.setParentPK(param.getBrdno());
+                f.setParentPK(param.getBoardnum());
                 sqlSession.insert("insertBoardFile", f);
             }
             txManager.commit(status);
@@ -88,9 +88,9 @@ public class BoardService {
     public List<?> selectBoardReplyList(String param) {
         return sqlSession.selectList("selectBoardReplyList", param);
     }
-    
+     
     public void insertBoardReply(BoardReplyVO param) {
-        if (param.getReno()==null || "".equals(param.getReno())) {
+        if (param.getRenum()==null || "".equals(param.getRenum())) {
             sqlSession.insert("insertBoardReply", param);
         } else {
             sqlSession.insert("updateBoardReply", param);

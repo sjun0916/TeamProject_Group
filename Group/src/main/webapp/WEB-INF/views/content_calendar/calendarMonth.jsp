@@ -6,52 +6,7 @@
 
 <%@ include file ="/WEB-INF/views/include/header.jsp" %>
 
-
-<% Calendar cal = Calendar.getInstance();
-	int nowYear = cal.get(Calendar.YEAR);
-	int nowMonth = cal.get(Calendar.MONTH)+1;
-	int nowDay = cal.get(Calendar.DAY_OF_MONTH);
-	
-	request.setCharacterEncoding("utf-8");
-	
-	String strYear = request.getParameter("year");
-	String strMonth = request.getParameter("month");
-	
-	int year = nowYear;
-	int month = nowMonth;
-	int i;
-	
-	if(strYear != null){
-		year = Integer.parseInt(strYear);
-	}
-	if(strMonth!=null){
-		month = Integer.parseInt(strMonth);
-	}
-	cal.set(year,month-1,1);
-	int startDay = 1;
-	
-	int endDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-	int week = cal.get(Calendar.DAY_OF_WEEK);
-	
-	request.setAttribute("nowYear", nowYear);
-	request.setAttribute("nowMonth", nowMonth);
-%>
-<script type="text/javascript">
-
-function month_onchange(){
-	var month = smonth.value;
-	var year = syear.value;
-	var addr = "calendarMonth.jsp?year="+year+"&month="+month;
-	location.href=addr;
-}
-function year_onchange(){
-	var year = syear.value;
-	var month = smonth.value;
-	var addr = "calendarMonth.jsp?year="+year"&month="+month;
-	
-	location.href=addr;
-}
-</script>
+<script src="calendar.js"></script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- ì»¨íí¸ í¤ë -->
@@ -68,91 +23,134 @@ function year_onchange(){
 	<!-- ì»¨íí¸ ë©ì¸ -->
 	<section class="content container-fluid">
 		
-		<table border="1">
-			
-			<tr>
-				<td>
-					<label class="switch">
-  						<input type="checkbox" checked>
-  						<span class="slider round"></span>
-  						회사
-					</label>
+		<div class="row">
 
-				</td>
-				<td>
-					<label class="switch">
-  						<input type="checkbox" checked>
-  						<span class="slider round"></span>
-  						부서
-					</label>
-				</td>
-				<td>
-					<label class="switch">
-  						<input type="checkbox" checked>
-  						<span class="slider round"></span>
-  						개인
-					</label>
-				</td>
-				<td>
-					<input type="button" value="${nowYear-1}년" name="pre_year" onclick="">
-				</td>
-				<td>
-					<input type="button" value="${nowMonth-1}월" name="pre_month">
-				</td>
-				
-				<td>
-					<b>&nbsp;
-					<input type="text" value="${nowYear}년" size="6" disabled>
-					</b>
-				</td>
-				<td>
-					<input type="text" value="${nowMonth}월" size="6" disabled>
-				</td>
-				<td>
-					<input type="button" value="${nowMonth+1}월" name="next_month">
-				</td>
-				<td>
-					<input type="button" value="${nowYear+1}년" name="next_year">
-				</td>
-		</table>
-		
-		<table border="1">
-		<tr>
-			<td width="100" height="100">월</td>
-			<td width="100" height="100">화</td>
-			<td width="100" height="100">수</td>
-			<td width="100" height="100">목</td>
-			<td width="100" height="100">금</td>
-			<td width="100" height="100">토</td>
-			<td width="100" height="100">일</td>
-		</tr>
-		<%
-			int newLine=0;
-			out.print("<tr>");
-			
-			for(i=1;i<week;i++){
-				out.print("<td width='100' height='100'>&nbsp;</td>");
-				newLine++;
-			}
-			
-			for(i=startDay;i<=endDay;i++){
-				
-				out.print("<td width='100' height='100'>"+
-				"<input type='button' value='"+i+"'></td>");
-				newLine++;
-				if(newLine==7 && i != endDay){
-					out.print("</tr><tr>");
-					newLine=0;
-				}
-			}
-			
-			while(newLine>0 && newLine<7){
-				out.print("<td width='100' height='100'>&nbsp;</td>");
-				newLine++;
-			}
-			out.print("</tr>");
-		%>
-	</table>
+			<div class="col-md-3">
+
+				<div class="box box-solid">
+					<form id="list" name="calendarList" method="post"
+						onsubmit="return loadHtml(this, this.action, 'result')">
+						<input type="submit" id="oksign" style="display: none;">
+					</form>
+					<div class="box-header with-border">
+						<h3 class="box-title">일정추가</h3>
+					</div>
+					<div class="form-group">
+						<label>색상 선택:</label> <input type="text" id="bgcolor"
+							class="form-control my-colorpicker1 colorpicker-element">
+					</div>
+					<!-- /btn-group -->
+					<label>제목</label>
+					<div class="input-group input-group-sm">
+
+						<input id="new-event" type="text" class="form-control"
+							placeholder="Event Title">
+						<div class="input-group-btn">
+							<button id="add-new-event" type="button"
+								class="btn btn-info btn-flat">일정추가</button>
+						</div>
+
+						<!-- /btn-group -->
+					</div>
+					<div class="form-group">
+						<label>날짜 선택</label>
+
+						<div class="input-group">
+							<div class="input-group-addon">
+								<i class="fa fa-clock-o"></i>
+							</div>
+							<input type="text" class="form-control pull-right"
+								id="reservationtime">
+						</div>
+						<div class="form-group">
+							<label>내용</label>
+							<textarea id="cont" class="form-control" rows="3"
+								placeholder="Enter ..."></textarea>
+						</div>
+						<div class="form-group">
+							<label>기타사항</label>
+							<textarea id="etc" class="form-control" rows="3"
+								placeholder="Enter ..."></textarea>
+						</div>
+						<!-- /input-group -->
+					</div>
+				</div>
+				<button type="button" class="btn btn-block btn-info btn-lg"
+					onclick="submit();">일정 등록</button>
+			</div>
+			<!-- /.col -->
+			<div class="col-md-9">
+				<div class="box box-primary">
+					<div class="box-body no-padding">
+						<!-- THE CALENDAR -->
+						<div id="calendar"></div>
+					</div>
+					<!-- /.box-body -->
+				</div>
+				<!-- /. box -->
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+	</section>
+	<!-- /.content -->
+	<div class="example-modal">
+        <div class="modal" id="myModal3" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="disable()">
+                  <span aria-hidden="true" onclick="disable()" >&times;</span></button>
+                <h4 class="modal-title"></h4>
+              </div>
+              <div class="modal-body" style="min-height: 300px; max-height: 763px;">
+              	<div class="form-group">
+              	<div class="form-group">
+                <label>색상</label>
+
+                <div class="input-group my-colorpicker2 colorpicker-element">
+                  <input type="text" id="settingcolor" class="form-control" disabled="">
+
+                  <div class="input-group-addon">
+                    <i id="settingbg" style="background-color: rgb(222, 2, 2);" disabled=""></i>
+                  </div>
+                </div>
+                <!-- /.input group -->
+                <div class="form-group">
+                <label>기간</label>
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                  </div>
+                  <input type="text" class="form-control pull-right" id="reservationtime2" disabled="">
+                </div>
+                <!-- /.input group -->
+              </div>
+              </div>
+                  <label>내용</label>
+                  <textarea id="cont" class="form-control" rows="3" placeholder="Enter ..." disabled=""></textarea>
+                </div>
+                <div class="form-group">
+                  <label>기타사항</label>
+                  <textarea id="etc" class="form-control" rows="3" placeholder="Enter ..." disabled=""></textarea>
+                  <input type="hidden" id="seq" >
+                  <input type="hidden" id="title" >
+                </div>
+              </div>
+              <div class="modal-footer"> 
+                <input type="button" style="width: 25%" id="modify" class="btn btn-primary" onclick="edit()" value="수정">
+                <input type="button" style="width: 25%" id="delte" class="btn btn-primary" onclick="remove()" value="삭제" />
+                <button type="button" style="width: 25%" class="btn btn-secondary" data-dismiss="modal" onclick="disable()" >닫기</button>
+             
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+      </div>
+</div>
 	
 	</section>
 	<!-- /.content -->

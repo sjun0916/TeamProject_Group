@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.group.common.FileUtil;
 import com.group.common.FileVO;
 import com.group.common.SearchVO;
@@ -41,17 +39,17 @@ public class BoardController {
         modelMap.addAttribute("searchVO", searchVO);
         
         return "content_board/BoardList";
-    }
-    
+    }//사용자가 선택한 필드와 검색어가 전달됨(SearchVO)
+
     /** 
      * 글 쓰기. 
      */
     @RequestMapping(value = "/BoardForm")
     public String boardForm(HttpServletRequest request, ModelMap modelMap) {
-        String brdno = request.getParameter("brdno");
-        if (brdno != null) {
-            BoardVO boardInfo = boardSvc.selectBoardOne(brdno);
-            List<?> listview = boardSvc.selectBoardFileList(brdno);
+        String boardnum = request.getParameter("boardnum");
+        if (boardnum != null) {
+            BoardVO boardInfo = boardSvc.selectBoardOne(boardnum);
+            List<?> listview = boardSvc.selectBoardFileList(boardnum);
         
             modelMap.addAttribute("boardInfo", boardInfo);
             modelMap.addAttribute("listview", listview);
@@ -65,12 +63,12 @@ public class BoardController {
      */
     @RequestMapping(value = "/BoardSave")
     public String boardSave(HttpServletRequest request, BoardVO boardInfo) {
-        String[] fileno = request.getParameterValues("fileno");
+        String[] filenum = request.getParameterValues("filenum");
         System.out.println(boardInfo.getUploadfile());
         FileUtil fs = new FileUtil();
         List<FileVO> filelist = fs.saveAllFiles(boardInfo.getUploadfile());
 
-        boardSvc.insertBoard(boardInfo, filelist, fileno);
+        boardSvc.insertBoard(boardInfo, filelist, filenum);
 
         return "redirect:/BoardList";
     }
@@ -81,12 +79,12 @@ public class BoardController {
     @RequestMapping(value = "/BoardRead")
     public String boardRead(HttpServletRequest request, ModelMap modelMap) {
         
-        String brdno = request.getParameter("brdno");
+        String boardnum = request.getParameter("boardnum");
         
-        boardSvc.updateBoardRead(brdno);
-        BoardVO boardInfo = boardSvc.selectBoardOne(brdno);
-        List<?> listview = boardSvc.selectBoardFileList(brdno);
-        List<?> replylist = boardSvc.selectBoardReplyList(brdno);
+        boardSvc.updateBoardRead(boardnum);
+        BoardVO boardInfo = boardSvc.selectBoardOne(boardnum);
+        List<?> listview = boardSvc.selectBoardFileList(boardnum);
+        List<?> replylist = boardSvc.selectBoardReplyList(boardnum);
         
         modelMap.addAttribute("boardInfo", boardInfo);
         modelMap.addAttribute("listview", listview);
@@ -101,9 +99,9 @@ public class BoardController {
     @RequestMapping(value = "/BoardDelete")
     public String boardDelete(HttpServletRequest request) {
         
-        String brdno = request.getParameter("brdno");
+        String boardnum = request.getParameter("boardnum");
         
-        boardSvc.deleteBoardOne(brdno);
+        boardSvc.deleteBoardOne(boardnum);
         
         return "redirect:/BoardList";
     }
@@ -118,7 +116,7 @@ public class BoardController {
         
         boardSvc.insertBoardReply(boardReplyInfo);
 
-        return "redirect:/BoardRead?brdno=" + boardReplyInfo.getBrdno();
+        return "redirect:/BoardRead?boardnum=" + boardReplyInfo.getBoardnum();
     }
     
     /**
@@ -127,8 +125,8 @@ public class BoardController {
     @RequestMapping(value = "/BoardReplyDelete")
     public String boardReplyDelete(HttpServletRequest request, BoardReplyVO boardReplyInfo) {
         
-        boardSvc.deleteBoardReply(boardReplyInfo.getReno());
+        boardSvc.deleteBoardReply(boardReplyInfo.getRenum());
 
-        return "redirect:/BoardRead?brdno=" + boardReplyInfo.getBrdno();
+        return "redirect:/BoardRead?boardnum=" + boardReplyInfo.getBoardnum();
     }      
 }

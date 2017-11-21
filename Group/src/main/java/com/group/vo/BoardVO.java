@@ -7,16 +7,17 @@ import com.group.common.utiletc;
 
 public class BoardVO {
 
-    private String brdno;
-    private String brdtitle; 
-    private String brdwriter; 
-    private String brdmemo; 
-    private String brddate; 
-    private String brdhit; 
+    private String boardnum;
+    private String title; 
+    private String writer; 
+    private String content; 
+    private String regdate; 
+    private String hit; 
     private String brddeleteflag; 
     private String filecnt;
     private String replycnt;
-    
+    private String membernum;
+    private String departname;
     
     /* 첨부파일 */
     private List<MultipartFile> uploadfile;
@@ -25,55 +26,55 @@ public class BoardVO {
      * 게시물 제목을 글자수에 맞추어 자르기.
      */
     public String getShortTitle(Integer len) {
-        return utiletc.getShortString(brdtitle, len);
+        return utiletc.getShortString(title, len);
     }
     
-    public String getBrdno() {
-        return brdno;
+    public String getBoardnum() {
+        return boardnum;
     }
 
-    public void setBrdno(String brdno) {
-        this.brdno = brdno;
+    public void setBoardnum(String boardnum) {
+        this.boardnum = boardnum;
     }
 
-    public String getBrdtitle() {
-        return brdtitle; 
+    public String getTitle() {
+        return title; 
     }
 
-    public void setBrdtitle(String brdtitle) {
-        this.brdtitle = brdtitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getBrdwriter() {
-        return brdwriter;
+    public String getWriter() {
+        return writer;
     }
 
-    public void setBrdwriter(String brdwriter) {
-        this.brdwriter = brdwriter;
+    public void setWriter(String writer) {
+        this.writer = writer;
     }
 
-    public String getBrdmemo() {
-        return brdmemo.replaceAll("(?i)<script", "&lt;script");
+    public String getContent() {
+        return content.replaceAll("(?i)<script", "&lt;script");
     }
 
-    public void setBrdmemo(String brdmemo) {
-        this.brdmemo = brdmemo;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getBrddate() {
-        return brddate;
+    public String getRegdate() {
+        return regdate;
     }
 
-    public void setBrddate(String brddate) {
-        this.brddate = brddate;
+    public void setRegdate(String regdate) {
+        this.regdate = regdate;
     }
 
-    public String getBrdhit() {
-        return brdhit;
+    public String getHit() {
+        return hit;
     }
 
-    public void setBrdhit(String brdhit) {
-        this.brdhit = brdhit;
+    public void setHit(String hit) {
+        this.hit = hit;
     }
 
     public String getBrddeleteflag() {
@@ -107,5 +108,21 @@ public class BoardVO {
     public void setReplycnt(String replycnt) {
         this.replycnt = replycnt;
     }
+
+	public String getMembernum() {
+		return membernum;
+	}
+
+	public void setMembernum(String membernum) {
+		this.membernum = membernum;
+	}
+
+	public String getDepartname() {
+		return departname;
+	}
+
+	public void setDepartname(String departname) {
+		this.departname = departname;
+	}
     
 }
