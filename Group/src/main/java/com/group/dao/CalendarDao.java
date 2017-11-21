@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.group.vo.CalendarVO;
-import com.group.vo.MemberVO;
+import com.group.vo.UserVO;
 
 public interface CalendarDao {
 	// select : all schedule
@@ -12,7 +12,7 @@ public interface CalendarDao {
 	// select : selected schedule
 	public abstract CalendarVO viewSelected(CalendarVO cal) throws SQLException;
 	// select : kind schedule
-	public abstract List<CalendarVO> kindList(int[] num, MemberVO member) throws SQLException;
+	public abstract List<CalendarVO> kindList(int[] num, UserVO user) throws SQLException;
 	// select : day
 	public abstract List<CalendarVO> dayList(String day) throws SQLException;
 	// insert : schedule

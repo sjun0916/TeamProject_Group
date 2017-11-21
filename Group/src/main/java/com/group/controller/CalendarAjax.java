@@ -11,9 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.group.dao.UserDao;
 import com.group.service.CalendarService;
 import com.group.vo.CalendarVO;
-import com.group.vo.MemberVO;
+import com.group.vo.UserVO;
 
 @Controller
 public class CalendarAjax {
@@ -25,17 +26,18 @@ public class CalendarAjax {
 		List<Map<String, String>> list = new ArrayList<>();
 
 		int[] num = null;
-		MemberVO member = null;
+		UserVO user = null;
+		UserDao userDao = new UserDao();
 		try {
 			num = (int[])SessionUtil.getAttribute("kind");
-			int memberId = (int) SessionUtil.getAttribute("id");
-			//getMember(memberId)
+			String employee_no = (String) SessionUtil.getAttribute("id");
+			user = userDao.get(employee_no);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<CalendarVO> listVo = service.kindList(num, member);
+		List<CalendarVO> listVo = service.kindList(num, user);
 		
 		for (CalendarVO vo : listVo) {
 			Map<String, String> map = new HashMap<>();

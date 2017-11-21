@@ -6,14 +6,16 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.group.vo.CalendarVO;
-import com.group.vo.MemberVO;
+import com.group.vo.UserVO;
 
 @Repository
 public class CalendarDaoMybatis implements CalendarDao{
 	
+	@Autowired
 	private SqlSessionTemplate sqlSessionTemp;
 	
 	public CalendarDaoMybatis(SqlSessionTemplate sqlSessionTemp) {
@@ -27,24 +29,36 @@ public class CalendarDaoMybatis implements CalendarDao{
 		// TODO Auto-generated method stub
 		return sqlSessionTemp.selectList("list");
 	}
-	//num=1 회사; num=2 부서; num=3 개인
-	public List<CalendarVO> kindList(int[] num, MemberVO member) throws SQLException{
+	//개인별 일정 추가
+	public List<CalendarVO> kindList(int[] num, UserVO user) throws SQLException{
 		List<CalendarVO> tmpList = new ArrayList<CalendarVO>();
 		List<CalendarVO> list = viewList();
 		CalendarVO temp = null;
+		UserDao userDao = new UserDao();
 		Iterator<CalendarVO> it = list.iterator();
-		while(it.hasNext()) {
-			temp = it.next();
-			for(int i=0;i<num.length;i++) {
-				switch(num[i]) {
-				case 1 : tmpList.add(temp);break;
-				/*
-				case 2 :
-					//미완: 회원id로 회원 정보 확인, 부서가 같은지 확인하여 추가
-					if(member.getDepartname()==temp.getMemberNum());break;
-				*/
-				case 3 : if(member.getMembernum()==temp.getMemberNum())
-							tmpList.add(temp);break;
+
+		if(num.length != 0) {
+			//전체 일정 list의 회원 list에 추가 확인
+			while(it.hasNext()) {
+				temp = it.next();
+				//선택된 kinds 확인
+				for(int i=0;i<num.length;i++) {
+					switch(num[i]) {
+					//전체 일정 list에 추가
+					case 1 : tmpList.add(temp);break;
+					
+					case 2 :
+						//부서 일정 list에 추가
+						//회원id로 회원 정보 확인, 부서가 같은지 확인하여 list에 추가
+						UserVO tmpUser = userDao.get(temp.getEmployee_no());
+						if(user.getTeamName().equals(tmpUser.getTeamName()))
+							tmpList.add(temp);
+						break;
+					
+					//개인 일정 list에 추가
+					case 3 : if(user.getEmployeeNo().equals(temp.getEmployee_no()))
+								tmpList.add(temp);break;
+					}
 				}
 			}
 		}

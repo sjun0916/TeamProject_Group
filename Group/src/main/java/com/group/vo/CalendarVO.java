@@ -5,7 +5,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("calendarVO")
 public class CalendarVO {
 	private int calNum;	//seqence로 설정됨
-	private int memberNum;
+	private String employee_no;
 	private String startDate;
 	private String endDate;
 	private String title;
@@ -22,11 +22,11 @@ public class CalendarVO {
 	public void setCalNum(int calNum) {
 		this.calNum = calNum;
 	}
-	public int getMemberNum() {
-		return memberNum;
+	public String getEmployee_no() {
+		return employee_no;
 	}
-	public void setMemberNum(int memberNum) {
-		this.memberNum = memberNum;
+	public void setEmployee_no(String employee_no) {
+		this.employee_no = employee_no;
 	}
 	public String getStartDate() {
 		return startDate;
