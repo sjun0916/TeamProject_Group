@@ -11,7 +11,7 @@ public class SessionUtil {
    * @return Object attribute obj
    */
   public static Object getAttribute(String name) throws Exception {
-      return (Object)RequestContextHolder.getRequestAttributes().getAttribute(name, RequestAttributes.SCOPE_SESSION);
+      return RequestContextHolder.getRequestAttributes().getAttribute(name, RequestAttributes.SCOPE_SESSION);
   }
 
   /**
