@@ -17,7 +17,7 @@ import com.group.vo.CalendarVO;
 <<<<<<< HEAD
 =======
 import com.group.vo.UserVO;
->>>>>>> branch 'master' of https://github.com/sjun0916/TeamProject_Group
+
 
 @Controller
 public class CalendarAjax {
