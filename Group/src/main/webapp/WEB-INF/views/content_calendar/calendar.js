@@ -139,7 +139,6 @@ $(function() {
 							htmlcode += '<div class="box-body" style="display: none;">';
 							htmlcode += '<div> 기간:' + dateCode;
 							htmlcode += '</div><div> 내용:' + cont;
-							htmlcode += '</div><div> 기타사항:' + etc;
 							htmlcode += ' </div><div>';
 							htmlcode += '<input type="hidden" name="calendar_color" value="'+bgcode+'"/>';
 							htmlcode += '<input type="hidden" name="calendar_start" value="'+date[0]+'"/>';
