@@ -3,156 +3,128 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.*" %>
 
-
 <%@ include file ="/WEB-INF/views/include/header.jsp" %>
 
-<script src="calendar.js"></script>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-	<!-- ì»¨íí¸ í¤ë -->
+	<!-- contents header -->
 	<section class="content-header">
 		<h1>
-			Page Header <small>Optional description</small>
+			일정 <small>Calendar</small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-			<li class="active">Here</li>
+			<li class="active">Calendar</li>
 		</ol>
 	</section>
-
-	<!-- ì»¨íí¸ ë©ì¸ -->
+	<script type="text/javascript" src="calendar.js"></script>
+	<!-- inputGroup -->
+	
 	<section class="content container-fluid">
+		<h2>Text</h2>
+	</section>
+	<table>	
 		
-		<div class="row">
-
-			<div class="col-md-3">
-
-				<div class="box box-solid">
-					<form id="list" name="calendarList" method="post"
-						onsubmit="return loadHtml(this, this.action, 'result')">
-						<input type="submit" id="oksign" style="display: none;">
-					</form>
-					<div class="box-header with-border">
-						<h3 class="box-title">일정추가</h3>
-					</div>
-					<div class="form-group">
-						<label>색상 선택:</label> <input type="text" id="bgcolor"
-							class="form-control my-colorpicker1 colorpicker-element">
-					</div>
-					<!-- /btn-group -->
-					<label>제목</label>
-					<div class="input-group input-group-sm">
-
-						<input id="new-event" type="text" class="form-control"
-							placeholder="Event Title">
-						<div class="input-group-btn">
-							<button id="add-new-event" type="button"
-								class="btn btn-info btn-flat">일정추가</button>
-						</div>
-
+		<form id="list" name="calendarList" method="post" onsubmit="return loadHtml(this, this.action, 'result')">
+			<input type="submit" id="oksign" style="display: none;">
+		</form>
+		
+		
+			<tr>
+				<h3 class="box-title">일정 추가</h3>
+			</tr>
+			<tr>
+				<td>
+					<label>분류 :</label>
+					<select>
+						<option value="3" selected>개인</option>
+						<option value="2">부서</option>
+						<option value="1">전체</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<!-- /btn-group -->
+				<td><label>제목</label></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+				<input id="new-event" type="text" class="form-control"
+					placeholder="제목을 입력하세요">
+				</td>
+			</tr>
+<!-- 				<tr> -->
+<!-- 							<button id="add-new-event" type="button" -->
+<!-- 								class="btn btn-info btn-flat">일정추가</button> -->
+<!-- 					</tr> -->
+					
 						<!-- /btn-group -->
-					</div>
-					<div class="form-group">
-						<label>날짜 선택</label>
-
-						<div class="input-group">
-							<div class="input-group-addon">
-								<i class="fa fa-clock-o"></i>
-							</div>
-							<input type="text" class="form-control pull-right"
-								id="reservationtime">
-						</div>
-						<div class="form-group">
-							<label>내용</label>
-							<textarea id="cont" class="form-control" rows="3"
-								placeholder="Enter ..."></textarea>
-						</div>
-						<div class="form-group">
-							<label>기타사항</label>
-							<textarea id="etc" class="form-control" rows="3"
-								placeholder="Enter ..."></textarea>
-						</div>
-						<!-- /input-group -->
-					</div>
-				</div>
+			<tr>
+				<td>
+					<label>시작 날짜</label>
+					<input type="date" name="startTime" max="2025-12-31" min="2015-01-01">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>종료 날짜</label>
+					<input type="date" name="endTime" max="2025-12-31" min="2015-01-01">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>내용</label>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<textarea id="cont" class="form-control" rows="3"
+					placeholder="내용을 입력하세요"></textarea>
+				</td>
+			</tr>
+			<!-- /inputGroup -->
+			<tr>
+				<td>
 				<button type="button" class="btn btn-block btn-info btn-lg"
 					onclick="submit();">일정 등록</button>
-			</div>
+				</td>
+			</tr>
 			<!-- /.col -->
-			<div class="col-md-9">
-				<div class="box box-primary">
-					<div class="box-body no-padding">
-						<!-- THE CALENDAR -->
-						<div id="calendar"></div>
-					</div>
-					<!-- /.box-body -->
-				</div>
-				<!-- /. box -->
-			</div>
-			<!-- /.col -->
-		</div>
-		<!-- /.row -->
-	</section>
-	<!-- /.content -->
-	<div class="example-modal">
-        <div class="modal" id="myModal3" role="dialog">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="disable()">
-                  <span aria-hidden="true" onclick="disable()" >&times;</span></button>
-                <h4 class="modal-title"></h4>
-              </div>
-              <div class="modal-body" style="min-height: 300px; max-height: 763px;">
-              	<div class="form-group">
-              	<div class="form-group">
-                <label>색상</label>
-
-                <div class="input-group my-colorpicker2 colorpicker-element">
-                  <input type="text" id="settingcolor" class="form-control" disabled="">
-
-                  <div class="input-group-addon">
-                    <i id="settingbg" style="background-color: rgb(222, 2, 2);" disabled=""></i>
-                  </div>
-                </div>
-                <!-- /.input group -->
-                <div class="form-group">
-                <label>기간</label>
-                <div class="input-group">
-                  <div class="input-group-addon">
-                    <i class="fa fa-clock-o"></i>
-                  </div>
-                  <input type="text" class="form-control pull-right" id="reservationtime2" disabled="">
-                </div>
-                <!-- /.input group -->
-              </div>
-              </div>
-                  <label>내용</label>
-                  <textarea id="cont" class="form-control" rows="3" placeholder="Enter ..." disabled=""></textarea>
-                </div>
-                <div class="form-group">
-                  <label>기타사항</label>
-                  <textarea id="etc" class="form-control" rows="3" placeholder="Enter ..." disabled=""></textarea>
-                  <input type="hidden" id="seq" >
-                  <input type="hidden" id="title" >
-                </div>
-              </div>
-              <div class="modal-footer"> 
-                <input type="button" style="width: 25%" id="modify" class="btn btn-primary" onclick="edit()" value="수정">
-                <input type="button" style="width: 25%" id="delte" class="btn btn-primary" onclick="remove()" value="삭제" />
-                <button type="button" style="width: 25%" class="btn btn-secondary" data-dismiss="modal" onclick="disable()" >닫기</button>
-             
-              </div>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
-      </div>
-</div>
+			
 	
-	</section>
+			<!-- /.content -->
+			<tr>
+				<td>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="disable()">
+			        <span aria-hidden="true" onclick="disable()" >&times;</span></button>
+			        <h4 class="modal-title"></h4>
+		       		<label>색상</label>
+		        	<input type="text" id="settingcolor" class="form-control" disabled="">
+					<i id="settingbg" style="background-color: rgb(222, 2, 2);" disabled=""></i>
+				</td>
+			</tr>
+			<tr>
+				<td>
+		        	<label>기간</label>
+					<input type="text" class="form-control pull-right" id="reservationtime2" disabled="">
+				</td>
+			</tr>
+			<!-- /.input group -->
+			<tr>
+				<td>
+					<label>내용</label>
+		            <textarea id="cont" class="form-control" rows="3" placeholder="Enter ..." disabled=""></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="button" style="width: 25%" id="modify" class="btn btn-primary" onclick="edit()" value="수정">
+					<input type="button" style="width: 25%" id="delte" class="btn btn-primary" onclick="remove()" value="삭제" />
+		            <button type="button" style="width: 25%" class="btn btn-secondary" data-dismiss="modal" onclick="disable()" >닫기</button>
+				</td>
+			</tr>
+	</table>
 	<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
