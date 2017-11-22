@@ -22,7 +22,7 @@ public class AuthLogoutInterceptor extends HandlerInterceptorAdapter {
 		}
 		response.sendRedirect( request.getContextPath() );
 
-		return false;
+		return true;
 	}
 
 }

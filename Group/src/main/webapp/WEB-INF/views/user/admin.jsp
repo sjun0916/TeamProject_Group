@@ -28,7 +28,6 @@
 
 
 <c:import url="/WEB-INF/views/include/header.jsp"/>
-<c:import url="/WEB-INF/views/include/top_gnb.jsp"/>
 
 
 
