@@ -25,11 +25,6 @@ public interface CalendarService {
 	public abstract int update(CalendarVO cal) throws SQLException;
 		
 	
-	
-	
-	// 02. 공휴일 지정
-	
-	
 	// 03. 오늘 날짜로 전환
 	
 	

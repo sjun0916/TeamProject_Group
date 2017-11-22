@@ -22,4 +22,9 @@ public interface CalendarDao {
 	public abstract int delete(CalendarVO cal) throws SQLException;
 	// update : schedule
 	public abstract int update(CalendarVO cal) throws SQLException;
+	//monthCalendar
+	public String zeroNumber(int num);
+	public String getLunar(String sDate); 
+	public String isLunar(String sDate) throws Exception;
+	public String isSun(String sDate) throws Exception;
 }
