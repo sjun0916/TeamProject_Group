@@ -3,7 +3,7 @@
 
 <mapper namespace="user">
 
-	<update id="approvejoin" parameterType="uservo">
+	<update id="approvejoin" parameterType="UserVO">
 		<![CDATA[
 			UPDATE EMPLOYEE
 			SET IS_AUTHORITY = 'Y'
@@ -12,7 +12,7 @@
 		]]>
 	</update>
 
-	<select id="getnotapproved"  resultType="uservo">
+	<select id="getnotapproved"  resultType="UserVO">
 		SELECT EMPLOYEE_NAME EMPLOYEENAME,
 			   IMAGE_URL IMAGEURL,
 			   (SELECT TEAM_NAME FROM TEAM WHERE TEAM_ID=EMPLOYEE.TEAM_ID) TEAMNAME,
@@ -24,21 +24,21 @@
 	</select>
 	
 	
-	<select id="getTeamList"  resultType="uservo">
+	<select id="getTeamList"  resultType="UserVO">
 		SELECT TEAM_ID TEAMID,TEAM_NAME TEAMNAME
 		FROM TEAM
 	
 	</select>
 
-	<select id="getPositionList"  resultType="uservo">
+	<select id="getPositionList"  resultType="UserVO">
 	SELECT POSITION_ID POSITIONID,POSITION_NAME POSITIONNAME
 		FROM POSITION
 		ORDER BY TO_NUMBER(POSITION_ID) DESC
 		
 		</select>
 
-	<insert id="insert" parameterType="uservo">
-		<![CDATA[
+	<insert id="insert" parameterType="UserVO">
+
 	INSERT INTO 
 		EMPLOYEE(
 				EMPLOYEE_NO,
@@ -52,7 +52,7 @@
 				ROLE,
 				IMAGE_URL) 
 		VALUES (
-				#{employeeNo},
+				EMPLOYEE_SEQ.NEXTVAL,
 				#{teamId},	
 				#{email},
 				#{employeeName},
@@ -63,12 +63,12 @@
 				'USER',
 				#{imageUrl}
 				)
-	    ]]>
+
 	</insert>
 
 	<select id="getByemployeeNoAndPassword" 
 			parameterType="map"
-			resultType="uservo">
+			resultType="UserVO">
 		<![CDATA[
 		SELECT EMPLOYEE_NO EMPLOYEENO,
 			TEAM_ID TEAMID,
@@ -88,7 +88,7 @@
 		]]>
 	</select>
 
-	<select id="getByNo" parameterType="long" resultType="uservo">
+	<select id="getByNo" parameterType="long" resultType="UserVO">
 		<![CDATA[
 		SELECT EMPLOYEE_NO EMPLOYEENO,
 			TEAM_ID TEAMID,

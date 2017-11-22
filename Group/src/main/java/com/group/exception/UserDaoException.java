@@ -1,4 +1,4 @@
-package com.group.exception;
+/*package com.group.exception;
 
 public class UserDaoException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
@@ -12,3 +12,4 @@ public class UserDaoException extends RuntimeException {
 	}
 	
 }
+*/

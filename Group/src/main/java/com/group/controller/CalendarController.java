@@ -70,7 +70,7 @@ public class CalendarController {
 	}
 	@RequestMapping(value = "/calendar/update",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> modify
-		 (int calendar_id, String employee_no, int calendar_kind,
+		 (int calendar_id, int employee_no, int calendar_kind,
 				 String calendar_start,String calendar_end,
 				 String calendar_title,String calendar_content) {
 		CalendarVO vo = new CalendarVO();
@@ -119,7 +119,7 @@ public class CalendarController {
 			jsonObject.put("state", "fail");
 		}
 		try {
-			if(selectVo.getEmployee_no().equals((String)SessionUtil.getAttribute("id")))
+			if(selectVo.getEmployee_no() == ((int)SessionUtil.getAttribute("id")))
 				jsonObject.put("admin", "true");
 			
 			jsonObject.put("select", selectVo);
@@ -136,7 +136,7 @@ public class CalendarController {
 		CalendarVO vo =new CalendarVO();
 		try {
 			vo.setStartDate(date);
-			vo.setEmployee_no((String)SessionUtil.getAttribute("id"));
+			vo.setEmployee_no((int)SessionUtil.getAttribute("id"));
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -73,6 +73,7 @@ public class UserController {
 		return "user/admin";
 	}
 	
+	
 	@ResponseBody
 	@RequestMapping( value="/searchnotapproved", method=RequestMethod.POST )
 	public JSONResult view(@ModelAttribute UserVO userVo) {

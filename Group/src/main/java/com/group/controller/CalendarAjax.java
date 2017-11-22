@@ -31,7 +31,7 @@ public class CalendarAjax {
 		UserDao userDao = new UserDao();
 		try {
 			num = (int[])SessionUtil.getAttribute("kind");
-			String employee_no = (String) SessionUtil.getAttribute("id");
+			int employee_no = (int)SessionUtil.getAttribute("id");
 			user = userDao.get(employee_no);
 			
 		} catch (Exception e) {
