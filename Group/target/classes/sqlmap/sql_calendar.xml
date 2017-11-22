@@ -21,7 +21,7 @@
 	<!-- 일정 등록 -->
 	<insert id="insert" parameterType="CalendarVO">
 	insert into CALENDAR
-	(CALENDARNUM, MEMBERNUM, STARTDATE, ENDDATE, TITLE, CONTENT, KIND)
+	(CALENDARNUM, EMPLOYEE_NO, STARTDATE, ENDDATE, TITLE, CONTENT, KIND)
 	</insert>
 	<!--일정 수정 -->
 	<update id="update" parameterType="CalendarVO">

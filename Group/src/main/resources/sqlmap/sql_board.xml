@@ -4,12 +4,18 @@
 <mapper namespace="Board">
     <sql id="includeBoard">
         WHERE BRDDELETEFLAG='N'
+
          <if test="searchKeyword!=null and searchKeyword!='' and searchType!=''">
               <foreach item="item" index="index" collection="searchTypeArr" separator=" OR " open="AND (" close=")">
                      ${item} LIKE '%'||#{searchKeyword}||'%'
               </foreach>
         </if>               
     </sql>
+    <!-- 
+    item:전달받은 인자값을 다른이름으로 대체
+    collection: 전달받은 인자값
+    separator: 한번 이상 반복할 때 반복되는 사이에 해당 문을 넣어줌
+     -->
 
     <select id="selectBoardCount" resultType="Integer" parameterType="com.group.common.SearchVO">
         SELECT COUNT(*)
@@ -25,10 +31,18 @@
             SELECT BOARDNUM, TITLE, DEPARTNAME, WRITER, REGDATE, HIT
               , ROW_NUMBER() OVER(ORDER BY BOARDNUM DESC) BOARDNUM_SEQ
           FROM BOARD
+          
+          
           <include refid="includeBoard"/>
+          
+          <if test="category1 != null and category1 !=''">
+          AND DEPARTNAME = #{category1}
+          </if>
+         
           ) DS
          WHERE BOARDNUM_SEQ BETWEEN ${rowStart} AND ${rowEnd}
          ORDER BY BOARDNUM DESC
+         
     </select> 
     
     <insert id="insertBoard" parameterType="com.group.vo.BoardVO" >
