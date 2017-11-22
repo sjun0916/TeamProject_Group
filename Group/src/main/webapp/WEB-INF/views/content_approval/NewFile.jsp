@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page session="false" %>
+<%-- <%@ page session="false" %> --%>
 <%@ include file ="/WEB-INF/views/include/header.jsp" %>
 
 <!-- Content Wrapper. Contains page content -->
