@@ -36,7 +36,7 @@ public class CalendarController {
 		CalendarVO vo = new CalendarVO();
 		UserDao userDao = new UserDao();
 		UserVO user = null;
-		String employee_no=null;
+		int employee_no;
 		if(calendar_kind!=0){
 			vo.setKind(calendar_kind);
 		}
@@ -54,7 +54,7 @@ public class CalendarController {
 		}
 		try {
 			//kind 별 schedule 추가
-			employee_no= (String) SessionUtil.getAttribute("id");
+			employee_no= (int) SessionUtil.getAttribute("id");
 			userDao.get(employee_no);
 			vo.setEmployee_no(employee_no);
 		} catch (Exception e) {
@@ -70,7 +70,7 @@ public class CalendarController {
 	}
 	@RequestMapping(value = "/calendar/update",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> modify
-		 (int calendar_id, String employee_no, int calendar_kind,
+		 (int calendar_id, int employee_no, int calendar_kind,
 				 String calendar_start,String calendar_end,
 				 String calendar_title,String calendar_content) {
 		CalendarVO vo = new CalendarVO();
@@ -119,7 +119,7 @@ public class CalendarController {
 			jsonObject.put("state", "fail");
 		}
 		try {
-			if(selectVo.getEmployee_no().equals((String)SessionUtil.getAttribute("id")))
+			if(selectVo.getEmployee_no() == ((int)SessionUtil.getAttribute("id")))
 				jsonObject.put("admin", "true");
 			
 			jsonObject.put("select", selectVo);
@@ -136,7 +136,7 @@ public class CalendarController {
 		CalendarVO vo =new CalendarVO();
 		try {
 			vo.setStartDate(date);
-			vo.setEmployee_no((String)SessionUtil.getAttribute("id"));
+			vo.setEmployee_no((int)SessionUtil.getAttribute("id"));
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

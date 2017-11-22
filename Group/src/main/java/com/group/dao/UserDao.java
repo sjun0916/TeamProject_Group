@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.group.exception.UserDaoException;
 import com.group.vo.UserVO;
 
 @Repository
@@ -22,12 +21,12 @@ public class UserDao {
 		return count;
 	}	
 	
-	public UserVO get( String employeeNo ) {
+	public UserVO get( int employeeNo ) {
 		return sqlSession.selectOne( "user.getByNo", employeeNo );
 	}
 	
 	
-	public UserVO get( String employeeNo, String password ) throws UserDaoException {
+	public UserVO get( int employeeNo, String password ){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("employeeNo", employeeNo);
 		map.put("password", password);

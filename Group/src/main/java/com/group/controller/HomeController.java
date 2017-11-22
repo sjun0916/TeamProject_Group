@@ -52,4 +52,9 @@ public class HomeController {
 		
 		return "user/login";
 	}
+	
+	@RequestMapping("/user/auth")
+	public String auth() {
+		return "user/auth";
+	}
 }

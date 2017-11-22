@@ -1,4 +1,4 @@
-package com.group.exception;
+/*package com.group.exception;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -25,3 +25,4 @@ public class GlobalExceptionHandler {
 		return mav;
 	}
 }
+*/

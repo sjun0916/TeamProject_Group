@@ -10,7 +10,7 @@
 <link href="${pageContext.servletContext.contextPath }/assets/css/wrong_base.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<c:import url="/WEB-INF/views/includes/header.jsp"/>
+	<c:import url="/WEB-INF/views/include/header.jsp"/>
 		<div id="content">
 					<h1>아직 가입승인이 되지 않았습니다..관리자에게 연락하거나 기다려 주세요</h1>
 		</div>

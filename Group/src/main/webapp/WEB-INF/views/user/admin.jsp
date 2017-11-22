@@ -27,8 +27,8 @@
 <body>
 
 
-<c:import url="/WEB-INF/views/includes/header.jsp"/>
-<c:import url="/WEB-INF/views/includes/top_gnb.jsp"/>
+<c:import url="/WEB-INF/views/include/header.jsp"/>
+<c:import url="/WEB-INF/views/include/top_gnb.jsp"/>
 
 
 
@@ -37,7 +37,7 @@
 <table id="list"></table>
 
 </div>
-<c:import url="/WEB-INF/views/includes/footer.jsp"/>
+<c:import url="/WEB-INF/views/include/footer.jsp"/>
 
 </body>
 </html>

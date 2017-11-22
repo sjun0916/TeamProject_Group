@@ -57,7 +57,7 @@ public class CalendarDaoMybatis implements CalendarDao{
 						break;
 					
 					//개인 일정 list에 추가
-					case 3 : if(user.getEmployeeNo().equals(temp.getEmployee_no()))
+					case 3 : if(user.getEmployeeNo() == (temp.getEmployee_no()))
 								tmpList.add(temp);break;
 					}
 				}

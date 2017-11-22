@@ -35,7 +35,7 @@
           
           <include refid="includeBoard"/>
           
-          <if test="category1 != null">
+          <if test="category1 != null and category1 !=''">
           AND DEPARTNAME = #{category1}
           </if>
          

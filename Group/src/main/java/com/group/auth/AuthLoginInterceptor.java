@@ -23,17 +23,18 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 		Object handler)
 		throws Exception {
 
-		String employeeNo = request.getParameter( "employeeNo" );
+		int employeeNo = Integer.parseInt(request.getParameter( "employeeNo" ));
 		String password = request.getParameter( "password" );
-		
+		System.out.println(employeeNo);
 		
 		UserVO userVo = userService.getUser(employeeNo, password);
+
 		
 		if( userVo == null ) {
 			response.sendRedirect( request.getContextPath() + "/user/login" );
 			return false;
 		}
-		
+		System.out.println(userVo.getIsAuthority());		
 		//승인받지 않은 회원일경우
 		if( userVo.getIsAuthority().equals("N")) {
 			response.sendRedirect( request.getContextPath() + "/user/notapproval" );
@@ -44,9 +45,9 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 		// session 처리
 		HttpSession session = request.getSession( true );
 		session.setAttribute( "authUser", userVo );
-		response.sendRedirect( request.getContextPath()+"/board" );
+		response.sendRedirect( request.getContextPath()+"/home" );
 
-		return false;
+		return true;
 	}
 
 }

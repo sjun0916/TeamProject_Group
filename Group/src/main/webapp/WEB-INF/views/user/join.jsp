@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Sang Company</title>
+<title>회원가입</title>
 
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="${pageContext.servletContext.contextPath }/assets/js/common.js" type="text/javascript"></script>
@@ -21,40 +21,51 @@
 			<div>
 				<p id="join">회원가입</p>
 			</div>
-			<div id="menu2">
-				<p>사번</p>
-				<p>비밀번호</p>
-				<p>사진업로드</p>
-				<p>이름</p>
-				<p>소속</p>
-				<p>이메일</p>
-				<p>직급</p>
+			<table>
+				<tr>
+					<td>사번</td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>소속부서</td>
+					<td>
+					<select id="teamId" name="teamId" style="width:160.8px; HEIGHT:22PX">
+						<option value="001">인사부</option>
+						<option value="002">행정부</option>
+						<option value="003">개발부</option>
+						<option value="004">영업부</option>
+					</select>
+					</td>
+				</tr>
+				<tr>
+					<td>직급</td>
+					<td>
+					<select id="positionId" name="positionId" style="width:160.8px; HEIGHT:22PX" >
+						<option value="001">사장</option>
+						<option value="002">과장</option>
+						<option value="003">대리</option>
+						<option value="004">사원</option>
+					</select>
+					</td>
+				</tr>
+				<tr>
+					<td>이름</td>
+					<td><input type="text" name="employeeName" /></td>
+				</tr>
+				<tr>
+					<td>비밀번호</td>
+					<td><input type="password" name="password" /> </td>
+				</tr>
+				<tr>
+					<td>이메일</td>
+					<td><input type="text" name="email" /></td>
+				</tr>
+				<tr>
+					<td>프로필사진</td>
+					<td><input type="file" name="file"></td>
+				</tr>
 				
-			</div>
-			<div id="form2">
-				<p>
-					<input type="text" name="employeeNo"> 
-				</p>
-				<p>
-					<input type="password" name="password" /> 
-				</p>
-				<p>
-					<input type="file" name="file">
-				</p>
-				<p>
-					<input type="text" name="employeeName" />
-				</p>
-				<p>
-					<select id="teamId" name="teamId" style="width:160.8px; HEIGHT:22PX"></select>
-				</p>
-				<p>
-					<input type="text" name="email" />
-				</p>
-				<p>
-					<select id="positionId" name="positionId" style="width:160.8px; HEIGHT:22PX" ></select>
-				</p>
-			</div>
-
+			</table>
 			<button id="submit" style="width:160.8px; HEIGHT:22PX">가입요청하기</button>
 		</form>
 	</div>

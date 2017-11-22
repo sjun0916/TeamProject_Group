@@ -9,15 +9,21 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class FileUploadService {
-	private static String SAVE_PATH = "/uploads";
-	private static String PREFIX_URL = "/uploads/images/";
+	private static String SAVE_PATH = "C:\\uploadTest";
+	private static String PREFIX_URL = "C:\\uploadTest\\images";
 	
 	public String restore(MultipartFile multipartFile) {
 		
 		String url = "";
 		
+		
 		try {
 			String originalFileName = multipartFile.getOriginalFilename();
+			
+			if (originalFileName == null || originalFileName.equals("")) {
+				return url;
+			}
+			
 			String extName = originalFileName.substring(originalFileName.lastIndexOf("."), originalFileName.length());	
 			Long size = multipartFile.getSize();
 			String saveFileName = genSaveFileName( extName );

@@ -2,9 +2,9 @@ package com.group.vo;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("uservo")
+@Alias("UserVO")
 public class UserVO {
-	private String employeeNo;
+	private int employeeNo;
 	private String teamId;
 	private String teamName;
 	private String email;
@@ -54,11 +54,11 @@ public class UserVO {
 		this.isAuthority = isAuthority;
 	}
 
-	public String getEmployeeNo() {
+	public int getEmployeeNo() {
 		return employeeNo;
 	}
 
-	public void setEmployeeNo(String employeeNo) {
+	public void setEmployeeNo(int employeeNo) {
 		this.employeeNo = employeeNo;
 	}
 
