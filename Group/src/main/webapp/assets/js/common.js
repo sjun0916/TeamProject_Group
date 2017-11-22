@@ -11,7 +11,7 @@
 function makeTeamList(selectTagId){
 	
 	$.ajax({
-		url: "/groupware/api/user/getTeamList",
+		url: "/group/api/user/getTeamList",
 		type: "get",
 		dataType: "json",
 		data:"",
@@ -37,7 +37,7 @@ function makeTeamList(selectTagId){
 function makePositionList(selectTagId){
 	
 	$.ajax({
-		url: "/groupware/api/user/getPositionList",
+		url: "/group/api/user/getPositionList",
 		type: "get",
 		dataType: "json",
 		data:"",

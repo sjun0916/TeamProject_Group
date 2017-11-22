@@ -33,7 +33,7 @@ function fn_formSubmit(){
     
 <body class="skin-green-light sidebar-mini">
 <div class="wrapper">
-
+<input type="hidden" id="userEmployeeNo" value="${authUser.employeeNo}" >
   <!-- 메인 헤더! -->
   <header class="main-header">
 
@@ -92,7 +92,7 @@ function fn_formSubmit(){
               <img src="${pageContext.request.contextPath}/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <!-- 미니 상태로 있을때 유저이름 -->
-              <span class="hidden-xs">AdminTester</span>
+              <span class="hidden-xs">${authUser.employeeName }</span>
             </a>
             <ul class="dropdown-menu">
               <!-- 유저 정보 클릭시 나오는 메뉴 -->
@@ -100,7 +100,7 @@ function fn_formSubmit(){
                 <img src="${pageContext.request.contextPath}/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  TEST - Web Developer
+                  [${authUser.teamName }/${authUser.positionName }] ${authUser.employeeName }
                   <small>Member since 2017</small>
                 </p>
               </li>
@@ -114,7 +114,7 @@ function fn_formSubmit(){
                     <a href="#">calendar</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="login.jsp">logout</a>
+                    <a href="/user/logout">logout</a>
                   </div>
                 </div>
               </li>
@@ -137,7 +137,7 @@ function fn_formSubmit(){
           <img src="${pageContext.request.contextPath}/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>AdminTester</p>
+          <p>${authUser.employeeName }</p>
           <!-- 접속 상태 표시 -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
@@ -159,7 +159,7 @@ function fn_formSubmit(){
         <li class="header"><hr></li>
         
 		<li>
-        	<a href="#">
+        	<a href="/group/searchemployee">
         	<i class="fa fa-dashboard"></i>
         	<span>사원 주소록</span>
         	</a>
@@ -223,12 +223,12 @@ function fn_formSubmit(){
         	<span>사진첩</span>
         	</a>
         </li>
-        
+
         <li><hr></li>
         
        <c:if test="${ authUser.getRole() == 'ADMIN' }">
         <li>
-        	<a href="#">
+        	<a href="${pageContext.request.contextPath}/admin">
         	<i class="fa fa-laptop"></i>
 <!--         	<i class="fa fa-gear"></i> -->
         	<span>관리자 설정</span>
