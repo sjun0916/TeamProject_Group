@@ -16,7 +16,7 @@
 			<div id="user">
 				<p class="jr-success">
 					회원가입을 축하합니다.<br>
-					가입승을을 기다려주세요
+					가입승인을 기다려주세요
 					
 					<br><br>
 					<a href="${pageContext.servletContext.contextPath }/user/login">돌아가기</a>

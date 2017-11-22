@@ -16,8 +16,14 @@ public class FileUploadService {
 		
 		String url = "";
 		
+		
 		try {
 			String originalFileName = multipartFile.getOriginalFilename();
+			
+			if (originalFileName == null || originalFileName.equals("")) {
+				return url;
+			}
+			
 			String extName = originalFileName.substring(originalFileName.lastIndexOf("."), originalFileName.length());	
 			Long size = multipartFile.getSize();
 			String saveFileName = genSaveFileName( extName );
