@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+<%
+	session.getAttribute("authUser");
+%>
 <html>
 <head>
 <script>
@@ -154,6 +158,13 @@ function fn_formSubmit(){
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header"><hr></li>
         
+		<li>
+        	<a href="#">
+        	<i class="fa fa-dashboard"></i>
+        	<span>사원 주소록</span>
+        	</a>
+        </li>
+        
         <!-- 전자게시판 -->
         <li class="treeview">
         	  <a href="#">
@@ -215,6 +226,7 @@ function fn_formSubmit(){
         
         <li><hr></li>
         
+       <c:if test="${ authUser.getRole() == 'ADMIN' }">
         <li>
         	<a href="#">
         	<i class="fa fa-laptop"></i>
@@ -222,6 +234,7 @@ function fn_formSubmit(){
         	<span>관리자 설정</span>
         	</a>
         </li>
+       </c:if>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

@@ -51,7 +51,7 @@ public class MailController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "mail/mailForm";
+		return "content_mail/mailForm";
 	}
 	
 	
@@ -75,7 +75,7 @@ public class MailController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "mail/mailForm";
+		return "content_mail/mailForm";
 	}
 	
 	
@@ -147,7 +147,7 @@ public class MailController {
 		
 		model.addAttribute("result","success");
 		
-		return "mail/result";
+		return "content_mail/result";
 	}
 	
 	private class SMTPAuthenticator extends javax.mail.Authenticator {
@@ -178,7 +178,7 @@ public class MailController {
 		List<UserVO> memList = service.listAll();
 		model.addAttribute("member", memList);
 		
-		return "mail/mailToSearch";
+		return "content_mail/mailToSearch";
 	}
 
 }
