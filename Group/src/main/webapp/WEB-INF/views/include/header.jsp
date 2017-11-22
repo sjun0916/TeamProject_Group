@@ -108,13 +108,13 @@ function fn_formSubmit(){
               <li class="user-footer">
                 <div class="row">
                   <div class="col-xs-4 text-center">
-                    <a href="#">mypage</a>
+                    <a href="${pageContext.request.contextPath}/user/mypage">mypage</a>
                   </div>
                   <div class="col-xs-4 text-center">
                     <a href="#">calendar</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="/user/logout">logout</a>
+                    <a href="${pageContext.request.contextPath}/user/logout">logout</a>
                   </div>
                 </div>
               </li>
@@ -228,7 +228,7 @@ function fn_formSubmit(){
         
        <c:if test="${ authUser.getRole() == 'ADMIN' }">
         <li>
-        	<a href="${pageContext.request.contextPath}/admin">
+        	<a href="${pageContext.request.contextPath}/user/admin">
         	<i class="fa fa-laptop"></i>
 <!--         	<i class="fa fa-gear"></i> -->
         	<span>관리자 설정</span>

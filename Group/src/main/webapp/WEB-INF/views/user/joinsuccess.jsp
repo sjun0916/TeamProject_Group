@@ -11,7 +11,6 @@
 </head>
 <body>
 	<div id="container">
-		<c:import url="/WEB-INF/views/include/header.jsp"/>
 		<div id="content">
 			<div id="user">
 				<p class="jr-success">

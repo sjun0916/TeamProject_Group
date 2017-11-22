@@ -1,4 +1,4 @@
- var dialog, form;
+var dialog, form;
 function initGrid() {
      
     $("#list").jqGrid({

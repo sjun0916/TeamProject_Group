@@ -57,4 +57,9 @@ public class HomeController {
 	public String auth() {
 		return "user/auth";
 	}
+	
+	@RequestMapping("/user/logout")
+	public String logout() {
+		return "user/logout";
+	}
 }

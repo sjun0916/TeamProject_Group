@@ -2,16 +2,16 @@
     pageEncoding="UTF-8"%>
 <%-- <%@ page session="false" %> --%>
 
-	<!-- 회원목록 -->
-	<link href="${pageContext.servletContext.contextPath}/assets/css/search_employee.css" rel="stylesheet" type="text/css">
+<!-- 회원목록 -->
+<link href="${pageContext.request.contextPath}/assets/css/search_employee.css" rel="stylesheet" type="text/css">
 
-<link rel="stylesheet" type="text/css" media="screen" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" type="text/css" media="screen" href="${pageContext.servletContext.contextPath}/assets/jqgrid/css/ui.jqgrid.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/assets/jqgrid/css/ui.jqgrid.css" />
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="${pageContext.servletContext.contextPath}/assets/jqgrid/js/jquery.jqGrid.min.js"></script>
-<script src="${pageContext.servletContext.contextPath }/assets/js/common.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/assets/jqgrid/js/jquery.jqGrid.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/common.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/assets/js/search_employee.js" type="text/javascript"></script>
 <%@ include file ="/WEB-INF/views/include/header.jsp" %>
 
