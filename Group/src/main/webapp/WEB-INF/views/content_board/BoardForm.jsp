@@ -53,13 +53,12 @@
 				<tbody>
 					<tr>
 						<td>부서명</td>
-						<td><input type="text" name="departname" size="20"
-							maxlength="20" value="<c:out value="${boardInfo.departname}"/>"></td>
+						<td><c:out value="${authUser.teamName}"/></td>
 					</tr>
 					<tr>
 						<td>작성자</td>
-						<td><input type="text" name="writer" size="20" maxlength="20"
-							value="<c:out value="${boardInfo.writer}"/>"></td>
+						<td>[<c:out value="${authUser.positionName}"/>]
+						<c:out value="${authUser.employeeName}"/></td>
 					</tr>
 					<tr>
 						<td>제목</td>
@@ -89,9 +88,16 @@
 					
 				</tbody>
 			</table>
+			<input type="hidden"  name="writerpos"
+				value="<c:out value="${authUser.positionName}"/>">
+			<input type="hidden"  name="departname"
+				value="<c:out value="${authUser.teamName}"/>">
+				<input type="hidden"  name="writer"
+				value="<c:out value="${authUser.employeeName}"/>">
 			<input type="hidden"  name="boardnum"
-				value="<c:out value="${boardInfo.boardnum}"/>"> <a href="#"
-				onclick="fn_formSubmit()" style="float:right;" >글등록</a>
+				value="<c:out value="${boardInfo.boardnum}"/>"> 
+				
+				<a href="#" onclick="fn_formSubmit()" style="float:right;" >글등록</a>
 				
 		</form>
 	</section>
