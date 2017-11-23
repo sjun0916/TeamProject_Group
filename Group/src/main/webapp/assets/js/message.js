@@ -26,7 +26,7 @@ function initSendMessageForm(){
 			
 			$.ajax({
 				
-				 url:'/groupware/message/answerMessage',
+				 url:'/group/message/answerMessage',
 				type:'POST',
 				data:data,
 		        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
@@ -85,7 +85,7 @@ function deleteMessage(messageId){
 	JSON.stringify(data);
 	
 	$.ajax({
-		url:'/groupware/message/deleteMessage',
+		url:'/group/message/deleteMessage',
 		type:'POST',
 		data:data,
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 

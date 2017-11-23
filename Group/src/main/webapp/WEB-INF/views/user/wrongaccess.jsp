@@ -10,7 +10,6 @@
 <link href="${pageContext.servletContext.contextPath }/assets/css/wrong_base.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<c:import url="/WEB-INF/views/include/header.jsp"/>
 		<div id="content">
 					<h1>잘못된 접근입니다.</h1>
 		</div>

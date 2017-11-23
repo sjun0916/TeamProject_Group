@@ -28,7 +28,7 @@ function approve(email) {
 	data.email= email;
 	JSON.stringify(data);
 	$.ajax({
-		 url:'/groupware/user/approve',
+		 url:'/group/user/approve',
 		type:'POST',
 		data:data,
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
@@ -69,7 +69,7 @@ function loadEmployeeData() {
 	var params = jQuery("#searchEmployeeForm").serialize();
 	$.ajax({
 		
-		 url:'/groupware/user/searchnotapproved',
+		 url:'/group/user/searchnotapproved',
 		type:'POST',
 		data:params,
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 

@@ -1,4 +1,4 @@
- var dialog, form;
+var dialog, form;
 function initGrid() {
      
     $("#list").jqGrid({
@@ -7,7 +7,7 @@ function initGrid() {
         //그리드 높이
         height: 700,
         //컬럼명들
-        colNames:['사진','이름', '소속', '직급','이메일','메세지 전송'],
+        colNames:['사진','이름', '소속', '직급','이메일'],
         //컬럼모델
         colModel:[
             {name:'imageUrl',align:"center",formatter:imageFormatter},
@@ -15,7 +15,7 @@ function initGrid() {
             {name:'teamName',align:"center"},
             {name:'positionName',align:"center"},
             {name:'email',align:"center",width:200},
-            {name:'IDX', index:'IDX',align:"center", width:100,formatter:sendmessageButton },
+//            {name:'IDX', index:'IDX',align:"center", width:100,formatter:sendmessageButton },
         ],
         width:700,
         //그리드타이틀
@@ -24,9 +24,9 @@ function initGrid() {
 }
 
 // 버튼 생성
-function sendmessageButton (cellvalue, options, rowObject) {
+function sendmailButton (cellvalue, options, rowObject) {
 
-  return '<input type="button" id="sendMessageButton" onclick="openForm(\''+rowObject.email+'\')" value="메세지 보내기"/>';
+  return '<input type="button" id="sendMailButton" onclick="openForm(\''+rowObject.email+'\')" value="메일 보내기"/>';
 }
 
 
@@ -54,7 +54,7 @@ function loadEmployeeData() {
 	var params = jQuery("#searchEmployeeForm").serialize();
 	$.ajax({
 		
-		 url:'/groupware/searchemployee',
+		 url:'/group/searchemployee',
 		type:'POST',
 		data:params,
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
@@ -104,7 +104,7 @@ function initSendMessageForm(){
 			
 			$.ajax({
 				
-				 url:'/groupware/message/sendMessage',
+				 url:'/group/message/sendMessage',
 				type:'POST',
 				data:data,
 		        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 

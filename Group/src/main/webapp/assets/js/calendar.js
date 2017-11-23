@@ -23,7 +23,7 @@ function getSchedule() {
 
 	$.ajax({
 
-		url : '/groupware/calendar/getSchedule',
+		url : '/group/calendar/getSchedule',
 		type : 'POST',
 		data : data,
 		contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -48,7 +48,7 @@ function addSchedule() {
 
 	var params = jQuery("#newScheduleForm").serialize();
 	$.ajax({
-		url : '/groupware/calendar/addSchedule',
+		url : '/group/calendar/addSchedule',
 		type : 'POST',
 		data : params,
 		contentType : 'application/x-www-form-urlencoded; charset=UTF-8',

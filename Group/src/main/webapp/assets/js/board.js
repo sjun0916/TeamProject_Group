@@ -11,7 +11,7 @@ function deleteContent(contentId){
 	
 	$.ajax({
 		
-		 url:'/groupware/board/deleteContent',
+		 url:'/group/board/deleteContent',
 		type:'POST',
 		data:data,
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
@@ -21,7 +21,7 @@ function deleteContent(contentId){
 		},
 		complete: function() {			
 			alert("게시물 삭제를 완료하였습니다");
-			location.href = '/groupware/board?boardId'+ $('#boardId').val();
+			location.href = '/group/board?boardId'+ $('#boardId').val();
 			}
 	});
 }
