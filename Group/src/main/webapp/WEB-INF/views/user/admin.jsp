@@ -5,11 +5,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
+<title>관리자 페이지</title>
 <head>
-<title>Sang Company</title>
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link href="${pageContext.servletContext.contextPath}/assets/css/search_employee.css" rel="stylesheet" type="text/css">
+	<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" media="screen" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" type="text/css" media="screen" href="${pageContext.servletContext.contextPath}/assets/jqgrid/css/ui.jqgrid.css" />
 
@@ -24,19 +24,36 @@
  
  </script>
 </head>
-<body>
+    <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 
-<c:import url="/WEB-INF/views/include/header.jsp"/>
+<div class="content-wrapper">
+	<!-- 컨텐트 헤더 -->
+	<section class="content-header">
+		<h1>
+			회원 목록 및 가입 승인 여부 <small>ADMIN</small>
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+			<li class="active">Here</li>
+		</ol>
+	</section>
 
+	<!-- ★★★★★★★★★★★여기에 추가★★★★★★★★★★★ -->
+	<!-- 컨텐트 메인 -->
+	<section class="content container-fluid">
 
+		 <div id = "list_div">
+		 <table id="list"></table>
+		 </div>
 
-
-<div id = "list_div">
-<table id="list"></table>
-
+	</section>
+	<!-- ★★★★★★★★★★★여기에 추가★★★★★★★★★★★ -->
+	<!-- /.content -->
 </div>
-<c:import url="/WEB-INF/views/include/footer.jsp"/>
-
+<!-- /.content-wrapper -->
+    
+    <%@ include file="/WEB-INF/views/include/footer.jsp" %>
+    <%@ include file="/WEB-INF/views/include/footerScript.jsp" %>
 </body>
 </html>

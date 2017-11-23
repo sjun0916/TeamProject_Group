@@ -3,14 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page session="true"%>
 
-<!-- jQuery 2.1.4 -->
-    <script src="${pageContext.request.contextPath}/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <body class="skin-green-light sidebar-mini">
 <div class="wrapper">
 <%-- <input type="hidden" id="userEmployeeNo" value="${authUser.employeeNo}" > --%>
   <!-- 메인 헤더! -->
   <header class="main-header">
 
+    
+    
     <!-- 메인 로고 -->
     <a href="/group/home" class="logo">
     
@@ -19,7 +19,6 @@
       <!-- 로고 형태 -->
       <span class="logo-lg"><b>G</b>roup<b>W</b>are</span>
     </a>
-
     <!-- 헤더 상단 네비바 -->
     <nav class="navbar navbar-static-top" role="navigation">
     
@@ -82,7 +81,7 @@
               <li class="user-footer">
                 <div class="row">
                   <div class="col-xs-4 text-center">
-                    <a href="${pageContext.servletContext.contextPath}/user/mypage">mypage</a>
+                    <a href="${pageContext.servletContext.contextPath }/mypage" class="menu item_2" id="top_gnb">mypage</a>
                   </div>
                   <div class="col-xs-4 text-center">
                     <a href="#">calendar</a>
@@ -96,7 +95,7 @@
           </li>
         </ul>
       </div>
-    </nav>
+      </nav>
   </header>
   
   <!-- 왼쪽 사이드바 (로고 및 컬럼 포함) -->
@@ -127,13 +126,12 @@
             </span>
         </div>
       </form>
-
       <!-- 사이드바 메뉴 -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header"><hr></li>
         
 		<li>
-        	<a href="/group/searchemployee">
+        	<a href="${pageContext.servletContext.contextPath }/searchemployee" class="menu item_1" id="top_gnb">
         	<i class="fa fa-dashboard"></i>
         	<span>사원 주소록</span>
         	</a>

@@ -1,6 +1,25 @@
 var dialog, form;
 function initGrid() {
-	 
+	$("#list").jqGrid({
+        //로컬그리드이용
+        datatype: "local",
+        //그리드 높이
+        height: 700,
+        //컬럼명들
+        colNames:['사진','이름', '소속', '직급','이메일'],
+        //컬럼모델
+        colModel:[
+            {name:'imageUrl',align:"center",formatter:imageFormatter},
+            {name:'employeeName',align:"center",width:100},
+            {name:'teamName',align:"center"},
+            {name:'positionName',align:"center"},
+            {name:'email',align:"center",width:200},
+//            {name:'IDX', index:'IDX',align:"center", width:100,formatter:sendmessageButton },
+        ],
+        width:700,
+        //그리드타이틀
+        caption: "사원목록"
+    });    
 }
 
 function imageFormatter(cellvalue, options, rowObject)
@@ -44,28 +63,9 @@ function loadEmployeeData() {
 
 
  $(function(){
-	 alert('test');
-	 $("#list").jqGrid({
-	        //로컬그리드이용
-	        datatype: "local",
-	        //그리드 높이
-	        height: 700,
-	        //컬럼명들
-	        colNames:['사진','이름', '소속', '직급','이메일'],
-	        //컬럼모델
-	        colModel:[
-	            {name:'imageUrl',align:"center",formatter:imageFormatter},
-	            {name:'employeeName',align:"center",width:100},
-	            {name:'teamName',align:"center"},
-	            {name:'positionName',align:"center"},
-	            {name:'email',align:"center",width:200},
-//	            {name:'IDX', index:'IDX',align:"center", width:100,formatter:sendmessageButton },
-	        ],
-	        width:700,
-	        //그리드타이틀
-	        caption: "사원목록"
-	    });    
-		//initGrid();
+	 
+	 	changeActiveGnb(1);
+		initGrid();
 	
 		$('#teamId').append("<option value=''>전체</option>");
 		makeTeamList('teamId');

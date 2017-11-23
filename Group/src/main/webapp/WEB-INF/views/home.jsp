@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<title>GroupWare_Home</title>
 <head>
 	<%@ include file="include/headerScript.jsp" %>
 </head>
@@ -13,7 +14,7 @@
     	<!-- Content 헤더 -->
     	<section class="content-header">
     		<h1>
-    		페이지 제목 <small>ㅇㅇ</small>
+    		Home <small>메인페이지 입니다.</small>
     		</h1>
     		<ol class="breadcrumb">
     			<li><a href="#"><i class="fa fa-dashboard"></i>Level</a></li>

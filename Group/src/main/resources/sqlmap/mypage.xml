@@ -5,7 +5,6 @@
 
 
 	<update id="modify" parameterType="UserVO">
-		<![CDATA[
 			UPDATE EMPLOYEE
 			SET PASSWORD = #{password},
 				EMPLOYEE_NAME = #{employeeName},
@@ -13,7 +12,6 @@
 				EMAIL = #{email}
 			WHERE EMPLOYEE_NO = #{employeeNo}
 		
-		]]>
 	</update>	
 	
 </mapper>
