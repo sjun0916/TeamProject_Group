@@ -23,7 +23,10 @@ public interface CalendarService {
 	public abstract int delete(CalendarVO cal) throws SQLException;
 	// update : schedule
 	public abstract int update(CalendarVO cal) throws SQLException;
-		
+	
+	//Holiday
+	public String isLunar(String sDate) throws Exception;
+	public String isSun(String sDate) throws Exception;
 	
 	// 03. 오늘 날짜로 전환
 	

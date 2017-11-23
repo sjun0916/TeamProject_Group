@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+	<%@ include file="include/headerScript.jsp" %>
+</head>
+
     <%@ include file="include/header.jsp" %>
 
     <!-- Content Wrapper. Contains page content -->
@@ -22,3 +28,6 @@
     </div>
     
     <%@ include file="include/footer.jsp" %>
+    <%@ include file="include/footerScript.jsp" %>
+</body>
+</html>

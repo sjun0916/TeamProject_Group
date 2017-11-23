@@ -1,12 +1,15 @@
 package com.group.controller;
 
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,9 +26,90 @@ import com.group.vo.UserVO;
 public class CalendarController {
 	@Resource(name = "calendarService")
 	CalendarService service;
+	
+	
+	public int nullIntconv(String inv)
+	{   
+		int conv=0;
+			
+		try{
+			System.out.println("nullIntconv_inv : "+inv); //confirm
+			conv=Integer.parseInt(inv);
+		}
+		catch(Exception e)
+		{}
+		return conv;
+	}
+	
 	@RequestMapping(value = "/calendar/main")
-	public String calendar(HttpServletRequest request) {
+	public String calendar(HttpServletRequest request, HttpServletResponse response) {
+		//calendarMonth.jsp month view에 필요한 value -> request.setAttribute();
+		
+		response.setContentType("text/html;charset=UTF-8");
+		
+		int iYear=nullIntconv(request.getParameter("iYear"));
+		int iMonth=nullIntconv(request.getParameter("iMonth"));
+		
+		Calendar ca = new GregorianCalendar();
+		
+		//today
+		int iTDay=ca.get(Calendar.DATE);
+		int iTYear=ca.get(Calendar.YEAR);
+		int iTMonth=ca.get(Calendar.MONTH);
+		System.out.println("Today : "+iTYear+iTMonth+iTDay); //confirm
+		if(iYear==0)
+		{
+			  iYear=iTYear;
+			  iMonth=iTMonth;
+		}
+
+		GregorianCalendar cal = new GregorianCalendar (iYear, iMonth, 1); 
+
+		int days=cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		int weekStartDay=cal.get(Calendar.DAY_OF_WEEK);
+		System.out.println("view info\n days : "+days+"\n WeekStartDay : "+weekStartDay); // confirm 
+		
+		cal = new GregorianCalendar (iYear, iMonth, days);
+//		iMonth = iMonth+1;
+		int iTotalweeks=cal.get(Calendar.WEEK_OF_MONTH);
+		int cnt =1;
+		String month = "", day="";
+		if(iMonth<10) {
+			month+="0"+iMonth;
+	    }
+	    if((cnt-weekStartDay+1)<10) {
+	    	day += "0"+(cnt-weekStartDay+1);
+	    }
+	    String date = ""+iYear+month+day;
+	    String event = isHoliday(date);
+	    
+        request.setAttribute("event", event);
+        request.setAttribute("weekStartDay", weekStartDay);
+        request.setAttribute("iTotalweeks", iTotalweeks);
+        request.setAttribute("days", days);
+        request.setAttribute("iTYear", iTYear);
+        request.setAttribute("iYear", iYear);
+        request.setAttribute("iMonth", iMonth+1);
+        System.out.println("end call calendar"); // confirm
 		return "content_calendar/calendarMonth";
+	}
+	
+	public String isHoliday(String date) {
+		String tmp1 = null;
+		String tmp2 = null;
+		try {
+			tmp1 = service.isLunar(date);
+			if(tmp1!=null)
+				return tmp1;
+		
+			tmp2 = service.isSun(date);
+			if(tmp2!=null)
+				return tmp2;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	@RequestMapping(value = "/calendar/main",method=RequestMethod.POST)
 	public String savecalendar(HttpServletRequest request,
@@ -145,4 +229,5 @@ public class CalendarController {
 		jsonObject.put("data", list);
 		return jsonObject;
 	}
+	
 }

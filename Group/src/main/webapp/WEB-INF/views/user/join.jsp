@@ -45,10 +45,6 @@
 						<span style="color:red; font-size:10pt">직급</span>
 						<div class="col-sm-3">
 							<select id="positionId" class="form-control" name="positionId" style="width:160.8px; HEIGHT:22PX" >
-								<option value="001">사장</option>
-								<option value="002">과장</option>
-								<option value="003">대리</option>
-								<option value="004">사원</option>
 							</select>
 						</div>
 					</div>
@@ -57,10 +53,6 @@
 						<span style="color:red; font-size:10pt">부서</span>
 						<div class="col-sm-3">
 							<select id="teamId" class="form-control" name="teamId" style="width:160.8px; HEIGHT:22PX" >
-								<option value="001">인사부</option>
-								<option value="002">행정부</option>
-								<option value="003">개발부</option>
-								<option value="004">영업부</option>
 							</select>
 						</div>
 					</div>

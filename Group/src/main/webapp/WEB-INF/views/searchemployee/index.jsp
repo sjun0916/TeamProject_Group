@@ -1,23 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <%@ page session="false" %> --%>
+<!DOCTYPE html>
+<html>
+<head>
+	<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
+<%-- <link href="${pageContext.servletContext.contextPath}/assets/css/search_employee.css" rel="stylesheet" type="text/css"> --%>
 
-<!-- 회원목록 -->
-<link href="${pageContext.request.contextPath}/assets/css/search_employee.css" rel="stylesheet" type="text/css">
+<!-- <link rel="stylesheet" type="text/css" media="screen" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+<%-- <link rel="stylesheet" type="text/css" media="screen" href="${pageContext.servletContext.contextPath}/assets/jqgrid/css/ui.jqgrid.css" /> --%>
 
-<link rel="stylesheet" type="text/css" media="screen" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/assets/jqgrid/css/ui.jqgrid.css" />
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+
+<!-- <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script> 
+
+<script src="${pageContext.servletContext.contextPath }/assets/js/common.js" type="text/javascript"></script>
+<script src="${pageContext.servletContext.contextPath }/assets/js/search_employee.js" type="text/javascript"></script>
+	
+
+
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="${pageContext.request.contextPath}/assets/jqgrid/js/jquery.jqGrid.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/common.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/assets/js/search_employee.js" type="text/javascript"></script>
-<%@ include file ="/WEB-INF/views/include/header.jsp" %>
+<script src="${pageContext.servletContext.contextPath}/assets/jqgrid/js/jquery.jqGrid.min.js"></script>
 
  <script type="text/javascript">  
  
  </script>
+</head>
+    <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- 컨텐트 헤더 -->
@@ -43,10 +55,6 @@
 						<th scope="row" >팀명</th>
 						<td colspan="2">
 							<select id="teamId" name="teamId" style="width:178.4px; HEIGHT:17.6px">
-								<option value="001">인사부</option>
-								<option value="002">행정부</option>
-								<option value="003">개발부</option>
-								<option value="004">영업부</option>
 							</select>
 						</td>
 						<th scope="row" >이름</th>
@@ -72,5 +80,8 @@
 	<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
-<%@ include file ="/WEB-INF/views/include/footer.jsp" %>
+    
+    <%@ include file="/WEB-INF/views/include/footer.jsp" %>
+    <%@ include file="/WEB-INF/views/include/footerScript.jsp" %>
+</body>
+</html>

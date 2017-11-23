@@ -147,7 +147,10 @@ public class CalendarDaoMybatis implements CalendarDao{
 		
 		String month = sDate.substring(4,6);
 		int intMonth = Integer.parseInt(month)+1;
-		month = zeroNumber(intMonth); 
+		if(intMonth<10)
+			month = "0"+intMonth;
+		else 
+			month = Integer.toString(intMonth); 
 		
 		String serviceKey = "tuM3dAwhoBec0v61TL%2FiSW78Q6feKZUNd2xWr2EF81IFOq8QeqN%2B4Z4KWTp5mUrkt1iCejz7%2BsWpyQQzCusBAQ%3D%3D";
 		String strUrl = "http://apis.data.go.kr/B090041/openapi/service/LrsrCldInfoService/getLunCalInfo?solYear="
@@ -173,6 +176,9 @@ public class CalendarDaoMybatis implements CalendarDao{
 			
 			for(int i=0;i<result.getLength();i++) {
 				resultCode = Integer.parseInt(result.item(i).getFirstChild().getNodeValue());
+				if(resultCode!=0)
+					break;
+				
 				sLeap = solLeapYear.item(i).getFirstChild().getNodeValue();
 				lLeap = lunLeapMonth.item(i).getFirstChild().getNodeValue();
 				
@@ -201,64 +207,6 @@ public class CalendarDaoMybatis implements CalendarDao{
 		}
 		return null;
 	}
-	/*
-	 * input sunDate -> output lunarDate
-	 * @param sDate 양력일자
-	 * @return 행사이름
-	 */
-	@Override
-	public String isLunar(String sDate) throws Exception{
-		
-		HashMap<String, String> lunar= new HashMap<String,String>();
-		lunar.put("01-01", "설날");
-		lunar.put("01-02", "설날");
-		lunar.put("04-08", "부처님 오신 날");
-		lunar.put("08-14", "추석");
-		lunar.put("08-15", "추석");
-		lunar.put("08-16", "추석");
-		lunar.put("12-30", "설날");
-		
-		String lunarDate = null; //
-		String confirm = null;
-		String date = "";
-		
-		lunarDate = getLunar(sDate);
-		confirm = lunarDate.substring(0,1);
-		
-		date += lunarDate.substring(5,7);
-		date += "-";
-		date += lunarDate.substring(7,lunarDate.length());
-		
-		if(confirm.equals("0"))
-			return lunar.get(date);
-		else
-			return null;
-	}
-	@Override
-	public String isSun(String sDate) throws Exception{
-		String result = null;
-		HashMap<String, String> sun = new HashMap<String, String>();
-		sun.put("01-01", "새해");
-		sun.put("03-01", "삼일절");
-		sun.put("05-01", "근로자의 날");
-		sun.put("05-05", "어린이날");
-		sun.put("06-06", "현충일");
-		sun.put("08-15", "광복절");
-		sun.put("10-03", "개천절");
-		sun.put("10-09", "한글날");
-		sun.put("12-25", "크리스마스");
-		
-		int month = Integer.parseInt(sDate.substring(4,6))+1;
-		int day = Integer.parseInt(sDate.substring(6,sDate.length()));
-		
-		String date = "";
-		date += zeroNumber(month);
-		date += "-";
-		date += zeroNumber(day);
-		
-		result = sun.get(date);
-		
-		return result;
-	}
+	
 	
 }
