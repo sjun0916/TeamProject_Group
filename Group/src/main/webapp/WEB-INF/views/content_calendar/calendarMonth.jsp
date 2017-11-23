@@ -134,10 +134,9 @@
   								</tr>
   								
 								  <tr>
-								    <td><table border="1">
+								    <td><!-- ? --><table border="1">
 								      <tbody>
 								      	<tr>
-										<!-- ?? -->
 								          <th>Sun</th>								          
 								          <th>Mon</th>
 								          <th>Tue</th>
