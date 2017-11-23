@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -48,7 +49,7 @@ public class CalendarController {
 		response.setContentType("text/html;charset=UTF-8");
 		
 		int iYear=nullIntconv(request.getParameter("iYear"));
-		int iMonth=nullIntconv(request.getParameter("iMonth"));
+		int iMonth=nullIntconv(request.getParameter("iMonth"))-1;
 		
 		Calendar ca = new GregorianCalendar();
 		
@@ -73,45 +74,67 @@ public class CalendarController {
 //		iMonth = iMonth+1;
 		int iTotalweeks=cal.get(Calendar.WEEK_OF_MONTH);
 		int cnt =1;
-		String month = "", day="";
+		String month = "";
+		iMonth = iMonth+1;
 		if(iMonth<10) {
 			month+="0"+iMonth;
-	    }
-	    if((cnt-weekStartDay+1)<10) {
-	    	day += "0"+(cnt-weekStartDay+1);
-	    }
-	    String date = ""+iYear+month+day;
-	    String event = isHoliday(date);
+	    }else
+	    	month+=iMonth;
+		
+		
+		//날짜, 이벤트
+		String date = "";
+		HashMap<String, String> eventMap = new HashMap<String, String>();
+	    String event = null;
+		for(int day=1;day<=days;day++) {
+			String sDay="";
+			if(day<10)
+				sDay +="0";
+			sDay+=day;
+			date = month+"-"+sDay;
+			System.out.println("strDate : "+date);
+			event = isHoliday(date);
+			if(event!=null) {
+		    	eventMap.put(Integer.toString(day), event);
+		    }
+		}
 	    
-        request.setAttribute("event", event);
+        request.setAttribute("event", eventMap);
         request.setAttribute("weekStartDay", weekStartDay);
         request.setAttribute("iTotalweeks", iTotalweeks);
         request.setAttribute("days", days);
         request.setAttribute("iTYear", iTYear);
         request.setAttribute("iYear", iYear);
-        request.setAttribute("iMonth", iMonth+1);
+        request.setAttribute("iMonth", iMonth);
+        Iterator<String> it = eventMap.keySet().iterator();
+        while(it.hasNext()) {
+        	System.out.println("Event : "+month+eventMap.get(it.next()));
+        }
         System.out.println("end call calendar"); // confirm
+        
 		return "content_calendar/calendarMonth";
 	}
+	
 	
 	public String isHoliday(String date) {
 		String tmp1 = null;
 		String tmp2 = null;
+		String result = null;
 		try {
 			tmp1 = service.isLunar(date);
 			if(tmp1!=null)
-				return tmp1;
+				result = tmp1;
 		
 			tmp2 = service.isSun(date);
 			if(tmp2!=null)
-				return tmp2;
+				result = tmp2;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return result;
 	}
-	@RequestMapping(value = "/calendar/main",method=RequestMethod.POST)
+	@RequestMapping(value = "/calendar/save",method=RequestMethod.POST)
 	public String savecalendar(HttpServletRequest request,
 			String calendar_memberId, int calendar_kind,
 			String calendar_start, String calendar_end,
