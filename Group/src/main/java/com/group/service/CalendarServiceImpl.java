@@ -1,6 +1,7 @@
 package com.group.service;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,4 +107,64 @@ public class CalendarServiceImpl implements CalendarService{
 		}
 		return result;
 	}
+	/*
+	 * input sunDate -> output lunarDate
+	 * @param sDate 양력일자
+	 * @return 행사이름
+	 */
+	@Override
+	public String isLunar(String sDate) throws Exception{
+		
+		HashMap<String, String> lunar= new HashMap<String,String>();
+		lunar.put("01-01", "설날");
+		lunar.put("01-02", "설날");
+		lunar.put("04-08", "부처님 오신 날");
+		lunar.put("08-14", "추석");
+		lunar.put("08-15", "추석");
+		lunar.put("08-16", "추석");
+		lunar.put("12-30", "설날");
+		
+		String lunarDate = null; //
+		String confirm = null;
+		String date = "";
+		
+		lunarDate = calendarDao.getLunar(sDate);
+		confirm = lunarDate.substring(0,1);
+		
+		date += lunarDate.substring(5,7);
+		date += "-";
+		date += lunarDate.substring(7,lunarDate.length());
+		
+		if(confirm.equals("0"))
+			return lunar.get(date);
+		else
+			return null;
+	}
+	@Override
+	public String isSun(String sDate) throws Exception{
+		String result = null;
+		HashMap<String, String> sun = new HashMap<String, String>();
+		sun.put("01-01", "새해");
+		sun.put("03-01", "삼일절");
+		sun.put("05-01", "근로자의 날");
+		sun.put("05-05", "어린이날");
+		sun.put("06-06", "현충일");
+		sun.put("08-15", "광복절");
+		sun.put("10-03", "개천절");
+		sun.put("10-09", "한글날");
+		sun.put("12-25", "크리스마스");
+		
+		int month = Integer.parseInt(sDate.substring(4,6))+1;
+		int day = Integer.parseInt(sDate.substring(6,sDate.length()));
+		
+		String date = "";
+		date += calendarDao.zeroNumber(month);
+		date += "-";
+		date += calendarDao.zeroNumber(day);
+		
+		result = sun.get(date);
+		
+		return result;
+	}
+	
 }
