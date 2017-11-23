@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page session="true"%>
 
-    
+<!-- jQuery 2.1.4 -->
+    <script src="${pageContext.request.contextPath}/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <body class="skin-green-light sidebar-mini">
 <div class="wrapper">
 <%-- <input type="hidden" id="userEmployeeNo" value="${authUser.employeeNo}" > --%>
@@ -81,13 +82,13 @@
               <li class="user-footer">
                 <div class="row">
                   <div class="col-xs-4 text-center">
-                    <a href="${pageContext.request.contextPath}/user/mypage">mypage</a>
+                    <a href="${pageContext.servletContext.contextPath}/user/mypage">mypage</a>
                   </div>
                   <div class="col-xs-4 text-center">
                     <a href="#">calendar</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="${pageContext.request.contextPath}/user/logout">logout</a>
+                    <a href="${pageContext.servletContext.contextPath}/user/logout">logout</a>
                   </div>
                 </div>
               </li>

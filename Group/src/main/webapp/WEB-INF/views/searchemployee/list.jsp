@@ -70,7 +70,7 @@
             <th>이메일</th>
             
         </tr>
-        <c:forEach var="employee" items="${JSONResult.success(list)}">
+        <c:forEach var="employee" items="${list}">
         <tr>
             <td>${employee.employeeNo}</td>
             <td>${employee.employeeName}</td>

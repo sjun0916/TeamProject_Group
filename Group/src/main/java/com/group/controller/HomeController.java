@@ -60,6 +60,6 @@ public class HomeController {
 	
 	@RequestMapping("/user/logout")
 	public String logout() {
-		return "user/logout";
+		return "redirect:/";
 	}
 }
