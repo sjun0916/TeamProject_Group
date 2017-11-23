@@ -87,7 +87,7 @@
                     <a href="#">calendar</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="${pageContext.servletContext.contextPath}/user/logout">logout</a>
+                    <a href="${pageContext.servletContext.contextPath}/logout">logout</a>
                   </div>
                 </div>
               </li>
@@ -200,7 +200,7 @@
         
        <c:if test="${ authUser.getRole() == 'ADMIN' }">
         <li>
-        	<a href="${pageContext.request.contextPath}/user/admin">
+        	<a href="${pageContext.servletContext.contextPath}/user/admin" class="menu item_3" id="top_gnb">
         	<i class="fa fa-laptop"></i>
 <!--         	<i class="fa fa-gear"></i> -->
         	<span>관리자 설정</span>

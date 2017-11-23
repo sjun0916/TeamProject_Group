@@ -62,12 +62,12 @@ function makePositionList(selectTagId){
 
 function changeActiveGnb(itemNum){
 	
-	 for(var i=1;i<3;i++){
+	 for(var i=1;i<4;i++){
 		 if(i==itemNum){
 			 $("#top_gnb > a.item_"+i).addClass('active');
 		 }
 		 else{
-			 $("#top_gnb > a.item_"+i).removeClass('active');
+			 $("#top_gnb > a.item_"+i).removeClass('avtive');
 		 }
 		 
 	 }

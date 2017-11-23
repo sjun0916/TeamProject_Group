@@ -4,12 +4,10 @@
 <mapper namespace="user">
 
 	<update id="approvejoin" parameterType="UserVO">
-		<![CDATA[
 			UPDATE EMPLOYEE
 			SET IS_AUTHORITY = 'Y'
 			WHERE EMAIL = #{email }
-		
-		]]>
+
 	</update>
 
 	<select id="getnotapproved"  resultType="UserVO">

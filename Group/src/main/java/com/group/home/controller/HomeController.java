@@ -5,6 +5,8 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -58,8 +60,11 @@ public class HomeController {
 		return "user/auth";
 	}
 	
-	@RequestMapping("/user/logout")
-	public String logout() {
+	// 로그 아웃 세션 종료
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String mmLogoutCtrl(HttpSession session) {
+		session.invalidate();
+
 		return "redirect:/";
 	}
 }
