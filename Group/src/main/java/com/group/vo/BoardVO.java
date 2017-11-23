@@ -16,7 +16,7 @@ public class BoardVO {
     private String brddeleteflag; 
     private String filecnt;
     private String replycnt;
-    private String membernum;
+    private String writerpos;
     private String departname;
     
     /* 첨부파일 */
@@ -109,13 +109,7 @@ public class BoardVO {
         this.replycnt = replycnt;
     }
 
-	public String getMembernum() {
-		return membernum;
-	}
 
-	public void setMembernum(String membernum) {
-		this.membernum = membernum;
-	}
 
 	public String getDepartname() {
 		return departname;
@@ -123,6 +117,14 @@ public class BoardVO {
 
 	public void setDepartname(String departname) {
 		this.departname = departname;
+	}
+
+	public String getWriterpos() {
+		return writerpos;
+	}
+
+	public void setWriterpos(String writerpos) {
+		this.writerpos = writerpos;
 	}
     
 }

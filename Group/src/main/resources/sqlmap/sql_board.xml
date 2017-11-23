@@ -24,11 +24,11 @@
     </select> 
     
     <select id="selectBoardList" resultType="com.group.vo.BoardVO" parameterType="com.group.common.SearchVO">
-        SELECT BOARDNUM, TITLE, DEPARTNAME, WRITER, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE, HIT
+        SELECT BOARDNUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE, HIT
              , (SELECT COUNT(*) FROM BOARDFILE WHERE BOARDNUM=DS.BOARDNUM) FILECNT
              , (SELECT COUNT(*) FROM BOARDREPLY WHERE BOARDNUM=DS.BOARDNUM AND REDELETEFLAG='N') REPLYCNT
           FROM (
-            SELECT BOARDNUM, TITLE, DEPARTNAME, WRITER, REGDATE, HIT
+            SELECT BOARDNUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, REGDATE, HIT
               , ROW_NUMBER() OVER(ORDER BY BOARDNUM DESC) BOARDNUM_SEQ
           FROM BOARD
           
@@ -49,21 +49,22 @@
     	<selectKey resultType="String" keyProperty="boardnum" order="BEFORE">
             SELECT BOARDNUM_SEQ.NEXTVAL FROM DUAL
         </selectKey> 
-        INSERT INTO BOARD(BOARDNUM, TITLE, DEPARTNAME, WRITER, CONTENT, REGDATE, HIT, BRDDELETEFLAG)
-        VALUES (#{boardnum}, #{title}, #{departname}, #{writer}, #{content}, SYSDATE, 0, 'N' )
+        INSERT INTO BOARD(BOARDNUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, CONTENT, REGDATE, HIT, BRDDELETEFLAG)
+        VALUES (#{boardnum}, #{title}, #{departname}, #{writer},#{writerpos}, #{content}, SYSDATE, 0, 'N' )
     </insert>
     
     <update id="updateBoard" parameterType="com.group.vo.BoardVO">
         UPDATE BOARD
            SET TITLE=#{title}
              , WRITER=#{writer}
+             , WRITERPOS=#{writerpos}
              , CONTENT=#{content} 
          WHERE BRDDELETEFLAG='N'
            AND BOARDNUM=#{boardnum}
     </update> 
         
     <select id="selectBoardOne" parameterType="String" resultType="com.group.vo.BoardVO">
-        SELECT BOARDNUM, TITLE, WRITER, CONTENT, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE
+        SELECT BOARDNUM, TITLE, WRITER, WRITERPOS,DEPARTNAME, CONTENT, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE
           FROM BOARD
          WHERE BRDDELETEFLAG='N'
            AND BOARDNUM=#{boardnum}
@@ -74,7 +75,7 @@
            SET HIT = HIT + 1 
          WHERE BOARDNUM=#{boardnum}
     </update> 
-
+ 
     <delete id="deleteBoardOne" parameterType="String">
         UPDATE BOARD
            SET BRDDELETEFLAG='Y' 
