@@ -3,7 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*,java.text.*"%>
-
+<!DOCTYPE html>
+<html>
+<head>
+<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 <%@ include file ="/WEB-INF/views/include/header.jsp" %>
 
 
@@ -244,7 +247,10 @@
 </div>
 <!-- /.content-wrapper -->
 
-<%@ include file ="/WEB-INF/views/include/footer.jsp" %>
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>
+    <%@ include file="/WEB-INF/views/include/footerScript.jsp" %>
+    </body>
+    
 <script>
 $(function() {
 
@@ -557,3 +563,4 @@ $(function() {
     });  
 	}
 </script>
+</html>
