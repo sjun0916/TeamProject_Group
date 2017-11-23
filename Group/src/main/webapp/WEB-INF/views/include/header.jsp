@@ -2,48 +2,21 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page session="true"%>
-<!DOCTYPE html>
-<%
-	session.getAttribute("authUser");
-%>
-<html>
-<head>
-<script>
-function fn_formSubmit(){
-	document.form1.submit();	
-}
-</script>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>HelloIT</title>
-  <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <!-- Bootstrap 3.3.4 -->
-    <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <!-- Font Awesome Icons -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <!-- Ionicons -->
-    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-    <!-- Theme style -->
-    <link href="${pageContext.request.contextPath}/resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
-   	<!-- 스킨 배경 색상 -->
-    <link href="${pageContext.request.contextPath}/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
 
-  </head>
-      <!-- jQuery 2.1.4 -->
-    <script src="${pageContext.request.contextPath}/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
     
 <body class="skin-green-light sidebar-mini">
 <div class="wrapper">
-<input type="hidden" id="userEmployeeNo" value="${authUser.employeeNo}" >
+<%-- <input type="hidden" id="userEmployeeNo" value="${authUser.employeeNo}" > --%>
   <!-- 메인 헤더! -->
   <header class="main-header">
 
     <!-- 메인 로고 -->
     <a href="/group/home" class="logo">
+    
       <!-- 메인바가 미니가 되었을때 로고 형태 -->
-      <span class="logo-mini"><b>★</b></span>
+      <span class="logo-mini"><b>GW</b></span>
       <!-- 로고 형태 -->
-      <span class="logo-lg"><b>GroupWare</b>GW</span>
+      <span class="logo-lg"><b>G</b>roup<b>W</b>are</span>
     </a>
 
     <!-- 헤더 상단 네비바 -->
@@ -56,7 +29,6 @@ function fn_formSubmit(){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      
       <!-- 네비 오른쪽 상단 메뉴 -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">

@@ -25,7 +25,7 @@ public class SearchEmployeeController {
 	
 	@RequestMapping( "")
 	public String mypage() {
-		return "searchemployee/index";
+		return "searchemployee/list";
 	}
 	
 	@ResponseBody

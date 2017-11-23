@@ -1,22 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <%@ page session="false" %> --%>
-<%@ include file ="/WEB-INF/views/include/header.jsp" %>
-<%-- <link href="${pageContext.servletContext.contextPath}/assets/css/search_employee.css" rel="stylesheet" type="text/css"> --%>
-
-<!-- <link rel="stylesheet" type="text/css" media="screen" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
-<%-- <link rel="stylesheet" type="text/css" media="screen" href="${pageContext.servletContext.contextPath}/assets/jqgrid/css/ui.jqgrid.css" /> --%>
-
-<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
-<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-<%-- <script src="${pageContext.servletContext.contextPath}/assets/jqgrid/js/jquery.jqGrid.min.js"></script> --%>
-<%-- <script src="${pageContext.servletContext.contextPath}/assets/js/common.js" type="text/javascript"></script> --%>
-<%-- <script src="${pageContext.request.contextPath}/assets/js/search_employee.js" type="text/javascript"></script> --%>
-
-
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
+<html>
+<head>
+	<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
+	
  <script type="text/javascript">  
  
  </script>
+</head>
+
+    <%@ include file="/WEB-INF/views/include/header.jsp" %>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- 컨텐트 헤더 -->
@@ -73,7 +70,7 @@
             <th>이메일</th>
             
         </tr>
-        <c:forEach var="employee" items="${list}">
+        <c:forEach var="employee" items="${JSONResult.success(list)}">
         <tr>
             <td>${employee.employeeNo}</td>
             <td>${employee.employeeName}</td>
@@ -91,5 +88,8 @@
 	<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
-<%@ include file ="/WEB-INF/views/include/footer.jsp" %>
+    
+    <%@ include file="/WEB-INF/views/include/footer.jsp" %>
+    <%@ include file="/WEB-INF/views/include/footerScript.jsp" %>
+</body>
+</html>
