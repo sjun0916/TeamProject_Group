@@ -37,13 +37,13 @@ public class MailController {
 	MailService service;
 	
 	/*** 메일 폼으로 이동 ***/
-	@RequestMapping("/mail/mailForm") //받는사람없을때
-	public String mailForm(@PathVariable String member_enum, Model model){
+/*	@RequestMapping("/mail/mailForm") //받는사람없을때
+	public String mailForm(@PathVariable String employee_No, Model model){
 		
 		String email = "";
-		if(member_enum.equals("0")){ } 
+		if(employee_No.equals("0")){ } 
 		else {
-			email = service.getEmail(member_enum);		// 멤버리스트서비스에서 이메일 받아옴
+			email = service.getEmail(employee_No);		// 멤버리스트서비스에서 이메일 받아옴
 		}
 		try {
 //			model.addAttribute("sessionId", SessionUtil.getSessionId());
@@ -52,10 +52,10 @@ public class MailController {
 			e.printStackTrace();
 		}
 		return "content_mail/mailForm";
-	}
+	}*/
 	
 	
-	@RequestMapping("/mail/mailForm2/{emails}")//받는사람있을때
+	@RequestMapping("/mail/mailForm/{email}")//받는사람있을때
 	public String mailForm2(@PathVariable String[] emails, Model model) {
 
 		Map<String, Object> map = new HashMap<String, Object>();

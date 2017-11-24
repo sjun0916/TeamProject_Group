@@ -7,8 +7,8 @@
 $(function(){
    // 받는 사람 검색하기 !!
    $("#searchBtn").click(function(){
-      var location = "${pageContext.request.contextPath}/mail/search";
-      window.open(location,'window_name','width=600,height=500,location=no,status=no,scrollbars=yes');
+      var location = "${pageContext.request.contextPath}/searchemployee";
+      window.open(location,'window_name','width=700,height=500,location=no,status=no,scrollbars=yes');
    });
    
 //    $("#mailSend").click(function(){
