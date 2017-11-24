@@ -17,18 +17,18 @@
     separator: 한번 이상 반복할 때 반복되는 사이에 해당 문을 넣어줌
      -->
 
-    <select id="selectBoardCount" resultType="Integer" parameterType="com.group.common.SearchVO">
+    <select id="selectBoardCount" resultType="Integer" parameterType="com.group.board.vo.SearchVO">
         SELECT COUNT(*)
           FROM BOARD
          <include refid="includeBoard"/>
     </select> 
     
-    <select id="selectBoardList" resultType="com.group.vo.BoardVO" parameterType="com.group.common.SearchVO">
-        SELECT BOARDNUM, TITLE, DEPARTNAME, WRITER, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE, HIT
+    <select id="selectBoardList" resultType="com.group.board.vo.BoardVO" parameterType="com.group.board.vo.SearchVO">
+        SELECT BOARDNUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE, HIT
              , (SELECT COUNT(*) FROM BOARDFILE WHERE BOARDNUM=DS.BOARDNUM) FILECNT
              , (SELECT COUNT(*) FROM BOARDREPLY WHERE BOARDNUM=DS.BOARDNUM AND REDELETEFLAG='N') REPLYCNT
           FROM (
-            SELECT BOARDNUM, TITLE, DEPARTNAME, WRITER, REGDATE, HIT
+            SELECT BOARDNUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, REGDATE, HIT
               , ROW_NUMBER() OVER(ORDER BY BOARDNUM DESC) BOARDNUM_SEQ
           FROM BOARD
           
@@ -45,25 +45,26 @@
          
     </select> 
     
-    <insert id="insertBoard" parameterType="com.group.vo.BoardVO" >
+    <insert id="insertBoard" parameterType="com.group.board.vo.BoardVO" >
     	<selectKey resultType="String" keyProperty="boardnum" order="BEFORE">
             SELECT BOARDNUM_SEQ.NEXTVAL FROM DUAL
         </selectKey> 
-        INSERT INTO BOARD(BOARDNUM, TITLE, DEPARTNAME, WRITER, CONTENT, REGDATE, HIT, BRDDELETEFLAG)
-        VALUES (#{boardnum}, #{title}, #{departname}, #{writer}, #{content}, SYSDATE, 0, 'N' )
+        INSERT INTO BOARD(BOARDNUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, CONTENT, REGDATE, HIT, BRDDELETEFLAG)
+        VALUES (#{boardnum}, #{title}, #{departname}, #{writer},#{writerpos}, #{content}, SYSDATE, 0, 'N' )
     </insert>
     
-    <update id="updateBoard" parameterType="com.group.vo.BoardVO">
+    <update id="updateBoard" parameterType="com.group.board.vo.BoardVO">
         UPDATE BOARD
            SET TITLE=#{title}
              , WRITER=#{writer}
+             , WRITERPOS=#{writerpos}
              , CONTENT=#{content} 
          WHERE BRDDELETEFLAG='N'
            AND BOARDNUM=#{boardnum}
     </update> 
         
-    <select id="selectBoardOne" parameterType="String" resultType="com.group.vo.BoardVO">
-        SELECT BOARDNUM, TITLE, WRITER, CONTENT, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE
+    <select id="selectBoardOne" parameterType="String" resultType="com.group.board.vo.BoardVO">
+        SELECT BOARDNUM, TITLE, WRITER, WRITERPOS,DEPARTNAME, CONTENT, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE
           FROM BOARD
          WHERE BRDDELETEFLAG='N'
            AND BOARDNUM=#{boardnum}
@@ -74,7 +75,7 @@
            SET HIT = HIT + 1 
          WHERE BOARDNUM=#{boardnum}
     </update> 
-
+ 
     <delete id="deleteBoardOne" parameterType="String">
         UPDATE BOARD
            SET BRDDELETEFLAG='Y' 
@@ -82,14 +83,14 @@
     </delete> 
 
     <!-- =============================================================================== -->
-    <select id="selectBoardFileList" resultType="com.group.common.FileVO" parameterType="String">
+    <select id="selectBoardFileList" resultType="com.group.board.vo.FileVO" parameterType="String">
         SELECT FILENUM, FILENAME, REALNAME, FILESIZE
           FROM BOARDFILE
          WHERE BOARDNUM=#{boardnum}
          ORDER BY FILENUM DESC 
     </select> 
 
-    <insert id="insertBoardFile" parameterType="com.group.common.FileVO" >
+    <insert id="insertBoardFile" parameterType="com.group.board.vo.FileVO" >
         INSERT INTO BOARDFILE (BOARDNUM, FILENUM, FILENAME, REALNAME, FILESIZE)
         VALUES (#{parentPK}, FILENUM_SEQ.NEXTVAL, #{filename}, #{realname}, #{filesize})
     </insert>
@@ -105,14 +106,14 @@
     </delete> 
 
     <!-- =============================================================================== -->
-    <select id="selectBoardReplyList" resultType="com.group.vo.BoardReplyVO" parameterType="String">
+    <select id="selectBoardReplyList" resultType="com.group.board.vo.BoardReplyVO" parameterType="String">
         SELECT BOARDNUM, RENUM, REWRITER, REDELETEFLAG, REMEMO, REDATE 
           FROM BOARDREPLY
          WHERE BOARDNUM=#{boardnum} AND REDELETEFLAG='N'
          ORDER BY RENUM
     </select>
         
-    <insert id="insertBoardReply" parameterType="com.group.vo.BoardReplyVO" >
+    <insert id="insertBoardReply" parameterType="com.group.board.vo.BoardReplyVO" >
         <selectKey resultType="String" keyProperty="renum" order="BEFORE">
             SELECT NVL(MAX(RENUM),0)+1 FROM BOARDREPLY
         </selectKey>
@@ -127,7 +128,7 @@
          WHERE RENUM=#{renum}       
     </update> 
 
-    <update id="updateBoardReply" parameterType="com.group.vo.BoardReplyVO">
+    <update id="updateBoardReply" parameterType="com.group.board.vo.BoardReplyVO">
         UPDATE BOARDREPLY
            SET REMEMO=#{rememo} 
          WHERE RENUM=#{renum}

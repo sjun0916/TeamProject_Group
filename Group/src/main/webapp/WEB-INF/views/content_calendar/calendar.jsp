@@ -15,7 +15,10 @@
 	month=myCalendar.get(myCalendar.MONTH)+1;
 	day=myCalendar.get(myCalendar.DAY_OF_MONTH);
 %>
-
+<!DOCTYPE html>
+<html>
+<head>
+<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 <%@ include file ="/WEB-INF/views/include/header.jsp" %>
 
 <!-- Content Wrapper. Contains page content -->
@@ -415,5 +418,7 @@
 	<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
-<%@ include file ="/WEB-INF/views/include/footer.jsp" %>
+    <%@ include file="/WEB-INF/views/include/footer.jsp" %>
+    <%@ include file="/WEB-INF/views/include/footerScript.jsp" %>
+</body>
+</html>

@@ -3,7 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*,java.text.*"%>
-
+<!DOCTYPE html>
+<html>
+<head>
+<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 <%@ include file ="/WEB-INF/views/include/header.jsp" %>
 
 
@@ -88,14 +91,16 @@
 			<div class="col-md-9">
 				<div class="box box-primary">
 					<div class="box-body no-padding">
+					
 						<!-- THE CALENDAR -->
 						<div id="calendar">
-							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<form name="monthView" method="post">
+							<table border="0" >
 								  <tr>
-								    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+								    <td><table border="0">
 								      <tr>
 								        
-								        <td width="6%">Year</td>
+								        <td width="6%">Year&nbsp;</td>
 								        <td width="7%">
 										<!-- start year and end year in combo box to change year in calendar -->
 										<select name="iYear" onchange="submit()">
@@ -109,11 +114,11 @@
 										    	</c:otherwise>
 									    	</c:choose>
 										</c:forEach>
-									   </select></td>
+									   </select>&nbsp;&nbsp;</td>
 								       
-								        <td width="73%" align="center"><h3>${iYear}-${iMonth}</h3></td>
+								        <td width="73%" align="center"><h3>&nbsp;${iYear}-${iMonth}&nbsp;</h3></td>
 								        
-								        <td width="6%">Month</td>
+								        <td width="6%">Month&nbsp;</td>
 								        <td width="8%">
 										
 										<!-- print month in combo box to change month in calendar -->
@@ -155,13 +160,14 @@
 								        			</c:when>
 								        			<c:otherwise>
 								        				<td align="center" height="35" id="day_${cnt-weekStartDay+1}">
-								        				<span>day : ${cnt-weekStartDay+1}</span><br>
-								        				<c:choose>
-								        					<c:when test="${event != null }">
-								        						<span><small>event : ${event}</small></span><br>
-								        					</c:when>
-								        						
-								        				</c:choose>
+								        				<span>${cnt-weekStartDay+1}</span><br>
+								        				<c:forEach var="map" items="${event}" varStatus="event">
+									        				<c:choose>
+									        					<c:when test="${event.key == (cnt-weekStartDay+1)}">
+									        						<span><small>event : ${event.value}</small></span><br>
+									        					</c:when>
+									        				</c:choose>
+								        				</c:forEach>
 								        				kind:1 / kind:2 / kind:3
 								        				</td>
 								        			</c:otherwise>
@@ -174,6 +180,7 @@
 								    </table></td>
 								  </tr>
 							</table>
+							</form>
 						</div>
 					</div>
 					<!-- /.box-body -->
@@ -240,7 +247,10 @@
 </div>
 <!-- /.content-wrapper -->
 
-<%@ include file ="/WEB-INF/views/include/footer.jsp" %>
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>
+    <%@ include file="/WEB-INF/views/include/footerScript.jsp" %>
+    </body>
+    
 <script>
 $(function() {
 
@@ -553,3 +563,4 @@ $(function() {
     });  
 	}
 </script>
+</html>

@@ -38,7 +38,7 @@
 		
     	 <!-- argument resolver -->
 	     <mvc:argument-resolvers>
-		 	<bean class="com.group.auth.AuthUserHandlerMethodArgumentResolver"/>           
+		 	<bean class="com.group.user.auth.AuthUserHandlerMethodArgumentResolver"/>           
 	     </mvc:argument-resolvers>
 	</mvc:annotation-driven>
 
@@ -51,15 +51,15 @@
         	<mvc:exclude-mapping path="/assets/**"/>
         	<mvc:exclude-mapping path="/resources/**"/>
         	<mvc:exclude-mapping path="/js/**"/>
-        	<bean class="com.group.auth.AuthInterceptor"/>
+        	<bean class="com.group.user.auth.AuthInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
         	<mvc:mapping path="/user/auth"/>
-        	<bean class="com.group.auth.AuthLoginInterceptor"/>
+        	<bean class="com.group.user.auth.AuthLoginInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
         	<mvc:mapping path="/user/logout"/>
-        	<bean class="com.group.auth.AuthLogoutInterceptor"/>
+        	<bean class="com.group.user.auth.AuthLogoutInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 
