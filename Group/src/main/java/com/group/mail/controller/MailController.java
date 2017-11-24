@@ -56,7 +56,7 @@ public class MailController {
 	
 	
 	@RequestMapping("/mail/mailForm/{email}")//받는사람있을때
-	public String mailForm2(@PathVariable String[] emails, Model model) {
+	public String mailForm(@PathVariable String[] emails, Model model) {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		
