@@ -1,5 +1,6 @@
 package com.group.user.service;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
@@ -9,13 +10,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class FileUploadService {
-	private static String SAVE_PATH = "C:\\uploadTest";
-	private static String PREFIX_URL = "C:\\uploadTest\\images";
+	private static String SAVE_PATH = "C:\\Test";
+	private static String PREFIX_URL = "C:\\Test\\images";
 	
 	public String restore(MultipartFile multipartFile) {
 		
 		String url = "";
-		
 		
 		try {
 			String originalFileName = multipartFile.getOriginalFilename();
@@ -33,7 +33,7 @@ public class FileUploadService {
 			System.out.println( "#######" + saveFileName );
 			System.out.println( "#######" + size );
 			
-			writeFile( multipartFile, saveFileName );
+			writeFile( multipartFile, SAVE_PATH, saveFileName );
 			
 			url = PREFIX_URL + saveFileName;
 			
@@ -44,10 +44,19 @@ public class FileUploadService {
 		return url;
 	}
 
+	/**
+     * 파일 저장 경로 생성.
+     */
+    public void makeBasePath(String path) {
+        File dir = new File(path); 
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+    }
+	
 	private void writeFile(
-		MultipartFile multipartFile,
-		String saveFileName ) throws IOException {
-		
+		MultipartFile multipartFile, String path, String saveFileName ) throws IOException {
+		makeBasePath(path);
 		byte[] fileData = multipartFile.getBytes();
 		
 		FileOutputStream fos

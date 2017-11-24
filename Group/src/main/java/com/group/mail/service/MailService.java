@@ -30,12 +30,12 @@ public class MailService {
 		return list;
 	}
 
-	public String getEmail(String member_enum) {
+	public String getEmail(String employeeEmail) {
 	
 		String email = "";
 
 		try {
-			email = mailDao.getEmail(member_enum);
+			email = mailDao.getEmail(employeeEmail);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

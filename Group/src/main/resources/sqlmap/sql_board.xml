@@ -49,8 +49,8 @@
     	<selectKey resultType="String" keyProperty="boardnum" order="BEFORE">
             SELECT BOARDNUM_SEQ.NEXTVAL FROM DUAL
         </selectKey> 
-        INSERT INTO BOARD(BOARDNUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, CONTENT, REGDATE, HIT, BRDDELETEFLAG)
-        VALUES (#{boardnum}, #{title}, #{departname}, #{writer},#{writerpos}, #{content}, SYSDATE, 0, 'N' )
+        INSERT INTO BOARD(BOARDNUM, TITLE, DEPARTNAME, MEMBERNUM, WRITER, WRITERPOS, CONTENT, REGDATE, HIT, BRDDELETEFLAG)
+        VALUES (#{boardnum}, #{title}, #{departname}, #{membernum}, #{writer},#{writerpos}, #{content}, SYSDATE, 0, 'N' )
     </insert>
     
     <update id="updateBoard" parameterType="com.group.board.vo.BoardVO">
@@ -64,7 +64,7 @@
     </update> 
         
     <select id="selectBoardOne" parameterType="String" resultType="com.group.board.vo.BoardVO">
-        SELECT BOARDNUM, TITLE, WRITER, WRITERPOS,DEPARTNAME, CONTENT, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE
+        SELECT BOARDNUM, TITLE,MEMBERNUM, WRITER, WRITERPOS, DEPARTNAME, CONTENT, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE
           FROM BOARD
          WHERE BRDDELETEFLAG='N'
            AND BOARDNUM=#{boardnum}
@@ -107,7 +107,7 @@
 
     <!-- =============================================================================== -->
     <select id="selectBoardReplyList" resultType="com.group.board.vo.BoardReplyVO" parameterType="String">
-        SELECT BOARDNUM, RENUM, REWRITER, REDELETEFLAG, REMEMO, REDATE 
+        SELECT BOARDNUM, RENUM, REWRITER,REWRITERPOS,MEMBERNUM, REDELETEFLAG, REMEMO, REDATE 
           FROM BOARDREPLY
          WHERE BOARDNUM=#{boardnum} AND REDELETEFLAG='N'
          ORDER BY RENUM
@@ -118,8 +118,8 @@
             SELECT NVL(MAX(RENUM),0)+1 FROM BOARDREPLY
         </selectKey>
             
-        INSERT INTO BOARDREPLY(BOARDNUM, RENUM, REWRITER, REDELETEFLAG, REMEMO, REDATE)
-        VALUES (#{boardnum}, #{renum}, #{rewriter}, 'N', #{rememo}, SYSDATE)
+        INSERT INTO BOARDREPLY(BOARDNUM, RENUM, REWRITER,REWRITERPOS,MEMBERNUM, REDELETEFLAG, REMEMO, REDATE)
+        VALUES (#{boardnum}, #{renum}, #{rewriter}, #{rewriterpos},#{membernum} , 'N', #{rememo}, SYSDATE)
     </insert>
 
     <update id="deleteBoardReply" parameterType="String"> 

@@ -2,7 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<!DOCTYPE html>
+<html>
+<head>
+<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
+<%  %>
 <script>
 	function fn_formSubmit() {
 		var form1 = document.form1;
@@ -138,15 +143,24 @@
 				<!-- 				</tr> -->
 			</tbody>
 		</table>
-		<a href="BoardList">돌아가기</a> <a
-			href="BoardDelete?boardnum=<c:out value="${boardInfo.boardnum}"/>">삭제</a>
+		<a href="BoardList">돌아가기</a> 
+ 		<c:if test="${boardInfo.membernum} == ${authUser.employeeNo}">
+		<a href="BoardDelete?boardnum=<c:out value="${boardInfo.boardnum}"/>">삭제</a>
 		<a href="BoardForm?boardnum=<c:out value="${boardInfo.boardnum}"/>">수정</a>
+		</c:if>
 		<p>&nbsp;</p>
 		<div style="border: 1px solid; width: 600px; padding: 5px">
 			<form name="form1" action="BoardReplySave" method="post">
 				<input type="hidden" name="boardnum"
-					value="<c:out value="${boardInfo.boardnum}"/>"> 작성자: <input
-					type="text" name="rewriter" size="20" maxlength="20"> <br />
+					value="<c:out value="${boardInfo.boardnum}"/>"> 
+					<input type="hidden" name="rewriter"
+					value="<c:out value="${authUser.employeeName}"/>">
+					<input type="hidden" name="rewriterpos"
+					value="<c:out value="${authUser.positionName}"/>">
+					<input type="hidden" name="membernum"
+					value="<c:out value="${authUser.employeeNo}"/>">
+					작성자: [<c:out value="${authUser.positionName}"/>]<c:out value="${authUser.employeeName}"/> 
+					<br />
 				<textarea name="rememo" rows="3" cols="60" maxlength="500"
 					placeholder="댓글을 달아주세요."></textarea>
 				<a href="#" onclick="fn_formSubmit()">저장</a>
@@ -156,12 +170,16 @@
 		<c:forEach var="replylist" items="${replylist}" varStatus="status">
 			<div
 				style="border: 1px solid gray; width: 600px; padding: 5px; margin-top: 5px;">
+				[<c:out value="${replylist.rewriterpos}" />]
 				<c:out value="${replylist.rewriter}" />
 				<c:out value="${replylist.redate}" />
+ 				<c:if test="${authUser.employeeNo == replylist.membernum}">
 				<a href="#"
 					onclick="fn_replyDelete('<c:out value="${replylist.renum}"/>')">삭제</a>
 				<a href="#"
 					onclick="fn_replyUpdate('<c:out value="${replylist.renum}"/>')">수정</a>
+				</c:if>
+				
 				<br />
 				<div id="reply<c:out value="${replylist.renum}"/>">
 					<c:out value="${replylist.rememo}" />
@@ -182,4 +200,7 @@
 	<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+    <%@ include file="/WEB-INF/views/include/footer.jsp" %>
+    <%@ include file="/WEB-INF/views/include/footerScript.jsp" %>
+</body>
+</html>

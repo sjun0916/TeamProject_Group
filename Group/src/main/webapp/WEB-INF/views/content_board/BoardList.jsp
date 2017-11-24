@@ -3,7 +3,10 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<!DOCTYPE html>
+<html>
+<head>
+<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 <style type="text/css">
 table, td, th {
@@ -53,13 +56,16 @@ color:black;
 </script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-	<!-- ì»¨íí¸ í¤ë -->
+	<!-- 컨텐츠 헤더 -->
 	<section class="content-header">
+	<h1>
+			부서 게시판 <small>board</small>
+		</h1>
 	<ol class="breadcrumb">
 			<a href="BoardList"><i class="fa fa-dashboard"></i> 게시판</a>		
 		</ol>
 	</section>
-	<!-- ì»¨íí¸ ë©ì¸ -->
+	<!-- 컨텐츠 메인 -->
 	<section class="content container-fluid">
 		<form id="form1" name="form1" method="post">
 			<table >			
@@ -111,7 +117,11 @@ color:black;
 							</c:if>
 							<c:out value="${listview.writer}" /></td>
 							<td><c:out value="${listview.regdate}" /></td>
-							<td><c:out value="${listview.filecnt}" /></td>
+							<td>
+							<c:if test="${listview.filecnt>0}">
+							<img src="<c:url value="/resources/icon/floppy-disk.png"/>" width="25" height="25"/>					
+							</c:if>
+							</td>
 							<td><c:out value="${listview.hit}" /></td>
 						</tr>
 					</c:forEach>
@@ -153,7 +163,7 @@ color:black;
 <!-- /.content-wrapper -->
 
 
-
-
-
-<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+    <%@ include file="/WEB-INF/views/include/footer.jsp" %>
+    <%@ include file="/WEB-INF/views/include/footerScript.jsp" %>
+</body>
+</html>
