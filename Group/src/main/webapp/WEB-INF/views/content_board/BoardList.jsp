@@ -117,7 +117,11 @@ color:black;
 							</c:if>
 							<c:out value="${listview.writer}" /></td>
 							<td><c:out value="${listview.regdate}" /></td>
-							<td><c:out value="${listview.filecnt}" /></td>
+							<td>
+							<c:if test="${listview.filecnt>0}">
+							<img src="<c:url value="/resources/icon/floppy-disk.png"/>" width="25" height="25"/>					
+							</c:if>
+							</td>
 							<td><c:out value="${listview.hit}" /></td>
 						</tr>
 					</c:forEach>
