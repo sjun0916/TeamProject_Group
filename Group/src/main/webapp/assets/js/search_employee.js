@@ -13,13 +13,18 @@ function initGrid() {
             {name:'employeeName',align:"center",width:100},
             {name:'teamName',align:"center"},
             {name:'positionName',align:"center"},
-            {name:'email',align:"center",width:200},
+            {name:'email',align:"center",width:200,formatter:mylink},
 //            {name:'IDX', index:'IDX',align:"center", width:100,formatter:sendmessageButton },
         ],
         width:700,
         //그리드타이틀
         caption: "사원목록"
     });    
+}
+
+function mylink(cellvalue, options, rowObject){
+	url = '<a href="'+getContextPath()+'/mail/mailForm/'+cellvalue+'">'+cellvalue+'</a>';
+	return url;
 }
 
 function imageFormatter(cellvalue, options, rowObject)
@@ -74,5 +79,10 @@ function loadEmployeeData() {
 		$("#searchEmployeeButton").click(function(){  
 			loadEmployeeData();
 		});  
+		
+		$("#list").on("click", ".email", function(){
+			var employee_No = $(this).attr("id");
+			location.href = "${pageContext.request.contextPath}/mail/mailForm/"+employee_No;
+		})
 		
 })

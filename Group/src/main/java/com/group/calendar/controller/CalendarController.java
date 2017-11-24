@@ -74,29 +74,32 @@ public class CalendarController {
 //		iMonth = iMonth+1;
 		int iTotalweeks=cal.get(Calendar.WEEK_OF_MONTH);
 		int cnt =1;
-		String month = "";
+		String yyyymm = ""+iYear;
 		iMonth = iMonth+1;
 		if(iMonth<10) {
-			month+="0"+iMonth;
+			yyyymm+="0"+iMonth;
 	    }else
-	    	month+=iMonth;
+	    	yyyymm+=iMonth;
 		
 		
 		//날짜, 이벤트
 		String date = "";
-		HashMap<String, String> eventMap = new HashMap<String, String>();
+		HashMap<Integer, String> eventMap = new HashMap<Integer, String>();
 	    String event = null;
 		for(int day=1;day<=days;day++) {
 			String sDay="";
 			if(day<10)
 				sDay +="0";
 			sDay+=day;
-			date = month+"-"+sDay;
+			date = yyyymm+sDay;
 			System.out.println("strDate : "+date);
 			event = isHoliday(date);
 			if(event!=null) {
-		    	eventMap.put(Integer.toString(day), event);
+		    	eventMap.put(day, event);
 		    }
+		}
+		if(eventMap.isEmpty()) {
+			eventMap = null;
 		}
 	    
         request.setAttribute("event", eventMap);
@@ -106,10 +109,12 @@ public class CalendarController {
         request.setAttribute("iTYear", iTYear);
         request.setAttribute("iYear", iYear);
         request.setAttribute("iMonth", iMonth);
-        Iterator<String> it = eventMap.keySet().iterator();
-        while(it.hasNext()) {
-        	System.out.println("Event : "+month+eventMap.get(it.next()));
-        }
+        
+//        // confirm
+//        Iterator<Integer> it = eventMap.keySet().iterator();
+//        while(it.hasNext()) {
+//        	System.out.println("Event : "+yyyymm+eventMap.get(it.next()));	
+//        }
         System.out.println("end call calendar"); // confirm
         
 		return "content_calendar/calendarMonth";
@@ -120,18 +125,16 @@ public class CalendarController {
 		String tmp1 = null;
 		String tmp2 = null;
 		String result = null;
-		try {
-			tmp1 = service.isLunar(date);
-			if(tmp1!=null)
-				result = tmp1;
 		
+		tmp1 = service.isLunar(date);
+		if(tmp1!=null)
+			result = tmp1;
+		else {
 			tmp2 = service.isSun(date);
 			if(tmp2!=null)
 				result = tmp2;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+		System.out.println("isHoliday result : "+result);
 		return result;
 	}
 	@RequestMapping(value = "/calendar/save",method=RequestMethod.POST)

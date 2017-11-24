@@ -25,9 +25,10 @@ public interface CalendarService {
 	public abstract int update(CalendarVO cal) throws SQLException;
 	
 	//Holiday
-	public String isLunar(String sDate) throws Exception;
-	public String isSun(String sDate) throws Exception;
-	
+	public String isLunar(String sDate);
+	public String isSun(String sDate);
+	public String getLunar(String sDate); 
+	public String zeroNumber(int num);
 	// 03. 오늘 날짜로 전환
 	
 	

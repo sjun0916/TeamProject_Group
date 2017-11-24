@@ -3,7 +3,6 @@ package com.group.calendar.dao;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -21,7 +20,6 @@ import org.xml.sax.SAXException;
 import com.group.calendar.vo.CalendarVO;
 import com.group.user.dao.UserDao;
 import com.group.user.vo.UserVO;
-
 
 @Repository
 public class CalendarDaoMybatis implements CalendarDao{
@@ -124,90 +122,5 @@ public class CalendarDaoMybatis implements CalendarDao{
 		// TODO Auto-generated method stub
 		return sqlSessionTemp.update("update", cal);
 	}
-	
-	@Override
-	public String zeroNumber(int num) {
-		String strNum = "";
-		if(num < 10)
-			strNum += "0" + Integer.toString(num);
-		else
-			strNum += Integer.toString(num);
-		return strNum;
-	}
-	
-	/*
-	 * 양력 -> 음력 변환
-	 * @param String 양력날짜(20170122)
-	 * @return String 음력날짜
-	 */
-	@Override
-	public String getLunar(String sDate) {
-		
-		String year = sDate.substring(0, 4);
-		String day = sDate.substring(6,sDate.length());
-		
-		String month = sDate.substring(4,6);
-		int intMonth = Integer.parseInt(month)+1;
-		if(intMonth<10)
-			month = "0"+intMonth;
-		else 
-			month = Integer.toString(intMonth); 
-		
-		String serviceKey = "tuM3dAwhoBec0v61TL%2FiSW78Q6feKZUNd2xWr2EF81IFOq8QeqN%2B4Z4KWTp5mUrkt1iCejz7%2BsWpyQQzCusBAQ%3D%3D";
-		String strUrl = "http://apis.data.go.kr/B090041/openapi/service/LrsrCldInfoService/getLunCalInfo?solYear="
-						+year+"&solMonth="+month+"&solDay="+day+"&ServiceKey="+serviceKey;
-		
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder;
-		try {
-			builder = factory.newDocumentBuilder();
-			Document document;
-			document = builder.parse(strUrl);
-			
-			NodeList result = document.getElementsByTagName("resultCode");
-			NodeList lunMonth = document.getElementsByTagName("lunMonth");
-			NodeList lunDay = document.getElementsByTagName("lunDay");
-			NodeList lunYear = document.getElementsByTagName("lunYear");
-			NodeList solLeapYear = document.getElementsByTagName("solLeapyear");
-			NodeList lunLeapMonth = document.getElementsByTagName("lunLeapmonth");
-			
-			int resultCode = -1; // 성공여부(0:성공,-1:실패)
-			String sLeap = null;
-			String lLeap = null;
-			
-			for(int i=0;i<result.getLength();i++) {
-				resultCode = Integer.parseInt(result.item(i).getFirstChild().getNodeValue());
-				if(resultCode!=0)
-					break;
-				
-				sLeap = solLeapYear.item(i).getFirstChild().getNodeValue();
-				lLeap = lunLeapMonth.item(i).getFirstChild().getNodeValue();
-				
-				//윤달, 윤년 구별
-				if(sLeap.equals("윤") || lLeap.equals("윤")) 
-					sLeap = "1";
-				else
-					sLeap = "0";
-				
-				year = lunYear.item(i).getFirstChild().getNodeValue();
-				month = lunMonth.item(i).getFirstChild().getNodeValue();
-				day = lunDay.item(i).getFirstChild().getNodeValue();
-				
-				return sLeap+year+month+day;
-			}
-			
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SAXException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
 	
 }
