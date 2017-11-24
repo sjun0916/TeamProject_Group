@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="label">
+	<resultMap type="com.group.approval.label.vo.LabelVo" id="labelMap">
+		<result property="LABEL_NUM" column="LABEL_NUM"/>
+		<result property="LABEL_NAME" column="LABEL_NAME"/>
+		<result property="LABEL_COLOR" column="LABEL_COLOR"/>
+		<result property="LABEL_DOCUMENT" column="LABEL_DOCUMENT"/>
+		<result property="LABEL_GNUM" column="LABEL_GNUM"/>
+		<result property="LABEL_ONUM" column="LABEL_ONUM"/>
+		<result property="LABEL_NESTED" column="LABEL_NESTED"/>
+		<result property="REG_ID_LABEL" column="REG_ID_LABEL"/>
+	</resultMap>
+
+
+
+
+	<select id="selectlabel" resultMap="labelMap" parameterType="string">
+		select * from LABEL where REG_ID_LABEL = #{id}  and LABEL_NUM != 0 order by LABEL_GNUM,LABEL_ONUM,LABEL_NUM
+	</select>
+	<!-- 상위 gnum 가져오기 -->
+	<select id="selectone" resultType="int" parameterType="int">
+		select LABEL_GNUM from label where LABEL_NUM = #{label_num}
+	</select>
+	
+	<insert id="insertlabel" parameterType="com.group.approval.label.vo.LabelVo">
+		<selectKey keyProperty="LABEL_NUM" resultType="int" order="BEFORE">
+		select PK_LABEL_NUM.nextval from dual
+		</selectKey>
+	insert into LABEL(LABEL_NUM,LABEL_NAME,LABEL_COLOR,LABEL_DOCUMENT,LABEL_GNUM,LABEL_ONUM,LABEL_NESTED,REG_ID_LABEL) values (#{label_num,jdbcType=INTEGER},#{label_name,jdbcType=VARCHAR},#{label_color,jdbcType=VARCHAR},0,PK_LABEL_NUM.currval,0,0,#{reg_id_label,jdbcType=VARCHAR})
+	
+	</insert>
+	
+	<select id="highlabel" resultMap="labelMap" parameterType="string">
+		select * from LABEL where REG_ID_LABEL = #{id} and LABEL_ONUM = 0 and LABEL_NESTED=0 order by LABEL_NUM
+	</select>
+	
+	<insert id="insertlow" parameterType="com.group.approval.label.vo.LabelVo">
+<!-- 		<selectKey keyProperty="LABEL_NUM" resultType="int" order="BEFORE"> -->
+<!-- 		select PK_LABEL_NUM.nextval from dual -->
+<!-- 		</selectKey> -->
+	insert into LABEL(LABEL_NUM,LABEL_NAME,LABEL_COLOR,LABEL_DOCUMENT,LABEL_GNUM,LABEL_ONUM,LABEL_NESTED,REG_ID_LABEL) values (PK_LABEL_NUM.nextval,#{label_name,jdbcType=VARCHAR},#{label_color,jdbcType=VARCHAR},0,#{label_gnum,jdbcType=INTEGER},#{label_onum,jdbcType=INTEGER},#{label_nested,jdbcType=INTEGER},#{reg_id_label,jdbcType=VARCHAR})
+	
+	</insert>
+	<!-- 상위 gnum 정보 가져오기 아니면 삭제로직에 쓴다-->
+	<select id="lowInfo"  parameterType="int" resultMap="labelMap">
+	select * from LABEL
+	where LABEL_GNUM=#{label_gnum} order by LABEL_ONUM
+	</select>
+	
+	<!-- 상위 gnum 정보 가져오기 아니면 삭제로직에 쓴다222-->
+	<select id="lowInfo2"  parameterType="int" resultMap="labelMap">
+	select * from LABEL where LABEL_GNUM = #{label_gnum} and LABEL_ONUM = 0
+	</select>
+	
+	
+	
+	
+	<!-- 상세보기 -->
+	<select id="viewDetail" parameterType="int" resultMap="labelMap">
+	select * from LABEL where LABEL_NUM=#{label_num}
+	</select>
+	 
+	
+	<!-- 수정하기 -->
+	<update id="modifylabel" parameterType="com.group.approval.label.vo.LabelVo">
+	update LABEL set LABEL_NAME=#{label_name}, LABEL_COLOR=#{label_color}, LABEL_GNUM = #{label_gnum},LABEL_ONUM = #{label_onum}, LABEL_NESTED = #{label_nested}
+	where LABEL_NUM = #{label_num}
+	</update>
+	
+	<!-- 상위 수정 -->
+	<select id="highModify" parameterType="int" resultType="int">
+	select count(LABEL_GNUM) from label where LABEL_GNUM = #{label_gnum}
+	</select>
+	
+	
+	<!-- 라벨 삭제 -->
+	<delete id="deletelabel" parameterType="int">
+	delete from LABEL where LABEL_NUM = #{label_num}
+	</delete>
+	
+	<!-- 라벨 삭제(그룹넘버로 삭제) -->
+	<delete id="deletelabelGnum" parameterType="int">
+	delete from LABEL where LABEL_GNUM = #{label_gnum}
+	</delete>
+	
+	<!--문서 수  -->
+	<update id="updatedocu" parameterType="com.group.approval.label.vo.LabelVo">
+	update LABEL set LABEL_DOCUMENT = (select count(reg_labelnum) from report where reg_labelnum = #{label_num} and  REG_ID = #{reg_id_label})
+	where LABEL_NUM = #{label_num}
+	
+	
+	</update>
+	
+	
+	<select id="labelnumlist" resultMap="labelMap">
+	select LABEL_NUM from LABEL
+	</select>
+	
+	
+</mapper>
