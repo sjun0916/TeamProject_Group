@@ -146,7 +146,7 @@
                	<i class="fa fa-angle-left pull-right"></i>
           	</a>
         	<ul class="treeview-menu">
-            	<li><a href="#"><i class="fa fa-circle-o"></i> 공지사항</a></li>
+            	<li><a href="/group/NoticeList"><i class="fa fa-circle-o"></i> 공지사항</a></li>
             	<li><a href="/group/BoardList"><i class="fa fa-circle-o"></i> 부서게시판</a></li>
           	</ul>
         </li>
