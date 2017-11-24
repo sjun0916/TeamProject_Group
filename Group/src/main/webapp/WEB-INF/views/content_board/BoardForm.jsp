@@ -2,17 +2,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
-
 <script>
 	function fn_formSubmit() {
 		var form1 = document.form1;
 
-		if (form1.writer.value == "") {
-			alert("작성자를 입력해주세요.");
-			form1.writer.focus();
-			return;
-		}
 		if (form1.title.value == "") {
 			alert("글 제목을 입력해주세요.");
 			form1.title.focus();
@@ -105,4 +103,7 @@
 </div>
 <!-- /.content-wrapper -->
 
-<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+    <%@ include file="/WEB-INF/views/include/footer.jsp" %>
+    <%@ include file="/WEB-INF/views/include/footerScript.jsp" %>
+</body>
+</html>

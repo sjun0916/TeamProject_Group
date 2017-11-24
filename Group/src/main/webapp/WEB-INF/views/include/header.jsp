@@ -73,7 +73,8 @@
                 <img src="${pageContext.request.contextPath}/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  [${authUser.teamName }/${authUser.positionName }] ${authUser.employeeName }
+                  [${authUser.teamName }][${authUser.positionName }] ${authUser.employeeName }
+<%--                   ${authUser.imageUrl} --%>
                   <small>Member since 2017</small>
                 </p>
               </li>
