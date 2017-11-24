@@ -8,7 +8,8 @@ public class BoardReplyVO {
     private String redeleteflag;
     private String rememo;
     private String redate;
-    
+    private String rewriterpos;
+    private int membernum;
     public String getBoardnum() {
         return boardnum;
     }
@@ -56,5 +57,21 @@ public class BoardReplyVO {
     public void setRedate(String redate) {
         this.redate = redate;
     }
+
+	public String getRewriterpos() {
+		return rewriterpos;
+	}
+
+	public void setRewriterpos(String rewriterpos) {
+		this.rewriterpos = rewriterpos;
+	}
+
+	public int getMembernum() {
+		return membernum;
+	}
+
+	public void setMembernum(int membernum) {
+		this.membernum = membernum;
+	}
     
 }

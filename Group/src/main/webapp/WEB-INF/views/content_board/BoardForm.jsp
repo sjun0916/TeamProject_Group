@@ -86,6 +86,8 @@
 					
 				</tbody>
 			</table>
+			<input type="hidden"  name="membernum"
+				value="<c:out value="${authUser.employeeNo}"/>">
 			<input type="hidden"  name="writerpos"
 				value="<c:out value="${authUser.positionName}"/>">
 			<input type="hidden"  name="departname"
