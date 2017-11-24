@@ -3,7 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*,java.text.*"%>
-
+<!DOCTYPE html>
+<html>
+<head>
+<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 <%@ include file ="/WEB-INF/views/include/header.jsp" %>
 
 
@@ -19,7 +22,6 @@
 			<li class="active">Calendar</li>
 		</ol>
 	</section>
-<!-- 	<script type="text/javascript" src="calendar.js"></script> -->
 	
 	<!-- inputGroup -->
 	
@@ -55,11 +57,6 @@
 
 						<input id="new-event" type="text" class="form-control"
 							placeholder="제목 입력">
-						<div class="input-group-btn">
-							<button id="add-new-event" type="button"
-								class="btn btn-info btn-flat">일정추가</button>
-						</div>
-
 						<!-- /btn-group -->
 					</div>
 					<div class="form-group">
@@ -157,15 +154,18 @@
 								        			</c:when>
 								        			<c:otherwise>
 								        				<td align="center" height="35" id="day_${cnt-weekStartDay+1}">
+								        				<a>
 								        				<span>${cnt-weekStartDay+1}</span><br>
-								        				<c:forEach var="map" items="${event}" varStatus="event">
-									        				<c:choose>
-									        					<c:when test="${event.key == (cnt-weekStartDay+1)}">
-									        						<span><small>event : ${event.value}</small></span><br>
-									        					</c:when>
-									        				</c:choose>
-								        				</c:forEach>
+								        				<c:if test="${event != 'null'}">
+									        				<c:forEach var="map" items="${event}" varStatus="event">
+									        					<c:set var="number" value="${cnt-weekStartDay+1}"/>
+									        					<c:if test="${map.key == number}">
+										        					<span><small>${map.value}</small></span><br>
+										        				</c:if>
+									        				</c:forEach>
+								        				</c:if>
 								        				kind:1 / kind:2 / kind:3
+								        				</a>
 								        				</td>
 								        			</c:otherwise>
 								        		</c:choose>
@@ -182,7 +182,7 @@
 					</div>
 					<!-- /.box-body -->
 				</div>
-				<!-- /. box -->
+				/. box
 			</div>
 			<!-- /.col -->
 		</div>
@@ -235,16 +235,19 @@
             </div>
             <!-- /.modal-content -->
           </div>
-          <!-- /.modal-dialog -->
+          /.modal-dialog
         </div>
-        <!-- /.modal -->
+        /.modal
       </div>
 
 	<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 
-<%@ include file ="/WEB-INF/views/include/footer.jsp" %>
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>
+    <%@ include file="/WEB-INF/views/include/footerScript.jsp" %>
+    </body>
+    
 <script>
 $(function() {
 
@@ -557,3 +560,4 @@ $(function() {
     });  
 	}
 </script>
+</html>

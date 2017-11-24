@@ -22,3 +22,7 @@ function fn_formSubmit(){
     <link href="${pageContext.request.contextPath}/resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
    	<!-- 스킨 배경 색상 -->
     <link href="${pageContext.request.contextPath}/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+    
+<!--     jQuery 2.1.4 -->
+    <script src="${pageContext.request.contextPath}/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+	<link href="${pageContext.request.contextPath}/assets/css/top_gnb.css" rel="stylesheet" type="text/css" />

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="Notice">
+    <sql id="includeNotice">
+        WHERE BRDDELETEFLAG='N'
+
+         <if test="searchKeyword!=null and searchKeyword!='' and searchType!=''">
+              <foreach item="item" index="index" collection="searchTypeArr" separator=" OR " open="AND (" close=")">
+                     ${item} LIKE '%'||#{searchKeyword}||'%'
+              </foreach>
+        </if>               
+    </sql>
+ 
+    <!-- 
+    item:전달받은 인자값을 다른이름으로 대체
+    collection: 전달받은 인자값
+    separator: 한번 이상 반복할 때 반복되는 사이에 해당 문을 넣어줌
+     -->
+
+    <select id="selectNoticeCount" resultType="Integer" parameterType="com.group.board.vo.SearchVO">
+        SELECT COUNT(*)
+          FROM NOTICE
+         <include refid="includeNotice"/>
+    </select> 
+    
+    <select id="selectNoticeList" resultType="com.group.notice.vo.NoticeVO" parameterType="com.group.board.vo.SearchVO">
+        SELECT NOTICENUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE, HIT
+             , (SELECT COUNT(*) FROM NOTICEFILE WHERE NOTICENUM=DS.NOTICENUM) FILECNT 
+          FROM (
+            SELECT NOTICENUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, REGDATE, HIT
+              , ROW_NUMBER() OVER(ORDER BY NOTICENUM DESC) NOTICENUM_SEQ
+          FROM NOTICE
+          
+          
+          <include refid="includeNotice"/>
+          
+          <if test="category1 != null and category1 !=''">
+          AND DEPARTNAME = #{category1}
+          </if>
+         
+          ) DS
+         WHERE NOTICENUM_SEQ BETWEEN ${rowStart} AND ${rowEnd}
+         ORDER BY NOTICENUM DESC
+         
+    </select> 
+    
+    <insert id="insertNotice" parameterType="com.group.notice.vo.NoticeVO" >
+    	<selectKey resultType="String" keyProperty="noticenum" order="BEFORE">
+            SELECT NOTICENUM_SEQ.NEXTVAL FROM DUAL
+        </selectKey> 
+        INSERT INTO NOTICE(NOTICENUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, CONTENT, REGDATE, HIT,IMPORTANT, BRDDELETEFLAG)
+        VALUES (#{noticenum}, #{title}, #{departname}, #{writer},#{writerpos}, #{content}, SYSDATE, 0, #{important,jdbcType=VARCHAR},'N' )
+    </insert>
+    
+    <update id="updateNotice" parameterType="com.group.notice.vo.NoticeVO">
+        UPDATE NOTICE
+           SET TITLE=#{title}
+             , WRITER=#{writer}
+             , WRITERPOS=#{writerpos}
+             , CONTENT=#{content} 
+         WHERE BRDDELETEFLAG='N'
+           AND NOTICENUM=#{noticenum}
+    </update> 
+        
+    <select id="selectNoticeOne" parameterType="String" resultType="com.group.notice.vo.NoticeVO">
+        SELECT NOTICENUM, TITLE, WRITER, WRITERPOS, DEPARTNAME, CONTENT, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE
+          FROM NOTICE
+         WHERE BRDDELETEFLAG='N'
+           AND NOTICENUM=#{noticenum}
+    </select> 
+
+    <update id="updateNoticeRead" parameterType="String">
+        UPDATE NOTICE
+           SET HIT = HIT + 1 
+         WHERE NOTICENUM=#{noticenum}
+    </update> 
+ 
+    <delete id="deleteNoticeOne" parameterType="String">
+        UPDATE NOTICE
+           SET BRDDELETEFLAG='Y' 
+         WHERE NOTICENUM=#{noticenum}
+    </delete> 
+
+    <!-- =============================================================================== -->
+    <select id="selectNoticeFileList" resultType="com.group.board.vo.FileVO" parameterType="String">
+        SELECT NOTICEFILENUM, FILENAME, REALNAME, FILESIZE
+          FROM NOTICEFILE
+         WHERE NOTICENUM=#{noticenum}
+         ORDER BY NOTICEFILENUM DESC 
+    </select> 
+
+    <insert id="insertNoticeFile" parameterType="com.group.board.vo.FileVO" >
+        INSERT INTO NOTICEFILE (NOTICENUM, NOTICEFILENUM, FILENAME, REALNAME, FILESIZE)
+        VALUES (#{parentPK}, NOTICEFILENUM_SEQ.NEXTVAL, #{filename}, #{realname}, #{filesize})
+    </insert>
+    
+    <delete id="deleteNoticeFile" parameterType="hashmap"> 
+        DELETE 
+          FROM NOTICEFILE
+         WHERE NOTICEFILENUM IN (
+              <foreach item="item" index="index" collection="filenum" separator=",">
+                     ${item}
+              </foreach>  
+        )             
+    </delete> 
+
+    <!-- =============================================================================== -->
+  
+         
+</mapper>
+

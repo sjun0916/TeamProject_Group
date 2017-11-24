@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
+<title>Smart-Groupware System</title>
 <head>
 <!-- Bootstrap Core CSS -->
     <link href="<c:url value='/resources/loginCSS/resources/css/bootstrap.min.css'/>" rel="stylesheet">

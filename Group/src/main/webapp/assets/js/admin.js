@@ -1,3 +1,4 @@
+var dialog, form;
 function initGrid() {
      
     $("#list").jqGrid({
@@ -59,7 +60,6 @@ function getContextPath() {
 	   return window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
 }
 function loadEmployeeData() {
-	
 	var gridData;
 	//그리드의 데이터를 비우고
 	var trf = $("#list tbody:first tr:first")[0];
@@ -91,7 +91,7 @@ function loadEmployeeData() {
 
 
  $(function(){
-		changeActiveGnb(0);
+		changeActiveGnb(3);
 		initGrid();
 		loadEmployeeData();
 })

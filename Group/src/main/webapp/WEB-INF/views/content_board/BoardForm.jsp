@@ -2,17 +2,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
-
 <script>
 	function fn_formSubmit() {
 		var form1 = document.form1;
 
-		if (form1.writer.value == "") {
-			alert("작성자를 입력해주세요.");
-			form1.writer.focus();
-			return;
-		}
 		if (form1.title.value == "") {
 			alert("글 제목을 입력해주세요.");
 			form1.title.focus();
@@ -53,13 +51,12 @@
 				<tbody>
 					<tr>
 						<td>부서명</td>
-						<td><input type="text" name="departname" size="20"
-							maxlength="20" value="<c:out value="${boardInfo.departname}"/>"></td>
+						<td><c:out value="${authUser.teamName}"/></td>
 					</tr>
 					<tr>
 						<td>작성자</td>
-						<td><input type="text" name="writer" size="20" maxlength="20"
-							value="<c:out value="${boardInfo.writer}"/>"></td>
+						<td>[<c:out value="${authUser.positionName}"/>]
+						<c:out value="${authUser.employeeName}"/></td>
 					</tr>
 					<tr>
 						<td>제목</td>
@@ -89,9 +86,18 @@
 					
 				</tbody>
 			</table>
+			<input type="hidden"  name="membernum"
+				value="<c:out value="${authUser.employeeNo}"/>">
+			<input type="hidden"  name="writerpos"
+				value="<c:out value="${authUser.positionName}"/>">
+			<input type="hidden"  name="departname"
+				value="<c:out value="${authUser.teamName}"/>">
+				<input type="hidden"  name="writer"
+				value="<c:out value="${authUser.employeeName}"/>">
 			<input type="hidden"  name="boardnum"
-				value="<c:out value="${boardInfo.boardnum}"/>"> <a href="#"
-				onclick="fn_formSubmit()" style="float:right;" >글등록</a>
+				value="<c:out value="${boardInfo.boardnum}"/>"> 
+				
+				<a href="#" onclick="fn_formSubmit()" style="float:right;" >글등록</a>
 				
 		</form>
 	</section>
@@ -99,4 +105,7 @@
 </div>
 <!-- /.content-wrapper -->
 
-<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+    <%@ include file="/WEB-INF/views/include/footer.jsp" %>
+    <%@ include file="/WEB-INF/views/include/footerScript.jsp" %>
+</body>
+</html>

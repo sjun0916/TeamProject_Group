@@ -1,5 +1,5 @@
 $(function() {
-	changeActiveGnb(5);
+	changeActiveGnb(2);
 
 
 });

@@ -3,12 +3,15 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<!DOCTYPE html>
+<html>
+<head>
+<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 <style type="text/css">
 table, td, th {
 	text-align: center;
-height:50px;
+height:45px;
 	
 }
 table,th {
@@ -40,7 +43,6 @@ color:black;
 }
 
 </style>
-
 <script>
 	function categoryChange(value) {
 		
@@ -54,23 +56,19 @@ color:black;
 </script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-	<!-- ì»¨íí¸ í¤ë -->
+	<!-- 컨텐츠 헤더 -->
 	<section class="content-header">
-		
+	<h1>
+			부서 게시판 <small>board</small>
+		</h1>
 	<ol class="breadcrumb">
-			<a href="BoardList"><i class="fa fa-dashboard"></i> 게시판</a>
-			
+			<a href="BoardList"><i class="fa fa-dashboard"></i> 게시판</a>		
 		</ol>
 	</section>
-
-	<!-- ì»¨íí¸ ë©ì¸ -->
+	<!-- 컨텐츠 메인 -->
 	<section class="content container-fluid">
-
-
-
 		<form id="form1" name="form1" method="post">
-			<table >
-				
+			<table >			
 				<colgroup>
 					<col width='8%' />
 					<col width='8%' />
@@ -83,7 +81,6 @@ color:black;
 				<thead>
 					<tr>
 						<th>NO</th>
-
 						<th><select id="category1" name="category1"
 							onchange="categoryChange(this.value);">
 								<option value="">카테고리</option>
@@ -93,12 +90,11 @@ color:black;
 								<option value="행정부">[행정부]</option>
 								<option value="개발부">[개발부]</option>
 						</select></th>
-
 						<th>제목</th>
 						<th>작성자</th>
 						<th>작성일</th>
-						<th>조회수</th>
 						<th>첨부</th>
+						<th>조회수</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -106,7 +102,6 @@ color:black;
 						<c:url var="link" value="BoardRead">
 							<c:param name="boardnum" value="${listview.boardnum}" />
 						</c:url>
-
 						<tr>
 							<td><c:out
 									value="${searchVO.totRow-((searchVO.page-1)*searchVO.displayRowCount + status.index)}" /></td>
@@ -116,10 +111,18 @@ color:black;
 									test="${listview.replycnt>0}">
 							(<c:out value="${listview.replycnt}" />)
 						</c:if></td>
-							<td><c:out value="${listview.writer}" /></td>
+							<td>
+							<c:if test="${listview.writerpos!=null}">
+							[<c:out value="${listview.writerpos}"/>]
+							</c:if>
+							<c:out value="${listview.writer}" /></td>
 							<td><c:out value="${listview.regdate}" /></td>
+							<td>
+							<c:if test="${listview.filecnt>0}">
+							<img src="<c:url value="/resources/icon/floppy-disk.png"/>" width="25" height="25"/>					
+							</c:if>
+							</td>
 							<td><c:out value="${listview.hit}" /></td>
-							<td><c:out value="${listview.filecnt}" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -160,7 +163,7 @@ color:black;
 <!-- /.content-wrapper -->
 
 
-
-
-
-<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+    <%@ include file="/WEB-INF/views/include/footer.jsp" %>
+    <%@ include file="/WEB-INF/views/include/footerScript.jsp" %>
+</body>
+</html>
