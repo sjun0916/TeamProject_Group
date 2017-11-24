@@ -18,6 +18,7 @@ public class BoardVO {
     private String replycnt;
     private String writerpos;
     private String departname;
+    private int membernum;
     
     /* 첨부파일 */
     private List<MultipartFile> uploadfile;
@@ -125,6 +126,14 @@ public class BoardVO {
 
 	public void setWriterpos(String writerpos) {
 		this.writerpos = writerpos;
+	}
+
+	public int getMembernum() {
+		return membernum;
+	}
+
+	public void setMembernum(int membernum) {
+		this.membernum = membernum;
 	}
     
 }
