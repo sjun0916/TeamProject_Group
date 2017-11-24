@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
+<%@ include file="/WEB-INF/views/include/headerScript.jsp"%>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 <script>
 	function fn_formSubmit() {
@@ -21,6 +21,15 @@
 			form1.content.focus();
 			return;
 		}
+		
+		var digit = "";
+		if ($("#chkBox").prop("checked")) {
+			digit = digit + "Y";
+		} else {
+			digit = digit + "N";
+		}
+		document.form1.important.value = digit;
+		alert(document.form1.important.value);
 		document.form1.submit();
 	}
 </script>
@@ -47,26 +56,30 @@
 				<colgroup>
 					<col width='15%' />
 					<col width='*%' />
+					<col width='90px' />
 				</colgroup>
 				<tbody>
 					<tr>
 						<td>부서명</td>
-						<td><c:out value="${authUser.teamName}"/></td>
+						<td><c:out value="${authUser.teamName}" /></td>
+						<td>important: <input type="checkbox" id="chkBox" name="chkBox">
+
+						</td>
 					</tr>
 					<tr>
 						<td>작성자</td>
-						<td>[<c:out value="${authUser.positionName}"/>]
-						<c:out value="${authUser.employeeName}"/></td>
+						<td colspan="2">[<c:out value="${authUser.positionName}" />]
+							<c:out value="${authUser.employeeName}" /></td>
 					</tr>
 					<tr>
 						<td>제목</td>
-						<td><input type="text" name="title" size="70" maxlength="250"
-						placeholder = "제목을 입력해주세요."
+						<td colspan="2"><input type="text" name="title" size="70"
+							maxlength="250" placeholder="제목을 입력해주세요."
 							value="<c:out value="${noticeInfo.title}"/>"></td>
 					</tr>
 					<tr>
 						<td>첨부</td>
-						<td><c:forEach var="listview" items="${listview}"
+						<td colspan="2"><c:forEach var="listview" items="${listview}"
 								varStatus="status">
 								<input type="checkbox" name="filenum"
 									value="<c:out value="${listview.filenum}"/>">
@@ -80,31 +93,32 @@
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td><textarea name="content" rows="5" cols="60" placeholder = "내용을 입력해주세요."><c:out
+						<td colspan="2"><textarea name="content" rows="5" cols="60"
+								placeholder="내용을 입력해주세요."><c:out
 									value="${noticeInfo.content}" /></textarea></td>
 					</tr>
-					
+
 				</tbody>
 			</table>
-		
-			<input type="hidden"  name="writerpos"
-				value="<c:out value="${authUser.positionName}"/>">
-			<input type="hidden"  name="departname"
-				value="<c:out value="${authUser.teamName}"/>">
-				<input type="hidden"  name="writer"
-				value="<c:out value="${authUser.employeeName}"/>">
-			<input type="hidden"  name="noticenum"
-				value="<c:out value="${noticeInfo.noticenum}"/>"> 
-				
-				<a href="#" onclick="fn_formSubmit()" style="float:right;" >글등록</a>
-				
+			<input type="hidden" name="important"
+				value="<c:out value="${noticeInfo.important}"/>"> <input
+				type="hidden" name="writerpos"
+				value="<c:out value="${authUser.positionName}"/>"> <input
+				type="hidden" name="departname"
+				value="<c:out value="${authUser.teamName}"/>"> <input
+				type="hidden" name="writer"
+				value="<c:out value="${authUser.employeeName}"/>"> <input
+				type="hidden" name="noticenum"
+				value="<c:out value="${noticeInfo.noticenum}"/>"> <a
+				href="#" onclick="fn_formSubmit()" style="float: right;">글등록</a>
+
 		</form>
 	</section>
 	<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 
-    <%@ include file="/WEB-INF/views/include/footer.jsp" %>
-    <%@ include file="/WEB-INF/views/include/footerScript.jsp" %>
+<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+<%@ include file="/WEB-INF/views/include/footerScript.jsp"%>
 </body>
 </html>

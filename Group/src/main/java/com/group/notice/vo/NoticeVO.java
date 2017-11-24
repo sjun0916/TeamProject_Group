@@ -18,6 +18,7 @@ public class NoticeVO {
     private String filecnt;
     private String writerpos;
     private String departname;
+    private String important;
     
     /* 첨부파일 */
     private List<MultipartFile> uploadfile;
@@ -95,6 +96,14 @@ public class NoticeVO {
 
 	public void setUploadfile(List<MultipartFile> uploadfile) {
 		this.uploadfile = uploadfile;
+	}
+
+	public String getImportant() {
+		return important;
+	}
+
+	public void setImportant(String important) {
+		this.important = important;
 	}
 	
 

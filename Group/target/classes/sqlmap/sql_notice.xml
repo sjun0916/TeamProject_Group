@@ -11,6 +11,7 @@
               </foreach>
         </if>               
     </sql>
+ 
     <!-- 
     item:전달받은 인자값을 다른이름으로 대체
     collection: 전달받은 인자값
@@ -48,8 +49,8 @@
     	<selectKey resultType="String" keyProperty="noticenum" order="BEFORE">
             SELECT NOTICENUM_SEQ.NEXTVAL FROM DUAL
         </selectKey> 
-        INSERT INTO NOTICE(NOTICENUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, CONTENT, REGDATE, HIT, BRDDELETEFLAG)
-        VALUES (#{noticenum}, #{title}, #{departname}, #{writer},#{writerpos}, #{content}, SYSDATE, 0, 'N' )
+        INSERT INTO NOTICE(NOTICENUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, CONTENT, REGDATE, HIT,IMPORTANT, BRDDELETEFLAG)
+        VALUES (#{noticenum}, #{title}, #{departname}, #{writer},#{writerpos}, #{content}, SYSDATE, 0, #{important,jdbcType=VARCHAR},'N' )
     </insert>
     
     <update id="updateNotice" parameterType="com.group.notice.vo.NoticeVO">
