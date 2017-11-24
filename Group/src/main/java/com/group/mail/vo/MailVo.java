@@ -91,4 +91,8 @@ public class MailVo {
 	public void setMailPW(String mailPW) {
 		this.mailPW = mailPW;
 	}
+	
+	public String toString() {
+		return "MailVo [mailID=" + mailID + ", mailPW=" + mailPW + "]";
+	}
 }
