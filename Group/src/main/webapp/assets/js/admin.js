@@ -91,7 +91,6 @@ function loadEmployeeData() {
 
 
  $(function(){
-	 	alert("test");
 		changeActiveGnb(3);
 		initGrid();
 		loadEmployeeData();
