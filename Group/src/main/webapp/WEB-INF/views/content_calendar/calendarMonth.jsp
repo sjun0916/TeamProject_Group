@@ -51,6 +51,13 @@
 						<div id="calendar">
 						<form name="monthView" method="post">
 							<table border="0" >
+								<tr>
+									<td>
+										<input type="checkbox" name="kind" value="1" checked>회사&nbsp;
+										<input type="checkbox" name="kind" value="2" checked>부서&nbsp;
+										<input type="checkbox" name="kind" value="3" checked>개인
+									</td>
+								</tr>
 								  <tr>
 								    <td><table border="0">
 								      <tr>
@@ -116,8 +123,14 @@
 								        			<c:otherwise>
 								        				<td align="center" height="35" id="day_${cnt-weekStartDay+1}">
 <!-- 								        				a link : daylist -->
-								        				<a href="<c:url value="daylist"/>">
-								        					<input type="hidden" name="date" value="${cnt-weekStartDay+1}">
+															<c:set var="day" value="0${cnt-weekStartDay+1}"/>
+															<c:choose>
+																<c:when test="${cnt-weekStartDay+1}">${day="'0'(cnt-weekStartDay+1)"}</c:when>
+																<c:otherwise>${day=cnt-weekStartDay+1}</c:otherwise>
+															</c:choose>
+															<input type="hidden" name="date" value="${iYear}${iMonth}${day}">
+															<c:out value="${date}"/>	
+															<a href="daylist" onclick="submit()">
 									        				<span>${cnt-weekStartDay+1}</span><br>
 									        				<c:if test="${event != 'null'}">
 										        				<c:forEach var="map" items="${event}" varStatus="event">
@@ -129,6 +142,7 @@
 									        				</c:if>
 									        				kind:1 / kind:2 / kind:3
 								        				</a>
+								        				
 								        				</td>
 								        			</c:otherwise>
 								        		</c:choose>

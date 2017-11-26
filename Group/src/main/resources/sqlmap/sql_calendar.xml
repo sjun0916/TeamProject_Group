@@ -7,7 +7,7 @@
 	<!-- id 속성은 DAO 의 메소드와 같아야 한다. 여기의 memberVO 는 Mybatis-confg.xml 에 Alias 되어있습니다. -->
 	
 	<!-- 등록된 전체 일정 목록 보기 -->
-	<select id="list" resultType="CalendarVO">
+	<select id="viewList" resultType="CalendarVO">
 	select * from CALENDAR
 	order by CALENDARNUM
 	</select>

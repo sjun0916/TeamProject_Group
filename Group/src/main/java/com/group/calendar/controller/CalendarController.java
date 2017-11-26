@@ -220,7 +220,7 @@ public class CalendarController {
 	@RequestMapping(value = "/calender/select",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> select(CalendarVO vo) {
 		System.out.println(vo.getCalNum());
-		CalendarVO selectVo = service.viewSelected(vo);
+		CalendarVO selectVo = service.select(vo);
 		Map<String, Object> jsonObject = new HashMap<String, Object>();
 
 		if(selectVo!=null){
@@ -239,18 +239,21 @@ public class CalendarController {
 		}
 		return jsonObject;
 	}
-	@RequestMapping(value = "/calendar/daylist",method=RequestMethod.POST)
+	@RequestMapping(value = "/daylist")
 	public @ResponseBody String select(HttpServletRequest req, HttpServletResponse res) {
 		System.out.println("controller select start");
 		String date = (String) req.getAttribute("date");
-		String team = null;
+		System.out.println("select date : "+date);
+		UserVO user = null;
+		List<CalendarVO>list = null;
 		try {
-			team = (String)SessionUtil.getAttribute("team");
-		}catch (Exception e) {
+			user = (UserVO)SessionUtil.getAttribute("authUser");
+			int[] kind = (int[]) req.getAttribute("kind");
+			list = service.viewDay(date, kind, user);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<CalendarVO>list = service.viewDay(date, team);
 		req.setAttribute("doList", list);
 		
 		return "content_calendar/calendarList";

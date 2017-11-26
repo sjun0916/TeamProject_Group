@@ -2,7 +2,9 @@ package com.group.calendar.service;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -17,7 +19,6 @@ import org.xml.sax.SAXException;
 
 import com.group.calendar.dao.CalendarDao;
 import com.group.calendar.vo.CalendarVO;
-import com.group.user.dao.SearchEmployeeDao;
 import com.group.user.dao.UserDao;
 import com.group.user.vo.UserVO;
 
@@ -41,43 +42,73 @@ public class CalendarServiceImpl implements CalendarService{
 	}
 
 	@Override
-	public CalendarVO viewSelected(CalendarVO cal) {
+	public CalendarVO select(CalendarVO cal) {
 		// TODO Auto-generated method stub
 		CalendarVO temp = null;
 		try {
-			temp = calendarDao.viewSelected(cal);
+			temp = calendarDao.select(cal);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return temp;
 	}
-	
+	//해당 날짜의 일정
 	@Override
-	public List<CalendarVO> viewDay(String date, String team) {
+	public List<CalendarVO> viewDay(String date, int[] num, UserVO user) {
 		// TODO Auto-generated method stub
 		
-		List<CalendarVO> tmp = null;
+		List<CalendarVO> allList = null;
+		List<CalendarVO> tmp = new ArrayList<CalendarVO>();
+		int searchDate = Integer.parseInt(date.substring(0,7));
 		
-		try {
-			tmp = calendarDao.dayList(date, team);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		allList = kindList(num, user);
+		Iterator<CalendarVO> allIt = allList.iterator();
+		while(allIt.hasNext()) {
+			CalendarVO cal = allIt.next();
+			int startDate = Integer.parseInt(cal.getStartDate().substring(0, 7));
+			int endDate = Integer.parseInt(cal.getEndDate().substring(0,7)); 
+			if(searchDate>=startDate && searchDate<=endDate)
+				tmp.add(cal);
 		}
 		return tmp;
 	}
+	//개인별 일정 view
 	@Override
 	public List<CalendarVO> kindList(int[] num, UserVO user) {
 		// TODO Auto-generated method stub
-		List<CalendarVO> tmp = null;
-		try {
-			tmp = calendarDao.kindList(num, user);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		List<CalendarVO> tmpList = new ArrayList<CalendarVO>();
+		List<CalendarVO> list = viewList();
+		CalendarVO temp = null;
+		UserDao userDao = new UserDao();
+		Iterator<CalendarVO> it = list.iterator();
+
+		if(num.length != 0) {
+			//전체 일정 list의 회원 list에 추가 확인
+			while(it.hasNext()) {
+				temp = it.next();
+				//선택된 kinds 확인
+				for(int i=0;i<num.length;i++) {
+					switch(num[i]) {
+					//전체 일정 list에 추가
+					case 1 : tmpList.add(temp);break;
+					
+					case 2 :
+						//부서 일정 list에 추가
+						//회원id로 회원 정보 확인, 부서가 같은지 확인하여 list에 추가
+						UserVO tmpUser = userDao.get(temp.getEmployee_no());
+						if(user.getTeamName().equals(tmpUser.getTeamName()))
+							tmpList.add(temp);
+						break;
+					
+					//개인 일정 list에 추가
+					case 3 : if(user.getEmployeeNo() == (temp.getEmployee_no()))
+								tmpList.add(temp);break;
+					}
+				}
+			}
 		}
-		return tmp;
+		return tmpList;
 	}
 	
 
