@@ -87,18 +87,22 @@ public class CalendarDaoMybatis implements CalendarDao{
 		}
 	}
 	@Override
-	public List<CalendarVO> dayList(String date) throws SQLException{
+	public List<CalendarVO> dayList(String date, String team) throws SQLException{
 		// TODO Auto-generated method stub
 		List<CalendarVO> tmpList = new ArrayList<CalendarVO>();
 		List<CalendarVO> allList = viewList();
 		Iterator<CalendarVO> it = allList.iterator();
 		int searchDate = Integer.parseInt(date.substring(0,7));
-		
+		UserDao userDao = new UserDao();
+		UserVO user = null;
 		while(it.hasNext()) {
 			CalendarVO tmp = it.next();
+			
 			int startDate = Integer.parseInt(tmp.getStartDate().substring(0, 7));
-			int endDate = Integer.parseInt(tmp.getEndDate().substring(0,3)); 
+			int endDate = Integer.parseInt(tmp.getEndDate().substring(0,7)); 
 			if(searchDate>=startDate && searchDate<=endDate) {
+				user = userDao.get(tmp.getEmployee_no());
+				if(tmp.getKind()==2 && !(team.equals(user.getTeamName()))) {}
 				tmpList.add(tmp);
 			}
 		}

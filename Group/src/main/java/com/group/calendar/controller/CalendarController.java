@@ -42,7 +42,7 @@ public class CalendarController {
 		return conv;
 	}
 	
-	@RequestMapping(value = "/calendar/main")
+	@RequestMapping(value = "/calendar")
 	public String calendar(HttpServletRequest request, HttpServletResponse response) {
 		//calendarMonth.jsp month view에 필요한 value -> request.setAttribute();
 		
@@ -239,21 +239,21 @@ public class CalendarController {
 		}
 		return jsonObject;
 	}
-	@RequestMapping(value = "/calender/daylist",method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> select(String date) {
-		Map<String, Object> jsonObject = new HashMap<String, Object>();
-		
-		CalendarVO vo =new CalendarVO();
+	@RequestMapping(value = "/calendar/daylist",method=RequestMethod.POST)
+	public @ResponseBody String select(HttpServletRequest req, HttpServletResponse res) {
+		System.out.println("controller select start");
+		String date = (String) req.getAttribute("date");
+		String team = null;
 		try {
-			vo.setStartDate(date);
-			vo.setEmployee_no((int)SessionUtil.getAttribute("id"));
+			team = (String)SessionUtil.getAttribute("team");
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<CalendarVO>list = service.viewDay(vo);
-		jsonObject.put("data", list);
-		return jsonObject;
+		List<CalendarVO>list = service.viewDay(date, team);
+		req.setAttribute("doList", list);
+		
+		return "content_calendar/calendarList";
 	}
 	
 }

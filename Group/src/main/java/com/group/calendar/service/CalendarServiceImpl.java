@@ -17,6 +17,8 @@ import org.xml.sax.SAXException;
 
 import com.group.calendar.dao.CalendarDao;
 import com.group.calendar.vo.CalendarVO;
+import com.group.user.dao.SearchEmployeeDao;
+import com.group.user.dao.UserDao;
 import com.group.user.vo.UserVO;
 
 @Service("calendarService") // 현재 클래스를 스프링에서 관리하는 service bean으로 등록
@@ -52,11 +54,13 @@ public class CalendarServiceImpl implements CalendarService{
 	}
 	
 	@Override
-	public List<CalendarVO> viewDay(CalendarVO cal) {
+	public List<CalendarVO> viewDay(String date, String team) {
 		// TODO Auto-generated method stub
+		
 		List<CalendarVO> tmp = null;
+		
 		try {
-			tmp = calendarDao.dayList(cal.getStartDate());
+			tmp = calendarDao.dayList(date, team);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

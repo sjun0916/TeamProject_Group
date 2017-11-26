@@ -15,7 +15,7 @@ public interface CalendarDao {
 	// select : kind schedule
 	public abstract List<CalendarVO> kindList(int[] num, UserVO user) throws SQLException;
 	// select : day
-	public abstract List<CalendarVO> dayList(String day) throws SQLException;
+	public abstract List<CalendarVO> dayList(String day, String team) throws SQLException;
 	// insert : schedule
 	public abstract int insert(CalendarVO cal) throws SQLException;
 	// delete : schedule

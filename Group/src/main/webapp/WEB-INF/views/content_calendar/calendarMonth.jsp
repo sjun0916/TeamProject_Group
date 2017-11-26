@@ -18,16 +18,16 @@
 			Calendar <small>Control panel</small>
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+			<li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
 			<li class="active">Calendar</li>
 		</ol>
 	</section>
 	
 	<!-- inputGroup -->
 	
-	<section class="content container-fluid">
-		<h2>Text</h2>
-	</section>
+<!-- 	<section class="content container-fluid"> -->
+<!-- 		<h2>Text</h2> -->
+<!-- 	</section> -->
 
 	<!-- Main content -->
 	<section class="content">
@@ -40,46 +40,7 @@
 						onsubmit="return loadHtml(this, this.action, 'result')">
 						<input type="submit" id="oksign" style="display: none;">
 					</form>
-					<div class="box-header with-border">
-						<h3 class="box-title">일정추가</h3>
-					</div>
-					<div class="form-group">
-						<label>분류:</label>
-						<select>
-							<option value="1">전체</option>
-							<option value="2">부서</option>
-							<option value="3" selected>개인</option>
-						</select>
-					</div>
-					<!-- /btn-group -->
-					<label>제목</label>
-					<div class="input-group input-group-sm">
-
-						<input id="new-event" type="text" class="form-control"
-							placeholder="제목 입력">
-						<!-- /btn-group -->
-					</div>
-					<div class="form-group">
-						<label>날짜 선택</label>
-
-						<div class="input-group">
-							<div class="input-group-addon">
-								<i class="fa fa-clock-o"></i>
-							</div>
-							<!-- id="reservationtime" -->
-							시작 날짜 : <input type="date" class="form-control pull-right" id="startDate"><br>
-							종료 날짜 : <input type="date" class="form-control pull-right" id="endDate"><br>
-						</div>
-						<div class="form-group">
-							<label>내용</label>
-							<textarea id="cont" class="form-control" rows="3"
-								placeholder="내용 입력"></textarea>
-						</div>
-						<!-- /input-group -->
-					</div>
-				</div>
-				<button type="button" class="btn btn-block btn-info btn-lg"
-					onclick="submit();">일정 등록</button>
+					
 			</div>
 			<!-- /.col -->
 			<div class="col-md-9">
@@ -154,17 +115,19 @@
 								        			</c:when>
 								        			<c:otherwise>
 								        				<td align="center" height="35" id="day_${cnt-weekStartDay+1}">
-								        				<a>
-								        				<span>${cnt-weekStartDay+1}</span><br>
-								        				<c:if test="${event != 'null'}">
-									        				<c:forEach var="map" items="${event}" varStatus="event">
-									        					<c:set var="number" value="${cnt-weekStartDay+1}"/>
-									        					<c:if test="${map.key == number}">
-										        					<span><small>${map.value}</small></span><br>
-										        				</c:if>
-									        				</c:forEach>
-								        				</c:if>
-								        				kind:1 / kind:2 / kind:3
+<!-- 								        				a link : daylist -->
+								        				<a href="<c:url value="daylist"/>">
+								        					<input type="hidden" name="date" value="${cnt-weekStartDay+1}">
+									        				<span>${cnt-weekStartDay+1}</span><br>
+									        				<c:if test="${event != 'null'}">
+										        				<c:forEach var="map" items="${event}" varStatus="event">
+										        					<c:set var="number" value="${cnt-weekStartDay+1}"/>
+										        					<c:if test="${map.key == number}">
+											        					<span><small>${map.value}</small></span><br>
+											        				</c:if>
+										        				</c:forEach>
+									        				</c:if>
+									        				kind:1 / kind:2 / kind:3
 								        				</a>
 								        				</td>
 								        			</c:otherwise>
@@ -235,9 +198,9 @@
             </div>
             <!-- /.modal-content -->
           </div>
-          /.modal-dialog
+<!--           /.modal-dialog -->
         </div>
-        /.modal
+<!--         /.modal -->
       </div>
 
 	<!-- /.content -->

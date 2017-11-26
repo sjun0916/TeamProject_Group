@@ -14,7 +14,7 @@ public interface CalendarService {
 	// select : selected schedule
 	public abstract CalendarVO viewSelected(CalendarVO cal);
 	// select : selected day
-	public abstract List<CalendarVO> viewDay(CalendarVO cal);
+	public abstract List<CalendarVO> viewDay(String date, String team);
 	//select : list of kind
 	public List<CalendarVO> kindList(int[] num, UserVO user);
 	// insert : schedule
