@@ -196,6 +196,13 @@
         	<span>사진첩</span>
         	</a>
         </li>
+        
+        <li>
+        	<a href="${pageContext.servletContext.contextPath }/message" class="menu item_4" id="top_gnb">
+        	<i class="fa fa-documnet"></i>
+        	<span>쪽지</span>
+        	</a>
+        </li>
 
         <li><hr></li>
         

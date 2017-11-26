@@ -17,7 +17,7 @@ function initGrid() {
             {name:'email',align:"center",width:200},
             {name:'IDX', index:'IDX',align:"center", width:100,formatter:sendmessageButton },
         ],
-        width:1000,
+        width:700,
         //그리드타이틀
         caption: "사원목록"
     });
@@ -54,7 +54,7 @@ function loadEmployeeData() {
 	var params = jQuery("#searchEmployeeForm").serialize();
 	$.ajax({
 		
-		 url:'/group/searchemployee',
+		 url:'/groupware/searchemployee',
 		type:'POST',
 		data:params,
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
@@ -96,7 +96,7 @@ function initSendMessageForm(){
 			
 			var data = new Object();
 			
-			data.senderemployeeNo= $('#useremployeeNo').val();
+			data.senderemployeeNo= $('#userEmployeeNo').val();
 			data.receiverEmail= $('#selectedEmail').val();
 			data.message= $('#messageArea').val();
 			
@@ -104,7 +104,7 @@ function initSendMessageForm(){
 			
 			$.ajax({
 				
-				 url:'/group/message/sendMessage',
+				 url:'/groupware/message/sendMessage',
 				type:'POST',
 				data:data,
 		        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
@@ -150,7 +150,7 @@ function initSendMessageForm(){
 
 	 	initSendMessageForm();
 	  
-		changeActiveGnb(1);
+		changeActiveGnb(3);
 		initGrid();
 		
 		$('#teamId').append("<option value=''>전체</option>");

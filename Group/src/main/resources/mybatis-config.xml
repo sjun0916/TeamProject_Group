@@ -14,6 +14,7 @@
 	
 	<!-- VO에 등록한 별명을 등록 -->
 	<typeAliases>
+		<typeAlias alias="messageVO" type="com.group.message.vo.MessageVO" />
 		<typeAlias alias="ReportVO" type="com.group.approval.vo.ReportVo" />
 		<typeAlias alias="UserVO" type="com.group.user.vo.UserVO" />
 		<typeAlias alias="calendarVO" type="com.group.calendar.vo.CalendarVO" />

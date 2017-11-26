@@ -37,6 +37,18 @@
 	<!-- 컨텐트 메인 -->
 	<section class="content container-fluid">
 
+		<div id="sendForm" title="메세지 전송">
+		  <form>
+		    <fieldset>
+		      <label for="name">전송할 내용을 입력하세요</label>
+		      <input type="hidden" name="selectedEmail" id="selectedEmail">
+		 	  <textarea id = "messageArea" rows="15" cols="48" name="contents"></textarea>
+		      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+		      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+		    </fieldset>
+		  </form>
+		</div>
+
 		 <div class="wrap">
 	    	<form id="searchEmployeeForm" name="searchEmployeeForm">
 				<table id="searchEmployeeTable">
