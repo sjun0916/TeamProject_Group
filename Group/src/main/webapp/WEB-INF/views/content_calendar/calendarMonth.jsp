@@ -53,9 +53,9 @@
 							<table border="0" >
 								<tr>
 									<td>
-										<input type="checkbox" name="kind" value="1" checked>회사&nbsp;
-										<input type="checkbox" name="kind" value="2" checked>부서&nbsp;
-										<input type="checkbox" name="kind" value="3" checked>개인
+										<input type="checkbox" name=kind value="1" checked="checked">회사&nbsp;
+										<input type="checkbox" name=kind value="2" checked="checked">부서&nbsp;
+										<input type="checkbox" name=kind value="3" checked="checked">개인
 									</td>
 								</tr>
 								  <tr>
@@ -123,14 +123,15 @@
 								        			<c:otherwise>
 								        				<td align="center" height="35" id="day_${cnt-weekStartDay+1}">
 <!-- 								        				a link : daylist -->
-															<c:set var="day" value="0${cnt-weekStartDay+1}"/>
-															<c:choose>
-																<c:when test="${cnt-weekStartDay+1}">${day="'0'(cnt-weekStartDay+1)"}</c:when>
-																<c:otherwise>${day=cnt-weekStartDay+1}</c:otherwise>
-															</c:choose>
-															<input type="hidden" name="date" value="${iYear}${iMonth}${day}">
-															<c:out value="${date}"/>	
-															<a href="daylist" onclick="submit()">
+															<a href="<c:url value="daylist">
+																<c:param name="date" value="${iYear}${iMonth}${cnt-weekStartDay+1}"></c:param>
+															</c:url>" onclick="submit()">
+															<c:import url="daylist"/>
+<%-- 															<c:set var="date" value="${iYear}${iMonth}${cnt-weekStartDay+1}"/> --%>
+<%-- 															<input type="hidden" name="date" value="${iYear}${iMonth}${cnt-weekStartDay+1}"> --%>
+<%-- 															<c:out value="${date}"/> --%>
+<%-- 															<% session.setAttribute("date", "${iYear}${iMonth}${cnt-weekStartDay+1}"); %> --%>
+															
 									        				<span>${cnt-weekStartDay+1}</span><br>
 									        				<c:if test="${event != 'null'}">
 										        				<c:forEach var="map" items="${event}" varStatus="event">

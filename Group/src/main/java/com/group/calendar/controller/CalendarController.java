@@ -239,17 +239,47 @@ public class CalendarController {
 		}
 		return jsonObject;
 	}
+	/*
+	 * gerParameter이 null일 경우 exception 방지
+	 */
+	public String errorParameterNull(String str) {
+		if(str == null)
+			return "";
+		else
+			return str;
+	}
 	@RequestMapping(value = "/daylist")
 	public @ResponseBody String select(HttpServletRequest req, HttpServletResponse res) {
-		System.out.println("controller select start");
-		String date = (String) req.getAttribute("date");
-		System.out.println("select date : "+date);
+		System.out.println("controller select start");//confirm
+		res.setContentType("text/html;charset=UTF-8");
+		String date = req.getParameter("date");		
+		System.out.println("select date : "+date);	 //confirm
+		
+		int day = Integer.parseInt(date.substring(6, date.length()));
+		date = date.substring(0,6);
+		if(day<10)
+			date += "0"+day;
+		System.out.println("select date : "+date);//confirm
 		UserVO user = null;
 		List<CalendarVO>list = null;
 		try {
 			user = (UserVO)SessionUtil.getAttribute("authUser");
-			int[] kind = (int[]) req.getAttribute("kind");
-			list = service.viewDay(date, kind, user);
+			String[] stKind = req.getParameterValues("kind");
+			if(stKind==null)
+				stKind=new String[0];
+			System.out.println("string_kind : "+stKind);
+			System.out.println("string_kind_length : "+stKind.length); //confirm
+			int[] kind = new int[stKind.length];
+			System.out.println("kind : ");
+			for(int i=0;i<kind.length;i++) {
+				System.out.println(stKind[i]);		//confirm
+				kind[i] = Integer.parseInt(stKind[i]);
+			}
+			System.out.println("user_no : "+user.getEmployeeNo());	//confirm
+			
+//			
+			System.out.println("");
+//			list = service.viewDay(date, kind, user);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
