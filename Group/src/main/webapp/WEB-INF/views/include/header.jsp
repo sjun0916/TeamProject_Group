@@ -73,7 +73,8 @@
                 <img src="${pageContext.request.contextPath}/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  [${authUser.teamName }/${authUser.positionName }] ${authUser.employeeName }
+                  [${authUser.teamName }][${authUser.positionName }] ${authUser.employeeName }
+<%--                   ${authUser.imageUrl} --%>
                   <small>Member since 2017</small>
                 </p>
               </li>
@@ -145,7 +146,7 @@
                	<i class="fa fa-angle-left pull-right"></i>
           	</a>
         	<ul class="treeview-menu">
-            	<li><a href="#"><i class="fa fa-circle-o"></i> 공지사항</a></li>
+            	<li><a href="/group/NoticeList"><i class="fa fa-circle-o"></i> 공지사항</a></li>
             	<li><a href="/group/BoardList"><i class="fa fa-circle-o"></i> 부서게시판</a></li>
           	</ul>
         </li>
@@ -157,9 +158,9 @@
             	<i class="fa fa-angle-left pull-right"></i>
         	</a>
             <ul class="treeview-menu">
-            	<li><a href="#"><i class="fa fa-circle-o"></i> 결재작성</a></li>
-            	<li><a href="#"><i class="fa fa-circle-o"></i> 결재함</a></li>
-            	<li><a href="#"><i class="fa fa-circle-o"></i> 문서양식</a></li>
+            	<li><a href="${pageContext.request.contextPath}/report/make"><i class="fa fa-circle-o"></i> 결재작성</a></li>
+            	<li><a href="${pageContext.request.contextPath}/report/state"><i class="fa fa-circle-o"></i> 결재함</a></li>
+            	<li><a href="${pageContext.request.contextPath}/report/wating"><i class="fa fa-circle-o"></i> 문서양식</a></li>
             </ul>
         </li>
         
@@ -183,7 +184,7 @@
             </li>
         
         <li>
-        	<a href="/group/calendar/main">
+        	<a href="/group/calendar">
         	<i class="fa fa-calendar"></i>
         	<span>일정</span>
         	</a>

@@ -18,17 +18,16 @@
 			Calendar <small>Control panel</small>
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+			<li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
 			<li class="active">Calendar</li>
 		</ol>
 	</section>
-<!-- 	<script type="text/javascript" src="calendar.js"></script> -->
 	
 	<!-- inputGroup -->
 	
-	<section class="content container-fluid">
-		<h2>Text</h2>
-	</section>
+<!-- 	<section class="content container-fluid"> -->
+<!-- 		<h2>Text</h2> -->
+<!-- 	</section> -->
 
 	<!-- Main content -->
 	<section class="content">
@@ -41,51 +40,7 @@
 						onsubmit="return loadHtml(this, this.action, 'result')">
 						<input type="submit" id="oksign" style="display: none;">
 					</form>
-					<div class="box-header with-border">
-						<h3 class="box-title">일정추가</h3>
-					</div>
-					<div class="form-group">
-						<label>분류:</label>
-						<select>
-							<option value="1">전체</option>
-							<option value="2">부서</option>
-							<option value="3" selected>개인</option>
-						</select>
-					</div>
-					<!-- /btn-group -->
-					<label>제목</label>
-					<div class="input-group input-group-sm">
-
-						<input id="new-event" type="text" class="form-control"
-							placeholder="제목 입력">
-						<div class="input-group-btn">
-							<button id="add-new-event" type="button"
-								class="btn btn-info btn-flat">일정추가</button>
-						</div>
-
-						<!-- /btn-group -->
-					</div>
-					<div class="form-group">
-						<label>날짜 선택</label>
-
-						<div class="input-group">
-							<div class="input-group-addon">
-								<i class="fa fa-clock-o"></i>
-							</div>
-							<!-- id="reservationtime" -->
-							시작 날짜 : <input type="date" class="form-control pull-right" id="startDate"><br>
-							종료 날짜 : <input type="date" class="form-control pull-right" id="endDate"><br>
-						</div>
-						<div class="form-group">
-							<label>내용</label>
-							<textarea id="cont" class="form-control" rows="3"
-								placeholder="내용 입력"></textarea>
-						</div>
-						<!-- /input-group -->
-					</div>
-				</div>
-				<button type="button" class="btn btn-block btn-info btn-lg"
-					onclick="submit();">일정 등록</button>
+					
 			</div>
 			<!-- /.col -->
 			<div class="col-md-9">
@@ -96,6 +51,13 @@
 						<div id="calendar">
 						<form name="monthView" method="post">
 							<table border="0" >
+								<tr>
+									<td>
+										<input type="checkbox" name="kind" value="1" checked>회사&nbsp;
+										<input type="checkbox" name="kind" value="2" checked>부서&nbsp;
+										<input type="checkbox" name="kind" value="3" checked>개인
+									</td>
+								</tr>
 								  <tr>
 								    <td><table border="0">
 								      <tr>
@@ -160,15 +122,27 @@
 								        			</c:when>
 								        			<c:otherwise>
 								        				<td align="center" height="35" id="day_${cnt-weekStartDay+1}">
-								        				<span>${cnt-weekStartDay+1}</span><br>
-								        				<c:forEach var="map" items="${event}" varStatus="event">
-									        				<c:choose>
-									        					<c:when test="${event.key == (cnt-weekStartDay+1)}">
-									        						<span><small>event : ${event.value}</small></span><br>
-									        					</c:when>
-									        				</c:choose>
-								        				</c:forEach>
-								        				kind:1 / kind:2 / kind:3
+<!-- 								        				a link : daylist -->
+															<c:set var="day" value="0${cnt-weekStartDay+1}"/>
+															<c:choose>
+																<c:when test="${cnt-weekStartDay+1}">${day="'0'(cnt-weekStartDay+1)"}</c:when>
+																<c:otherwise>${day=cnt-weekStartDay+1}</c:otherwise>
+															</c:choose>
+															<input type="hidden" name="date" value="${iYear}${iMonth}${day}">
+															<c:out value="${date}"/>	
+															<a href="daylist" onclick="submit()">
+									        				<span>${cnt-weekStartDay+1}</span><br>
+									        				<c:if test="${event != 'null'}">
+										        				<c:forEach var="map" items="${event}" varStatus="event">
+										        					<c:set var="number" value="${cnt-weekStartDay+1}"/>
+										        					<c:if test="${map.key == number}">
+											        					<span><small>${map.value}</small></span><br>
+											        				</c:if>
+										        				</c:forEach>
+									        				</c:if>
+									        				kind:1 / kind:2 / kind:3
+								        				</a>
+								        				
 								        				</td>
 								        			</c:otherwise>
 								        		</c:choose>
@@ -185,7 +159,7 @@
 					</div>
 					<!-- /.box-body -->
 				</div>
-				<!-- /. box -->
+				/. box
 			</div>
 			<!-- /.col -->
 		</div>
@@ -238,9 +212,9 @@
             </div>
             <!-- /.modal-content -->
           </div>
-          <!-- /.modal-dialog -->
+<!--           /.modal-dialog -->
         </div>
-        <!-- /.modal -->
+<!--         /.modal -->
       </div>
 
 	<!-- /.content -->

@@ -18,15 +18,15 @@ public class MailDao {
 	
 	public List<UserVO> listAll() throws SQLException {
 		// TODO Auto-generated method stub
-		return client.selectList("user.listAll");
+		return client.selectList("searchEmployee.getEmployeeList");
 	}
 	
-	public String getEmail(String member_enum) throws SQLException {
-		return client.selectOne("user.getEmail", member_enum);
+	public String getEmail(String employeeEmail) throws SQLException {
+		return client.selectOne("mail.getEmail", employeeEmail);
 	}
 	
 	public List<String> getEmails(Map<String, Object> array) throws SQLException {
-		return client.selectList("user.getEmails", array);
+		return client.selectList("mail.getEmails", array);
 	}
 
 }

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="report">
+
+	<select id="select" parameterType="UserVO"
+		resultType="ReportVO">
+		select REPORT_NO,REG_TITLE,REG_REGISTER,REG_STATE,REG_REASON,LABEL_NAME, LABEL_COLOR from REPORT,LABEL where LABEL_NUM = nvl(reg_labelnum,0) and REG_ID=#{member_enum,jdbcType=VARCHAR}
+				
+	</select>
+	
+	<select id="select2" parameterType="int"
+		resultType="ReportVO">
+		select REPORT_NO,REG_TITLE,REG_REGISTER,REG_STATE,REG_REASON,LABEL_NAME, LABEL_COLOR from REPORT,LABEL where LABEL_NUM = nvl(reg_labelnum,0)
+		and LABEL_NUM =#{label_num}
+				
+	</select>
+	
+	
+	
+	<select id="selectOne" parameterType="int"
+		resultType="ReportVO">
+		select * from REPORT where REPORT_NO=#{member_enum,jdbcType=VARCHAR}
+	</select>
+	<select id="check" parameterType="UserVO"
+		resultType="ReportVO">
+		select REPORT_NO,REG_TITLE,REG_REGISTER,REG_STATE,REG_REASON from REPORT
+where REPORT_NO in 
+(select REPORT_NO from REPORT
+		where REPORT_NO in(
+		select REPORT_NO from REPORT
+		where REG_MANAGER1 =#{member_enum,jdbcType=VARCHAR}
+    	and REG_UPDATE1 is null
+		)
+		or REPORT_NO in(
+		select REPORT_NO from REPORT
+		where REG_MANAGER2 =#{member_enum,jdbcType=VARCHAR}
+		and REG_UPDATE1 is not null
+    and REG_UPDATE2 is null
+		)
+		or REPORT_NO in(
+		select REPORT_NO from REPORT
+		where REG_MANAGER3 =#{member_enum,jdbcType=VARCHAR}
+		and REG_UPDATE2 is not null
+    and REG_UPDATE2 is null
+		)
+		or REPORT_NO in(
+		select REPORT_NO from REPORT
+		where REG_MANAGER4 =#{member_enum,jdbcType=VARCHAR}
+		and REG_UPDATE3 is not null
+    and REG_UPDATE4 is null
+		)or REPORT_NO in(
+		select REPORT_NO from REPORT
+		where REG_MANAGER5 =#{member_enum,jdbcType=VARCHAR}
+		and REG_UPDATE4 is not null
+    and REG_UPDATE5 is null
+		)
+  )
+  and REG_STATE !=0
+  and REG_STATE !=3
+	</select>
+
+	<insert id="insert" parameterType="ReportVO">
+		insert into
+		REPORT(
+		REPORT_NO,
+		REG_ID,
+		REG_DEP,
+		REG_MANAGER1,
+		REG_MANAGER2,
+		REG_MANAGER3,
+		REG_MANAGER4,
+		REG_MANAGER5,
+		REG_TITLE,
+		REG_STATE,
+		REG_REGISTER,
+		REG_TYPE,
+		REG_CONT,
+		REG_LABELNUM,
+		COMMENT
+		)values
+		(
+		PK_REP_REORT_NO.nextval,
+		#{reg_id,jdbcType=VARCHAR},
+		#{reg_dep,jdbcType=VARCHAR},
+		#{reg_manager1,jdbcType=VARCHAR},
+		#{reg_manager2,jdbcType=VARCHAR},
+		#{reg_manager3,jdbcType=VARCHAR},
+		#{reg_manager4,jdbcType=VARCHAR},
+		#{reg_manager5,jdbcType=VARCHAR},
+		#{reg_title,jdbcType=VARCHAR},
+		#{reg_state,jdbcType=VARCHAR},
+		SYSDATE,
+		#{reg_type,jdbcType=VARCHAR},
+		#{reg_cont,jdbcType=VARCHAR},
+		#{reg_labelnum,jdbcType=INTEGER},
+		#{comment,jdbcType=VARCHAR}
+		)
+	</insert>
+	<update id="updateReport" parameterType="ReportVO">
+		update REPORT
+		<choose>
+		<when test="reg_update1 == null">
+		set REG_UPDATE1 =SYSDATE
+		<choose>
+		<when test="reg_manager2 != null">
+		,REG_STATE=2
+		</when>
+		<when test="reg_manager2 == null">
+		,REG_STATE=3
+		</when>
+		</choose>
+		</when>
+		<when test="reg_update2 == null">
+		set REG_UPDATE2 =SYSDATE
+		<choose>
+		<when test="reg_manager3 != null">
+		,REG_STATE=2
+		</when>
+		<when test="reg_manager3 == null">
+		,REG_STATE=3
+		</when>
+		</choose>
+		</when>
+		<when test="reg_update3 == null">
+		set REG_UPDATE3 =SYSDATE
+		<choose>
+		<when test="reg_manager4 != null">
+		,REG_STATE=2
+		</when>
+		<when test="reg_manager4 == null">
+		,REG_STATE=3
+		</when>
+		</choose>
+		</when>
+		<when test="reg_update4 == null">
+		set REG_UPDATE4 =SYSDATE
+		<choose>
+		<when test="reg_manager5 != null">
+		,REG_STATE=2
+		</when>
+		<when test="reg_manager5 == null">
+		,REG_STATE=3
+		</when>
+		</choose>
+		</when>
+		<when test="reg_update5 == null">
+		set REG_UPDATE5 =SYSDATE
+		,REG_STATE=3
+		</when>
+		</choose>
+		where REPORT_NO=#{report_no,jdbcType=VARCHAR}
+	</update>
+		<update id="backReport" parameterType="ReportVO">
+	update REPORT set
+		REG_REASON=#{reg_reason,jdbcType=VARCHAR},REG_STATE=0
+		where REPORT_NO=#{report_no,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="surch" parameterType="hashmap" resultType="ReportVO">
+			select * from
+			(select * from
+			(select REG_REGISTER
+						  ,REG_ID
+						  ,REG_TITLE
+						  ,REPORT_NO
+						  ,REG_STATE 
+			from REPORT
+			where REG_ID != #{sessionid,jdbcType=VARCHAR}) 
+			where
+			     REPORT_NO like '%'||#{keyword,jdbcType=VARCHAR}||'%'
+					or REG_ID like '%'||#{keyword,jdbcType=VARCHAR}||'%'
+					or REG_TITLE like '%'||#{keyword,jdbcType=VARCHAR}||'%')
+			    where REG_STATE =0 or REG_STATE =3
+	</select>
+	
+	
+	<update id="updateLabelNumPlus" parameterType="ReportVO">
+	update REPORT set 
+	REG_LABELNUM = #{reg_labelnum,jdbcType=INTEGER}
+	where REPORT_NO = #{report_no,jdbcType=INTEGER}
+	
+		
+	</update>
+	
+	<update id="updateLabelNumMinus" parameterType="ReportVO">
+	update REPORT set 
+	REG_LABELNUM = 0
+	where REPORT_NO = #{report_no,jdbcType=INTEGER}
+			
+	</update>
+<select id="waitCont" parameterType="String" resultType="int">
+	select count(*)
+	from REPORT
+	where REG_ID=#{id,jdbcType=VARCHAR}
+	and REPORT_NO
+	in(select REPORT_NO
+	from REPORT
+	where REG_STATE = '1'
+	or REG_STATE='2')
+</select>
+	<select id="endCont" parameterType="String" resultType="int">
+		select count(*)
+		from REPORT
+		where REG_ID=#{id,jdbcType=VARCHAR}
+		and REPORT_NO
+		in(select REPORT_NO
+		from REPORT
+		where REG_STATE = '3')
+	</select>
+	<select id="backCont" parameterType="String" resultType="int">
+		select count(*)
+		from REPORT
+		where REG_ID=#{id,jdbcType=VARCHAR}
+		and REPORT_NO
+		in(select REPORT_NO
+		from REPORT
+		where REG_STATE = '0')
+	</select>
+	
+
+	
+	
+</mapper>
