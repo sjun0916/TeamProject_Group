@@ -184,7 +184,7 @@
             </li>
         
         <li>
-        	<a href="/group/calendar">
+        	<a href="/group/calendar/main">
         	<i class="fa fa-calendar"></i>
         	<span>일정</span>
         	</a>
