@@ -21,7 +21,7 @@
 			form1.content.focus();
 			return;
 		}
-		
+
 		var digit = "";
 		if ($("#chkBox").prop("checked")) {
 			digit = digit + "Y";
@@ -29,7 +29,7 @@
 			digit = digit + "N";
 		}
 		document.form1.important.value = digit;
-		alert(document.form1.important.value);
+		//alert(document.form1.important.value);
 		document.form1.submit();
 	}
 </script>
@@ -62,7 +62,8 @@
 					<tr>
 						<td>부서명</td>
 						<td><c:out value="${authUser.teamName}" /></td>
-						<td>important: <input type="checkbox" id="chkBox" name="chkBox">
+						<td>important: <input type="checkbox" id="chkBox"
+							name="chkBox">
 
 						</td>
 					</tr>
@@ -109,9 +110,10 @@
 				type="hidden" name="writer"
 				value="<c:out value="${authUser.employeeName}"/>"> <input
 				type="hidden" name="noticenum"
-				value="<c:out value="${noticeInfo.noticenum}"/>"> <a
-				href="#" onclick="fn_formSubmit()" style="float: right;">글등록</a>
-
+				value="<c:out value="${noticeInfo.noticenum}"/>">
+			<c:if test="${authUser.role == 'ADMIN'}">
+				<a href="#" onclick="fn_formSubmit()" style="float: right;">글등록</a>
+			</c:if>
 		</form>
 	</section>
 	<!-- /.content -->

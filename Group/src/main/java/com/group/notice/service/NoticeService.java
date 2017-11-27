@@ -35,6 +35,9 @@ public class NoticeService {
 	    public List<?> selectNoticeList2() {
 	        return sqlSession.selectList("selectNoticeList2");
 	    }
+	    public List<?> selectNoticeList3() {
+	        return sqlSession.selectList("selectNoticeList3");
+	    }
 	    
 	    /**
 	     * 글 저장.
