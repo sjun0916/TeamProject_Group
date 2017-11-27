@@ -27,7 +27,7 @@ $(function(){
 <div class="content-wrapper" style="min-height: 901px;">
    <!-- Content Header (Page header) -->
    <section class="content-header">
-      <h1>Mail</h1>
+      <h1><img src="<c:url value="/resources/icon/envelope.png"/>" width="35" height="35"/> Mail</h1>
    </section>  
    <section class="content">
       <div class="row">
@@ -56,7 +56,8 @@ $(function(){
                      </div>
 <!--                      메일아이디 -->
                      <div class="form-group">
-                        <input type="text" id="mailID" name="mailID" value="${authUser.email }" class="form-control" disabled> 
+                        <input type="text" id="mailID" name="mailID" class="form-control" placeholder="구글아이디@gmail.com">
+<%--                         <input type="text" id="mailID" name="mailID" value="${authUser.email }" class="form-control" disabled>  --%>
                      </div>
 <!--                      메일비밀번호 -->
                      <div class="form-group">

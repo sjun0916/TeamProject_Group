@@ -28,6 +28,7 @@
 	<!-- 컨텐트 헤더 -->
 	<section class="content-header">
 		<h1>
+			<img src="<c:url value="/resources/icon/list.png"/>" width="50" height="50"/>
 			사원 가입 승인 대기 목록 <small>ADMIN</small>
 		</h1>
 		<ol class="breadcrumb">
@@ -40,7 +41,7 @@
 	<!-- 컨텐트 메인 -->
 	<section class="content container-fluid">
 		
-		
+		<hr>
 
 		 <div id="list_div">
 			<table id="list"></table>
