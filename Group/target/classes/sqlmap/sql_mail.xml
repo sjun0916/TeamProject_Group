@@ -3,6 +3,27 @@
 
 <mapper namespace="mail">
 
+
+<!-- 	<insert id="insert" parameterType="com.group.mail.vo.MailVo"> -->
+
+<!-- 		INSERT INTO EMAIL( -->
+<!-- 		MAIL_NUM, -->
+<!-- 		SENDER_EMPLOYEE_NO, -->
+<!-- 		RECEIVE_EMPLOYEE_NO, -->
+<!-- 		TITLE, -->
+<!-- 		CONTENT, -->
+<!-- 		REGDATE) -->
+<!-- 		VALUES ( -->
+<!-- 		EMAIL_SEQ.NEXTVAL, -->
+<!-- 		#{senderemployeeNo}, -->
+<!-- 		#{receiveemployeeNo}, -->
+<!-- 		#{title}, -->
+<!-- 		#{content}, -->
+<!-- 		SYSDATE -->
+<!-- 		) -->
+
+<!-- 	</insert> -->
+		
 	
 	<select id="getEmail" resultType="String" parameterType="String">
 		select EMAIL from EMPLOYEE
