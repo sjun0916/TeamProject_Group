@@ -54,6 +54,22 @@ public class MailController {
 		return "content_mail/mailForm";
 	}
 	
+	//보낸 메일함
+	@RequestMapping( "/senderlist")
+	public String sendmail(@AuthUser UserVO authUser, 
+											Model model) {
+		MailVo mailVo= new MailVo();
+		mailVo.setSenderMail(authUser.getEmail());
+		
+		List<MailVo> list = 
+				service.getMail( mailVo );
+		
+		model.addAttribute( "list", list );
+		
+		System.out.println("00000");
+		return "content_mail/mailsendlist";
+	}
+	
 	
 	// mailForm
 /*	@RequestMapping(value = "/mailsend")

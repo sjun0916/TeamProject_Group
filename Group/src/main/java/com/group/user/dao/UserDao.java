@@ -38,7 +38,7 @@ public class UserDao {
 //	비밀번호 이메일 인증
 	public String getPw(Map<String, Object> paramMap) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("user.getPw",paramMap);
+		return (String) sqlSession.selectOne("user.getPw",paramMap);
 	}
 	
 
