@@ -176,10 +176,8 @@
                   <ul class="treeview-menu">
                     <li><a href="#"><i class="fa fa-circle-o"></i> 받은메일함</a></li>
                     <li><a href="#"><i class="fa fa-circle-o"></i> 보낸메일함</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> 임시보관함</a></li>
                   </ul>
                 </li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 휴지통</a></li>
               </ul>
             </li>
         
