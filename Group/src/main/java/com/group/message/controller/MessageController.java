@@ -36,7 +36,7 @@ public class MessageController {
 		model.addAttribute( "list", list );
 		
 		
-		return "message/index";
+		return "message/messageform";
 	}
 	
 	@RequestMapping(value="/view", method=RequestMethod.GET)
@@ -58,7 +58,7 @@ public class MessageController {
 	@RequestMapping( value="/deleteMessage", method=RequestMethod.POST)
 	public String deleteMessage(@ModelAttribute MessageVO messageVo) {
 		int count = messageService.deleteMessage(messageVo);
-		return "message/index";
+		return "message/messageform";
 	}
 	
 	

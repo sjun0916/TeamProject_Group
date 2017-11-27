@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<title>GroupWare_Home</title>
+<title>Smart-Groupware[HOME]</title>
 <head>
 	<%@ include file="include/headerScript.jsp" %>
 </head>

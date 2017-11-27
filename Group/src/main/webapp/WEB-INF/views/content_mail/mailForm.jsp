@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+<title>Smart-Groupware</title>
 <head>
 	<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 
