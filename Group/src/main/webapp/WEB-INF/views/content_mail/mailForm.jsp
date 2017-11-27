@@ -42,8 +42,8 @@ $(function(){
                   <div class="box-body">
                      <div class="form-group">
                      <div class="input-group input-group-sm">
-
-                           <input type="text"  name="toInput" id="toInput" class="form-control" placeholder="To:" >
+							<input type="hidden" id="senderMail" value="${authUser.email}">
+                           <input type="text"  name="receiverMail" id="receiverMail" class="form-control" placeholder="To:" >
 
                         <span class="input-group-btn">
                            <input type="button" name="searchBtn" id="searchBtn" class="btn btn-info btn-flat" value="검색"/>
@@ -51,11 +51,11 @@ $(function(){
                      </div>
                      </div>
                      <div class="form-group">
-                        <input type="text" id="titleInput" name="titleInput" class="form-control" placeholder="제목:">
+                        <input type="text" id="title" name="title" class="form-control" placeholder="제목:">
                      </div>
 <!--                      메일아이디 -->
                      <div class="form-group">
-                        <input type="text" id="mailID" name="mailID" class="form-control" placeholder="내 구글 ID 입력">
+                        <input type="text" id="mailID" name="mailID" class="form-control" value="${authUser.email}"><!-- placeholder="내 구글 ID 입력" -->
                      </div>
 <!--                      메일비밀번호 -->
                      <div class="form-group">
@@ -63,7 +63,7 @@ $(function(){
                      </div>                     
                                           
                      <div class="form-group">
-                        <textarea id="compose-textarea" class="textarea" name="mailContent"
+                        <textarea id="compose-textarea" class="textarea" name="content"
                            style="width: 100%; height: 300px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
                       
                              </textarea>

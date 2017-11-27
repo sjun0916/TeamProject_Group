@@ -1,8 +1,8 @@
 package com.group.mail.service;
 
-//import java.sql.SQLException;
-//import java.util.List;
-//import java.util.Map;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.group.mail.dao.MailDao;
 import com.group.mail.vo.MailVo;
-//import com.group.user.vo.UserVO;
 
 @Service
 public class MailService {
@@ -18,18 +17,10 @@ public class MailService {
 	@Resource
 	MailDao mailDao;
 	
-//	public List<UserVO> listAll() {
-//		
-//		List<UserVO> list = null;
-//		try {
-//			list = mailDao.listAll();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} 
-//		
-//		return list;
-//	}
+	public List<MailVo> getMail(MailVo mailVo) {
+		List<MailVo> list = mailDao.getMail(mailVo);
+		return list;
+	}
 //
 //	public String getEmail(String employeeEmail) {
 //	
@@ -59,8 +50,11 @@ public class MailService {
 //		return emailList;
 //	}
 	
-//	public int insert( MailVo mailvo ) {
-//		return mailDao.insert( mailvo );
-//	}
+	public int insert( MailVo mailvo ) {
+		System.out.println("222222222222");
+		int result = mailDao.insert( mailvo );
+		System.out.println("444444444");
+		return result;
+	}
 	
 }
