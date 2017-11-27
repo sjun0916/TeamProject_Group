@@ -138,7 +138,7 @@ public class MailController {
 			mex.printStackTrace();
 			
 			model.addAttribute("result","fail");
-			return "mail/result";
+			return "content_mail/result";
 		}
 		
 		model.addAttribute("result","success");
