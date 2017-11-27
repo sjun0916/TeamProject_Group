@@ -31,10 +31,7 @@
 			<img src="<c:url value="/resources/icon/list.png"/>" width="50" height="50"/>
 			사원 가입 승인 대기 목록 <small>ADMIN</small>
 		</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-			<li class="active">Here</li>
-		</ol>
+
 	</section>
 
 	<!-- ★★★★★★★★★★★여기에 추가★★★★★★★★★★★ -->
