@@ -56,12 +56,12 @@ $(function(){
                      </div>
 <!--                      메일아이디 -->
                      <div class="form-group">
-<<<<<<< HEAD
-                        <input type="text" id="mailID" name="mailID" class="form-control" value="${authUser.email}"><!-- placeholder="내 구글 ID 입력" -->
-=======
+
+<%--                         <input type="text" id="mailID" name="mailID" class="form-control" value="${authUser.email}"><!-- placeholder="내 구글 ID 입력" --> --%>
+
                         <input type="text" id="mailID" name="mailID" class="form-control" placeholder="구글아이디@gmail.com">
 <%--                         <input type="text" id="mailID" name="mailID" value="${authUser.email }" class="form-control" disabled>  --%>
->>>>>>> branch 'master' of https://github.com/sjun0916/TeamProject_Group.git
+
                      </div>
 <!--                      메일비밀번호 -->
                      <div class="form-group">
