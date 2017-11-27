@@ -2,6 +2,11 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+	<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
+
 <script src="${pageContext.request.contextPath}/resources/plugins/jQuery/jQuery-2.2.0.min.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -10,26 +15,14 @@ $(function(){
       var location = "${pageContext.request.contextPath}/searchemployee";
       window.open(location,'window_name','width=700,height=500,location=no,status=no,scrollbars=yes');
    });
-   
-//    $("#mailSend").click(function(){
-// 	   var mailContent2 = $("#mailForm2").serialize();
-// 	   alert("asfdsaf");
-// 	   $.ajax({
-// 		   'url' : '${pageContext.request.contextPath}/mail/send',
-// 			'type' : 'post',
-// 			'data' : mailContent2,
-// 			'dataType' : 'json',
-// 			'success' : function(data){
-// 				alert('success');
-// 			},
-// 			'error' : function(){
-// 				alert('error');
-// 			}
-// 	   })
-//    });
+
    
 })
 </script>
+</head>
+    <%@ include file="/WEB-INF/views/include/header.jsp" %>
+    
+    
 <div class="content-wrapper" style="min-height: 901px;">
    <!-- Content Header (Page header) -->
    <section class="content-header">
@@ -49,13 +42,9 @@ $(function(){
                   <div class="box-body">
                      <div class="form-group">
                      <div class="input-group input-group-sm">
-                        <c:if test="${ not empty getEmail }">
-                           <input type="text"  name="toInput" id="toInput" class="form-control" value="${ getEmail }" >
-                        </c:if>
-                        <c:if test="${ empty getEmail }">
-<!--                            선택안하고 메일보내기 눌렀을때  -->
+
                            <input type="text"  name="toInput" id="toInput" class="form-control" placeholder="To:" >
-                        </c:if>
+
                         <span class="input-group-btn">
                            <input type="button" name="searchBtn" id="searchBtn" class="btn btn-info btn-flat" value="검색"/>
                         </span>
@@ -96,5 +85,7 @@ $(function(){
       </div>
    </section>
 </div>
+    <%@ include file="/WEB-INF/views/include/footer.jsp" %>
+    <%@ include file="/WEB-INF/views/include/footerScript.jsp" %>
 </body>
 </html>

@@ -170,7 +170,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="/group/mail/mailForm"><i class="fa fa-circle-o"></i> 메일쓰기</a></li>
+                <li><a href="/group/mail/mailsend"><i class="fa fa-circle-o"></i> 메일쓰기</a></li>
                 <li>
                   <a href="#"><i class="fa fa-circle-o"></i> 메일함 <i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
