@@ -16,20 +16,15 @@
 			form1.title.focus();
 			return;
 		}
-		if (form1.content.value == "") {
-			alert("글 내용을 입력해주세요.");
-			form1.content.focus();
-			return;
-		}
+		if( $("uploadfile").val() != "" ){
+			var ext = $('#uploadfile').val().split('.').pop().toLowerCase();
+			      if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+				 alert('gif,png,jpg,jpeg 파일만 업로드 할수 있습니다.');
+				 return;
+		      }
+			}
 
-		var digit = "";
-		if ($("#chkBox").prop("checked")) {
-			digit = digit + "Y";
-		} else {
-			digit = digit + "N";
-		}
-		document.form1.important.value = digit;
-		//alert(document.form1.important.value);
+
 		document.form1.submit();
 	}
 </script>
@@ -38,7 +33,7 @@
 	<!-- Content 헤더 -->
 	<section class="content-header">
 		<h1>
-			부서 게시판 <small>Notice Write</small>
+			사진첩 <small>Photo Write</small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -49,7 +44,7 @@
 	<!-- Content 메인 -->
 	<section class="content container-fluid">
 
-		<form name="form1" action="NoticeSave" method="post"
+		<form name="form1" action="PhotoSave" method="post"
 			enctype="multipart/form-data">
 			<table border="1" style="width: 600px">
 				<caption>게시판</caption>
@@ -62,21 +57,18 @@
 					<tr>
 						<td>부서명</td>
 						<td><c:out value="${authUser.teamName}" /></td>
-						<td>important: <input type="checkbox" id="chkBox"
-							name="chkBox">
 
-						</td>
 					</tr>
 					<tr>
 						<td>작성자</td>
-						<td colspan="2">[<c:out value="${authUser.positionName}" />]
-							<c:out value="${authUser.employeeName}" /></td>
+						<td>[<c:out value="${authUser.positionName}" />] <c:out
+								value="${authUser.employeeName}" /></td>
 					</tr>
 					<tr>
 						<td>제목</td>
 						<td colspan="2"><input type="text" name="title" size="70"
 							maxlength="250" placeholder="제목을 입력해주세요."
-							value="<c:out value="${noticeInfo.title}"/>"></td>
+							value="<c:out value="${photoInfo.title}"/>"></td>
 					</tr>
 					<tr>
 						<td>첨부</td>
@@ -90,30 +82,23 @@
 								</a>
 								<c:out value="${listview.size2String()}" />
 								<br />
-							</c:forEach> <input type="file" name="uploadfile" multiple="" /></td>
+							</c:forEach> <input type="file" name="uploadfile" multiple="" id="uploadfile" /></td>
 					</tr>
-					<tr>
-						<td>내용</td>
-						<td colspan="2"><textarea name="content" rows="5" cols="60"
-								placeholder="내용을 입력해주세요."><c:out
-									value="${noticeInfo.content}" /></textarea></td>
-					</tr>
+
 
 				</tbody>
 			</table>
-			<input type="hidden" name="important"
-				value="<c:out value="${noticeInfo.important}"/>"> <input
-				type="hidden" name="writerpos"
+			<input type="hidden" name="writerpos"
 				value="<c:out value="${authUser.positionName}"/>"> <input
 				type="hidden" name="departname"
 				value="<c:out value="${authUser.teamName}"/>"> <input
 				type="hidden" name="writer"
 				value="<c:out value="${authUser.employeeName}"/>"> <input
-				type="hidden" name="noticenum"
-				value="<c:out value="${noticeInfo.noticenum}"/>">
-<%-- 			<c:if test="${authUser.role == 'ADMIN'}"> --%>
-				<a href="#" onclick="fn_formSubmit()" style="float: right;">글등록</a>
-<%-- 			</c:if> --%>
+				type="hidden" name="photonum"
+				value="<c:out value="${photoInfo.photonum}"/>">
+			<%-- 			<c:if test="${authUser.role == 'ADMIN'}"> --%>
+			<a href="#" onclick="fn_formSubmit()" style="float: right;">글등록</a>
+			<%-- 			</c:if> --%>
 		</form>
 	</section>
 	<!-- /.content -->
