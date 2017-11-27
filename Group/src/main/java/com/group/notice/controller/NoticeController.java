@@ -33,12 +33,14 @@ public class NoticeController {
         searchVO.pageCalculate( noticeSvc.selectNoticeCount(searchVO) ); // startRow, endRow
 
         List<?> listview  = noticeSvc.selectNoticeList(searchVO);
-        
+        List<?> listview2 = noticeSvc.selectNoticeList2();
+        modelMap.addAttribute("listview2", listview2);
         modelMap.addAttribute("listview", listview);
         modelMap.addAttribute("searchVO", searchVO);
         
         return "content_notice/NoticeList";
     }//사용자가 선택한 필드와 검색어가 전달됨(SearchVO)
+
 
     /** 
      * 글 쓰기. 

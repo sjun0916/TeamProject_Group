@@ -7,10 +7,7 @@
 <head>
 <%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
-<%  %>
-<script>
-	
-</script>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- ì»¨íí¸ í¤ë -->
@@ -59,22 +56,10 @@
 					<td colspan="3" height="200"><c:out value="${noticeInfo.content}"
 							escapeXml="false" /></td>
 				</tr>
-				<!-- 				<tr> -->
-				<!-- 					<td>첨부</td> -->
-				<%-- 					<td><c:forEach var="listview" items="${listview}" --%>
-				<%-- 							varStatus="status"> --%>
-				<!-- 							<a -->
-				<%-- 								href="fileDownload?filename=<c:out value="${listview.filename}"/>&downname=<c:out value="${listview.realname }"/>"> --%>
-				<%-- 								<c:out value="${listview.filename}" /> --%>
-				<!-- 							</a> -->
-				<%-- 							<c:out value="${listview.size2String()}" /> --%>
-				<!-- 							<br /> -->
-				<%-- 						</c:forEach></td> --%>
-				<!-- 				</tr> -->
 			</tbody>
 		</table>
 		<a href="NoticeList">돌아가기</a> 
- 		<c:if test="${authUser.role==ADMIN}">
+ 		<c:if test="${authUser.role == 'ADMIN'}">
 		<a href="NoticeDelete?noticenum=<c:out value="${noticeInfo.noticenum}"/>">삭제</a>
 		<a href="NoticeForm?noticenum=<c:out value="${noticeInfo.noticenum}"/>">수정</a>
 		</c:if>
