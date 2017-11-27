@@ -55,7 +55,7 @@ $(function(){
                      </div>
 <!--                      메일아이디 -->
                      <div class="form-group">
-                        <input type="text" id="mailID" name="mailID" class="form-control" placeholder="내 구글 ID 입력">
+                        <input type="text" id="mailID" name="mailID" value="${authUser.email }" class="form-control" disabled> 
                      </div>
 <!--                      메일비밀번호 -->
                      <div class="form-group">

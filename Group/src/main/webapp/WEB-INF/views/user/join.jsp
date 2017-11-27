@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>회원가입</title>
+<title>Smart-Groupware</title>
 
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="${pageContext.servletContext.contextPath }/assets/js/common.js" type="text/javascript"></script>
@@ -32,7 +32,7 @@
 						</div>
 						
 						<div class="col-sm-3">
-							이메일 : <input type="text" class="form-control" name="email" placeholder="사원 이메일">
+							이메일 : <input type="text" class="form-control" name="email" placeholder="사원 이메일(*구글 이메일)">
 						</div>
 					
 					<div class="form-group">

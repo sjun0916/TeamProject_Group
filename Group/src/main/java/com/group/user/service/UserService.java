@@ -1,6 +1,7 @@
 package com.group.user.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,12 @@ public class UserService {
 	
 	public UserVO getUser(int no,String password) {
 		return userDao.get(no,password);
+	}
+	
+//	비밀번호 이메일 인증
+	public String getPw(Map<String, Object> paramMap) {
+		// TODO Auto-generated method stub
+		return userDao.getPw(paramMap);
 	}
 	
 	

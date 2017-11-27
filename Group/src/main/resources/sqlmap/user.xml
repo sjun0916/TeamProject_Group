@@ -63,6 +63,10 @@
 				)
 
 	</insert>
+	
+	
+	<select resultType="UserVO" parameterType="map"	id="getPw">
+	SELECT PASSWORD from EMPLOYEE WHERE EMPLOYEE_NAME=#{employeeName} and EMAIL=#{email} </select>
 
 	<select id="getByemployeeNoAndPassword" 
 			parameterType="map"

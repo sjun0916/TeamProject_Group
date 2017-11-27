@@ -19,7 +19,7 @@ public class EmailSender {
          try {
              msg.setSubject(email.getSubject());
              msg.setText(email.getContent());
-             msg.setRecipients(MimeMessage.RecipientType.TO , InternetAddress.parse(email.getReciver()));
+             msg.setRecipients(MimeMessage.RecipientType.TO , InternetAddress.parse(email.getReceiver()));
             
          }catch(MessagingException e) {
              System.out.println("MessagingException");

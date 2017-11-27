@@ -5,6 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
+<title>Smart-Groupware[ADMIN]</title>
 <head>
 	<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">

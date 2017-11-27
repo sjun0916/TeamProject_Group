@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
-<title>Smart-Groupware System</title>
+<title>Smart-Groupware</title>
 <head>
 <!-- Bootstrap Core CSS -->
     <link href="<c:url value='/resources/loginCSS/resources/css/bootstrap.min.css'/>" rel="stylesheet">
@@ -82,7 +82,7 @@
 											<input type="password" class="form-control" name="password" id="password" placeholder="비밀번호를 입력하세요" />
 										</div>
 									</div>
-									<div><a href="${pageContext.servletContext.contextPath }/user/join">REGISTER</a> || <a href="/group/mail/mailForm">비밀번호 찾기</a></div>
+									<div><a href="${pageContext.servletContext.contextPath }/user/join">REGISTER</a> || <a href="${pageContext.servletContext.contextPath }/mail/mailForm">비밀번호 찾기</a></div>
 									<button type="submit" class="btn btn-sm btn-primary btn-block">로그인</button>
 								</form>
 							</div>

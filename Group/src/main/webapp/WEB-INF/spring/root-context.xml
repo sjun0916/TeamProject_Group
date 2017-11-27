@@ -56,7 +56,7 @@ http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
       <property name="host" value="smtp.gmail.com" />
       <property name="port" value="587" />
       <property name="username" value="sjun0916@gmail.com" />
-      <property name="password" value="비밀번호" />
+      <property name="password" value="" />
       
       <property name="javaMailProperties">
          <props>
@@ -67,6 +67,9 @@ http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
          </props>
       </property>
     </bean>
-
+<!-- 	<bean id="email" class="com.group.home.controller.Email"> -->
+<!--     </bean> -->
+<!--     <bean id="emailSender" class="com.group.home.controller.EmailSender"> -->
+<!--     </bean> -->
 
 </beans>
