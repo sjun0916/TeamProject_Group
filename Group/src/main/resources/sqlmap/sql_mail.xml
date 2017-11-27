@@ -3,9 +3,42 @@
 
 <mapper namespace="mail">
 
+
+ 	<insert id="insert" parameterType="com.group.mail.vo.MailVo">
+
+ 		INSERT INTO MAIL( 
+ 		MAILNUM, 
+ 		SENDER_MAIL, 
+ 		RECEIVER_MAIL, 
+ 		TITLE, 
+ 		CONTENT, 
+ 		REGDATE) 
+ 		VALUES ( 
+ 		MAIL_SEQ.NEXTVAL, 
+ 		#{senderMail}, 
+ 		#{receiverMail}, 
+ 		#{title}, 
+ 		#{content}, 
+ 		SYSDATE 
+ 		)
+
+ 	</insert> 
+		
 	
-	<select id="getEmail" resultType="String" parameterType="String">
-		select EMAIL from EMPLOYEE
+	<select id="getEmail" resultType="com.group.mail.vo.MailVo" parameterType="UserVo">
+		SELECT RECEIVER_MAIL receiverMail,
+		SENDER_MAIL senderMail,
+		MAIL_NUM mailNum,
+		(
+		SELECT EMAIL
+		FROM EMPLOYEESD
+		WHERE EMAIL = MAIL.SENDER_MAIL) SENDER,
+		MESSAGE_CONTENT message,
+		REGDATE REGDATE
+		FROM MAIL
+		WHERE RECEIVER_MAIL = #{email}
+		ORDER
+		BY REGDATE DESC
 	</select>
 
 	<select id="listDepart" resultType="UserVO" parameterType="String">
@@ -38,5 +71,7 @@
 		#{item}
 		</foreach>
 	</select>
+	
+	
 	
 </mapper>

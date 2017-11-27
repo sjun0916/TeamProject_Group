@@ -1,8 +1,6 @@
 package com.group.mail.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import javax.annotation.Resource;
@@ -17,7 +15,7 @@ import javax.mail.internet.MimeMessage;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,73 +23,88 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.group.mail.dao.MailDao;
 import com.group.mail.service.MailService;
 import com.group.mail.vo.MailVo;
+import com.group.user.auth.AuthUser;
+import com.group.user.common.JSONResult;
 import com.group.user.vo.UserVO;
 
 
 @Controller
+@RequestMapping( "/mail" )
 public class MailController {
 	
 	@Resource
 	MailDao dao;
 	@Resource
-	MailService service;
+	MailService service;	
 	
-	/*** 메일 폼으로 이동 ***/
-/*	@RequestMapping("/mail/mailForm") //받는사람없을때
-	public String mailForm(@PathVariable String employee_No, Model model){
+	@RequestMapping( "")
+	public String message(@AuthUser UserVO authUser, 
+											Model model) {
+		MailVo mailVo= new MailVo();
+		mailVo.setSenderMail(authUser.getEmail());
 		
-		String email = "";
-		if(employee_No.equals("0")){ } 
-		else {
-			email = service.getEmail(employee_No);		// 멤버리스트서비스에서 이메일 받아옴
-		}
-		try {
-//			model.addAttribute("sessionId", SessionUtil.getSessionId());
-			model.addAttribute("getEmail", email);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "content_mail/mailForm";
-	}*/
-	
-	
-	@RequestMapping("/mail/mailForm/{email}")//받는사람있을때
-	public String mailForm(@PathVariable String[] emails, Model model) {
-
-		Map<String, Object> map = new HashMap<String, Object>();
+/*		int count = service.insert(mailVo);
 		
-		map.put("email", emails);
+		List<MailVo> list = 
+				service.getMail( mailVo );
 		
-		List<String> emailList = service.getEmails(map);
+		model.addAttribute( "list", list );*/
 		
-		String mail = "";
-		for (String string : emailList) {					// 받는 사람 목록
-			mail += string + ",";
-		}
-		mail = mail.substring(0, mail.lastIndexOf(","));
-		try {
-//			model.addAttribute("sessionId", SessionUtil.getSessionId());
-			model.addAttribute("getEmail", mail);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		System.out.println("00000");
 		return "content_mail/mailForm";
 	}
 	
+	//보낸 메일함
+	@RequestMapping( "/senderlist")
+	public String sendmail(@AuthUser UserVO authUser, 
+											Model model) {
+		MailVo mailVo= new MailVo();
+		mailVo.setSenderMail(authUser.getEmail());
+		
+		List<MailVo> list = 
+				service.getMail( mailVo );
+		
+		model.addAttribute( "list", list );
+		
+		System.out.println("00000");
+		return "content_mail/mailsendlist";
+	}
+	
+	
+	// mailForm
+/*	@RequestMapping(value = "/mailsend")
+	public JSONResult sendMailForm(@ModelAttribute MailVo mailVo) {
+		System.out.println("11111111111");
+		int count = service.insert(mailVo);
+		
+	    return JSONResult.success(count);
+	  } */
+	
+	
+	
 	
 	/** 메일 보내기 */
-	@RequestMapping(value="/mail/send", method=RequestMethod.POST)
-	public String sendMail(@RequestParam("toInput") String toSomeone
-						  ,@RequestParam("titleInput") String title
-						  ,@RequestParam("mailContent") String content
+	@RequestMapping(value="/send", method=RequestMethod.POST)
+	public String sendMail(
+						  @RequestParam("receiverMail") String receiverMail
+						  ,@RequestParam("title") String title
+						  ,@RequestParam("content") String content
 						  ,@RequestParam("mailID") String mailID
 						  ,@RequestParam("mailPW") String mailPW
-						  , Model model){
+						  , Model model
+						  ,@AuthUser UserVO authUser){
 		
 		MailVo vo = new MailVo();
 		
 		vo.setMailID(mailID);
 		vo.setMailPW(mailPW);
+		vo.setSenderMail(authUser.getEmail());
+		vo.setReceiverMail(receiverMail);
+		vo.setTitle(title);
+		vo.setContent(content);		
+		
+		int count = service.insert(vo);
+		JSONResult.success(count);
 		
 		SMTPAuthenticator smtp = new SMTPAuthenticator();
 		System.out.println(vo.getMailID().toString());
@@ -124,7 +137,7 @@ public class MailController {
 			msg.setFrom(fromAddr);
 			System.out.println(vo.getMailID().toString()+"3");
 			// 받는사람 메일주소
-			String[] toList = toSomeone.trim().split(",");
+			String[] toList = receiverMail.trim().split(",");
 			System.out.println(vo.getMailID().toString()+"4");
 			for(int i=0; i<toList.length; i++){
 				msg.addRecipients(Message.RecipientType.TO, InternetAddress.parse(toList[i]));
@@ -138,11 +151,10 @@ public class MailController {
 			
 		} catch (Exception mex) { 
 			System.out.println("로그인오류");
-			System.out.println("이메일 에러났다2");
 			mex.printStackTrace();
 			
 			model.addAttribute("result","fail");
-			return "mail/result";
+			return "content_mail/result";
 		}
 		
 		model.addAttribute("result","success");
@@ -169,16 +181,6 @@ public class MailController {
 			
 		}
 		
-	}
-
-	/** 받는 사람 검색 폼 */
-	@RequestMapping("/mail/search")
-	public String mailSearch(Model model) {
-		
-		List<UserVO> memList = service.listAll();
-		model.addAttribute("member", memList);
-		
-		return "content_mail/mailToSearch";
 	}
 
 }

@@ -1,4 +1,34 @@
 var dialog, form,messageId;
+
+
+
+function openForm(sender){
+	$("#receiverEmployeeNo").val(sender);
+	dialog.dialog( "open" );
+}
+
+function deleteMessage(messageId){
+	var data = new Object();
+	data.messageId=messageId;
+	JSON.stringify(data);
+	
+	$.ajax({
+		url:'/group/message/deleteMessage',
+		type:'POST',
+		data:data,
+		contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+		dataType: 'json',
+		success:function(responseData,status) {
+			
+		},
+		complete: function() {			
+			alert('해당 메세지가 삭제되었습니다.');
+			window.location.reload();
+		}
+	});
+}
+
+
 function initSendMessageForm(){
     // From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
 	   var name = $( "#name" ),
@@ -22,7 +52,7 @@ function initSendMessageForm(){
 			data.messageId= messageId;
 			/*data.message = $("#messageArea").val();*/
 			data.senderemployeeNo= $('#senderemployeeNo').val();
-			data.receiverNo= $('#sender').val();
+			data.receiverEmployeeNo= $('#receiverEmployeeNo').val();
 			data.message= $('#messageArea').val();
 			
 			JSON.stringify(data);
@@ -75,32 +105,6 @@ function initSendMessageForm(){
 	      dialog.dialog( "open" );
 	    });
 	 
-}
-
-function openForm(answerMessageId){
-	messageId=answerMessageId;
-	dialog.dialog( "open" );
-}
-
-function deleteMessage(messageId){
-	var data = new Object();
-	data.messageId=messageId;
-	JSON.stringify(data);
-	
-	$.ajax({
-		url:'/group/message/deleteMessage',
-		type:'POST',
-		data:data,
-        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
-        dataType: 'json',
-		success:function(responseData,status) {
-		    
-		},
-		complete: function() {			
-			alert('해당 메세지가 삭제되었습니다.');
-			window.location.reload();
-		}
-	});
 }
 
 

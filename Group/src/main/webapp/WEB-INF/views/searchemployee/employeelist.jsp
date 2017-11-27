@@ -5,6 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
+<title>Smart-Groupware</title>
 <head>
 	<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 <link rel="stylesheet" type="text/css" media="screen" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -25,12 +26,10 @@
 	<!-- 컨텐트 헤더 -->
 	<section class="content-header">
 		<h1>
+			<img src="<c:url value="/resources/icon/meeting.png"/>" width="50" height="50"/>
 			사원 목록 <small>employee list</small>
 		</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-			<li class="active">Here</li>
-		</ol>
+		
 	</section>
 
 	<!-- ★★★★★★★★★★★여기에 추가★★★★★★★★★★★ -->
@@ -49,15 +48,17 @@
 		    </fieldset>
 		  </form>
 		</div>
-
+		
+		<hr>
+		
 		 <div class="wrap">
 	    	<form id="searchEmployeeForm" name="searchEmployeeForm">
 				<table id="searchEmployeeTable">
-					<tbody>
+					<tbody align="center">
 					<tr >
 						<th scope="row" >팀명</th>
 						<td colspan="2">
-							<select id="teamId" name="teamId" style="width:178.4px; HEIGHT:17.6px">
+							<select id="teamId" name="teamId" style="width:178.4px; HEIGHT:20px">
 							</select>
 						</td>
 						<th scope="row" >이름</th>
@@ -72,7 +73,7 @@
 				</table>
 			</form>
 		</div>
-
+		<hr>
 		<div id="list_div">
 			<table id="list"></table>
 

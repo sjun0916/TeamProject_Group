@@ -111,9 +111,9 @@
 				value="<c:out value="${authUser.employeeName}"/>"> <input
 				type="hidden" name="noticenum"
 				value="<c:out value="${noticeInfo.noticenum}"/>">
-			<c:if test="${authUser.role == 'ADMIN'}">
+<%-- 			<c:if test="${authUser.role == 'ADMIN'}"> --%>
 				<a href="#" onclick="fn_formSubmit()" style="float: right;">글등록</a>
-			</c:if>
+<%-- 			</c:if> --%>
 		</form>
 	</section>
 	<!-- /.content -->

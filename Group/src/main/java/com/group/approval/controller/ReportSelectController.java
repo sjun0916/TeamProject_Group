@@ -64,7 +64,7 @@ public class ReportSelectController {
 		}
 		request.setAttribute("formHtml", formHtml.toString());
 
-		return "report/reportEditor";
+		return "content_approval/reportEditor";
 	}
 	
 	@RequestMapping(value = "/report/select/{form}",method=RequestMethod.POST)
@@ -83,14 +83,14 @@ public class ReportSelectController {
 		vo.setReg_dep(user.getPositionName());
 		vo.setReg_state("1");
 		service.insert(vo);		
-		return "report/endReport";
+		return "content_approval/endReport";
 	}
 	@RequestMapping(value = "/report/image", method=RequestMethod.POST)
 	public String reportImage(Model model,@RequestParam("content")String content){
 		
 		model.addAttribute("content", content);
 		
-		return "report/toImage";
+		return "content_approval/toImage";
 	}
 	@RequestMapping(value = "/report/selectOne",method=RequestMethod.POST)
 	public @ResponseBody Map<String,Object> selectReport(int data){

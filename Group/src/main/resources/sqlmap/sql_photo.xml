@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="Photo">
+    <sql id="includePhoto">
+        WHERE BRDDELETEFLAG='N'
+
+         <if test="searchKeyword!=null and searchKeyword!='' and searchType!=''">
+              <foreach item="item" index="index" collection="searchTypeArr" separator=" OR " open="AND (" close=")">
+                     ${item} LIKE '%'||#{searchKeyword}||'%'
+              </foreach>
+        </if>               
+    </sql>
+ 
+    <!-- 
+    item:전달받은 인자값을 다른이름으로 대체
+    collection: 전달받은 인자값
+    separator: 한번 이상 반복할 때 반복되는 사이에 해당 문을 넣어줌
+     -->
+
+    <select id="selectPhotoCount" resultType="Integer" parameterType="com.group.board.vo.SearchVO">
+        SELECT COUNT(*)
+          FROM PHOTO
+         <include refid="includePhoto"/>
+    </select> 
+    
+<!--     페이징처리,카테고리기능  -->
+    <select id="selectPhotoList" resultType="com.group.photo.vo.PhotoVO" parameterType="com.group.board.vo.SearchVO">
+        SELECT PHOTONUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE
+             , (SELECT COUNT(*) FROM PHOTOFILE WHERE PHOTONUM=DS.PHOTONUM) FILECNT 
+          FROM (
+            SELECT PHOTONUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, REGDATE
+              , ROW_NUMBER() OVER(ORDER BY PHOTONUM DESC) PHOTONUM_SEQ
+          FROM PHOTO
+                    
+          <include refid="includePhoto"/>
+         
+          ) DS
+         WHERE PHOTONUM_SEQ BETWEEN ${rowStart} AND ${rowEnd}
+         ORDER BY PHOTONUM DESC
+         
+    </select> 
+
+
+     
+    
+    <insert id="insertPhoto" parameterType="com.group.photo.vo.PhotoVO" >
+    	<selectKey resultType="String" keyProperty="photonum" order="BEFORE">
+            SELECT PHOTONUM_SEQ.NEXTVAL FROM DUAL
+        </selectKey> 
+        INSERT INTO PHOTO(PHOTONUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, REGDATE, BRDDELETEFLAG)
+        VALUES (#{photonum}, #{title}, #{departname}, #{writer},#{writerpos}, SYSDATE,'N' )
+    </insert>
+    
+    <update id="updatePhoto" parameterType="com.group.photo.vo.PhotoVO">
+        UPDATE PHOTO
+           SET TITLE=#{title}
+             , WRITER=#{writer}
+             , WRITERPOS=#{writerpos}
+         WHERE BRDDELETEFLAG='N'
+           AND PHOTONUM=#{photonum}
+    </update> 
+        
+ 
+    <delete id="deletePhotoOne" parameterType="String">
+        UPDATE PHOTO
+           SET BRDDELETEFLAG='Y' 
+         WHERE PHOTONUM=#{photonum}
+    </delete> 
+
+    <!-- =============================================================================== -->
+    <select id="selectPhotoFileList" resultType="com.group.board.vo.FileVO" parameterType="String">
+        SELECT PHOTOFILENUM, FILENAME, REALNAME, FILESIZE
+          FROM PHOTOFILE
+         WHERE PHOTONUM=#{photonum}
+         ORDER BY PHOTOFILENUM DESC 
+    </select> 
+
+    <insert id="insertPhotoFile" parameterType="com.group.board.vo.FileVO" >
+        INSERT INTO PHOTOFILE (PHOTONUM, PHOTOFILENUM, FILENAME, REALNAME, FILESIZE)
+        VALUES (#{parentPK}, PHOTOFILENUM_SEQ.NEXTVAL, #{filename}, #{realname}, #{filesize})
+    </insert>
+    
+    <delete id="deletePhotoFile" parameterType="hashmap"> 
+        DELETE 
+          FROM PHOTOFILE
+         WHERE PHOTOFILENUM IN (
+              <foreach item="item" index="index" collection="filenum" separator=",">
+                     ${item}
+              </foreach>  
+        )             
+    </delete> 
+
+    <!-- =============================================================================== -->
+  
+         
+</mapper>
+

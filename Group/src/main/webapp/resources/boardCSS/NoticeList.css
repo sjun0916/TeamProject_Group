@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+table, td, th {
+	text-align: center;
+height:45px;
+	
+}
+table,th {
+	border:1px solid;
+	width: 650px;
+}
+table,td{
+	background-color: white;
+}
+td {
+	max-width: 100px;
+	border: 1px solid black;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;	
+}
+th{
+background-color:gainsboro;
+}
+.tmptable,.tmptable td{
+border:0px;
+background-color:whitesmoke;
+}
+a:link{
+color:black;
+}
+a:visited{
+color:black;
+}
+b{
+	color:red;
+}

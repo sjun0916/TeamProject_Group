@@ -11,7 +11,7 @@
 		WRITE_DATE
 		) VALUES(
 		#{senderemployeeNo}||#{senderemployeeNo}||TO_CHAR(SYSDATE,'yyyymmddhh24miss'),
-		#{receiverNo},
+		#{receiverEmployeeNo},
 		#{senderemployeeNo},
 		#{message},
 		SYSDATE
