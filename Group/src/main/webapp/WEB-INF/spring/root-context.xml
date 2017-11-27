@@ -67,9 +67,9 @@ http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
          </props>
       </property>
     </bean>
-<!-- 	<bean id="email" class="com.group.home.controller.Email"> -->
-<!--     </bean> -->
-<!--     <bean id="emailSender" class="com.group.home.controller.EmailSender"> -->
-<!--     </bean> -->
+	<bean id="email" class="com.group.home.controller.Email">
+    </bean>
+    <bean id="emailSender" class="com.group.home.controller.EmailSender">
+    </bean>
 
 </beans>
