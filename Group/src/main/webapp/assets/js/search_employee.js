@@ -5,7 +5,7 @@ function initGrid() {
         //로컬그리드이용
         datatype: "local",
         //그리드 높이
-        height: 700,
+        height: 500,
         //컬럼명들
         colNames:['사번','이름', '소속', '직급','이메일','메세지 전송'],
         //컬럼모델
@@ -17,7 +17,7 @@ function initGrid() {
             {name:'email',align:"center",width:200},
             {name:'IDX', index:'IDX',align:"center", width:100,formatter:sendmessageButton },
         ],
-        width:1000,
+        width:1200,
         //그리드타이틀
         caption: "사원목록"
     });

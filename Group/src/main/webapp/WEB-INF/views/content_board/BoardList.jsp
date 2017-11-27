@@ -8,41 +8,10 @@
 <head>
 <%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
-<style type="text/css">
-table, td, th {
-	text-align: center;
-height:45px;
-	
-}
-table,th {
-	border:1px solid;
-	width: 650px;
-}
-table,td{
-	background-color: white;
-}
-td {
-	max-width: 100px;
-	border: 1px solid black;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;	
-}
-th{
-background-color:gainsboro;
-}
-.tmptable,.tmptable td{
-border:0px;
-background-color:whitesmoke;
-}
-a:link{
-color:black;
-}
-a:visited{
-color:black;
-}
+<link rel='stylesheet' type='text/css'
+	href='<c:url value="/resources/boardCSS/NoticeList.css"/>'>
 
-</style>
+
 <script>
 	function categoryChange(value) {
 

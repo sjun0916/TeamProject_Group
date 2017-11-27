@@ -8,91 +8,37 @@
 <head>
 <%@ include file="/WEB-INF/views/include/headerScript.jsp"%>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
-<link rel='stylesheet' type='text/css'
-	href='<c:url value="/resources/boardCSS/NoticeList.css"/>'>
+
 
 <script>
-	function categoryChange(value) {
-
-		/* alert("selectbox value: " + $("#category1 option:selected").val()); */
-		/* 	if (value == "전체") {
-			location.href("BoardList.jsp");
-		} else {
-		 */
-		document.form1.submit();
-	}
+	
 </script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- 컨텐츠 헤더 -->
 	<section class="content-header">
 		<h1>
-			공지사항 <small>notice</small>
+			사진첩 <small>photo</small>
 		</h1>
 		<ol class="breadcrumb">
-			<a href="NoticeList"><i class="fa fa-dashboard"></i> 게시판</a>
+			<a href="PhotoList"><i class="fa fa-dashboard"></i> 게시판</a>
 		</ol>
 	</section>
 	<!-- 컨텐츠 메인 -->
 	<section class="content container-fluid">
 		<form id="form1" name="form1" method="post">
 			<table>
-				<colgroup>
-					<col width='8%' />
-					<col width='8%' />
-					<col width='*%' />
-					<col width='15%' />
-					<col width='15%' />
-					<col width='10%' />
-					<col width='10%' />
-				</colgroup>
-				<thead>
-					<tr>
-						<th>NO</th>
-						<th><select id="category1" name="category1"
-							onchange="categoryChange(this.value);">
-								<option value="">카테고리</option>
-								<option value="">전체보기</option>
-								<option value="영업부">[영업부]</option>
-								<option value="인사부">[인사부]</option>
-								<option value="행정부">[행정부]</option>
-								<option value="개발부">[개발부]</option>
-						</select></th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
-						<th>첨부</th>
-						<th>조회수</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="listview" items="${listview2}" varStatus="loop">
-						<c:url var="link" value="NoticeRead">
-							<c:param name="noticenum" value="${listview.noticenum}" />
-						</c:url>
-						<tr>
-							<td><img src="<c:url value="/resources/icon/star.png"/>"
-								width="25" height="25" /></td>
-							<td><c:out value="${listview.departname}" /></td>
-							<td><a href="${link}"><b><c:out
-											value="${listview.title}" /></b></a></td>
-							<td><c:if test="${listview.writerpos!=null}">
-							[<c:out value="${listview.writerpos}" />]
-							</c:if> <c:out value="${listview.writer}" /></td>
-							<td><c:out value="${listview.regdate}" /></td>
-							<td><c:if test="${listview.filecnt>0}">
-									<img src="<c:url value="/resources/icon/floppy-disk.png"/>"
-										width="25" height="25" />
-								</c:if></td>
-							<td><c:out value="${listview.hit}" /></td>
-						</tr>
-					</c:forEach>
 
+
+				<tbody>
 
 					<c:forEach var="listview" items="${listview}" varStatus="status">
-						<c:url var="link" value="NoticeRead">
-							<c:param name="noticenum" value="${listview.noticenum}" />
+						<c:url var="link" value="PhotoRead">
+							<c:param name="photonum" value="${listview.photonum}" />
 						</c:url>
+						<tr>
+							<td><c:out value="${listview }</td>
+						</tr>
 						<tr>
 							<td><c:out
 									value="${searchVO.totRow-((searchVO.page-1)*searchVO.displayRowCount + status.index)}" /></td>
@@ -102,11 +48,10 @@
 							[<c:out value="${listview.writerpos}" />]
 							</c:if> <c:out value="${listview.writer}" /></td>
 							<td><c:out value="${listview.regdate}" /></td>
-							<td><c:if test="${listview.filecnt>0}">
-									<img src="<c:url value="/resources/icon/floppy-disk.png"/>"
-										width="25" height="25" />
-								</c:if></td>
-							<td><c:out value="${listview.hit}" /></td>
+
+							<%-- 									<img src="<c:url value="/resources/icon/floppy-disk.png"/>" --%>
+							<!-- 										width="25" height="25" /> -->
+
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -115,7 +60,7 @@
 				<tr>
 					<td><jsp:include
 							page="/WEB-INF/views/common/pagingforSubmit.jsp" /> <a
-						href="NoticeForm"><p style="text-align: right">글작성</a></td>
+						href="PhotoForm"><p style="text-align: right">글작성</a></td>
 				</tr>
 				<tr>
 					<td>

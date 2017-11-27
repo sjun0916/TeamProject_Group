@@ -5,7 +5,7 @@
 <!doctype html>
 <html>
 <head>
-<title>Sang Company</title>
+<title>Smart-Groupware</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link href="${pageContext.servletContext.contextPath }/assets/css/wrong_base.css" rel="stylesheet" type="text/css">
 </head>

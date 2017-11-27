@@ -64,12 +64,17 @@
 
 	</insert>
 	
+
 	<!-- 현아 추가 -->
 	<select id="userlist" resultType="UserVO">
 		select * from EMPLOYEE,TEAM
 		where ROLE !='ADMIN'
 		and EMPLOYEE.TEAM_ID=TEAM.TEAM_NAME
 	</select>
+
+	
+	<select resultType="UserVO" parameterType="map"	id="getPw">
+	SELECT PASSWORD from EMPLOYEE WHERE EMPLOYEE_NAME=#{employeeName} and EMAIL=#{email} </select>
 
 	<select id="getByemployeeNoAndPassword" 
 			parameterType="map"

@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>메시지</title>
+<title>Smart-Groupware</title>
 <%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 
 <meta http-equiv="content-type" content="text/html; charset=utf-8">

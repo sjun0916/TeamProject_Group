@@ -4,13 +4,13 @@ public class Email {
 	 
     private String subject;
     private String content;
-    private String reciver;
+    private String receiver;
      
-    public String getReciver() {
-        return reciver;
+    public String getReceiver() {
+        return receiver;
     }
-    public void setReciver(String reciver) {
-        this.reciver = reciver;
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
     }
  
     public String getSubject() {
@@ -24,5 +24,9 @@ public class Email {
     }
     public void setContent(String content) {
         this.content = content;
+    }
+    @Override
+    public String toString() {
+        return "Email [subject=" + subject + ", content=" + content + ", receiver=" + receiver + "]";
     }
 }

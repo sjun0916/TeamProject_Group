@@ -1,42 +1,51 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form"  uri="http://www.springframework.org/tags/form" %>
- 
+
 <!DOCTYPE html>
-<html>
 <head>
-<meta charset="UTF-8">
- 
-<!-- Bootstrap -->
-<link href='<c:url value="/css/bootstrap.min.css" />' rel="stylesheet">
-<link href='<c:url value="/css/kfonts2.css" />' rel="stylesheet">
- 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src='<c:url value="/jquery/jquery-1.11.3.min.js" />'></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src='<c:url value="/js/bootstrap.min.js"  />'></script>
- 
-<title>메일 보내기</title>
+<title>Smart-GroupWare System</title>
+	<link rel="icon" type="image/png"  href="/jmcnetplug/image/jmclogo.png"/>
+	<title> 비밀번호 찾기</title>
+	<script type="text/javascript">
+		function search(){
+			if((pwsearch.employeeName.value!=null)&&(pwsearch.email.value!=null)){
+				pwsearch.submit();
+			}else if(pwsearch.employeeName.value==null) {
+				alert("이름을 입력하세요.")
+			}else if(pwsearch.email.value==null) {
+				alert("이메일주소를 입력하세요.")
+			}
+		
+		}
+	
+	</script>
+	
 </head>
 <body>
-<div class="container">
-  <h4>메일 보내기</h4>
-  <form action="${pageContext.request.contextPath}/mail/mailSending" method="post">
-    <div align="center"><!-- 받는 사람 이메일 -->
-      <input type="text" name="tomail" size="120" style="width:100%" placeholder="상대의 이메일" class="form-control" >
-    </div>     
-    <div align="center"><!-- 제목 -->
-      <input type="text" name="title" size="120" style="width:100%" placeholder="제목을 입력해주세요" class="form-control" >
-    </div>
-    <p>
-    <div align="center"><!-- 내용 --> 
-      <textarea name="content" cols="120" rows="12" style="width:100%; resize:none" placeholder="내용#" class="form-control"></textarea>
-    </div>
-    <p>
-    <div align="center">
-      <input type="submit" value="메일 보내기" class="btn btn-warning">
-    </div>
-  </form>
-</div>
+
+<h2 align="center">비밀번호 찾기</h2>
+<div align="center">
+<p >이름과 이메일 주소를 입력해 주세요.</p>
+<form action="${pageContext.servletContext.contextPath }/mail/mailSending" name="pwsearch" method="post" >
+	<table border="1" >
+		
+		<tr>
+			<td>이름</td>
+			<td>e-mail</td>
+		</tr>
+		<tr>
+			<td><input type="text" name="employeeName"/></td>
+			<td><input type="email" name="email" /></td>
+		</tr>
+		<tr align="center">
+			<td colspan="2"><input type="button" value="비밀번호 찾기 " onclick="search()" /></td>
+			
+		</tr>
+	</table>
+
+</form>
+</div> 
+<p align="center">로그인 페이지로 가시려면 <a href="${pageContext.servletContext.contextPath }/">로그인페이지</a>를 클릭하세요.</p>
 </body>
-</html> 
+</html>
