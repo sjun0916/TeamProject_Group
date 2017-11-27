@@ -9,8 +9,6 @@
 	<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-<link href="${pageContext.servletContext.contextPath}/assets/css/write.css"
-	rel="stylesheet" type="text/css">
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script
 	src="${pageContext.servletContext.contextPath }/assets/js/common.js"

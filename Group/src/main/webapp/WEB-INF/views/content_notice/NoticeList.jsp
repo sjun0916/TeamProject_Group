@@ -98,6 +98,31 @@ color:black;
 					</tr>
 				</thead>
 				<tbody>
+					<c:forEach var="listview" items="${listview2}" varStatus="loop">
+						<c:url var="link" value="NoticeRead">
+							<c:param name="noticenum" value="${listview.noticenum}" />
+						</c:url>
+						<tr>
+							<td><img src="<c:url value="/resources/icon/star.png"/>" width="25" height="25"/></td>
+							<td><c:out value="${listview.departname}" /></td>
+							<td><a href="${link}"><b><c:out
+										value="${listview.title}" /></b></a></td>
+							<td>
+							<c:if test="${listview.writerpos!=null}">
+							[<c:out value="${listview.writerpos}"/>]
+							</c:if>
+							<c:out value="${listview.writer}" /></td>
+							<td><c:out value="${listview.regdate}" /></td>
+							<td>
+							<c:if test="${listview.filecnt>0}">
+							<img src="<c:url value="/resources/icon/floppy-disk.png"/>" width="25" height="25"/>					
+							</c:if>
+							</td>
+							<td><c:out value="${listview.hit}" /></td>
+						</tr>
+					</c:forEach>
+					
+				
 					<c:forEach var="listview" items="${listview}" varStatus="status">
 						<c:url var="link" value="NoticeRead">
 							<c:param name="noticenum" value="${listview.noticenum}" />

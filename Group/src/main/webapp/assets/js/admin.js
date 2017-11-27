@@ -7,10 +7,10 @@ function initGrid() {
         //그리드 높이
         height: 700,
         //컬럼명들
-        colNames:['사진','이름', '소속', '직급','이메일','가입승인'],
+        colNames:['사번','이름', '소속', '직급','이메일','가입승인'],
         //컬럼모델
         colModel:[
-            {name:'imageUrl',align:"center",formatter:imageFormatter},
+            {name:'employeeNo',align:"center"},
             {name:'employeeName',align:"center",width:100},
             {name:'teamName',align:"center"},
             {name:'positionName',align:"center"},

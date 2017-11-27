@@ -45,12 +45,7 @@ color:black;
 </style>
 <script>
 	function categoryChange(value) {
-		
-		/* alert("selectbox value: " + $("#category1 option:selected").val()); */
-		/* 	if (value == "전체") {
-			location.href("BoardList.jsp");
-		} else {
-		 */
+
 		document.form1.submit();
 	}
 </script>
@@ -98,6 +93,7 @@ color:black;
 					</tr>
 				</thead>
 				<tbody>
+					
 					<c:forEach var="listview" items="${listview}" varStatus="status">
 						<c:url var="link" value="BoardRead">
 							<c:param name="boardnum" value="${listview.boardnum}" />
