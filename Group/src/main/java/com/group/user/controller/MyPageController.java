@@ -26,7 +26,7 @@ public class MyPageController {
 	
 	@RequestMapping( "")
 	public String mypage() {
-		return "mypage/index";
+		return "mypage/mypage";
 	}
 	
 	@RequestMapping( value="/modify", method=RequestMethod.POST )

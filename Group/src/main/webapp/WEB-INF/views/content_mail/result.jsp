@@ -23,7 +23,7 @@
 						<p> 요청하신 메일이 성공적으로 발송 되었습니다. </p>
 						<img src="${pageContext.request.contextPath}/WEB-INF/views/content_mail/img/mailOK.png"/>
 						<br><br>
-						<a href="${pageContext.request.contextPath}/memberList"> 주소록 이동 </a>
+						<a href="${pageContext.request.contextPath}/home"> 홈 이동 </a>
 						</c:if>
 						<c:if test="${result eq 'fail'}" >
 						<img src="${pageContext.request.contextPath}/WEB-INF/views/content_mail/img/mailFail.png" width="200px"/>

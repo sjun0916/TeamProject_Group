@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <!-- 회원수정 -->
-<title>회원정보수정</title>
+<title>Smart-Groupware</title>
 <head>
 	<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 
