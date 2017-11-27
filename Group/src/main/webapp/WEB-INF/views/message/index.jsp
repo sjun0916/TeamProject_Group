@@ -37,7 +37,7 @@
   <form>
     <fieldset>
       <label for="name">전송할 내용을 입력하세요</label>
-      <input type="hidden" id="sender" value="${row.sender}">
+      <input type="hidden" name="receiverEmployeeNo" id="receiverEmployeeNo">
       <input type="hidden" id="senderemployeeNo" value="${authUser.employeeNo}">
  	  <textarea id = "messageArea" rows="15" cols="48" name="contents"></textarea>
       <!-- Allow form submission with keyboard without duplicating the dialog button -->
