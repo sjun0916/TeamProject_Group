@@ -44,6 +44,7 @@
          ORDER BY BOARDNUM DESC
          
     </select> 
+  
     
     <insert id="insertBoard" parameterType="com.group.board.vo.BoardVO" >
     	<selectKey resultType="String" keyProperty="boardnum" order="BEFORE">

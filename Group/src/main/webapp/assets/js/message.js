@@ -20,7 +20,10 @@ function initSendMessageForm(){
 			var data = new Object();
 			
 			data.messageId= messageId;
-			data.message = $("#messageArea").val();
+			/*data.message = $("#messageArea").val();*/
+			data.senderemployeeNo= $('#senderemployeeNo').val();
+			data.receiverNo= $('#sender').val();
+			data.message= $('#messageArea').val();
 			
 			JSON.stringify(data);
 			

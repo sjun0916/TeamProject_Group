@@ -124,23 +124,10 @@
 							</c:forEach>
 						</td>
 				</tr>
-
 				<tr>
 					<td colspan="3" height="200"><c:out value="${boardInfo.content}"
 							escapeXml="false" /></td>
 				</tr>
-				<!-- 				<tr> -->
-				<!-- 					<td>첨부</td> -->
-				<%-- 					<td><c:forEach var="listview" items="${listview}" --%>
-				<%-- 							varStatus="status"> --%>
-				<!-- 							<a -->
-				<%-- 								href="fileDownload?filename=<c:out value="${listview.filename}"/>&downname=<c:out value="${listview.realname }"/>"> --%>
-				<%-- 								<c:out value="${listview.filename}" /> --%>
-				<!-- 							</a> -->
-				<%-- 							<c:out value="${listview.size2String()}" /> --%>
-				<!-- 							<br /> -->
-				<%-- 						</c:forEach></td> --%>
-				<!-- 				</tr> -->
 			</tbody>
 		</table>
 		<a href="BoardList">돌아가기</a> 
