@@ -7,10 +7,10 @@ function initGrid() {
         //그리드 높이
         height: 700,
         //컬럼명들
-        colNames:['사진','이름', '소속', '직급','이메일','메세지 전송'],
+        colNames:['사번','이름', '소속', '직급','이메일','메세지 전송'],
         //컬럼모델
         colModel:[
-            {name:'imageUrl',align:"center",formatter:imageFormatter},
+            {name:'employeeNo',align:"center"},
             {name:'employeeName',align:"center",width:100},
             {name:'teamName',align:"center"},
             {name:'positionName',align:"center"},
@@ -96,7 +96,7 @@ function initSendMessageForm(){
 			
 			var data = new Object();
 			
-			data.senderemployeeNo= $('#useremployeeNo').val();
+			data.senderemployeeNo= $('#senderemployeeNo').val();
 			data.receiverEmail= $('#selectedEmail').val();
 			data.message= $('#messageArea').val();
 			
@@ -114,6 +114,8 @@ function initSendMessageForm(){
 				},
 				complete: function() {			
 					dialog.dialog( "close" );
+					alert("메세지 전송을 완료하였습니다.");
+					window.location.reload();
 				}
 			});
 	    }
