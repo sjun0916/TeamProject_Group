@@ -1,5 +1,6 @@
 package com.group.mail.controller;
 
+import java.util.List;
 import java.util.Properties;
 
 import javax.annotation.Resource;
@@ -14,6 +15,7 @@ import javax.mail.internet.MimeMessage;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,9 +23,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.group.mail.dao.MailDao;
 import com.group.mail.service.MailService;
 import com.group.mail.vo.MailVo;
+import com.group.user.auth.AuthUser;
+import com.group.user.common.JSONResult;
+import com.group.user.vo.UserVO;
 
 
 @Controller
+@RequestMapping( "/mail" )
 public class MailController {
 	
 	@Resource
@@ -31,31 +37,58 @@ public class MailController {
 	@Resource
 	MailService service;	
 	
-	 
+	@RequestMapping( "")
+	public String message(@AuthUser UserVO authUser, 
+											Model model) {
+		MailVo mailVo= new MailVo();
+		mailVo.setSenderMail(authUser.getEmail());
+		
+/*		int count = service.insert(mailVo);
+		
+		List<MailVo> list = 
+				service.getMail( mailVo );
+		
+		model.addAttribute( "list", list );*/
+		
+		System.out.println("00000");
+		return "content_mail/mailForm";
+	}
+	
+	
 	// mailForm
-	@RequestMapping(value = "/mail/mailsend")
-	public String mailForm() {
-	   
-	    return "content_mail/mailForm";
-	  } 
+/*	@RequestMapping(value = "/mailsend")
+	public JSONResult sendMailForm(@ModelAttribute MailVo mailVo) {
+		System.out.println("11111111111");
+		int count = service.insert(mailVo);
+		
+	    return JSONResult.success(count);
+	  } */
 	
 	
 	
 	
 	/** 메일 보내기 */
-	@RequestMapping(value="/mail/send", method=RequestMethod.POST)
+	@RequestMapping(value="/send", method=RequestMethod.POST)
 	public String sendMail(
-						  @RequestParam("toInput") String toSomeone
-						  ,@RequestParam("titleInput") String title
-						  ,@RequestParam("mailContent") String content
+						  @RequestParam("receiverMail") String receiverMail
+						  ,@RequestParam("title") String title
+						  ,@RequestParam("content") String content
 						  ,@RequestParam("mailID") String mailID
 						  ,@RequestParam("mailPW") String mailPW
-						  , Model model){
+						  , Model model
+						  ,@AuthUser UserVO authUser){
 		
 		MailVo vo = new MailVo();
 		
 		vo.setMailID(mailID);
 		vo.setMailPW(mailPW);
+		vo.setSenderMail(authUser.getEmail());
+		vo.setReceiverMail(receiverMail);
+		vo.setTitle(title);
+		vo.setContent(content);		
+		
+		int count = service.insert(vo);
+		JSONResult.success(count);
 		
 		SMTPAuthenticator smtp = new SMTPAuthenticator();
 		System.out.println(vo.getMailID().toString());
@@ -88,7 +121,7 @@ public class MailController {
 			msg.setFrom(fromAddr);
 			System.out.println(vo.getMailID().toString()+"3");
 			// 받는사람 메일주소
-			String[] toList = toSomeone.trim().split(",");
+			String[] toList = receiverMail.trim().split(",");
 			System.out.println(vo.getMailID().toString()+"4");
 			for(int i=0; i<toList.length; i++){
 				msg.addRecipients(Message.RecipientType.TO, InternetAddress.parse(toList[i]));

@@ -33,11 +33,12 @@ public class ReportDaoImpl implements ReportDao {
 	public List<ReportVo> check(UserVO vo) throws SQLException {
 		return client.selectList("report.check", vo);
 	}
+	
 
 	@Override
 	public List<UserVO> getUser() throws SQLException {
 		// TODO Auto-generated method stub
-		return client.selectList("user.getByemployeeNoAndPassword");
+		return client.selectList("user.userlist");	// 현아 수정
 	}
 
 	@Override

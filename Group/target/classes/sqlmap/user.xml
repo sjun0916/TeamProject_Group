@@ -64,9 +64,25 @@
 
 	</insert>
 	
+<<<<<<< HEAD
 <!-- 	비밀번호 이메일 전송 -->
+=======
+
+	<!-- 현아 추가 -->
+	<select id="userlist" resultType="UserVO">
+		select * from EMPLOYEE,TEAM
+		where ROLE !='ADMIN'
+		and EMPLOYEE.TEAM_ID=TEAM.TEAM_NAME
+	</select>
+
+	
+>>>>>>> branch 'master' of https://github.com/sjun0916/TeamProject_Group.git
 	<select resultType="UserVO" parameterType="map"	id="getPw">
+<<<<<<< HEAD
 	SELECT PASSWORD FROM EMPLOYEE WHERE EMPLOYEE_NAME=#{employeeName} and EMAIL=#{email} </select>
+=======
+	SELECT PASSWORD from EMPLOYEE WHERE EMPLOYEE_NAME=#{employeeName} and EMAIL=#{email} </select>
+>>>>>>> branch 'master' of https://github.com/sjun0916/TeamProject_Group.git
 
 	<select id="getByemployeeNoAndPassword" 
 			parameterType="map"

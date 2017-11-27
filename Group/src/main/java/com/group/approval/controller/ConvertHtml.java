@@ -12,6 +12,6 @@ public class ConvertHtml {
     public String convertHTML(String reg_cont,HttpServletRequest request) {
 		request.setAttribute("reg_cont", reg_cont);
 		
-		return "report/getHTML";
+		return "content_approval/getHTML";
 	}
 }
