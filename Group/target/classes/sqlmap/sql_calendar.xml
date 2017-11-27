@@ -33,24 +33,34 @@
 <!-- 	delete from CALENDAR where CALENDARNUM=#{CALENDARNUM} -->
 <!-- 	</delete> -->
 	<mapper namespace="calendar">
-	<select id="seletOne" parameterType="com.group.calendar.vo.Calendar_Vo"
-		resultType="com.group.calendar.vo.Calendar_Vo">
-		select * from calendar where calendar_no =#{calendar_no}
+	<select id="selectOne" parameterType="int" resultMap="selectResultMap">
+		SELECT * FROM CALENDAR WHERE CALENDAR_NO=#{calendar_no}
 	</select>
-	<select id="seletList" parameterType="string" resultType="com.group.calendar.vo.Calendar_Vo">
-		select calendar_no,calendar_start,calendar_end,calendar_title,calendar_color from calendar
-		where CALENDAR_REGID=#{id} or CALENDAR_REGID ='admin'
+	
+	<resultMap id="selectResultMap" type="com.group.calendar.vo.Calendar_Vo">
+		<id property="calendar_no" column="CALENDAR_NO"/>
+		<result property="calendar_regid" column="CALENDAR_REGID"/>
+  		<result property="calendar_start" column="CALENDAR_START"/>
+  		<result property="calendar_end" column="CALENDAR_END"/>
+  		<result property="calendar_title" column="CALENDAR_TITLE"/>
+  		<result property="calendar_cont" column="CALENDAR_CONT"/>
+  		<result property="calendar_remark" column="CALENDAR_REMARK"/>
+  		<result property="calendar_color" column="CALENDAR_COLOR"/>
+	</resultMap>
+	<select id="selectList" parameterType="int" resultMap="selectResultMap">
+		SELECT CALENDAR_NO,CALENDAR_START,CALENDAR_END,CALENDAR_TITLE,CALENDAR_COLOR FROM CALENDAR
+		WHERE CALENDAR_REGID=#{id}
 	</select>
 	<insert id="insert" parameterType="java.util.Map">
-		INSERT INTO calendar (
-		calendar_no,
-		calendar_regid,
-		calendar_start,
-		calendar_end,
-		calendar_title,
-		calendar_cont,
-		calendar_remark,
-		calendar_color
+		INSERT INTO CALENDAR (
+		CALENDAR_NO,
+		CALENDAR_REGID,
+		CALENDAR_START,
+		CALENDAR_END,
+		CALENDAR_TITLE,
+		CALENDAR_CONT,
+		CALENDAR_REMARK,
+		CALENDAR_COLOR
 		)
 		SELECT PK_CALENDAR_NO.NEXTVAl, A.*
 		FROM (
@@ -69,20 +79,20 @@
 
 	</insert>
 	<update id="update" parameterType="com.group.calendar.vo.Calendar_Vo">
-	update calendar set
-		calendar_start =#{calendar_start},
-		calendar_end=#{calendar_end},
-		calendar_cont=#{calendar_cont},
-		calendar_remark=#{calendar_remark},
-		calendar_color=#{calendar_color}
-    where calendar_no =#{calendar_no}
+	update CALENDAR set
+		CALENDAR_START=#{calendar_start},
+		CALENDAR_END=#{calendar_end},
+		CALENDAR_CONT=#{calendar_cont},
+		CALENDAR_REMARK=#{calendar_remark},
+		CALENDAR_COLOR=#{calendar_color}
+    WHERE CALENDAR_NO=#{calendar_no}
 	</update>
 	<delete id="delete" parameterType="com.group.calendar.vo.Calendar_Vo">
-	delete from calendar where calendar_no =#{calendar_no}
+	DELETE FROM CALENDAR WHERE CALENDAR_NO=#{calendar_no}
 	</delete>
 	<select id="dayList" parameterType="com.group.calendar.vo.Calendar_Vo" resultType="com.group.calendar.vo.Calendar_Vo">
-	select * FROM CALENDAR
-	where 
+	SELECT * FROM CALENDAR
+	WHERE 
   	CALENDAR_REGID=#{calendar_regid}
 	and #{calendar_regdate} between CALENDAR_START and CALENDAR_END
 	

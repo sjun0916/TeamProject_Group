@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.group.calendar.service.Calendar_Service;
 import com.group.calendar.vo.Calendar_Vo;
+import com.group.user.vo.UserVO;
 
 @Controller
 public class Calendar_Ajax {
@@ -21,17 +24,21 @@ public class Calendar_Ajax {
 	Calendar_Service service;
 
 	@RequestMapping(value = "/calendar/data")
-	public @ResponseBody List<Map<String, String>> calendar() {
+	public @ResponseBody List<Map<String, String>> calendar(HttpServletRequest request) {
 		List<Map<String, String>> list = new ArrayList<>();
-
-		String id = null;
+		HttpSession session = request.getSession();
+		int id = 0;
 		try {
-			id = (String) SessionUtil.getAttribute("id");
+			UserVO user= (UserVO) session.getAttribute("authUser");
+			id = user.getEmployeeNo();
+			System.out.println("calendar_ajax user : "+user); 	//confirm
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("calendar_ajax id : "+id);		//confirm
 		List<Calendar_Vo> listVo = service.selectCalenderAll(id);
+		System.out.println("calendar_ajax listVo length : "+listVo.size()); //confirm
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String startDate = null;
 		String endDate = null;

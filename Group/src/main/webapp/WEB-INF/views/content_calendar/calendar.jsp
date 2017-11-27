@@ -268,16 +268,18 @@
 							var etc = $("#etc").val();
 							var date = $("#reservationtime").val().split("-");
 							var htmlcode = '';
-							var dateResult=/^(1\d{3}|200[0-9]|201[0-6])\/(0[1-9]|1[0-2])\/(0[1-9]|[1-2]\d|30)\/ (1[0-2]|[0-9])(:[0-5][0-9]){1} ([(A)|(P)][M])$/;
+// 							var dateResult=/^(1\d{3}|201[0-9]|202[0-9])\/(0[1-9]|1[0-2])\/(0[1-9]|[1-2]\d|30)\/ (1[0-2]|[0-9])(:[0-5][0-9]){1} ([(A)|(P)][M])$/;
 							if(bgcode==""){
 								alert("배경색을 입력하세요");
 								return false;
 							}else if(date.length!=2){
 								alert("날짜를 입력하세요");
 								return false;
-							}else if(!dateResult.test(date[0].trim())||!dateResult.test(date[1].trim())){
-								alert("날짜를 올바르게");
-								return false;
+// 							}else if(!dateResult.test(date[0].trim())||!dateResult.test(date[1].trim())){
+// 								alert("날짜를 올바르게");
+// 								alert(date[0].trim());
+// 								alert(date[1].trim());
+// 								return false;
 							}else if(title==""){
 								alert("제목을 입력하세요");
 								return false;

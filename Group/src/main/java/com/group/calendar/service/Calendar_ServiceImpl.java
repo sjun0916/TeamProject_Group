@@ -64,7 +64,7 @@ public class Calendar_ServiceImpl implements Calendar_Service {
 	}
 
 	@Override
-	public List<Calendar_Vo> selectCalenderAll(String id) {
+	public List<Calendar_Vo> selectCalenderAll(int id) {
 		// TODO Auto-generated method stub
 		List<Calendar_Vo> list=null;
 		try {

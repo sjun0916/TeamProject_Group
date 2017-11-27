@@ -2,20 +2,22 @@ package com.group.calendar.vo;
 
 import java.util.Date;
 
+import org.apache.ibatis.type.Alias;
 import org.springframework.format.annotation.DateTimeFormat;
 
+@Alias("calendar_Vo")
 public class Calendar_Vo {
-	int calendar_no;
-	String calendar_regid;
-	Date calendar_regdate;
+	private int calendar_no;
+	private int calendar_regid;
+	private Date calendar_regdate;
 	@DateTimeFormat(pattern="MM/dd/yyyy KK:mm:ss a Z")
-	Date calendar_start;
+	private Date calendar_start;
 	@DateTimeFormat(pattern="MM/dd/yyyy KK:mm:ss a Z")
-	Date calendar_end;
-	String calendar_title;
-	String calendar_cont;
-	String calendar_remark;
-	String calendar_color;
+	private Date calendar_end;
+	private String calendar_title;
+	private String calendar_cont;
+	private String calendar_remark;
+	private String calendar_color;
 	
 	public Calendar_Vo(){
 		
@@ -29,6 +31,7 @@ public class Calendar_Vo {
 		this.calendar_cont = calendar_cont;
 		this.calendar_remark = calendar_remark;
 		this.calendar_color = calendar_color;
+		System.out.println("Calendar_VO calendar_start : "+this.calendar_start); //confirm
 	}
 	public int getCalendar_no() {
 		return calendar_no;
@@ -36,10 +39,10 @@ public class Calendar_Vo {
 	public void setCalendar_no(int calendar_no) {
 		this.calendar_no = calendar_no;
 	}
-	public String getCalendar_regid() {
+	public int getCalendar_regid() {
 		return calendar_regid;
 	}
-	public void setCalendar_regid(String calendar_regid) {
+	public void setCalendar_regid(int calendar_regid) {
 		this.calendar_regid = calendar_regid;
 	}
 	public Date getCalendar_regdate() {
@@ -53,6 +56,7 @@ public class Calendar_Vo {
 	}
 	public void setCalendar_start(Date calendar_start) {
 		this.calendar_start = calendar_start;
+		System.out.println("Calendar_VO calendar_start : "+this.calendar_start); //confirm
 	}
 	public Date getCalendar_end() {
 		return calendar_end;

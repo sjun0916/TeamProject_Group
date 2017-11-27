@@ -11,6 +11,6 @@ public interface Calendar_Service {
 	public Calendar_Vo selectCalender(Calendar_Vo vo);
 	public int deleteCalender(Calendar_Vo vo) throws SQLException;
 	public int updateCalender(Calendar_Vo vo) throws SQLException;
-	public List<Calendar_Vo> selectCalenderAll(String id);
+	public List<Calendar_Vo> selectCalenderAll(int id);
 	public List<Calendar_Vo> dayCalendarList(Calendar_Vo vo);
 }

@@ -11,6 +11,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.group.calendar.service.Calendar_Service;
 import com.group.calendar.vo.Calendar_Vo;
+import com.group.user.vo.UserVO;
 
 @Controller
 public class Calendar_Main {
@@ -36,7 +38,7 @@ public class Calendar_Main {
 			String[] calendar_cont,	
 			String[] calendar_remark){ 
 		List<Calendar_Vo> list =new ArrayList<Calendar_Vo>();
-		String id=null;
+		int id = 0;
 		System.out.println(calendar_title.length);
 		for (int i=0;i<calendar_title.length;i++) {
 			Calendar_Vo vo = new Calendar_Vo();
@@ -59,8 +61,12 @@ public class Calendar_Main {
 				vo.setCalendar_color(calendar_color[i]);
 			}
 			list.add(vo);
+			
+			HttpSession session = request.getSession();
 			try {
-				id= (String) SessionUtil.getAttribute("id");
+				UserVO user = (UserVO) session.getAttribute("authUser");
+				id = user.getEmployeeNo();
+				System.out.println("Calendar_main id : "+id);	//confirm
 				list.get(i).setCalendar_regid(id);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -111,19 +117,23 @@ public class Calendar_Main {
 		return jsonObject;
 	}
 	@RequestMapping(value = "/calender/select",method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> select(Calendar_Vo vo) {
+	public @ResponseBody Map<String, Object> select(HttpServletRequest request,Calendar_Vo vo) {
 		System.out.println(vo.getCalendar_no());
+		System.out.println("CalendarMain vo : "+vo);
 		Calendar_Vo selectVo = service.selectCalender(vo);
+		System.out.println("CalendarMain selectCalendar : "+selectVo);
 		Map<String, Object> jsonObject = new HashMap<String, Object>();
-
+		HttpSession session = request.getSession();
 		if(selectVo!=null){
 			jsonObject.put("state", "success");
 		}else{
 			jsonObject.put("state", "fail");
 		}
 		try {
-			if(!selectVo.getCalendar_regid().equals(SessionUtil.getAttribute("id")))
-			jsonObject.put("admin", "true");
+			UserVO user = (UserVO) session.getAttribute("authUser");
+			System.out.println("CalendarMain user : "+user);
+			if(selectVo.getCalendar_regid()!= user.getEmployeeNo())
+				jsonObject.put("admin", "true");
 			
 			jsonObject.put("select", selectVo);
 		} catch (Exception e) {
@@ -133,20 +143,21 @@ public class Calendar_Main {
 		return jsonObject;
 	}
 	@RequestMapping(value = "/calender/daylist",method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> select(String date) {
+	public @ResponseBody Map<String, Object> select(HttpServletRequest request, String date) {
 		Map<String, Object> jsonObject = new HashMap<String, Object>();
 		String[] spDate = date.split(" ");
 		spDate[0] =spDate[0].substring(0, 3);
 		date =spDate[2]+"-"+spDate[0]+"-"+spDate[1];
 
-		
+		HttpSession session = request.getSession();
 		SimpleDateFormat formet = new SimpleDateFormat("dd-MMM-yyyy",Locale.ENGLISH);
 		Calendar_Vo vo =new Calendar_Vo();
 		Date result =null;
 		try {
 			result = formet.parse(date);
 			vo.setCalendar_regdate(result);
-			vo.setCalendar_regid((String) SessionUtil.getAttribute("id"));
+			UserVO user = (UserVO) session.getAttribute("authUser");
+			vo.setCalendar_regid(user.getEmployeeNo());
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

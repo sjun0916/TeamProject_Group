@@ -1,6 +1,7 @@
 package com.group.calendar.dao;
 
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +25,10 @@ public class Calendar_DaoImpl implements Calendar_Dao {
 	@Override
 	public Calendar_Vo selectCalender(Calendar_Vo vo) throws SQLException {
 		// TODO Auto-generated method stub
-		return client.selectOne("calendar.seletOne",vo);
+		System.out.println("calendarDao no : "+vo.getCalendar_no());
+		Calendar_Vo tmp = client.selectOne("calendar.selectOne",vo.getCalendar_no());
+		System.out.println("CalendarDao calendarVo : "+tmp);
+		return client.selectOne("calendar.selectOne",vo.getCalendar_no());
 	}
 
 	@Override
@@ -38,11 +42,23 @@ public class Calendar_DaoImpl implements Calendar_Dao {
 		// TODO Auto-generated method stub
 		return client.update("calendar.update",vo);
 	}
-
 	@Override
-	public List<Calendar_Vo> selectCalenderAll(String id) throws SQLException {
+	public List<Calendar_Vo> selectCalenderAll(int id) throws SQLException {
 		// TODO Auto-generated method stub
-		return client.selectList("calendar.seletList",id);
+		//confirm
+		List<Calendar_Vo> tmpList = client.selectList("calendar.selectList",id);
+		System.out.println("Calendar Dao list : "+tmpList);
+		System.out.println("Calendar Dao list size : "+tmpList.size());
+		Calendar_Vo[] tmp = new Calendar_Vo[tmpList.size()];
+		Iterator<Calendar_Vo> it = tmpList.iterator();
+		
+		for(int i=0;i<tmpList.size();i++) {
+			tmp[i] = (Calendar_Vo)it.next();
+			System.out.println("Calendar_Dao Calendar_vo["+i+"] : "+tmp[i]);
+		}
+		System.out.println("Calendar_Dao list<Calendar_Vo>.size : "+tmpList.size());
+		
+		return client.selectList("calendar.selectList",id);
 	}
 
 	@Override
