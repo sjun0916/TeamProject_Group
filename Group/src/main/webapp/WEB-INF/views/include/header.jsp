@@ -191,7 +191,7 @@
         </li>
         
         <li>
-        	<a href="#">
+        	<a href="/group/PhotoList">
         	<i class="fa fa-dashboard"></i>
         	<span>사진첩</span>
         	</a>

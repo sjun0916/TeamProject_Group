@@ -24,6 +24,7 @@
          <include refid="includeNotice"/>
     </select> 
     
+<!--     페이징처리,카테고리기능  -->
     <select id="selectNoticeList" resultType="com.group.notice.vo.NoticeVO" parameterType="com.group.board.vo.SearchVO">
         SELECT NOTICENUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE, HIT
              , (SELECT COUNT(*) FROM NOTICEFILE WHERE NOTICENUM=DS.NOTICENUM) FILECNT 
@@ -44,6 +45,7 @@
          ORDER BY NOTICENUM DESC
          
     </select> 
+<!--     게시판 상단에 올릴것(IMPORTANT 'Y') -->
     <select id="selectNoticeList2" resultType="com.group.notice.vo.NoticeVO">
         SELECT NOTICENUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE, HIT
              , (SELECT COUNT(*) FROM NOTICEFILE WHERE NOTICENUM=DS.NOTICENUM) FILECNT 
@@ -57,17 +59,15 @@
          ORDER BY NOTICENUM DESC
          
     </select> 
+<!--     메인(Home.jsp) 게시판 NOTICENUM 5개 리미트 -->
     <select id="selectNoticeList3" resultType="com.group.notice.vo.NoticeVO">
-        SELECT NOTICENUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE, HIT
+       SELECT NOTICENUM, TITLE, WRITER, WRITERPOS, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE
              , (SELECT COUNT(*) FROM NOTICEFILE WHERE NOTICENUM=DS.NOTICENUM) FILECNT 
           FROM (
-            SELECT NOTICENUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, REGDATE, HIT
-              , ROW_NUMBER() OVER(ORDER BY NOTICENUM DESC) NOTICENUM_SEQ
-          FROM NOTICE
-           WHERE BRDDELETEFLAG='N' AND IMPORTANT='N'
-        
+            SELECT NOTICENUM, TITLE, WRITER, WRITERPOS, REGDATE
+          FROM VIEW_NOTICE    
           ) DS
-         ORDER BY NOTICENUM DESC
+  
          
     </select> 
      
