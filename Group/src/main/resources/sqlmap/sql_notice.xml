@@ -3,7 +3,7 @@
 
 <mapper namespace="Notice">
     <sql id="includeNotice">
-        WHERE BRDDELETEFLAG='N'
+        WHERE BRDDELETEFLAG='N' AND IMPORTANT='N'
 
          <if test="searchKeyword!=null and searchKeyword!='' and searchType!=''">
               <foreach item="item" index="index" collection="searchTypeArr" separator=" OR " open="AND (" close=")">
@@ -44,6 +44,20 @@
          ORDER BY NOTICENUM DESC
          
     </select> 
+    <select id="selectNoticeList2" resultType="com.group.notice.vo.NoticeVO">
+        SELECT NOTICENUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE, HIT
+             , (SELECT COUNT(*) FROM NOTICEFILE WHERE NOTICENUM=DS.NOTICENUM) FILECNT 
+          FROM (
+            SELECT NOTICENUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, REGDATE, HIT
+              , ROW_NUMBER() OVER(ORDER BY NOTICENUM DESC) NOTICENUM_SEQ
+          FROM NOTICE
+           WHERE BRDDELETEFLAG='N' AND IMPORTANT='Y'
+        
+          ) DS
+         ORDER BY NOTICENUM DESC
+         
+    </select> 
+     
     
     <insert id="insertNotice" parameterType="com.group.notice.vo.NoticeVO" >
     	<selectKey resultType="String" keyProperty="noticenum" order="BEFORE">
@@ -59,6 +73,7 @@
              , WRITER=#{writer}
              , WRITERPOS=#{writerpos}
              , CONTENT=#{content} 
+             , IMPORTANT=#{important}
          WHERE BRDDELETEFLAG='N'
            AND NOTICENUM=#{noticenum}
     </update> 
