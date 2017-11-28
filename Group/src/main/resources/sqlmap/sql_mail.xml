@@ -24,21 +24,54 @@
 
  	</insert> 
 		
-	
+	<!-- 받은 메일함 -->
 	<select id="getEmail" resultType="com.group.mail.vo.MailVo" parameterType="UserVo">
-		SELECT RECEIVER_MAIL receiverMail,
+		SELECT 
+		RECEIVER_MAIL receiverMail,
 		SENDER_MAIL senderMail,
-		MAIL_NUM mailNum,
+		MAILNUM mailNum,
 		(
 		SELECT EMAIL
-		FROM EMPLOYEESD
+		FROM EMPLOYEE
 		WHERE EMAIL = MAIL.SENDER_MAIL) SENDER,
-		MESSAGE_CONTENT message,
+		TITLE title,
 		REGDATE REGDATE
 		FROM MAIL
-		WHERE RECEIVER_MAIL = #{email}
+		WHERE RECEIVER_MAIL = #{senderMail}
 		ORDER
 		BY REGDATE DESC
+	</select>
+	
+	<!-- 보낸 메일함 -->
+	<select id="getEmail2" resultType="com.group.mail.vo.MailVo" parameterType="UserVo">
+		SELECT 
+		RECEIVER_MAIL receiverMail,
+		SENDER_MAIL senderMail,
+		MAILNUM mailNum,
+		(
+		SELECT EMAIL
+		FROM EMPLOYEE
+		WHERE EMAIL = MAIL.RECEIVER_MAIL) RECEIVER,
+		TITLE title,
+		REGDATE REGDATE
+		FROM MAIL
+		WHERE SENDER_MAIL = #{senderMail}
+		ORDER
+		BY REGDATE DESC
+	</select>
+	
+	<!-- 메일 내용 -->
+	<select id="getDetailMail" resultType="com.group.mail.vo.MailVo">
+		SELECT 
+		TITLE title,
+			(SELECT EMAIL
+			FROM EMPLOYEE
+			WHERE EMAIL = MAIL.SENDER_MAIL) SENDER,
+			CONTENT content
+		FROM MAIL
+		WHERE MAILNUM = #{mailNum}
+
+
 	</select>
 
 	<select id="listDepart" resultType="UserVO" parameterType="String">

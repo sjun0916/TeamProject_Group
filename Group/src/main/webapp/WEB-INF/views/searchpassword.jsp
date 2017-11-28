@@ -3,10 +3,9 @@
 <%@ taglib prefix="form"  uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
-<head>
+<html>
 <title>Smart-GroupWare System</title>
-	<link rel="icon" type="image/png"  href="/jmcnetplug/image/jmclogo.png"/>
-	<title> 비밀번호 찾기</title>
+<head>
 	<script type="text/javascript">
 		function search(){
 			if((pwsearch.employeeName.value!=null)&&(pwsearch.email.value!=null)){
@@ -39,7 +38,7 @@
 			<td><input type="email" name="email" /></td>
 		</tr>
 		<tr align="center">
-			<td colspan="2"><input type="button" value="비밀번호 찾기 " onclick="search()" /></td>
+			<td colspan="2"><input type="submit" value="비밀번호 찾기 " onclick="search()" /></td>
 			
 		</tr>
 	</table>
