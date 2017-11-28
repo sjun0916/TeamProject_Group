@@ -18,12 +18,13 @@ public class Calendar_Vo {
 	private String calendar_cont;
 	private String calendar_remark;
 	private String calendar_color;
+	private String calendar_kind;
 	
 	public Calendar_Vo(){
 		
 	}
 	public Calendar_Vo(Date calendar_start, Date calendar_end, String calendar_title, String calendar_cont,
-			String calendar_remark, String calendar_color) {
+			String calendar_remark, String calendar_color, String calendar_kind) {
 		super();
 		this.calendar_start = calendar_start;
 		this.calendar_end = calendar_end;
@@ -31,7 +32,8 @@ public class Calendar_Vo {
 		this.calendar_cont = calendar_cont;
 		this.calendar_remark = calendar_remark;
 		this.calendar_color = calendar_color;
-		System.out.println("Calendar_VO calendar_start : "+this.calendar_start); //confirm
+		this.calendar_kind = calendar_kind;
+		System.out.println("Calendar_VO calendar_kind : "+this.calendar_kind); //confirm
 	}
 	public int getCalendar_no() {
 		return calendar_no;
@@ -56,7 +58,7 @@ public class Calendar_Vo {
 	}
 	public void setCalendar_start(Date calendar_start) {
 		this.calendar_start = calendar_start;
-		System.out.println("Calendar_VO calendar_start : "+this.calendar_start); //confirm
+		
 	}
 	public Date getCalendar_end() {
 		return calendar_end;
@@ -88,6 +90,13 @@ public class Calendar_Vo {
 	public void setCalendar_color(String calendar_color) {
 		this.calendar_color = calendar_color;
 	}
-	
+	public String getCalendar_kind() {
+		System.out.println("Calendar_VO calendar_kind : "+this.calendar_kind); //confirm
+		return this.calendar_kind;
+	}
+	public void setCalendar_kind(String calendar_kind) {
+		this.calendar_kind = calendar_kind;
+		System.out.println("Calendar_VO calendar_kind : "+this.calendar_kind); //confirm
+	}
 	
 }
