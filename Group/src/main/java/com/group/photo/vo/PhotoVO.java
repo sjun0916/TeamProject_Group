@@ -16,7 +16,8 @@ public class PhotoVO {
     private String filecnt;
     private String writerpos;
     private String departname;
-    private String filename;
+ 
+    private String realname;
  
     
     /* 첨부파일 */
@@ -87,12 +88,13 @@ public class PhotoVO {
 		this.uploadfile = uploadfile;
 	}
 
-	public String getFilename() {
-		return filename;
+
+	public String getRealname() {
+		return realname;
 	}
 
-	public void setFilename(String filename) {
-		this.filename = filename;
+	public void setRealname(String realname) {
+		this.realname = realname;
 	}
 
 

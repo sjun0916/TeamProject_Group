@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.group.board.vo.FileVO;
 
-public class FileUtil {
+public class FileUtil2 {
     /**
      * 파일 업로드.
      */
@@ -24,17 +24,19 @@ public class FileUtil {
                 continue;
             }
            
-
+            String tmpfile = getFileExtension(uploadfile.getOriginalFilename());
             String newName = getNewName();
+            String realName = newName+tmpfile;
             
             saveFile(uploadfile, filePath + "/" + newName.substring(0,4) + "/",
-            		newName);
+            		realName);
            
             FileVO filedo = new FileVO();
             filedo.setFilename(uploadfile.getOriginalFilename());
-            filedo.setRealname(newName);
+            filedo.setRealname(realName);
             filedo.setFilesize(uploadfile.getSize());
             filelist.add(filedo);
+            //FileVO에 넣고 filelist(List<FileVO>)에 추가시켜서 리셋
         }
         return filelist;
     }    

@@ -10,8 +10,8 @@
 <script>
 	function fn_formSubmit() {
 		var form1 = document.form1;
-		var fileValue = $("#uploadfile").val().split("\\");
-		var fileName = fileValue[fileValue.length-1]; // 파일명
+// 		var fileValue = $("#uploadfile").val().split("\\");
+// 		var fileName = fileValue[fileValue.length-1]; // 파일명
 
 
 		if (form1.title.value == "") {
@@ -28,7 +28,7 @@
 		      }
 			}
 
-		document.form1.filename.value = fileName;
+// 		document.form1.filename.value = fileName;
 		document.form1.submit();
 	}
 </script>
@@ -81,7 +81,7 @@
 								<input type="checkbox" name="filenum"
 									value="<c:out value="${listview.filenum}"/>">
 								<a
-									href="fileDownload?filename=<c:out value="${listview.filename}"/>&downname=<c:out value="${listview.realname }"/>">
+									href="fileDownload2?filename=<c:out value="${listview.filename}"/>&downname=<c:out value="${listview.realname }"/>">
 									<c:out value="${listview.filename}" />
 								</a>
 								<c:out value="${listview.size2String()}" />
@@ -92,8 +92,8 @@
 
 				</tbody>
 			</table>
-			<input type="hidden" name="filename"
-				value="<c:out value="${photoInfo.filename}"/>">
+<!-- 			<input type="hidden" name="filename" -->
+<%-- 				value="<c:out value="${photoInfo.filename}"/>"> --%>
 			<input type="hidden" name="writerpos"
 				value="<c:out value="${authUser.positionName}"/>"> <input
 				type="hidden" name="departname"
