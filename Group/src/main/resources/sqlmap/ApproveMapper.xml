@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="AprDAO">
+	<resultMap id="resultApr" 						type="com.cafe24.smart.approve.domain.Approval">
+		<result property="aprCode" 					column="apr_code"/>
+		<result property="mmCode" 					column="mm_code"/>
+		<result property="aprApproval1" 			column="apr_approval1"/>
+		<result property="aprApproval2" 			column="apr_approval2"/>
+		<result property="aprApproval3" 			column="apr_approval3"/>
+	</resultMap>
+	
+	<resultMap id="resultDoc" 						type="com.cafe24.smart.approve.domain.Document">
+		<result property="docCode" 					column="doc_code"/>
+		<result property="docFileGroup"				column="doc_fileGroup"/>
+		<result property="docFileOri" 				column="doc_fileOri"/>
+		<result property="docFilePath" 				column="doc_filePath"/>
+	</resultMap>
+		
+	<resultMap id="resultDft" 						type="com.cafe24.smart.approve.domain.Draft">
+		<result property="dftCode" 					column="dft_code"/>
+		<result property="aprCode" 					column="apr_code"/>
+		<result property="docCode" 					column="doc_code"/>
+		<result property="mmCode" 					column="mm_code"/>
+		<result property="dftTitle" 				column="dft_title"/>
+		<result property="dftDegree" 				column="dft_degree"/>
+		<result property="dftDate" 					column="dft_date"/>
+		<result property="aprApproval1" 			column="apr_approval1"/>
+		<result property="aprApproval2" 			column="apr_approval2"/>
+		<result property="aprApproval3" 			column="apr_approval3"/>
+		<result property="dftFinalState" 			column="dft_finalState"/>
+		<result property="dftCheck" 				column="dft_check"/>
+		<result property="proApproval" 				column="pro_approval"/>
+		<result property="proRealTime" 				column="pro_realTime"/>
+		<result property="dftFilePath" 				column="dft_filePath"/>
+		<result property="dftFileOri" 				column="dft_fileOri"/>
+		<result property="docFileGroup" 			column="doc_fileGroup"/>
+		<result property="mmName" 					column="mm_name"/>
+		<result property="dpName" 					column="dp_name"/>
+		<result property="ptName" 					column="pt_name"/>
+		<result property="proState" 				column="pro_state"/>
+		<result property="dftContent" 				column="dft_content"/>
+	</resultMap>
+	
+	<resultMap id="resultPro" 						type="com.cafe24.smart.approve.domain.Progress">
+		<result property="proCode" 					column="pro_code"/>
+		<result property="dftCode" 					column="dft_code"/>
+		<result property="proTime" 					column="pro_time"/>
+		<result property="proReason" 				column="pro_reason"/>
+		<result property="proState" 				column="pro_state"/>
+		<result property="proPersonState" 			column="pro_personalState"/>
+		<result property="proTurn" 					column="pro_turn"/>
+		<result property="proRealTime" 				column="pro_realTime"/>
+		<result property="dftTitle" 				column="dft_title"/>
+		<result property="dftDate" 					column="dft_date"/>
+		<result property="proApproval" 				column="pro_approval"/>
+		<result property="mmCode" 					column="mm_code"/>
+	</resultMap>
+		
+	<!-- 목록 검색 : doc_code -->
+	<select id="selectBySearchGroup" parameterType="com.cafe24.smart.approve.domain.Draft" resultMap ="resultDft">					
+		SELECT   
+			*
+		FROM  
+			document 	
+		JOIN
+			draft
+		ON 
+			draft.doc_code = document.doc_code
+		JOIN
+			progress 
+		ON 
+			draft.dft_code = progress.dft_code    	
+			<trim prefix="WHERE" prefixOverrides="AND">
+				<if test="!docFileGroup.equals('문서없음')">
+					AND document.doc_fileGroup = #{docFileGroup} 
+				</if>  
+				<if test="dftDegree != 0">
+					AND draft.dft_degree = #{dftDegree} 
+				</if>   
+				<if test="proState != 3">
+					AND progress.pro_state = #{proState} 
+				</if> 
+			</trim>
+	</select>
+	
+	<!-- 임시문서함 목록검색 -->
+	<select id="selectBySearchDocGroup" parameterType="String" resultMap ="resultDoc">
+		SELECT 
+			*
+		FROM
+			document 
+		WHERE
+			doc_fileGroup = #{docFileGroup};
+	</select>
+	
+	<!-- 임시문서함 목록검색 -->
+	<select id="selectBySearchTemGroup" parameterType="String" resultMap ="resultDft">
+		SELECT 
+			*	
+		FROM
+			document 
+		JOIN
+			draft   
+		ON  
+			draft.doc_code = document.doc_code 
+		JOIN
+			progress
+		ON
+			draft.dft_code = progress.dft_code			
+		WHERE
+			doc_fileGroup = #{docFileGroup};
+	</select>		
+	
+	<select id="selectAllTem" resultMap="resultDft">
+		SELECT 
+			* 
+		FROM 
+			draft
+		WHERE 
+			dft_check = 'true'
+		AND 
+			mm_code = #{mmCode};		
+	</select>
+	
+	<!-- 파일 분류 가져오기 -->
+	<select id ="selectByDoc" parameterType="int" resultType ="String">
+		SELECT 
+			document.doc_fileGroup  
+		FROM
+			document 
+		JOIN
+			draft   
+		ON  
+			draft.doc_code = document.doc_code 
+		WHERE
+			dft_code = #{dftCode};
+	</select>
+		
+	
+	
+	<!-- 개인별 결재선 가져오기  : 사원[복수]-->
+	<select id="selectByApr" resultMap="resultApr">
+		SELECT  
+			*
+		FROM 
+			approval
+		WHERE
+			mm_code = #{mmCode};
+	</select>
+	
+	<!-- 개인별 결재선 가져오기 : pk값[단수]-->
+	<select id="selectByReApr" resultMap="resultApr" parameterType="int">
+		SELECT  
+			*
+		FROM 
+			approval
+		WHERE
+			apr_code = #{aprCode}
+	</select>
+	
+	<!-- 문서 양식 목록 -->
+	<select id="selectAllDoc" resultMap="resultDoc">
+		SELECT 
+			doc_code,
+			doc_fileGroup,
+			doc_fileOri,
+			doc_filePath   
+		FROM 
+			document;
+	</select>
+	
+	<!-- insert후 select된 문서 양식 목록 -->
+	<select id="selectListByDoc" resultMap="resultDoc" parameterType="com.cafe24.smart.approve.domain.Document">
+		SELECT 
+			doc_code,
+			doc_fileGroup,
+			doc_fileOri,
+			doc_filePath   
+		FROM 
+			document 
+		WHERE
+			doc_code = #{docCode};			
+	</select>
+	
+	<!-- 사원번호/이름 가져오기 -->
+	<select id="selectContMm" resultType="com.cafe24.smart.member.domain.Member" parameterType="Map">
+		SELECT 
+			mm_name as mmName,
+			mm_code as mmCode,
+			dp_code as dpCode,
+			pt_code as ptCode   
+		FROM 
+			memberManagement 
+		WHERE 
+			dp_code = #{dpCode}  
+		AND 
+			pt_code = #{ptCode};
+	</select>
+		
+	<!-- new 사원별:이름/직급/부서가져오기 -->
+	<select id="selectByPersonal" parameterType="int" resultType="Map">
+		SELECT
+			memberManagement.mm_code as mmCode,
+			memberManagement.mm_name as mmName,
+			department.dp_code as dpCode,
+			department.dp_name as dpName,
+			rankposition.pt_code as ptCode,
+			rankposition.pt_name as ptName
+		FROM
+			memberManagement
+		JOIN
+			department
+		ON
+			memberManagement.dp_code = department.dp_code 
+		JOIN 
+			rankposition
+		ON	
+			memberManagement.pt_code = rankposition.pt_code 
+		WHERE
+			memberManagement.mm_code = #{mmCode};
+	</select>
+	
+	<!-- 결재 목록 :intro 목록(전체 결재 목록)-->
+	<select id="selectAllPg" resultMap="resultDft" parameterType ="int">
+		SELECT 
+			*
+		 FROM
+		 	progress
+		 JOIN
+			draft
+		 ON
+			progress.dft_code = draft.dft_code
+		 JOIN
+			document
+		 ON
+			document.doc_code = draft.doc_code
+		 WHERE
+			mm_code = #{mmCode}
+		  OR
+			pro_approval = #{mmCode}	;
+	</select>
+	
+	<!-- 결재 목록 :결재 대기/반려/완료 -->
+	<select id="selectByHv" parameterType="Map" resultMap="resultDft">
+		SELECT   
+			*  
+		FROM 
+			progress,
+			draft,
+			document
+		WHERE  
+			pro_state = #{progress}
+		AND 
+			progress.dft_code = draft.dft_code
+		AND 
+			document.doc_code = draft.doc_code 
+		AND  
+			pro_approval = #{mmCode};				
+	</select>
+	
+	<select id="selectByReCom" parameterType="Map" resultMap="resultDft">
+		SELECT   
+			*  
+		FROM 
+			progress,
+			draft,
+			document
+		WHERE  
+			pro_state = #{progress}
+		AND 
+			progress.dft_code = draft.dft_code
+		AND 
+			document.doc_code = draft.doc_code 
+		AND  
+			mm_code = #{mmCode};
+	</select>
+		 
+	<!-- 결재 상세보기 : proApproval 가져오기-->
+	<select id="selectDetailHv" parameterType="int" resultMap="resultPro">
+		SELECT 
+			pro_approval,
+			pro_state,
+			pro_reason 
+		FROM 
+			progress 
+		WHERE 
+			dft_code = #{dftCode};
+	</select>
+	
+	<!-- 기안자 이름 가져오기 -->
+	<select id="selectByMm" parameterType="int" resultType ="String">
+		SELECT 
+			mm_name
+		FROM
+			memberManagement 
+		WHERE
+			mm_code = #{mmCode};
+	</select>
+						
+	<!-- 결재자 이름 가져오기 -->
+	<select id="selectByPMm" parameterType="int" resultType ="String">
+		SELECT 
+			mm_name
+		FROM
+			memberManagement 
+		WHERE
+			mm_code = #{proApproval};
+	</select>
+					
+	<!-- 기안자 부서가져오기 -->
+	<select id="selectByDp" parameterType="int" resultType ="String">
+		SELECT 
+			department.dp_name  
+		FROM
+			memberManagement 
+		JOIN
+			department  
+		ON  
+			memberManagement.dp_code = department.dp_code 
+		WHERE
+			mm_code = #{mmCode};
+	</select>
+		
+	<!-- 결재자 부서가져오기 -->
+	<select id="selectByPDp" parameterType="int" resultType ="String">
+		SELECT 
+			department.dp_name  
+		FROM
+			memberManagement 
+		JOIN
+			department  
+		ON  
+			memberManagement.dp_code = department.dp_code 
+		WHERE
+			mm_code = #{proApproval};		
+	</select>
+			
+	<!-- 기안자 직급 가져오기 -->
+	<select id="selectByPt" parameterType="int" resultType ="String">
+		SELECT 
+			rankposition.pt_name  
+		FROM
+			memberManagement 
+		JOIN
+			rankposition   
+		ON  
+			memberManagement.pt_code = rankposition.pt_code 
+		WHERE
+			mm_code = #{mmCode};
+	</select>
+			
+	<!-- 결재자자 직급 가져오기 -->
+	<select id="selectByPPt" parameterType="int" resultType ="String">
+		SELECT 
+			rankposition.pt_name  
+		FROM
+			memberManagement 
+		JOIN
+			rankposition   
+		ON  
+			memberManagement.pt_code = rankposition.pt_code 
+		WHERE
+			mm_code = #{proApproval};
+	</select>
+	
+	<!-- 결재,임시저장 상세보기 -->
+	<select id="selectContHv" parameterType="int"  resultMap="resultDft">
+		SELECT 
+			* 
+		FROM 
+			draft
+		INNER JOIN 
+			document 
+		ON
+			draft.doc_code = document.doc_code
+		WHERE 
+			dft_code = #{dftCode};
+	</select>
+	
+	<!-- 기안 등록 1-1 -->	
+	<insert id="insertDft" parameterType="com.cafe24.smart.approve.domain.Draft" 
+														useGeneratedKeys="true" keyProperty="dftCode">
+		INSERT INTO draft (
+		    apr_code,
+		    doc_code,	 
+			dft_title,
+			dft_degree, 
+			mm_code, 
+			dft_date,
+		    apr_approval1,
+		    apr_approval2,
+		    apr_approval3,
+		    dft_finalState,
+		    dft_check,
+		   	dft_filePath,
+		   	dft_fileOri,
+		   	dft_content) 
+		VALUES ( 
+			#{aprCode},
+		 	#{docCode},
+	        #{dftTitle},
+	        #{dftDegree},
+	        #{mmCode},
+		 	#{dftDate},
+			#{aprApproval1},
+			#{aprApproval2},
+		 	#{aprApproval3},
+		 	#{dftFinalState},
+	        #{dftCheck},
+	        #{dftFilePath},
+	        #{dftFileOri},
+	        #{dftContent});
+	</insert>
+	
+	<!-- 진행 등록 1-2 -->
+	<insert id="insertPg" parameterType="com.cafe24.smart.approve.domain.Progress">
+		INSERT INTO progress (
+			pro_time,
+			dft_code,
+			pro_turn,
+			pro_personalState,
+			pro_state,
+			pro_approval)  
+	 	VALUES (
+	 		#{proTime},
+			#{dftCode},
+			#{proTurn},
+			#{proPersonState},
+			#{proState},
+			#{proApproval}); 
+	</insert>
+	
+	<!-- 문서 양식 등록 -->
+	<insert id="insertDoc" parameterType="com.cafe24.smart.approve.domain.Document"
+														useGeneratedKeys="true" keyProperty="docCode">
+		INSERT INTO document (
+			doc_fileGroup,
+			doc_fileOri,
+			doc_filePath) 
+		VALUES ( 
+			#{docFileGroup},
+			#{docFileOri},
+			#{docFilePath});
+	</insert>
+	
+	<!-- 개인별 결재선 등록 -->
+	<insert id="insertApr" parameterType="com.cafe24.smart.approve.domain.Approval">
+		INSERT INTO approval (
+			mm_code,
+			apr_approval1,
+			apr_approval2,
+			apr_approval3) 
+		VALUES ( 
+			#{mmCode},
+			#{aprApproval1},
+			#{aprApproval2},
+			#{aprApproval3});
+	</insert>
+	
+	<!-- 결재 요청 : 1단계 : progress Update -->
+	<update id="updatePro" parameterType="com.cafe24.smart.approve.domain.Progress">
+		UPDATE 
+			progress 
+		SET 
+			pro_realTime = #{proRealTime},
+			pro_state = #{proState},
+			pro_personalstate = #{proPersonState},  
+			pro_reason = #{proReason} 
+		WHERE 
+			dft_code = #{dftCode};
+	</update>
+	
+	<!-- 결재 요청 : 2-1단계 : draft update -->
+	<update id="updateDft" parameterType="com.cafe24.smart.approve.domain.Draft">
+		UPDATE 
+			draft 
+		SET 
+			dft_degree = #{dftDegree}, 
+			dft_finalState = #{dftFinalState}
+		WHERE 
+			dft_code = #{dftCode};
+	</update>
+	
+	<!-- 결재 요청 : 2-2단계 : progress에 결재자 추가//결재 차수 추가 -->
+	<update id="updateProApv" parameterType="com.cafe24.smart.approve.domain.Progress">
+		UPDATE 
+			progress 
+		SET 
+			pro_approval = #{proApproval},
+			pro_turn = #{proTurn},
+			pro_state = #{proState} 
+		WHERE 
+			dft_code = #{dftCode};
+	</update>	
+</mapper>
