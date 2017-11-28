@@ -16,11 +16,19 @@ public class MailService {
 	@Resource
 	MailDao mailDao;
 	
+//	받은메일함
 	public List<MailVo> getMail(MailVo mailVo) {
 		List<MailVo> list = mailDao.getMail(mailVo);
 		return list;
 	}
-//
+
+//	보낸메일함
+	public List<MailVo> getMail2(MailVo mailVo) {
+		List<MailVo> list = mailDao.getMail2(mailVo);
+		return list;
+	}
+	
+	
 //	public String getEmail(String employeeEmail) {
 //	
 //		String email = "";

@@ -2,7 +2,6 @@ package com.group.mail.dao;
 
 
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +15,19 @@ public class MailDao {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 	
+//	받은메일함
 	public List<MailVo> getMail(MailVo mailVo) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("mail.getEmail", mailVo);
 	}
+	
+//	보낸메일함
+	public List<MailVo> getMail2(MailVo mailVo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("mail.getEmail2", mailVo);
+	}
+	
+	
 //	
 //	public String getEmail(String employeeEmail) throws SQLException {
 //		return client.selectOne("mail.getEmail", employeeEmail);

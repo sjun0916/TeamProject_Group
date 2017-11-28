@@ -21,7 +21,7 @@
 	<!-- 컨텐트 헤더 -->
 	<section class="content-header">
 		<h1>
-			보낸메일함 <small>그룹웨어 내부에서 보낸 메일만 표시</small>
+			받은메일함 <small>그룹웨어 내부에서 보낸 메일만 표시</small>
 		</h1>
 	</section>
 
@@ -44,7 +44,7 @@
 	<thead>
 		<tr>
 			<th scope="col">메일번호</th>
-			<th scope="col">받은사람</th>
+			<th scope="col">보낸사람</th>
 			<th scope="col">제목</th>
 			<th scope="col">보낸시간</th>
 

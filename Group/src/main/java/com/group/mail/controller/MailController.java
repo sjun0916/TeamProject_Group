@@ -50,12 +50,12 @@ public class MailController {
 		
 		model.addAttribute( "list", list );*/
 		
-		System.out.println("00000");
+		System.out.println("메일함 열기 성공");
 		return "content_mail/mailForm";
 	}
 	
-	//보낸 메일함
-	@RequestMapping("/senderlist")
+	//받은 메일함
+	@RequestMapping("/receivelist")
 	public String receivemail(@AuthUser UserVO authUser, Model model) {
 		MailVo mailVo = new MailVo();
 		mailVo.setSenderMail(authUser.getEmail());
@@ -64,8 +64,22 @@ public class MailController {
 
 		model.addAttribute("list", list);
 
+		System.out.println("보낸메일함 성공");
+		return "content_mail/receivelist";
+	}
+	
+	//보낸 메일함
+	@RequestMapping("/sendlist")
+	public String sendmail(@AuthUser UserVO authUser, Model model) {
+		MailVo mailVo = new MailVo();
+		mailVo.setSenderMail(authUser.getEmail());
+
+		List<MailVo> list = service.getMail2(mailVo);
+
+		model.addAttribute("list", list);
+
 		System.out.println("00000");
-		return "content_mail/mailsendlist";
+		return "content_mail/sendlist";
 	}
 	
 	
