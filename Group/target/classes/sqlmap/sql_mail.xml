@@ -34,7 +34,7 @@
 		SELECT EMAIL
 		FROM EMPLOYEE
 		WHERE EMAIL = MAIL.SENDER_MAIL) SENDER,
-		CONTENT content,
+		TITLE title,
 		REGDATE REGDATE
 		FROM MAIL
 		WHERE RECEIVER_MAIL = #{senderMail}
@@ -52,12 +52,26 @@
 		SELECT EMAIL
 		FROM EMPLOYEE
 		WHERE EMAIL = MAIL.RECEIVER_MAIL) RECEIVER,
-		CONTENT content,
+		TITLE title,
 		REGDATE REGDATE
 		FROM MAIL
 		WHERE SENDER_MAIL = #{senderMail}
 		ORDER
 		BY REGDATE DESC
+	</select>
+	
+	<!-- 메일 내용 -->
+	<select id="getDetailMail" resultType="com.group.mail.vo.MailVo">
+		SELECT 
+		TITLE title,
+			(SELECT EMAIL
+			FROM EMPLOYEE
+			WHERE EMAIL = MAIL.SENDER_MAIL) SENDER,
+			CONTENT content
+		FROM MAIL
+		WHERE MAILNUM = #{mailNum}
+
+
 	</select>
 
 	<select id="listDepart" resultType="UserVO" parameterType="String">

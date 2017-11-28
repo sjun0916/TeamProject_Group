@@ -59,14 +59,14 @@
                             <td>${row.mailNum }</td>
                             <td>${row.senderMail }</td>
                             <td class="title">
-                                <a href="${pageContext.request.contextPath }/content_mail/view?mailNum=${row.mailNum}">
+                                <a href="${pageContext.request.contextPath }/mail/view?mailNum=${row.mailNum}">
                                 
 							          <c:choose>
-							           <c:when test="${fn:length(row.content) > 23}">
-							            <c:out value="${fn:substring(row.content,0,23)}"/>....
+							           <c:when test="${fn:length(row.title) > 23}">
+							            <c:out value="${fn:substring(row.title,0,23)}"/>....
 							           </c:when>
 							           <c:otherwise>
-							            <c:out value="${row.content}"/>
+							            <c:out value="${row.title}"/>
 							           </c:otherwise> 
 							          </c:choose>
 								

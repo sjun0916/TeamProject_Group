@@ -27,19 +27,16 @@ public class MailDao {
 		return sqlSession.selectList("mail.getEmail2", mailVo);
 	}
 	
-	
-//	
-//	public String getEmail(String employeeEmail) throws SQLException {
-//		return client.selectOne("mail.getEmail", employeeEmail);
-//	}
-//	
-//	public List<String> getEmails(Map<String, Object> array) throws SQLException {
-//		return client.selectList("mail.getEmails", array);
-//	}
-	
+//	메일 DB입력
 	public int insert( MailVo mailVo ) {
 		System.out.println("333333");
 		int count = sqlSession.insert("mail.insert", mailVo);
 		return count;
+	}
+	
+//	내용
+	public MailVo getDetailMail(MailVo mailVo ) {
+		return sqlSession.selectOne("mail.getDetailMail", mailVo);
+		
 	}
 }
