@@ -61,31 +61,6 @@ public class ReportDaoImpl implements ReportDao {
 	}
 
 	@Override
-	public void updateLabelNumPlus(ReportVo vo) throws SQLException {
-		// TODO Auto-generated method stub
-		client.update("report.updateLabelNumPlus", vo);
-	}
-
-	@Override
-	public void updateLabelNumMinus(ReportVo vo) throws SQLException {
-		// TODO Auto-generated method stub
-		client.update("report.updateLabelNumMinus", vo);
-
-	}
-
-	@Override
-	public List<ReportVo> labelnumlist() throws SQLException {
-		// TODO Auto-generated method stub
-		return client.selectList("report.labelnumlist");
-	}
-
-	@Override
-	public List<ReportVo> select2(int labelnum) throws SQLException {
-		// TODO Auto-generated method stub
-		return client.selectList("report.select2", labelnum);
-	}
-
-	@Override
 	public List<Integer> stateList(String id) throws SQLException {
 		// TODO Auto-generated method stub
 		List<Integer> list = new ArrayList<>();

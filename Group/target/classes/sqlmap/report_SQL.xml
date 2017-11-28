@@ -4,7 +4,7 @@
 
 	<select id="select" parameterType="UserVO"
 		resultType="ReportVO">
-		select REPORT_NO,REG_TITLE,REG_REGISTER,REG_STATE,REG_REASON,LABEL_NAME, LABEL_COLOR from REPORT,LABEL where LABEL_NUM = nvl(reg_labelnum,0) and REG_ID=#{member_enum,jdbcType=VARCHAR}
+		select REPORT_NO,REG_TITLE,REG_REGISTER,REG_STATE,REG_REASON from REPORT,LABEL where REG_ID=#{employeeNo,jdbcType=VARCHAR}
 				
 	</select>
 	
@@ -92,7 +92,6 @@ where REPORT_NO in
 		SYSDATE,
 		#{reg_type,jdbcType=VARCHAR},
 		#{reg_cont,jdbcType=VARCHAR},
-		#{reg_labelnum,jdbcType=INTEGER},
 		#{comment,jdbcType=VARCHAR}
 		)
 	</insert>
@@ -174,20 +173,6 @@ where REPORT_NO in
 	</select>
 	
 	
-	<update id="updateLabelNumPlus" parameterType="ReportVO">
-	update REPORT set 
-	REG_LABELNUM = #{reg_labelnum,jdbcType=INTEGER}
-	where REPORT_NO = #{report_no,jdbcType=INTEGER}
-	
-		
-	</update>
-	
-	<update id="updateLabelNumMinus" parameterType="ReportVO">
-	update REPORT set 
-	REG_LABELNUM = 0
-	where REPORT_NO = #{report_no,jdbcType=INTEGER}
-			
-	</update>
 <select id="waitCont" parameterType="String" resultType="int">
 	select count(*)
 	from REPORT
