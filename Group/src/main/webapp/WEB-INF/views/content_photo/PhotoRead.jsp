@@ -43,7 +43,7 @@
 					<td>
 							<c:forEach var="listview" items="${listview}" varStatus="status">
 								<a
-									href="fileDownload?filename=<c:out value="${listview.filename}"/>&downname=<c:out value="${listview.realname }"/>">
+									href="fileDownload2?filename=<c:out value="${listview.filename}"/>&downname=<c:out value="${listview.realname}"/>">
 									<c:out value="${listview.filename}" />
 								</a>
 								<c:out value="${listview.size2String()}" />
