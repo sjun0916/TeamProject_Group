@@ -16,6 +16,7 @@ public class PhotoVO {
     private String filecnt;
     private String writerpos;
     private String departname;
+    private String filename;
  
     
     /* 첨부파일 */
@@ -84,6 +85,14 @@ public class PhotoVO {
 
 	public void setUploadfile(List<MultipartFile> uploadfile) {
 		this.uploadfile = uploadfile;
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
 
 

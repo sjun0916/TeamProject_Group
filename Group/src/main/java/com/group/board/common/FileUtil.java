@@ -23,11 +23,13 @@ public class FileUtil {
             if (uploadfile.getSize() == 0) {
                 continue;
             }
-            
+           
+//            String tmpfile = getFileExtension(uploadfile.getOriginalFilename());
             String newName = getNewName();
             
-            saveFile(uploadfile, filePath + "/" + newName.substring(0,4) + "/", newName);
-            
+            saveFile(uploadfile, filePath + "/" + newName.substring(0,4) + "/",
+            		newName);
+           
             FileVO filedo = new FileVO();
             filedo.setFilename(uploadfile.getOriginalFilename());
             filedo.setRealname(newName);

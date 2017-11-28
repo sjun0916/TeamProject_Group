@@ -24,6 +24,8 @@ public class PhotoController {
     @Autowired
     private PhotoService photoSvc;
     
+
+    
     /**
      * 리스트.
      */

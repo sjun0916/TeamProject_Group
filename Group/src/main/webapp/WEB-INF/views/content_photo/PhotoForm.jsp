@@ -10,6 +10,9 @@
 <script>
 	function fn_formSubmit() {
 		var form1 = document.form1;
+		var fileValue = $("#uploadfile").val().split("\\");
+		var fileName = fileValue[fileValue.length-1]; // 파일명
+
 
 		if (form1.title.value == "") {
 			alert("글 제목을 입력해주세요.");
@@ -20,11 +23,12 @@
 			var ext = $('#uploadfile').val().split('.').pop().toLowerCase();
 			      if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
 				 alert('gif,png,jpg,jpeg 파일만 업로드 할수 있습니다.');
+				 
 				 return;
 		      }
 			}
 
-
+		document.form1.filename.value = fileName;
 		document.form1.submit();
 	}
 </script>
@@ -88,6 +92,8 @@
 
 				</tbody>
 			</table>
+			<input type="hidden" name="filename"
+				value="<c:out value="${photoInfo.filename}"/>">
 			<input type="hidden" name="writerpos"
 				value="<c:out value="${authUser.positionName}"/>"> <input
 				type="hidden" name="departname"

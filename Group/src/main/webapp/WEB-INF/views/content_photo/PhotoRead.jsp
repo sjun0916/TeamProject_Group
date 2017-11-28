@@ -52,10 +52,7 @@
 						</td>
 				</tr>
 
-				<tr>
-					<td colspan="3" height="200"><c:out value="${photoInfo.content}"
-							escapeXml="false" /></td>
-				</tr>
+			
 			</tbody>
 		</table>
 		<a href="PhotoList">돌아가기</a> 
