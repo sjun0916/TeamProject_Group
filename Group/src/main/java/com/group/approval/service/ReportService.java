@@ -14,9 +14,5 @@ public interface ReportService {
 	public ReportVo selectOne(int num) throws SQLException;
 	public int check(int num) throws SQLException;
 	public int back(ReportVo vo) throws SQLException;
-	public void updateLabelNumPlus(ReportVo vo);
-	public void updateLabelNumMinus(ReportVo vo);
-	public List<ReportVo> labelnumlist();
-	public List<ReportVo> select2(int labelnum);
 	public List<Integer> stateList(String id);
 }

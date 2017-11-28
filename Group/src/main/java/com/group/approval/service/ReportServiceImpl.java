@@ -80,49 +80,6 @@ public class ReportServiceImpl implements ReportService {
 		return dao.back(vo);
 	}
 	@Override
-	public void updateLabelNumPlus(ReportVo vo) {
-		// TODO Auto-generated method stub
-		try {
-			dao.updateLabelNumPlus(vo);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	@Override
-	public void updateLabelNumMinus(ReportVo vo) {
-		// TODO Auto-generated method stub
-		try {
-			dao.updateLabelNumMinus(vo);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	@Override
-	public List<ReportVo> labelnumlist() {
-		List<ReportVo> list = null;
-		try {
-			list = dao.labelnumlist();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return list;
-	}
-	@Override
-	public List<ReportVo> select2(int labelnum) {
-		// TODO Auto-generated method stub
-				List<ReportVo> list=null;
-				try {
-					list=dao.select2(labelnum);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				return list;
-	}
-	@Override
 	public List<Integer> stateList(String id) {
 		// TODO Auto-generated method stub
 		List<Integer> list = null;

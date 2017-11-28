@@ -15,9 +15,5 @@ public interface ReportDao {
 	public ReportVo selectOne(int num) throws SQLException;
 	public int check(int num) throws SQLException;
 	public int back(ReportVo vo) throws SQLException;
-	public void updateLabelNumPlus(ReportVo vo) throws SQLException;
-	public void updateLabelNumMinus(ReportVo vo) throws SQLException;
-	public List<ReportVo> labelnumlist() throws SQLException;
-	public List<ReportVo> select2(int labelnum) throws SQLException;
 	public List<Integer> stateList(String id) throws SQLException;
 }

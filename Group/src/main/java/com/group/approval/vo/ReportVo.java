@@ -4,8 +4,8 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("ReportVO")
 public class ReportVo {
-	String report_no;
-	String reg_id;
+	String report_no;		//시퀀스
+	String reg_id;			//authUser 사원번호
 	String reg_dep;
 	String reg_manager1;
 	String reg_manager2;
@@ -16,7 +16,7 @@ public class ReportVo {
 	String reg_cont;
 	String reg_state;
 	String reg_reason;
-	String reg_register;
+	String reg_register;		//SYSDATE
 	String reg_update1;
 	String reg_update2;
 	String reg_update3;
@@ -24,9 +24,7 @@ public class ReportVo {
 	String reg_update5;
 	String reg_type;
 	String comment;
-	int reg_labelnum;
-	String label_name;
-	String label_color;
+	
 	public String getReport_no() {
 		return report_no;
 	}
@@ -146,24 +144,6 @@ public class ReportVo {
 	}
 	public void setComment(String comment) {
 		this.comment = comment;
-	}
-	public int getReg_labelnum() {
-		return reg_labelnum;
-	}
-	public void setReg_labelnum(int reg_labelnum) {
-		this.reg_labelnum = reg_labelnum;
-	}
-	public String getLabel_name() {
-		return label_name;
-	}
-	public void setLabel_name(String label_name) {
-		this.label_name = label_name;
-	}
-	public String getLabel_color() {
-		return label_color;
-	}
-	public void setLabel_color(String label_color) {
-		this.label_color = label_color;
 	}
 	
 }
