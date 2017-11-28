@@ -158,9 +158,9 @@
             	<i class="fa fa-angle-left pull-right"></i>
         	</a>
             <ul class="treeview-menu">
-            	<li><a href="${pageContext.request.contextPath}/report/make"><i class="fa fa-circle-o"></i> 결재작성</a></li>
-            	<li><a href="${pageContext.request.contextPath}/report/state"><i class="fa fa-circle-o"></i> 결재함</a></li>
-            	<li><a href="${pageContext.request.contextPath}/report/wating"><i class="fa fa-circle-o"></i> 문서양식</a></li>
+            	<li><a href="${pageContext.request.contextPath}/ap/add"><i class="fa fa-circle-o"></i> 결재작성</a></li>
+            	<li><a href="${pageContext.request.contextPath}/ap/list"><i class="fa fa-circle-o"></i> 결재함</a></li>
+            	<li><a href="${pageContext.request.contextPath}/ap/docList"><i class="fa fa-circle-o"></i> 문서양식</a></li>
             </ul>
         </li>
         

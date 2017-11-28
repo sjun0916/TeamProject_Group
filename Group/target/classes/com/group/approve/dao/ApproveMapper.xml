@@ -64,24 +64,24 @@
 		SELECT  
 			*
 		FROM  
-			document 	
+			DOCUMENT 	
 		JOIN
-			draft
+			DRAFT
 		ON 
-			draft.doc_code = document.doc_code
+			DRAFT.DOC_CODE=DOCUMENT.DOC_CODE
 		JOIN
-			progress 
+			PROGRESS
 		ON 
-			draft.dft_code = progress.dft_code    	
+			DRAFT.DFT_CODE=PROGRESS.DFT_CODE	
 			<trim prefix="WHERE" prefixOverrides="AND">
 				<if test="!docFileGroup.equals('문서없음')">
-					AND document.doc_fileGroup = #{docFileGroup} 
+					AND DOCUMENT.DOC_FILEGROUP= #{docFileGroup} 
 				</if>  
 				<if test="dftDegree != 0">
-					AND draft.dft_degree = #{dftDegree} 
+					AND DRAFT.DFT_DEGREE= #{dftDegree} 
 				</if>   
 				<if test="proState != 3">
-					AND progress.pro_state = #{proState} 
+					AND PROGRESS.PRO_STATE= #{proState} 
 				</if> 
 			</trim>
 	</select>
@@ -91,9 +91,9 @@
 		SELECT 
 			*
 		FROM
-			document 
+			DOCUMENT
 		WHERE
-			doc_fileGroup = #{docFileGroup};
+			DOC_FILEGROUP= #{docFileGroup};
 	</select>
 	
 	<!-- 임시문서함 목록검색 -->
@@ -101,42 +101,42 @@
 		SELECT 
 			*	
 		FROM
-			document 
+			DOCUMENT
 		JOIN
-			draft   
+			DRAFT   
 		ON  
-			draft.doc_code = document.doc_code 
+			DRAFT.DOC_CODE=DOCUMENT.DOC_CODE
 		JOIN
-			progress
+			PROGRESS
 		ON
-			draft.dft_code = progress.dft_code			
+			DRAFT.DFT_CODE=PROGRESS.DFT_CODE			
 		WHERE
-			doc_fileGroup = #{docFileGroup};
+			DOC_FILEGROUP = #{docFileGroup};
 	</select>		
 	
 	<select id="selectAllTem" resultMap="resultDft">
 		SELECT 
 			* 
 		FROM 
-			draft
+			DRAFT
 		WHERE 
-			dft_check = 'true'
+			DFT_CHECK= 'TRUE'
 		AND 
-			mm_code = #{mmCode};		
+			MM_CODE= #{mmCode};		
 	</select>
 	
 	<!-- 파일 분류 가져오기 -->
 	<select id ="selectByDoc" parameterType="int" resultType ="String">
 		SELECT 
-			document.doc_fileGroup  
+			DOCUMENT.DOC_FILEGROUP
 		FROM
-			document 
+			DOCUMENT
 		JOIN
-			draft   
+			DRAFT   
 		ON  
-			draft.doc_code = document.doc_code 
+			DRAFT.DOC_CODE=DOCUMENT.DOC_CODE
 		WHERE
-			dft_code = #{dftCode};
+			DFT_CODE= #{dftCode};
 	</select>
 		
 	
@@ -146,9 +146,9 @@
 		SELECT  
 			*
 		FROM 
-			approval
+			APPROVAL
 		WHERE
-			mm_code = #{mmCode};
+			MM_CODE= #{mmCode};
 	</select>
 	
 	<!-- 개인별 결재선 가져오기 : pk값[단수]-->
@@ -156,48 +156,48 @@
 		SELECT  
 			*
 		FROM 
-			approval
+			APPROVAL
 		WHERE
-			apr_code = #{aprCode}
+			APR_CODE= #{aprCode}
 	</select>
 	
 	<!-- 문서 양식 목록 -->
 	<select id="selectAllDoc" resultMap="resultDoc">
 		SELECT 
-			doc_code,
-			doc_fileGroup,
-			doc_fileOri,
-			doc_filePath   
+			DOC_CODE,
+			DOC_FILEGROUP,
+			DOC_FILEORI,
+			DOC_FILEPATH
 		FROM 
-			document;
+			DOCUMENT;
 	</select>
 	
 	<!-- insert후 select된 문서 양식 목록 -->
-	<select id="selectListByDoc" resultMap="resultDoc" parameterType="com.cafe24.smart.approve.domain.Document">
+	<select id="selectListByDoc" resultMap="resultDoc" parameterType="com.group.approve.vo.Document">
 		SELECT 
-			doc_code,
-			doc_fileGroup,
-			doc_fileOri,
-			doc_filePath   
+			DOC_CODE,
+			DOC_FILEGROUP,
+			DOC_FILEORI,
+			DOC_FILEPATH
 		FROM 
-			document 
+			DOCUMENT
 		WHERE
-			doc_code = #{docCode};			
+			DOC_CODE = #{docCode};			
 	</select>
 	
 	<!-- 사원번호/이름 가져오기 -->
-	<select id="selectContMm" resultType="com.cafe24.smart.member.domain.Member" parameterType="Map">
+	<select id="selectContMm" resultType="com.group.approve.vo.Member" parameterType="Map">
 		SELECT 
-			mm_name as mmName,
-			mm_code as mmCode,
-			dp_code as dpCode,
-			pt_code as ptCode   
+			MM_NAME as mmName,
+			MM_CODE as mmCode,
+			DP_CODE as dpCode,
+			PT_CODE as ptCode   
 		FROM 
-			memberManagement 
+			MEMBERMANAGEMENT 
 		WHERE 
-			dp_code = #{dpCode}  
+			DP_CODE= #{dpCode}  
 		AND 
-			pt_code = #{ptCode};
+			PT_CODE= #{ptCode};
 	</select>
 		
 	<!-- new 사원별:이름/직급/부서가져오기 -->
@@ -228,19 +228,19 @@
 		SELECT 
 			*
 		 FROM
-		 	progress
+		 	PROGRESS
 		 JOIN
-			draft
+			DRAFT
 		 ON
-			progress.dft_code = draft.dft_code
+			PROGRESS.DFT_CODE= DRAFT.DFT_CODE
 		 JOIN
-			document
+			DOCUMENT
 		 ON
-			document.doc_code = draft.doc_code
+			DOCUMENT.DOC_CODE=DRAFT.DOC_CODE
 		 WHERE
-			mm_code = #{mmCode}
+			MM_CODE= #{mmCode}
 		  OR
-			pro_approval = #{mmCode}	;
+			PRO_APPROVAL= #{mmCode}	;
 	</select>
 	
 	<!-- 결재 목록 :결재 대기/반려/완료 -->
@@ -248,72 +248,72 @@
 		SELECT   
 			*  
 		FROM 
-			progress,
-			draft,
-			document
+			PROGRESS,
+			DRAFT,
+			DOCUMENT
 		WHERE  
-			pro_state = #{progress}
+			PRO_STATE= #{progress}
 		AND 
-			progress.dft_code = draft.dft_code
+			PROGRESS.DFT_CODE= DRAFT.DFT_CODE
 		AND 
-			document.doc_code = draft.doc_code 
+			DOCUMENT.DOC_CODE= DRAFT.DOC_CODE
 		AND  
-			pro_approval = #{mmCode};				
+			PRO_APPROVAL= #{mmCode};				
 	</select>
 	
 	<select id="selectByReCom" parameterType="Map" resultMap="resultDft">
 		SELECT   
 			*  
 		FROM 
-			progress,
-			draft,
-			document
+			PROGRESS,
+			DRAFT,
+			DOCUMENT
 		WHERE  
-			pro_state = #{progress}
+			PRO_STATE= #{progress}
 		AND 
-			progress.dft_code = draft.dft_code
+			PROGRESS.DFT_CODE=DRAFT.DFT_CODE
 		AND 
-			document.doc_code = draft.doc_code 
+			DOCUMENT.DOC_CODE=DRAFT.DOC_CODE
 		AND  
-			mm_code = #{mmCode};
+			MM_CODE= #{mmCode};
 	</select>
 		 
 	<!-- 결재 상세보기 : proApproval 가져오기-->
 	<select id="selectDetailHv" parameterType="int" resultMap="resultPro">
 		SELECT 
-			pro_approval,
-			pro_state,
-			pro_reason 
+			PRO_APPROVAL,
+			PRO_STATE,
+			PRO_REASON 
 		FROM 
-			progress 
+			PROGRESS
 		WHERE 
-			dft_code = #{dftCode};
+			DFT_CODE= #{dftCode};
 	</select>
 	
 	<!-- 기안자 이름 가져오기 -->
 	<select id="selectByMm" parameterType="int" resultType ="String">
 		SELECT 
-			mm_name
+			EMPLOYEE_NAME
 		FROM
-			memberManagement 
+			EMPLOYEE
 		WHERE
-			mm_code = #{mmCode};
+			EMPLOYEE_NO= #{employeeNo};
 	</select>
 						
 	<!-- 결재자 이름 가져오기 -->
 	<select id="selectByPMm" parameterType="int" resultType ="String">
 		SELECT 
-			mm_name
+			EMPLOYEE_NAME
 		FROM
-			memberManagement 
+			EMPLOYEE 
 		WHERE
-			mm_code = #{proApproval};
+			EMPLOYEE_NO= #{proApproval};
 	</select>
 					
 	<!-- 기안자 부서가져오기 -->
 	<select id="selectByDp" parameterType="int" resultType ="String">
 		SELECT 
-			department.dp_name  
+			DEPARTMENT.DP_NAME
 		FROM
 			memberManagement 
 		JOIN
@@ -371,33 +371,33 @@
 		SELECT 
 			* 
 		FROM 
-			draft
+			DRAFT
 		INNER JOIN 
-			document 
+			DOCUMENT
 		ON
-			draft.doc_code = document.doc_code
+			DRAFT.DOC_CODE=DOCUMENT.DOC_CODE
 		WHERE 
-			dft_code = #{dftCode};
+			DFT_CODE= #{dftCode};
 	</select>
 	
 	<!-- 기안 등록 1-1 -->	
-	<insert id="insertDft" parameterType="com.cafe24.smart.approve.domain.Draft" 
+	<insert id="insertDft" parameterType="com.group.approve.vo.Draft" 
 														useGeneratedKeys="true" keyProperty="dftCode">
-		INSERT INTO draft (
-		    apr_code,
-		    doc_code,	 
-			dft_title,
-			dft_degree, 
-			mm_code, 
-			dft_date,
-		    apr_approval1,
-		    apr_approval2,
-		    apr_approval3,
-		    dft_finalState,
-		    dft_check,
-		   	dft_filePath,
-		   	dft_fileOri,
-		   	dft_content) 
+		INSERT INTO DRAFT (
+		    ART_CODE,
+		    DOC_CODE,	 
+			DFT_TITLE,
+			DFT_DEGREE, 
+			MM_CODE, 
+			DFT_DATE,
+		    APR_APPROVAL1,
+		    APR_APPROVAL2,
+		    APR_APPROVAL3,
+		    DFT_FINALSTATE,
+		    DFT_CHECK,
+		   	DFT_FILEPATH,
+		   	DFT_FILEORI,
+		   	DFT_CONTENT) 
 		VALUES ( 
 			#{aprCode},
 		 	#{docCode},
@@ -416,14 +416,14 @@
 	</insert>
 	
 	<!-- 진행 등록 1-2 -->
-	<insert id="insertPg" parameterType="com.cafe24.smart.approve.domain.Progress">
-		INSERT INTO progress (
-			pro_time,
-			dft_code,
-			pro_turn,
-			pro_personalState,
-			pro_state,
-			pro_approval)  
+	<insert id="insertPg" parameterType="com.group.approve.vo.Progress">
+		INSERT INTO PROGRESS (
+			PRO_TIME,
+			DFT_CODE,
+			PRO_TURN,
+			PRO_PERSONALSTATE,
+			PRO_STATE,
+			PRO_APPROVAL)  
 	 	VALUES (
 	 		#{proTime},
 			#{dftCode},
@@ -434,12 +434,12 @@
 	</insert>
 	
 	<!-- 문서 양식 등록 -->
-	<insert id="insertDoc" parameterType="com.cafe24.smart.approve.domain.Document"
+	<insert id="insertDoc" parameterType="com.group.approve.vo.Document"
 														useGeneratedKeys="true" keyProperty="docCode">
-		INSERT INTO document (
-			doc_fileGroup,
-			doc_fileOri,
-			doc_filePath) 
+		INSERT INTO DOCUMENT (
+			DOC_FILEGROUP,
+			DOC_FILEORI,
+			DOC_FILEPATH) 
 		VALUES ( 
 			#{docFileGroup},
 			#{docFileOri},
@@ -447,12 +447,12 @@
 	</insert>
 	
 	<!-- 개인별 결재선 등록 -->
-	<insert id="insertApr" parameterType="com.cafe24.smart.approve.domain.Approval">
-		INSERT INTO approval (
-			mm_code,
-			apr_approval1,
-			apr_approval2,
-			apr_approval3) 
+	<insert id="insertApr" parameterType="com.group.approve.vo.Approval">
+		INSERT INTO APPROVAL (
+			MM_CODE,
+			APR_APPROVAL1,
+			APR_APPROVAL2,
+			APR_APPROVAL3) 
 		VALUES ( 
 			#{mmCode},
 			#{aprApproval1},
@@ -461,38 +461,38 @@
 	</insert>
 	
 	<!-- 결재 요청 : 1단계 : progress Update -->
-	<update id="updatePro" parameterType="com.cafe24.smart.approve.domain.Progress">
+	<update id="updatePro" parameterType="com.group.approve.vo.Progress">
 		UPDATE 
-			progress 
+			PROGRESS
 		SET 
-			pro_realTime = #{proRealTime},
-			pro_state = #{proState},
-			pro_personalstate = #{proPersonState},  
-			pro_reason = #{proReason} 
+			PRO_REALTIME= #{proRealTime},
+			PRO_STATE= #{proState},
+			PRO_PERSONALSTATE= #{proPersonState},  
+			PRO_REASON= #{proReason} 
 		WHERE 
-			dft_code = #{dftCode};
+			DFT_CODE= #{dftCode};
 	</update>
 	
 	<!-- 결재 요청 : 2-1단계 : draft update -->
-	<update id="updateDft" parameterType="com.cafe24.smart.approve.domain.Draft">
+	<update id="updateDft" parameterType="com.group.approve.vo.Draft">
 		UPDATE 
-			draft 
+			DRAFT
 		SET 
-			dft_degree = #{dftDegree}, 
-			dft_finalState = #{dftFinalState}
+			DFT_DEGREE= #{dftDegree}, 
+			DFT_FINALSTATE= #{dftFinalState}
 		WHERE 
-			dft_code = #{dftCode};
+			DFT_CODE= #{dftCode};
 	</update>
 	
 	<!-- 결재 요청 : 2-2단계 : progress에 결재자 추가//결재 차수 추가 -->
-	<update id="updateProApv" parameterType="com.cafe24.smart.approve.domain.Progress">
+	<update id="updateProApv" parameterType="com.group.approve.vo.Progress">
 		UPDATE 
-			progress 
+			PROGRESS
 		SET 
-			pro_approval = #{proApproval},
-			pro_turn = #{proTurn},
-			pro_state = #{proState} 
+			PRO_APPROVAL= #{proApproval},
+			PRO_TURN= #{proTurn},
+			PRO_STATE= #{proState} 
 		WHERE 
-			dft_code = #{dftCode};
+			DFT_CODE= #{dftCode};
 	</update>	
 </mapper>

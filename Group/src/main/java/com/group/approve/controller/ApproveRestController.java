@@ -34,7 +34,7 @@ public class ApproveRestController {
 	private ApproveService approveService;
 
 	// 문서양식 등록 : POST
-	@RequestMapping(value ="ap/addDoc", method = RequestMethod.POST)
+	@RequestMapping(value ="/ap/addDoc", method = RequestMethod.POST)
 	public Map<String, Object> apDocAddReCtrl(@RequestParam("uploadFile") MultipartFile uploadFile,
 							  MultipartHttpServletRequest request, Document document) {
 		
@@ -67,7 +67,7 @@ public class ApproveRestController {
 	}
 	
 	// 결재선 : 브라우저 내에서 선택하여 사원코드/이름값 가져오기
-	@RequestMapping(value ="ap/addMm", method = RequestMethod.POST)
+	@RequestMapping(value ="/ap/addMm", method = RequestMethod.POST)
 	public List<UserVO> apMmAddReCtrl(Position position, Department department) {
 		
 		log.debug("ApproveRestController apMmAddReCtrl position : " + position + ", department : " + department);
@@ -76,7 +76,7 @@ public class ApproveRestController {
 	}
 	
 	// 결재선 : 결재선 등록,즐겨찾기
-	@RequestMapping(value ="ap/addApr", method = RequestMethod.POST)
+	@RequestMapping(value ="/ap/addApr", method = RequestMethod.POST)
 	public int apAprAddReCtrl(Approval approval) {
 				
 		log.debug("ApproveRestController apAprAddReCtrl approval : " + approval);
@@ -94,7 +94,7 @@ public class ApproveRestController {
 	}
 	
 	// 결재선 : list에서 view_db에서 사원코드로 저장된 결재선 가져오기 [복수]
-	@RequestMapping(value ="ap/listApr", method = RequestMethod.POST)
+	@RequestMapping(value ="/ap/listApr", method = RequestMethod.POST)
 	public List<Approval> apAprListReCtrl(@RequestParam("mmCode") int mmCode) {		
 		
 		log.debug("ApproveRestController apAprListReCtrl mmCode : " + mmCode);
@@ -112,7 +112,7 @@ public class ApproveRestController {
 	}
 	
 	// 검색 : 결재 목록
-	@RequestMapping(value="ap/searchDft", method = RequestMethod.POST)
+	@RequestMapping(value="/ap/searchDft", method = RequestMethod.POST)
 	public List<Draft> apSearchListCtrl(Draft draft,
 					@RequestParam(value="docFileGroup", defaultValue="문서없음") String docFileGroup) {
 		
@@ -123,7 +123,7 @@ public class ApproveRestController {
 	}
 	
 	// 검색 : 문서 양식 목록
-	@RequestMapping(value = "ap/searchDoc", method = RequestMethod.POST)
+	@RequestMapping(value = "/ap/searchDoc", method = RequestMethod.POST)
 	public List<Document> apSearchDocListCtrl(@RequestParam(value="docFileGroup") String docFileGroup) {
 		
 		log.debug("ApproveRestController apSearchDocListCtrl docFileGroup : " + docFileGroup);
@@ -132,7 +132,7 @@ public class ApproveRestController {
 	}
 	
 	// 검색 : 임시 저장목록
-	@RequestMapping(value = "ap/searchTem", method = RequestMethod.POST)
+	@RequestMapping(value = "/ap/searchTem", method = RequestMethod.POST)
 	public List<Draft> apSearchDocListCtrl(Draft draft,
 						@RequestParam(value="docFileGroup", defaultValue="0") String docFileGroup) {
 		
@@ -143,7 +143,7 @@ public class ApproveRestController {
 	}
 	
 	// 전자결제 팝업창 기본데이터 요청 : 윤재호
-	@RequestMapping(value ="ap/evApproval", method = RequestMethod.POST)
+	@RequestMapping(value ="/ap/evApproval", method = RequestMethod.POST)
 	public Map<String, Object> evAppReqData() {
 		
 		// 1.문서종류, 결제부서, 직급 정보를 조회한다
@@ -164,7 +164,7 @@ public class ApproveRestController {
 	}
 	
 	//기안 등록 : POST 윤재호
-	@RequestMapping(value ="ap/addApply", method = RequestMethod.POST)
+	@RequestMapping(value ="/ap/addApply", method = RequestMethod.POST)
 	public String apAddApplyCtrl(@RequestParam("uploadFile") MultipartFile uploadFile,
 							MultipartHttpServletRequest request, Draft draft, Progress progress){
 			

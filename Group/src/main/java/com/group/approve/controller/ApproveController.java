@@ -36,7 +36,7 @@ public class ApproveController {
 	private ApproveService approveService;
 
 	// 기안 등록 : GET
-	@RequestMapping(value = "ap/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/ap/add", method = RequestMethod.GET)
 	public String add(Model model) {
 
 		// log.debug("ctrl dftAdd GET> test");
@@ -50,11 +50,11 @@ public class ApproveController {
 
 		log.debug("ApproveController add model : " + model);
 		
-		return "/approve/ap_dftAdd";
+		return "approve/ap_dftAdd";
 	}
 
 	// 기안 등록 : POST
-	@RequestMapping(value = "ap/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/ap/add", method = RequestMethod.POST)
 	public String apAddCtrl(@RequestParam("uploadFile") MultipartFile uploadFile,
 					MultipartHttpServletRequest request, Draft draft, Progress progress) {
 
@@ -68,11 +68,11 @@ public class ApproveController {
 		log.debug("ApproveController apAddCtrl uploadPath :" + uploadPath);
 		log.debug("ApproveController apAddCtrl result :" + result);
 
-		return "redirect:/ap/list";
+		return "redirect:ap/list";
 	}
 
 	// 결재 목록 [대기/반려/완료] : GET
-	@RequestMapping(value = "ap/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/ap/list", method = RequestMethod.GET)
 	public String apProListCtrl(Model model,
 			@RequestParam(value = "apProgress", defaultValue = "0") int apProgress, HttpSession session) {
 
@@ -89,11 +89,11 @@ public class ApproveController {
 		model.addAttribute("pgList", pgList);
 		model.addAttribute("docList", docList);
 
-		return "/approve/ap_list";
+		return "approve/ap_list";
 	}
 
 	// 결재 상세보기[대기/반려/완료] : GET
-	@RequestMapping(value = "ap/Content", method = RequestMethod.GET)
+	@RequestMapping(value = "/ap/Content", method = RequestMethod.GET)
 	public String apHvDetailCtrl(Model model, @RequestParam("dftCode") int dftCode) {
 		
 		log.debug("ApproveController apHvDetailCtrl dftCode :" + dftCode);
@@ -110,7 +110,7 @@ public class ApproveController {
 	}
 
 	// 결재 요청[승인/반려] : POST
-	@RequestMapping(value = "ap/proAdd", method = RequestMethod.POST)
+	@RequestMapping(value = "/ap/proAdd", method = RequestMethod.POST)
 	public String proAdd(Draft draft, Progress progress, @RequestParam("dftCode") int dftCode) {
 
 		log.debug("ApproveController proAdd dftCode :" + dftCode);
@@ -119,11 +119,11 @@ public class ApproveController {
 		
 		log.debug("ApproveController proAdd result :" + result);
 
-		return "redirect:/ap/list";
+		return "redirect:ap/list";
 	}
 
 	// 임시 문서함 : GET
-	@RequestMapping(value = "ap/temList", method = RequestMethod.GET)
+	@RequestMapping(value = "/ap/temList", method = RequestMethod.GET)
 	public String temList(Model model, HttpSession session) {
 
 		int mmCode = (int) session.getAttribute("mmCode");
@@ -137,11 +137,11 @@ public class ApproveController {
 		model.addAttribute("temList", temList);
 		model.addAttribute("docList", docList);
 
-		return "/approve/ap_temList";
+		return "approve/ap_temList";
 	}
 
 	// 임시 문서함 상세보기 : GET
-	@RequestMapping(value = "ap/temContent", method = RequestMethod.GET)
+	@RequestMapping(value = "/ap/temContent", method = RequestMethod.GET)
 	public String aptemDetailCtrl(Model model, @RequestParam("dftCode") int dftCode) {
 
 		log.debug("ApproveController aptemDetailCtrl dftCode : " + dftCode);
@@ -159,11 +159,11 @@ public class ApproveController {
 		model.addAttribute("depMap", approveService.temContDepServ(draft));
 		model.addAttribute("ptMap", approveService.temContPtServ(draft));
 		
-		return "/approve/ap_temModify";
+		return "approve/ap_temModify";
 	}
 
 	// 문서 양식 목록 : GET
-	@RequestMapping(value = "ap/docList", method = RequestMethod.GET)
+	@RequestMapping(value = "/ap/docList", method = RequestMethod.GET)
 	public String apdocListCtrl(Model model) {
 
 		List<Document> docList = new ArrayList<Document>();
@@ -174,11 +174,11 @@ public class ApproveController {
 		
 		model.addAttribute("docList", docList);
 
-		return "/approve/ap_docList";
+		return "approve/ap_docList";
 	}
 
 	// 다운로드 : 기안 : 첨부파일 다운로드
-	@RequestMapping(value = "ap/dftDownFile", method = RequestMethod.GET)
+	@RequestMapping(value = "/ap/dftDownFile", method = RequestMethod.GET)
 	public ModelAndView apDftDownDftFile(@RequestParam(value = "dftCode", required = true) int dftCode) {
 
 		log.debug("ApproveController apDftDownDftFile dftCode : " + dftCode);
@@ -195,7 +195,7 @@ public class ApproveController {
 	}
 
 	// 다운로드 : 문서 : 첨부파일 다운로드
-	@RequestMapping(value = "ap/docDownFile", method = RequestMethod.GET)
+	@RequestMapping(value = "/ap/docDownFile", method = RequestMethod.GET)
 	public ModelAndView apDocDownDftFile(@RequestParam(value = "docCode", required = true) int docCode) {
 		
 		log.debug("ApproveController apDocDownDftFile docCode : " + docCode);
