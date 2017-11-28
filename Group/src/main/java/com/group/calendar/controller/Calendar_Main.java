@@ -40,6 +40,7 @@ public class Calendar_Main {
 			String[] calendar_remark){ 
 		List<Calendar_Vo> list =new ArrayList<Calendar_Vo>();
 		int id = 0;
+		UserVO user = null;
 		System.out.println("calendarMain kind : "+calendar_kind);
 		System.out.println("calendarMain kind.length : "+calendar_kind.length); //confirm
 		for (int i=0;i<calendar_title.length;i++) {
@@ -69,7 +70,8 @@ public class Calendar_Main {
 			
 			HttpSession session = request.getSession();
 			try {
-				UserVO user = (UserVO) session.getAttribute("authUser");
+				user = (UserVO) session.getAttribute("authUser");
+				
 				id = user.getEmployeeNo();
 				System.out.println("Calendar_main id : "+id);	//confirm
 				list.get(i).setCalendar_regid(id);
@@ -81,7 +83,7 @@ public class Calendar_Main {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("list", list);
 		service.insertCalender(map);
-		request.setAttribute("calendarList",service.selectCalenderAll(id));
+		request.setAttribute("calendarList",service.selectCalenderKind(user, calendar_kind));
 		return "content_calendar/calendar";
 	}
 	public String getKindColor(String kind) {
