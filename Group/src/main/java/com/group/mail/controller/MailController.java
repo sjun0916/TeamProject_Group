@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.group.mail.dao.MailDao;
 import com.group.mail.service.MailService;
 import com.group.mail.vo.MailVo;
+import com.group.message.vo.MessageVO;
 import com.group.user.auth.AuthUser;
 import com.group.user.common.JSONResult;
 import com.group.user.vo.UserVO;
@@ -193,6 +194,23 @@ public class MailController {
 			
 		}
 		
+	}
+	
+	
+	@RequestMapping(value="/view", method=RequestMethod.GET)
+	public String view(@RequestParam(value = "mailNum", required = true) int mailNum,
+			Model model) {
+		
+		MailVo mailVo = new MailVo();
+		mailVo.setMailNum(mailNum);
+		MailVo resVo = service.getDetailMail(mailVo);
+		
+		model.addAttribute("sender", resVo.getSenderMail());
+		model.addAttribute("receiver", resVo.getReceiverMail());
+		model.addAttribute("content", resVo.getContent());
+		model.addAttribute("title", resVo.getTitle());
+		
+		return "content_mail/view";
 	}
 
 }
