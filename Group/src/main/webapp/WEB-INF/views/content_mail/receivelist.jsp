@@ -21,31 +21,18 @@
 	<!-- 컨텐트 헤더 -->
 	<section class="content-header">
 		<h1>
-			쪽지 <small>ㅋㅋㅋㅋ</small>
+			받은메일함 <small>그룹웨어 내부에서 보낸 메일만 표시</small>
 		</h1>
-
 	</section>
 
 	<!-- ★★★★★★★★★★★여기에 추가★★★★★★★★★★★ -->
 	<!-- 컨텐트 메인 -->
 	<section class="content container-fluid">
-
-		 <div id="sendForm" title="메세지 전송">
-  <form>
-    <fieldset>
-      <label for="name">전송할 내용을 입력하세요</label>
-      <input type="hidden" name="receiverEmployeeNo" id="receiverEmployeeNo">
-      <input type="hidden" id="senderemployeeNo" value="${authUser.employeeNo}">
- 	  <textarea id = "messageArea" rows="15" cols="48" name="contents"></textarea>
-      <!-- Allow form submission with keyboard without duplicating the dialog button -->
-      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-    </fieldset>
-  </form>
-</div>
-
+	
+	<input type="hidden" name="receiverEmail" id="receiverEmail">
+      <input type="hidden" id="senderEmail" value="${authUser.email}">
 			
-			
-			<h2>쪽지 리스트</h2>
+			<h2>메일 리스트</h2>
 
 <table class="board_list">
 	<colgroup>
@@ -56,11 +43,10 @@
 	</colgroup>
 	<thead>
 		<tr>
-			<th scope="col">발신자</th>
-			<th scope="col">내용</th>
-			<th scope="col">수신시간</th>
-			<th scope="col">답장</th>
-			<th scope="col">삭제</th>
+			<th scope="col">메일번호</th>
+			<th scope="col">보낸사람</th>
+			<th scope="col">제목</th>
+			<th scope="col">보낸시간</th>
 
 		</tr>
 	</thead>
@@ -70,32 +56,31 @@
                     <c:forEach items="${list }" var="row">
                        
                         <tr>
-                            <td>${row.sender }</td>
+                            <td>${row.mailNum }</td>
+                            <td>${row.senderMail }</td>
                             <td class="title">
-                                <a href="${pageContext.request.contextPath }/message/view?messageId=${row.messageId}">
+                                <a href="${pageContext.request.contextPath }/mail/view?mailNum=${row.mailNum}">
                                 
 							          <c:choose>
-							           <c:when test="${fn:length(row.message) > 23}">
-							            <c:out value="${fn:substring(row.message,0,23)}"/>....
+							           <c:when test="${fn:length(row.title) > 23}">
+							            <c:out value="${fn:substring(row.title,0,23)}"/>....
 							           </c:when>
 							           <c:otherwise>
-							            <c:out value="${row.message}"/>
+							            <c:out value="${row.title}"/>
 							           </c:otherwise> 
 							          </c:choose>
 								
                                 </a>
                                 <input type="hidden" id="IDX" value="temp">
                             </td>
-                            <td>${row.writeDate }</td>
-                			<td><button id="sendMessageButton" onclick="openForm('${row.sender}')">답장</button></td>
-							<td><button id="deleteMessageButton" onclick="deleteMessage('${row.messageId}')">삭제</button></td>
+                            <td>${row.regdate }</td>
                         </tr>
                        
                     </c:forEach>
                 </c:when>
                 <c:otherwise>
                     <tr>
-                        <td colspan="5">수신한 쪽지가 존재하지 않습니다.</td>
+                        <td colspan="5">수신한 메일이 존재하지 않습니다.</td>
                     </tr>
                 </c:otherwise>
             </c:choose>

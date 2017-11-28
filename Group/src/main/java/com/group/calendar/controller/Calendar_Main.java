@@ -31,17 +31,20 @@ public class Calendar_Main {
 		return "content_calendar/calendar";
 	}
 	@RequestMapping(value = "/calendar/main",method=RequestMethod.POST)
-	public String savecalendar(HttpServletRequest request,String[] 
-			calendar_color,	Date[] calendar_start,	
+	public String savecalendar(HttpServletRequest request,
+			String[] calendar_kind,
+			Date[] calendar_start,	
 			Date[] calendar_end,
 			String[] calendar_title,
 			String[] calendar_cont,	
 			String[] calendar_remark){ 
 		List<Calendar_Vo> list =new ArrayList<Calendar_Vo>();
 		int id = 0;
-		System.out.println(calendar_title.length);
+		System.out.println("calendarMain kind : "+calendar_kind);
+		System.out.println("calendarMain kind.length : "+calendar_kind.length); //confirm
 		for (int i=0;i<calendar_title.length;i++) {
 			Calendar_Vo vo = new Calendar_Vo();
+			String color = null;
 			if(calendar_start.length!=0){
 				vo.setCalendar_start(calendar_start[i]);
 			}
@@ -57,9 +60,11 @@ public class Calendar_Main {
 			if(calendar_remark.length!=0){
 				vo.setCalendar_remark(calendar_remark[i]);
 			}
-			if(calendar_color.length!=0){
-				vo.setCalendar_color(calendar_color[i]);
+			if(calendar_kind.length!=0){
+				vo.setCalendar_kind(calendar_kind[i]);
+				System.out.println("calendarMain kind : "+calendar_kind[i]); //confirm
 			}
+			vo.setCalendar_color(getKindColor(calendar_kind[i]));
 			list.add(vo);
 			
 			HttpSession session = request.getSession();
@@ -79,18 +84,30 @@ public class Calendar_Main {
 		request.setAttribute("calendarList",service.selectCalenderAll(id));
 		return "content_calendar/calendar";
 	}
+	public String getKindColor(String kind) {
+		String color = null;
+		
+		switch(kind) {
+		case "person" : color = "#2377ff";break;
+		case "team" : color = "#efa110";break;
+		case "compony" : color = "#259613";break;
+		}
+		return color;
+	}
 	@RequestMapping(value = "/calendar/update",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object>   modify
 		 (int calendar_no,Date calendar_start,Date calendar_end,
 		  String calendar_title,String calendar_cont,
-		  String calendar_remark,String calendar_color) {
+		  String calendar_remark,String calendar_color, String calendar_kind) {
 		Calendar_Vo vo = new Calendar_Vo();
 		vo.setCalendar_no(calendar_no);
 		vo.setCalendar_start(calendar_start);
 		vo.setCalendar_end(calendar_end);
 		vo.setCalendar_cont(calendar_cont);
 		vo.setCalendar_remark(calendar_remark);
-		vo.setCalendar_color(calendar_color);
+		vo.setCalendar_kind(calendar_kind);
+		vo.setCalendar_color(getKindColor(calendar_kind));
+		
 		Map<String, Object> jsonObject = new HashMap<String, Object>();
 		try {
 			service.updateCalender(vo);

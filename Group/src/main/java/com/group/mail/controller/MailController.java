@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.group.mail.dao.MailDao;
 import com.group.mail.service.MailService;
 import com.group.mail.vo.MailVo;
+import com.group.message.vo.MessageVO;
 import com.group.user.auth.AuthUser;
 import com.group.user.common.JSONResult;
 import com.group.user.vo.UserVO;
@@ -38,7 +39,7 @@ public class MailController {
 	MailService service;	
 	
 	@RequestMapping( "")
-	public String message(@AuthUser UserVO authUser, 
+	public String email(@AuthUser UserVO authUser, 
 											Model model) {
 		MailVo mailVo= new MailVo();
 		mailVo.setSenderMail(authUser.getEmail());
@@ -50,24 +51,36 @@ public class MailController {
 		
 		model.addAttribute( "list", list );*/
 		
-		System.out.println("00000");
+		System.out.println("메일함 열기 성공");
 		return "content_mail/mailForm";
 	}
 	
-	//보낸 메일함
-	@RequestMapping( "/senderlist")
-	public String sendmail(@AuthUser UserVO authUser, 
-											Model model) {
-		MailVo mailVo= new MailVo();
+	//받은 메일함
+	@RequestMapping("/receivelist")
+	public String receivemail(@AuthUser UserVO authUser, Model model) {
+		MailVo mailVo = new MailVo();
 		mailVo.setSenderMail(authUser.getEmail());
-		
-		List<MailVo> list = 
-				service.getMail( mailVo );
-		
-		model.addAttribute( "list", list );
-		
+
+		List<MailVo> list = service.getMail(mailVo);
+
+		model.addAttribute("list", list);
+
+		System.out.println("보낸메일함 성공");
+		return "content_mail/receivelist";
+	}
+	
+	//보낸 메일함
+	@RequestMapping("/sendlist")
+	public String sendmail(@AuthUser UserVO authUser, Model model) {
+		MailVo mailVo = new MailVo();
+		mailVo.setSenderMail(authUser.getEmail());
+
+		List<MailVo> list = service.getMail2(mailVo);
+
+		model.addAttribute("list", list);
+
 		System.out.println("00000");
-		return "content_mail/mailsendlist";
+		return "content_mail/sendlist";
 	}
 	
 	
@@ -181,6 +194,23 @@ public class MailController {
 			
 		}
 		
+	}
+	
+	
+	@RequestMapping(value="/view", method=RequestMethod.GET)
+	public String view(@RequestParam(value = "mailNum", required = true) int mailNum,
+			Model model) {
+		
+		MailVo mailVo = new MailVo();
+		mailVo.setMailNum(mailNum);
+		MailVo resVo = service.getDetailMail(mailVo);
+		
+		model.addAttribute("sender", resVo.getSenderMail());
+		model.addAttribute("receiver", resVo.getReceiverMail());
+		model.addAttribute("content", resVo.getContent());
+		model.addAttribute("title", resVo.getTitle());
+		
+		return "content_mail/view";
 	}
 
 }

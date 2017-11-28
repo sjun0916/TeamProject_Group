@@ -3,36 +3,10 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 맵핑될 DAO 인터페이스의 name 을 줍니다. -->
-<!-- <mapper namespace="CalendarDao"> -->
-	<!-- id 속성은 DAO 의 메소드와 같아야 한다. 여기의 memberVO 는 Mybatis-confg.xml 에 Alias 되어있습니다. -->
-	
-	<!-- 등록된 전체 일정 목록 보기 -->
-<!-- 	<select id="viewList" resultType="CalendarVO"> -->
-<!-- 	select * from CALENDAR -->
-<!-- 	order by CALENDARNUM -->
-<!-- 	</select> -->
-	
-	<!-- 선택한 일정 보기 -->
-<!-- 	<select id="select" parameterType="int" resultType="CalendarVO"> -->
-<!-- 	select * from CALENDAR -->
-<!-- 	where CALENDARNUM = #{CALENDARNUM} -->
-<!-- 	</select> -->
-	
-	<!-- 일정 등록 -->
-<!-- 	<insert id="insert" parameterType="CalendarVO"> -->
-<!-- 	insert into CALENDAR -->
-<!-- 	(CALENDARNUM, EMPLOYEE_NO, STARTDATE, ENDDATE, TITLE, CONTENT, KIND) -->
-<!-- 	</insert> -->
-	<!--일정 수정 -->
-<!-- 	<update id="update" parameterType="CalendarVO"> -->
-<!-- 	update CALENDAR set STARTDATE=#{STARTDATE}, ENDDATE=#{ENDDATE}, TITLE=#{TITLE},  -->
-<!-- 	CONTENT=#{CONTENT}, KIND=#{KIND} where CALENDARNUM=#{CALENDARNUM} -->
-<!-- 	</update> -->
-	<!-- 일정 삭제 -->
-<!-- 	<delete id="delete" parameterType="CalendarVO"> -->
-<!-- 	delete from CALENDAR where CALENDARNUM=#{CALENDARNUM} -->
-<!-- 	</delete> -->
 	<mapper namespace="calendar">
+	<!-- id 속성은 DAO 의 메소드와 같아야 한다. 여기의 memberVO 는 Mybatis-confg.xml 에 Alias 되어있습니다. -->
+
+<!-- 	선택된 일정 확인 -->
 	<select id="selectOne" parameterType="int" resultMap="selectResultMap">
 		SELECT * FROM CALENDAR WHERE CALENDAR_NO=#{calendar_no}
 	</select>
@@ -46,11 +20,14 @@
   		<result property="calendar_cont" column="CALENDAR_CONT"/>
   		<result property="calendar_remark" column="CALENDAR_REMARK"/>
   		<result property="calendar_color" column="CALENDAR_COLOR"/>
+  		<result property="calendar_kind" column="CALENDAR_KIND"/>
 	</resultMap>
+<!-- 	내 일정 -->
 	<select id="selectList" parameterType="int" resultMap="selectResultMap">
-		SELECT CALENDAR_NO,CALENDAR_START,CALENDAR_END,CALENDAR_TITLE,CALENDAR_COLOR FROM CALENDAR
-		WHERE CALENDAR_REGID=#{id}
+		SELECT CALENDAR_NO,CALENDAR_START,CALENDAR_END,CALENDAR_TITLE,CALENDAR_COLOR,CALENDAR_KIND
+		FROM CALENDAR WHERE CALENDAR_REGID=#{id}
 	</select>
+<!-- 	일정 추가 -->
 	<insert id="insert" parameterType="java.util.Map">
 		INSERT INTO CALENDAR (
 		CALENDAR_NO,
@@ -60,7 +37,8 @@
 		CALENDAR_TITLE,
 		CALENDAR_CONT,
 		CALENDAR_REMARK,
-		CALENDAR_COLOR
+		CALENDAR_COLOR,
+		CALENDAR_KIND
 		)
 		SELECT PK_CALENDAR_NO.NEXTVAl, A.*
 		FROM (
@@ -72,31 +50,34 @@
 			#{item.calendar_title,jdbcType=VARCHAR},
 			#{item.calendar_cont,jdbcType=VARCHAR},
 			#{item.calendar_remark,jdbcType=VARCHAR},
-			#{item.calendar_color}
+			#{item.calendar_color},
+			#{item.calendar_kind}
 			FROM DUAL
 		</foreach>
 		) A
 
 	</insert>
+<!-- 	일정 수정 -->
 	<update id="update" parameterType="com.group.calendar.vo.Calendar_Vo">
 	update CALENDAR set
 		CALENDAR_START=#{calendar_start},
 		CALENDAR_END=#{calendar_end},
 		CALENDAR_CONT=#{calendar_cont},
 		CALENDAR_REMARK=#{calendar_remark},
-		CALENDAR_COLOR=#{calendar_color}
+		CALENDAR_COLOR=#{calendar_color},
+		CALENDAR_KIND=#{calendar_kind}
     WHERE CALENDAR_NO=#{calendar_no}
 	</update>
+<!-- 	일정 삭제 -->
 	<delete id="delete" parameterType="com.group.calendar.vo.Calendar_Vo">
 	DELETE FROM CALENDAR WHERE CALENDAR_NO=#{calendar_no}
 	</delete>
+<!-- 	일별 일정 확인 -->
 	<select id="dayList" parameterType="com.group.calendar.vo.Calendar_Vo" resultType="com.group.calendar.vo.Calendar_Vo">
 	SELECT * FROM CALENDAR
 	WHERE 
   	CALENDAR_REGID=#{calendar_regid}
 	and #{calendar_regdate} between CALENDAR_START and CALENDAR_END
-	
-	
 	</select>
 </mapper>
 

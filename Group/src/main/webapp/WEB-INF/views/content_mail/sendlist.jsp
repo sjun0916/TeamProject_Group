@@ -21,18 +21,16 @@
 	<!-- 컨텐트 헤더 -->
 	<section class="content-header">
 		<h1>
-			쪽지 <small>ㅋㅋㅋㅋ</small>
+			보낸메일함 <small>그룹웨어 내부에서 보낸 메일만 표시</small>
 		</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-			<li class="active">Here</li>
-		</ol>
 	</section>
 
 	<!-- ★★★★★★★★★★★여기에 추가★★★★★★★★★★★ -->
 	<!-- 컨텐트 메인 -->
 	<section class="content container-fluid">
-
+	
+	<input type="hidden" name="receiverEmail" id="receiverEmail">
+      <input type="hidden" id="senderEmail" value="${authUser.email}">
 			
 			<h2>메일 리스트</h2>
 
@@ -47,7 +45,7 @@
 		<tr>
 			<th scope="col">메일번호</th>
 			<th scope="col">받은사람</th>
-			<th scope="col">내용</th>
+			<th scope="col">제목</th>
 			<th scope="col">보낸시간</th>
 
 		</tr>
@@ -59,23 +57,23 @@
                        
                         <tr>
                             <td>${row.mailNum }</td>
-                            <td>${row.senderMail }</td>
+                            <td>${row.receiverMail }</td>
                             <td class="title">
-                                <a href="${pageContext.request.contextPath }/content_mail/view?mailNum=${row.mailNum}">
+                                <a href="${pageContext.request.contextPath }/mail/view?mailNum=${row.mailNum}">
                                 
 							          <c:choose>
-							           <c:when test="${fn:length(row.content) > 23}">
-							            <c:out value="${fn:substring(row.content,0,23)}"/>....
+							           <c:when test="${fn:length(row.title) > 23}">
+							            <c:out value="${fn:substring(row.title,0,23)}"/>....
 							           </c:when>
 							           <c:otherwise>
-							            <c:out value="${row.content}"/>
+							            <c:out value="${row.title}"/>
 							           </c:otherwise> 
 							          </c:choose>
 								
                                 </a>
                                 <input type="hidden" id="IDX" value="temp">
                             </td>
-                            <td>${row.writeDate }</td>
+                            <td>${row.regdate }</td>
                         </tr>
                        
                     </c:forEach>

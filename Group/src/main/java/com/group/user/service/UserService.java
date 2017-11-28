@@ -30,8 +30,12 @@ public class UserService {
 //	비밀번호 이메일 인증
 	public String getPw(Map<String, Object> paramMap) {
 		// TODO Auto-generated method stub
+		System.out.println("test");
 		return userDao.getPw(paramMap);
 	}
+//	public UserVO getPw(String employeeName, String email) {
+//		return userDao.getPw(employeeName ,email);
+//	}
 	
 	
 	public List<UserVO> getTeamList(){
