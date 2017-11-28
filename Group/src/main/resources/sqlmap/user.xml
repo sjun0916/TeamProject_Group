@@ -72,9 +72,18 @@
 	</select>
 
 	
-	<!-- 	비밀번호 이메일 전송 -->
+	<!-- 비밀번호 이메일 전송 -->
 	<select resultType="UserVO" parameterType="map"	id="getPw">
-	SELECT PASSWORD FROM EMPLOYEE WHERE EMPLOYEE_NAME=#{employeeName} and EMAIL=#{email} </select>
+	SELECT 
+	PASSWORD 
+	FROM EMPLOYEE 
+	WHERE 
+	EMPLOYEE_NAME=#{employeeName} 
+	and EMAIL=#{email} 
+	</select>
+
+
+
 
 	<select id="getByemployeeNoAndPassword" 
 			parameterType="map"

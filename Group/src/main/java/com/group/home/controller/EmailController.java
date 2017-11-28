@@ -23,10 +23,10 @@ public class EmailController {
 //  private JavaMailSender mailSender;
  
   // mailForm
-  @RequestMapping(value = "/mail/mailForm")
+  @RequestMapping(value = "/search/searchpassword")
   public String mailForm() {
    
-    return "mailForm";
+    return "searchpassword";
   }  
  
   // mailSending 코드

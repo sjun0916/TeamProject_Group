@@ -38,7 +38,7 @@ public class MailController {
 	MailService service;	
 	
 	@RequestMapping( "")
-	public String message(@AuthUser UserVO authUser, 
+	public String email(@AuthUser UserVO authUser, 
 											Model model) {
 		MailVo mailVo= new MailVo();
 		mailVo.setSenderMail(authUser.getEmail());
@@ -55,17 +55,15 @@ public class MailController {
 	}
 	
 	//보낸 메일함
-	@RequestMapping( "/senderlist")
-	public String sendmail(@AuthUser UserVO authUser, 
-											Model model) {
-		MailVo mailVo= new MailVo();
+	@RequestMapping("/senderlist")
+	public String receivemail(@AuthUser UserVO authUser, Model model) {
+		MailVo mailVo = new MailVo();
 		mailVo.setSenderMail(authUser.getEmail());
-		
-		List<MailVo> list = 
-				service.getMail( mailVo );
-		
-		model.addAttribute( "list", list );
-		
+
+		List<MailVo> list = service.getMail(mailVo);
+
+		model.addAttribute("list", list);
+
 		System.out.println("00000");
 		return "content_mail/mailsendlist";
 	}

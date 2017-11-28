@@ -59,7 +59,7 @@ $(function(){
 
 <%--                         <input type="text" id="mailID" name="mailID" class="form-control" value="${authUser.email}"><!-- placeholder="내 구글 ID 입력" --> --%>
 
-                        <input type="text" id="mailID" name="mailID" class="form-control" placeholder="구글아이디@gmail.com">
+                        <input type="text" id="mailID" name="mailID" class="form-control" value="${authUser.email }">
 <%--                         <input type="text" id="mailID" name="mailID" value="${authUser.email }" class="form-control" disabled>  --%>
 
                      </div>
@@ -70,9 +70,7 @@ $(function(){
                                           
                      <div class="form-group">
                         <textarea id="compose-textarea" class="textarea" name="content"
-                           style="width: 100%; height: 300px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
-                      
-                             </textarea>
+                           style="width: 100%; height: 300px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                      </div>
                      <div class="pull-right">
                         <button type="submit" class="btn btn-primary">

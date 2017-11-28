@@ -26,17 +26,18 @@
 		
 	
 	<select id="getEmail" resultType="com.group.mail.vo.MailVo" parameterType="UserVo">
-		SELECT RECEIVER_MAIL receiverMail,
+		SELECT 
+		RECEIVER_MAIL receiverMail,
 		SENDER_MAIL senderMail,
-		MAIL_NUM mailNum,
+		MAILNUM mailNum,
 		(
 		SELECT EMAIL
-		FROM EMPLOYEESD
+		FROM EMPLOYEE
 		WHERE EMAIL = MAIL.SENDER_MAIL) SENDER,
-		MESSAGE_CONTENT message,
+		CONTENT content,
 		REGDATE REGDATE
 		FROM MAIL
-		WHERE RECEIVER_MAIL = #{email}
+		WHERE RECEIVER_MAIL = #{senderMail}
 		ORDER
 		BY REGDATE DESC
 	</select>

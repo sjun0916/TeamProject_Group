@@ -23,10 +23,7 @@
 		<h1>
 			쪽지 <small>ㅋㅋㅋㅋ</small>
 		</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-			<li class="active">Here</li>
-		</ol>
+
 	</section>
 
 	<!-- ★★★★★★★★★★★여기에 추가★★★★★★★★★★★ -->

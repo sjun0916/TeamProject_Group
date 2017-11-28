@@ -17,9 +17,12 @@
 <script src="${pageContext.servletContext.contextPath }/assets/js/common.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/assets/js/search_employee.js" type="text/javascript"></script>
  <script type="text/javascript">  
- 
+
  </script>
+ 
+ 
 </head>
+
     <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
