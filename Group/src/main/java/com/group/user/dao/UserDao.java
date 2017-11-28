@@ -38,8 +38,17 @@ public class UserDao {
 //	비밀번호 이메일 인증
 	public String getPw(Map<String, Object> paramMap) {
 		// TODO Auto-generated method stub
-		return (String) sqlSession.selectOne("user.getPw",paramMap);
+		System.out.println("test");
+		return sqlSession.selectOne("user.getPw",paramMap);
 	}
+//	public UserVO getPw( String employeeName, String email ){
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("employeeName", employeeName);
+//		map.put("password", email);
+//		UserVO vo = sqlSession.selectOne("user.getPw", map);
+//		
+//		return vo;
+//	}
 	
 
 	public List<UserVO> getTeamList(){
