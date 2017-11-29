@@ -17,6 +17,8 @@ public class PhotoVO {
     private String writerpos;
     private String departname;
  
+    private String realname;
+ 
     
     /* 첨부파일 */
     private List<MultipartFile> uploadfile;
@@ -84,6 +86,15 @@ public class PhotoVO {
 
 	public void setUploadfile(List<MultipartFile> uploadfile) {
 		this.uploadfile = uploadfile;
+	}
+
+
+	public String getRealname() {
+		return realname;
+	}
+
+	public void setRealname(String realname) {
+		this.realname = realname;
 	}
 
 

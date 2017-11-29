@@ -54,4 +54,10 @@ public class Calendar_DaoImpl implements Calendar_Dao {
 		return client.selectList("calendar.dayList",vo);
 	}
 
+	@Override
+	public List<Calendar_Vo> selectCalenderT() throws SQLException {
+		// TODO Auto-generated method stub
+		return client.selectList("calendar.selectAll");
+	}
+
 }

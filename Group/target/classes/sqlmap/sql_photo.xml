@@ -26,10 +26,10 @@
     
 <!--     페이징처리,카테고리기능  -->
     <select id="selectPhotoList" resultType="com.group.photo.vo.PhotoVO" parameterType="com.group.board.vo.SearchVO">
-        SELECT PHOTONUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE
+        SELECT PHOTONUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE, REALNAME
              , (SELECT COUNT(*) FROM PHOTOFILE WHERE PHOTONUM=DS.PHOTONUM) FILECNT 
           FROM (
-            SELECT PHOTONUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, REGDATE
+            SELECT PHOTONUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, REGDATE, REALNAME
               , ROW_NUMBER() OVER(ORDER BY PHOTONUM DESC) PHOTONUM_SEQ
           FROM PHOTO
                     
@@ -40,7 +40,12 @@
          ORDER BY PHOTONUM DESC
          
     </select> 
-
+<select id="selectPhotoOne" parameterType="String" resultType="com.group.photo.vo.PhotoVO">
+        SELECT PHOTONUM, TITLE, WRITER, WRITERPOS, DEPARTNAME, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE
+          FROM PHOTO
+         WHERE BRDDELETEFLAG='N'
+           AND PHOTONUM=#{photonum}
+    </select> 
 
      
     
@@ -48,11 +53,11 @@
     	<selectKey resultType="String" keyProperty="photonum" order="BEFORE">
             SELECT PHOTONUM_SEQ.NEXTVAL FROM DUAL
         </selectKey> 
-        INSERT INTO PHOTO(PHOTONUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, REGDATE, BRDDELETEFLAG)
-        VALUES (#{photonum}, #{title}, #{departname}, #{writer},#{writerpos}, SYSDATE,'N' )
+        INSERT INTO PHOTO(PHOTONUM, TITLE, DEPARTNAME, WRITER, WRITERPOS,REALNAME, REGDATE, BRDDELETEFLAG)
+        VALUES (#{photonum}, #{title}, #{departname}, #{writer},#{writerpos},#{realname}, SYSDATE,'N' )
     </insert>
     
-    <update id="updatePhoto" parameterType="com.group.photo.vo.PhotoVO">
+    <update id="updatePhotoRead" parameterType="com.group.photo.vo.PhotoVO">
         UPDATE PHOTO
            SET TITLE=#{title}
              , WRITER=#{writer}
@@ -62,7 +67,7 @@
     </update> 
         
  
-    <delete id="deletePhotoOne" parameterType="String">
+    <delete id="deletePhoto" parameterType="String">
         UPDATE PHOTO
            SET BRDDELETEFLAG='Y' 
          WHERE PHOTONUM=#{photonum}

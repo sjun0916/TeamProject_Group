@@ -14,4 +14,5 @@ public interface Calendar_Dao {
 	public int deleteCalender(Calendar_Vo vo) throws SQLException;
 	public int updateCalender(Calendar_Vo vo) throws SQLException;
 	public List<Calendar_Vo> dayCalendarList(Calendar_Vo vo) throws SQLException;
+	public List<Calendar_Vo> selectCalenderT() throws SQLException;
 }
