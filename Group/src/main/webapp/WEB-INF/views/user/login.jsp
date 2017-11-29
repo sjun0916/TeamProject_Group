@@ -22,6 +22,23 @@
 	<script src="<c:url value='/resources/loginCSS/resources/js/rsa/rng.js'/>"></script>
 	
 	<script src="<c:url value='/resources/loginCSS/resources/js/jquery-3.1.1.min.js'/>"></script>
+	
+	<script>
+		function loginCheck(){
+			if(document.loginform.employeeNo.value==""){
+				alert("사원번호를 입력해 주세요.");
+				document.loginform.employeeNo.focus();
+				return
+			}
+			if(document.loginform.password.value==""){
+				alert("비밀번호를 입력해 주세요.");
+				document.loginform.password.focus();
+				return
+			}
+			
+			document.loginform.submit();
+		}
+	</script>
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
@@ -83,7 +100,7 @@
 										</div>
 									</div>
 									<div><a href="${pageContext.servletContext.contextPath }/user/join">REGISTER</a> || <a href="${pageContext.servletContext.contextPath }/search/searchpassword">비밀번호 찾기</a></div>
-									<button type="submit" class="btn btn-sm btn-primary btn-block">로그인</button>
+									<button type="button" class="btn btn-sm btn-primary btn-block" onClick="loginCheck()">로그인</button>
 								</form>
 							</div>
 						</div>
