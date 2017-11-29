@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+table, td, th {
+	text-align: center;
+	
+}
+a:link{
+color:black;
+}
+a:visited{
+color:black;
+}
+td{
+	padding: 30px;
+}

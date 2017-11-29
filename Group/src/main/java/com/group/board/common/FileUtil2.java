@@ -12,11 +12,16 @@ import org.springframework.web.multipart.MultipartFile;
 import com.group.board.vo.FileVO;
 
 public class FileUtil2 {
+	
+	private String conPath;
     /**
      * 파일 업로드.
      */
     public List<FileVO> saveAllFiles(List<MultipartFile> upfiles) {
-        String filePath = "c:\\workspace\\fileupload\\"; 
+//        String filePath = "c:\\workspace\\fileupload\\"; 
+    	String filePath = conPath;
+    	System.out.println("servletContextpath: "+filePath);
+    	
         List<FileVO> filelist = new ArrayList<FileVO>();
 
         for (MultipartFile uploadfile : upfiles ) {
@@ -90,4 +95,12 @@ public class FileUtil2 {
     public String getRealPath(String path, String filename) {
         return path + filename.substring(0,4) + "/";
     }
+
+	public String getConPath() {
+		return conPath;
+	}
+
+	public void setConPath(String conPath) {
+		this.conPath = conPath;
+	}
 }

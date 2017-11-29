@@ -9,10 +9,11 @@
 <%@ include file="/WEB-INF/views/include/headerScript.jsp"%>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 
+<link rel='stylesheet' type='text/css'
+	href='<c:url value="/resources/boardCSS/PhotoList.css"/>'>
 
-<script>
-	
-</script>
+
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- 컨텐츠 헤더 -->
@@ -31,28 +32,20 @@
 
 
 				<tbody>
+					<tr>
+						<c:forEach var="listview" items="${listview}" varStatus="status">
+							<c:url var="link" value="PhotoRead">
+								<c:param name="photonum" value="${listview.photonum}" />
+							</c:url>
 
-					<c:forEach var="listview" items="${listview}" varStatus="status">
-						<c:url var="link" value="PhotoRead">
-							<c:param name="photonum" value="${listview.photonum}" />
-						</c:url>
-						<tr>
-							<td><img src="c:\\workspace\\fileupload\\201711290942577227.png" width="100" height="80"/></td>
-						</tr>
-						<tr>
-							<td><c:out
-									value="${searchVO.totRow-((searchVO.page-1)*searchVO.displayRowCount + status.index)}" /></td>
-							<td><c:out value="${listview.departname}" /></td>
-							<td><a href="${link}"><c:out value="${listview.title}" /></a></td>
-							<td><c:if test="${listview.writerpos!=null}">
-							[<c:out value="${listview.writerpos}" />]
-							</c:if> <c:out value="${listview.writer}" /></td>
-							<td><c:out value="${listview.regdate}" /></td>
+							<td><img
+								src="\group\imgUpload\2017\<c:out value="${listview.realname}"/>"
+								width="400" height="300" /><br> <a href="${link}"><c:out
+										value="${listview.title}" /></a></td>
+							<c:if test="${status.count%3 eq 0 || status.last}">
+					</tr>
+					</c:if>
 
-							<%-- 									<img src="<c:url value="/resources/icon/floppy-disk.png"/>" --%>
-							<!-- 										width="25" height="25" /> -->
-
-						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
