@@ -37,7 +37,7 @@
 							<c:param name="photonum" value="${listview.photonum}" />
 						</c:url>
 						<tr>
-							<td></td>
+							<td><img src="c:\\workspace\\fileupload\\201711290942577227.png" width="100" height="80"/></td>
 						</tr>
 						<tr>
 							<td><c:out

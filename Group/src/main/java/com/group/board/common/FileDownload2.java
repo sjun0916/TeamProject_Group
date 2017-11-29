@@ -23,7 +23,7 @@ public class FileDownload2 {
     @RequestMapping(value = "fileDownload2")
     public void fileDownload2(HttpServletRequest request,HttpServletResponse response) {
         String path = "c:\\workspace\\fileupload\\"; 
-        
+       
         String filename = request.getParameter("filename");
         String downname = request.getParameter("downname");
 //        String[] arrFilename = filename.split(".");
