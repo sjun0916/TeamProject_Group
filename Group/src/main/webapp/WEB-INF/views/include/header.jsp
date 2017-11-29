@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page session="true"%>
 
-<body class="skin-green-light sidebar-mini">
+<body class="skin-blue sidebar-mini">
 <div class="wrapper">
 <%-- <input type="hidden" id="userEmployeeNo" value="${authUser.employeeNo}" > --%>
   <!-- 메인 헤더! -->
@@ -15,9 +15,9 @@
     <a href="/group/home" class="logo">
     
       <!-- 메인바가 미니가 되었을때 로고 형태 -->
-      <span class="logo-mini"><b>GW</b></span>
+      <span class="logo-mini">GW</span>
       <!-- 로고 형태 -->
-      <span class="logo-lg"><b>G</b>roup<b>W</b>are</span>
+      <span class="logo-lg">GroupWare</span>
     </a>
     <!-- 헤더 상단 네비바 -->
     <nav class="navbar navbar-static-top" role="navigation">
@@ -158,9 +158,8 @@
             	<i class="fa fa-angle-left pull-right"></i>
         	</a>
             <ul class="treeview-menu">
-            	<li><a href="${pageContext.request.contextPath}/ap/add"><i class="fa fa-circle-o"></i> 결재작성</a></li>
-            	<li><a href="${pageContext.request.contextPath}/ap/list"><i class="fa fa-circle-o"></i> 결재함</a></li>
-            	<li><a href="${pageContext.request.contextPath}/ap/docList"><i class="fa fa-circle-o"></i> 문서양식</a></li>
+            	<li><a href="${pageContext.request.contextPath}/report/make"><i class="fa fa-circle-o"></i> 결재작성</a></li>
+            	<li><a href="${pageContext.request.contextPath}/report/state"><i class="fa fa-circle-o"></i> 결재함</a></li>
             </ul>
         </li>
         

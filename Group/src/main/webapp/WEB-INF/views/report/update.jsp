@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<!DOCTYPE html>
+<html>
+<head>
+<title>Smart-Groupware</title>
+<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
+<%@ include file="/WEB-INF/views/include/header.jsp" %>
 <div class="content-wrapper" style="min-height: 901px;">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
@@ -128,6 +133,9 @@
 		<!-- /.box-body -->
 	</div>
 	<!-- /.content -->
+    <%@ include file="/WEB-INF/views/include/footer.jsp" %>
+    <%@ include file="/WEB-INF/views/include/footerScript.jsp" %>
+</body>
 
 <script type="text/javascript">
 var title;
@@ -185,3 +193,4 @@ var title;
 <!-- Select2 -->
 <script
 	src="${pageContext.request.contextPath}/resources/plugins/select2/select2.full.min.js"></script>
+	</html>
