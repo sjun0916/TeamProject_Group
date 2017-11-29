@@ -13,12 +13,6 @@
 
 <script>
 	function categoryChange(value) {
-
-		/* alert("selectbox value: " + $("#category1 option:selected").val()); */
-		/* 	if (value == "전체") {
-			location.href("BoardList.jsp");
-		} else {
-		 */
 		document.form1.submit();
 	}
 </script>

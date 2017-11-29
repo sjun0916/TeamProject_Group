@@ -67,7 +67,7 @@
     </update> 
         
  
-    <delete id="deletePhoto" parameterType="String">
+    <delete id="deletePhotoOne" parameterType="String">
         UPDATE PHOTO
            SET BRDDELETEFLAG='Y' 
          WHERE PHOTONUM=#{photonum}

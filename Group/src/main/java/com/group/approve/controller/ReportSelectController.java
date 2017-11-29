@@ -10,9 +10,9 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,21 +23,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.group.approve.service.ReportService;
 import com.group.approve.vo.ReportVo;
-import com.group.calendar.controller.SessionUtil;
-import com.group.message.service.MessageService;
+import com.group.user.auth.AuthUser;
 import com.group.user.vo.UserVO;
 
 @Controller
 public class ReportSelectController {
-	@Resource(name = "reportService")
+	
+	@Autowired
 	ReportService service;
-	@Resource(name="messageService")
-	private MessageService msgservice;
 
 	@RequestMapping(value = "/report/select/{form}",method=RequestMethod.GET)
-	public String formReport(@PathVariable String form, HttpServletRequest request,ReportVo vo) {
+	public String formReport(@PathVariable String form, HttpServletRequest request,ReportVo reportVo) {
 		
-		request.setAttribute("vo", vo);
+		request.setAttribute("vo", reportVo);
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e1) {
@@ -70,21 +68,16 @@ public class ReportSelectController {
 	}
 	
 	@RequestMapping(value = "/report/select/{form}",method=RequestMethod.POST)
-	public String endReport(@PathVariable String form, HttpServletRequest request,ReportVo vo,@RequestParam("content")String content){
-		UserVO user = null;
-		try {
-			user = (UserVO) SessionUtil.getAttribute("login");
-	
-		} catch (Exception e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		vo.setReg_cont(content);
-		System.out.println(user.getEmployeeNo());
-		vo.setReg_id(user.getEmployeeNo());
-		vo.setReg_dep(user.getTeamId());
-		vo.setReg_state("1");
-		service.insert(vo);
+	public String endReport(@PathVariable String form, HttpServletRequest request,ReportVo reportVo,@RequestParam("content")String content,
+								@AuthUser UserVO authUser){
+		
+		reportVo.setReg_cont(content);
+		reportVo.setReg_id(authUser.getEmployeeNo());
+		reportVo.setReg_dep(authUser.getTeamId());
+		reportVo.setReg_state("1");
+		service.insert(reportVo);
+		
+		System.out.println("결재서류 작성 완료");
 		
 		return "report/endReport";
 	}
