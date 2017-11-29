@@ -99,7 +99,8 @@
 											<input type="password" class="form-control" name="password" id="password" placeholder="비밀번호를 입력하세요" />
 										</div>
 									</div>
-									<div><a href="${pageContext.servletContext.contextPath }/user/join">REGISTER</a> || <a href="${pageContext.servletContext.contextPath }/search/searchpassword">비밀번호 찾기</a></div>
+									<hr>
+									<div><a href="${pageContext.servletContext.contextPath }/user/join">사원 등록하기</a> |||| <a href="${pageContext.servletContext.contextPath }/search/searchemployeeno">사원번호 찾기</a> |||| <a href="${pageContext.servletContext.contextPath }/search/searchpassword">비밀번호 찾기</a></div>
 									<button type="button" class="btn btn-sm btn-primary btn-block" onClick="loginCheck()">로그인</button>
 								</form>
 							</div>

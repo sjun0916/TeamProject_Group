@@ -22,12 +22,19 @@ public class EmailController {
 //  @Autowired
 //  private JavaMailSender mailSender;
  
-  // mailForm
+  // 비밀번호 찾기 매핑
   @RequestMapping(value = "/search/searchpassword")
   public String mailForm() {
    
     return "searchpassword";
-  }  
+  }
+  
+//사원번호 찾기 매핑
+ @RequestMapping(value = "/search/searchemployeeno")
+ public String mailForm2() {
+  
+   return "searchemployeeno";
+ }  
  
   // mailSending 코드
 //  @RequestMapping(value = "/mail/mailSending")
@@ -67,7 +74,7 @@ public class EmailController {
   @Autowired
   private Email email;
   
-   @RequestMapping(value = "/mail/mailSending")
+   @RequestMapping(value = "/mail/mailSendPw")
    public ModelAndView sendEmailAction (@RequestParam Map<String, Object> paramMap, ModelMap model) throws Exception {
        ModelAndView mav;
        String name= (String) paramMap.get("employeeName");
@@ -80,6 +87,28 @@ public class EmailController {
            email.setContent("비밀번호는 "+password+" 입니다.");
            email.setReceiver(e_mail);
            email.setSubject(name+"님 비밀번호 찾기 메일입니다.");           
+           emailSender.SendEmail(email);
+           mav= new ModelAndView("redirect:/");
+           return mav;
+       }else {
+           mav=new ModelAndView("redirect:/");
+           return mav;
+       }
+   }
+   
+   @RequestMapping(value = "/mail/mailSendNo")
+   public ModelAndView sendNoEmailAction (@RequestParam Map<String, Object> paramMap, ModelMap model) throws Exception {
+       ModelAndView mav;
+       String name= (String) paramMap.get("employeeName");
+       String e_mail=(String) paramMap.get("email");
+       System.out.println(name);
+       System.out.println(e_mail);
+       String no = userService.getNo(paramMap);
+       System.out.println(no);
+       if(no!=null) {
+           email.setContent("사원번호는 "+no+" 입니다.");
+           email.setReceiver(e_mail);
+           email.setSubject(name+"님 사원번호 확인 메일입니다.");           
            emailSender.SendEmail(email);
            mav= new ModelAndView("redirect:/");
            return mav;
