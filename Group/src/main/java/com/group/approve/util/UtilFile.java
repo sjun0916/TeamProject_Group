@@ -23,8 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.view.AbstractView;
 
-import com.group.approve.vo.Draft;
-
 
 
 //@Component > @Service
@@ -103,14 +101,6 @@ public class UtilFile extends AbstractView {
 		
 		String uploadPath = request.getSession().getServletContext().getRealPath("/");
 		String attachPath = "resources/files/";
-		
-//		Approval인 경우
-		if(obj instanceof Draft) {
-			attachPath += "approval/";
-//		Document인 경우			
-		} else {
-			attachPath += "document/";
-		}
 		
 		System.out.println("UtilFile getSaveLocation path : " + uploadPath + attachPath);
 		

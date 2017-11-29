@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
-	 <%@ include file="/WEB-INF/views/include/header.jsp" %>
+<title>Smart-Groupware</title>
+<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 <!-- Content Wrapper. Contains page content -->
 <style>
 .sjgfont {
@@ -49,6 +48,7 @@
 	overflow: hidden;
 }
 </style>
+<%@ include file="/WEB-INF/views/include/header.jsp" %>
 <div class="content-wrapper" style="min-height: 841px;">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
@@ -334,7 +334,6 @@
     <%@ include file="/WEB-INF/views/include/footer.jsp" %>
     <%@ include file="/WEB-INF/views/include/footerScript.jsp" %>
 </body>
-
 <script type="text/javascript">
 	$(function() {
 		$("tr:has('td')").children().not(':first-child').click(

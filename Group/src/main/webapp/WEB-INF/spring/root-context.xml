@@ -55,8 +55,8 @@ http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
    <bean id="mailSender" class = "org.springframework.mail.javamail.JavaMailSenderImpl">
       <property name="host" value="smtp.gmail.com" />
       <property name="port" value="587" />
-      <property name="username" value="sjun0916@gmail.com" />
-      <property name="password" value="" />
+      <property name="username" value="groupwhere@gmail.com" />
+      <property name="password" value="tiger123!" />
       
       <property name="javaMailProperties">
          <props>
