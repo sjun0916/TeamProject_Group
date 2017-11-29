@@ -72,6 +72,8 @@ public class EmailController {
        ModelAndView mav;
        String name= (String) paramMap.get("employeeName");
        String e_mail=(String) paramMap.get("email");
+       System.out.println(name);
+       System.out.println(e_mail);
        String password=userService.getPw(paramMap);
        System.out.println(password);
        if(password!=null) {

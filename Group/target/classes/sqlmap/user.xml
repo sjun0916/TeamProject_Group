@@ -73,7 +73,7 @@
 
 	
 	<!-- 비밀번호 이메일 전송 -->
-	<select resultType="UserVO" parameterType="map"	id="getPw">
+	<select resultType="java.lang.String" parameterType="map"	id="getPw">
 	SELECT 
 	PASSWORD 
 	FROM EMPLOYEE 

@@ -37,7 +37,7 @@
 							<c:param name="photonum" value="${listview.photonum}" />
 						</c:url>
 						<tr>
-							<td><c:out value="${listview }</td>
+							<td></td>
 						</tr>
 						<tr>
 							<td><c:out
