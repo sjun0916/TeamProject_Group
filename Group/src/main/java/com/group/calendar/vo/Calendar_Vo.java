@@ -19,6 +19,7 @@ public class Calendar_Vo {
 	private String calendar_remark;
 	private String calendar_color;
 	private String calendar_kind;
+	private String calendar_team;
 	
 	public Calendar_Vo(){
 		
@@ -98,5 +99,12 @@ public class Calendar_Vo {
 		this.calendar_kind = calendar_kind;
 		System.out.println("Calendar_VO calendar_kind : "+this.calendar_kind); //confirm
 	}
+	public String getCalendar_team() {
+		return calendar_team;
+	}
+	public void setCalendar_team(String calendar_team) {
+		this.calendar_team = calendar_team;
+	}
+	
 	
 }

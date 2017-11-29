@@ -24,6 +24,7 @@
   		<result property="calendar_remark" column="CALENDAR_REMARK"/>
   		<result property="calendar_color" column="CALENDAR_COLOR"/>
   		<result property="calendar_kind" column="CALENDAR_KIND"/>
+  		<result property="calendar_team" column="CALENDAR_team"/>
 	</resultMap>
 <!-- 	내 일정 -->
 	<select id="selectList" parameterType="int" resultMap="selectResultMap">
@@ -41,7 +42,8 @@
 		CALENDAR_CONT,
 		CALENDAR_REMARK,
 		CALENDAR_COLOR,
-		CALENDAR_KIND
+		CALENDAR_KIND,
+		CALENDAR_TEAM
 		)
 		SELECT PK_CALENDAR_NO.NEXTVAl, A.*
 		FROM (
@@ -54,7 +56,8 @@
 			#{item.calendar_cont,jdbcType=VARCHAR},
 			#{item.calendar_remark,jdbcType=VARCHAR},
 			#{item.calendar_color},
-			#{item.calendar_kind}
+			#{item.calendar_kind},
+			#{item.calendar_team}
 			FROM DUAL
 		</foreach>
 		) A

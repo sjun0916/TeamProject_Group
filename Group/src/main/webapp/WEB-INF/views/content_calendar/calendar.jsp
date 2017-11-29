@@ -172,6 +172,70 @@
 
 <%@ include file="/WEB-INF/views/content_calendar/calendarScript.jsp" %>
 <script>
+function calView(desc){
+	$('#calendar').fullCalendar(
+			{
+				header : {
+					left : 'today',
+					center : 'prev, title, next',
+					right : ''
+				},
+				buttonText : {
+					today : 'today'
+				},
+				//Random default events
+				events : "${pageContext.request.contextPath}/calendar/data",
+				editable : false,
+				droppable : false, // this allows things to be dropped onto the calendar !!!
+				eventClick : function(calEvent, jsEvent, view) {
+// 					alert("fullcalendar.eventClick 실행");
+			    	$.ajax({    
+//				    		alert("fullcalendar.eventClick.ajax 실행");	//2
+			        	type:"POST",  
+			        	url:'${pageContext.request.contextPath}/calender/select',      
+			        	data:{"calendar_no":calEvent.description},
+			        	dataType : 'json',
+			        	success:function(data){   
+			            	var state =data.state;
+			             	var datainfo = data.select;
+			             	if(data.admin=="true"){
+		            			$('#myModal3 #delete').attr("type","hidden");
+			            		$('#myModal3 #modify').attr("type","hidden");
+				             }else{
+				            	 $('#myModal3 #delte').attr("type","button");
+				               	 $('#myModal3 #modify').attr("type","button");
+			             	}
+			             	if(state="success"){
+				           		 var dt1 = new Date(datainfo.calendar_start).format("MM/dd/yyyy hh:mm a/p");
+						     	var dt2 = new Date(datainfo.calendar_end).format("MM/dd/yyyy hh:mm a/p");
+								$('#myModal3 h4').text(datainfo.calendar_title); 
+								$('#myModal3 #title').val(datainfo.calendar_title);
+								$('#myModal3 #kind').val(datainfo.calendar_kind);
+								$('#myModal3 #settingcolor').val(datainfo.calendar_color); 
+								$('#myModal3 #settingbg').attr("style",'background-color:'+datainfo.calendar_color+';'); 
+								$('#myModal3 #reservationtime2').val(dt1+"-"+dt2); 
+								$('#myModal3 #cont').val(datainfo.calendar_cont); 
+								$('#myModal3 #etc').val(datainfo.calendar_remark);
+								$('#myModal3 #seq').val(datainfo.calendar_no); 
+								$('#myModal3').modal();
+				        	}else{
+				          		alert("일정 불러오기를 실패하였습니다");
+				        	}
+			                
+				             
+				        }, 
+				        error:function(e){  
+				            alert(e.responseText);  
+				        }  
+				    });
+					},
+					
+				});
+//					eventRender : function(calEvent, jsEvent, view){
+					
+//					}
+			
+}
 	$(function() {
 
 		/* initialize the external events
@@ -208,84 +272,33 @@
 		//Date for the calendar events (dummy data)
 		var date = new Date();
 		var d = date.getDate(), m = date.getMonth(), y = date.getFullYear();
-		$('#calendar').fullCalendar(
-				{
-					header : {
-						left : 'today',
-						center : 'prev, title, next',
-						right : ''
-					},
-					buttonText : {
-						today : 'today'
-					},
-					//Random default events
-					events : "${pageContext.request.contextPath}/calendar/data",
-					editable : false,
-					droppable : false, // this allows things to be dropped onto the calendar !!!
-					eventClick : function(calEvent, jsEvent, view) {
-						alert("fullcalendar.eventClick 실행");
-				    	$.ajax({    
-// 				    		alert("fullcalendar.eventClick.ajax 실행");	//2
-				        	type:"POST",  
-				        	url:'${pageContext.request.contextPath}/calender/select',      
-				        	data:{"calendar_no":calEvent.description},
-				        	dataType : 'json',
-				        	success:function(data){   
-				             var state =data.state;
-				             var datainfo = data.select;
-				             if(data.admin=="true"){
-				            		$('#myModal3 #delete').attr("type","hidden");
-				            		$('#myModal3 #modify').attr("type","hidden");
-				             }else{
-				            	 $('#myModal3 #delte').attr("type","button");
-				            	$('#myModal3 #modify').attr("type","button");
-				             }
-				             if(state="success"){
-				            	 alert("fullcalendar.eventClick.ajax.state 실행");
-				            	 var dt1 = new Date(datainfo.calendar_start).format("MM/dd/yyyy hh:mm a/p");
-				            	 var dt2 = new Date(datainfo.calendar_end).format("MM/dd/yyyy hh:mm a/p");
-								$('#myModal3 h4').text(datainfo.calendar_title); 
-								$('#myModal3 #title').val(datainfo.calendar_title);
-								$('#myModal3 #kind').val(datainfo.calendar_kind);
-								$('#myModal3 #settingcolor').val(datainfo.calendar_color); 
-								$('#myModal3 #settingbg').attr("style",'background-color:'+datainfo.calendar_color+';'); 
-								$('#myModal3 #reservationtime2').val(dt1+"-"+dt2); 
-								$('#myModal3 #cont').val(datainfo.calendar_cont); 
-								$('#myModal3 #etc').val(datainfo.calendar_remark);
-								$('#myModal3 #seq').val(datainfo.calendar_no); 
-								$('#myModal3').modal();
-				             }else{
-				            	 alert("일정 불러오기를 실패하였습니다");
-				             }
-				        }, 
-				        error:function(e){  
-				            alert(e.responseText);  
-				        }  
-				    });
-					},
-// 					eventRender : function(calEvent, jsEvent, view){
-						
-// 					}
-				});
 		
+		calView();
 		//continue : title에 checkbox 삽입 
 // 		var checkboxContainer = $(
 // 				"<div class='checkboxContainer'><input type='checkbox' value='compony' name='kind'>회사"+
 // 				"<input type='checkbox' value='team' name='kind'>부서"+
 // 				"<input type='checkbox' value='person' name='kind'>개인</div>");
 		var checkboxContainer = "<div class='ds-event-categories'>"+    
-			"<label><input id='monthKind' type='checkbox' value='compony' checked>회사</label>&nbsp;"+
-			"<label><input id='monthKind' type='checkbox' value='team' checked>부서</label>&nbsp;"+
-			"<label><input id='monthKind' type='checkbox' value='person' checked>개인</label>&nbsp;"+
+			"<label><input name='monthKind' id='kindcom' type='checkbox' value='compony' checked>회사</label>&nbsp;"+
+			"<label><input name='monthKind' id='kindteam' type='checkbox' value='team' checked>부서</label>&nbsp;"+
+			"<label><input name='monthKind' id='kindperson' type='checkbox' value='person' checked>개인</label>&nbsp;"+
 			"</div>";
 
 			// Append it to FullCalendar.
 			$(".fc-toolbar").after(checkboxContainer);
 
-			$("#monthKind").change(function() {
-				alert("monthKind.change 실행");
-				$('#calendar').fullCalendar('addEventSource', eventSource[1]);
-				});
+			$("[name='monthKind']").change(function() {
+				var ch_list=Array();
+				alert($('input:checkbox[name=monthKind]:checked'));
+// 				$("input:checkbox[type=kindcom]:checked").each(function(){
+// 					ch_list.push($(this).val());
+// 					alert($(this).val());
+// 				});
+// 				alert(ch_list[0]);
+// 				calView();
+			});
+			
 
 // 			$("#team").change(function() {
 // 			    if (this.checked) {
@@ -395,7 +408,7 @@
 
 	});
 	window.onload = function() {
-		alert("window.onload 실행");
+// 		alert("window.onload 실행");
 		$(".datepicker.datepicker-inline").hide();
 	};
 	function submit() {
@@ -421,9 +434,6 @@
 		}else{
 			return false;
 		}
-// 		$("#monthKind").change(function() {
-// 			$('#calendar').fullCalendar('rerenderEvents');
-// 		});
 		
 	}
 	

@@ -28,8 +28,9 @@ public class Calendar_Ajax {
 		List<Map<String, String>> list = new ArrayList<>();
 		HttpSession session = request.getSession();
 		int id = 0;
+		UserVO user = null;
 		try {
-			UserVO user= (UserVO) session.getAttribute("authUser");
+			user= (UserVO) session.getAttribute("authUser");
 			id = user.getEmployeeNo();
 			System.out.println("calendar_ajax user : "+user); 	//confirm
 		} catch (Exception e) {
@@ -37,24 +38,27 @@ public class Calendar_Ajax {
 			e.printStackTrace();
 		}
 		System.out.println("calendar_ajax id : "+id);		//confirm
-		List<Calendar_Vo> listVo = service.selectCalenderAll(id);
-		System.out.println("calendar_ajax listVo length : "+listVo.size()); //confirm
+		List<Calendar_Vo> listVo = service.selectCalenderKind(user, request.getParameterValues("monthKind"));
+//		System.out.println("calendar_ajax listVo length : "+listVo.size()); //confirm
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String startDate = null;
 		String endDate = null;
-		for (Calendar_Vo vo : listVo) {
-			Map<String, String> map = new HashMap<>();
-			startDate = dateFormat.format(vo.getCalendar_start());
-			endDate = dateFormat.format(vo.getCalendar_end());
-			map.put("title",vo.getCalendar_title());
-			map.put("start",startDate);
-			map.put("end", endDate);
-			map.put("backgroundColor",vo.getCalendar_color());
-			map.put("borderColor",vo.getCalendar_color());
-			map.put("allDay", "false");
-			map.put("description",Integer.toString(vo.getCalendar_no()));
-			list.add(map);
-		}
-		return list;
+		if(!(listVo==null)){
+			for (Calendar_Vo vo : listVo) {
+				Map<String, String> map = new HashMap<>();
+				startDate = dateFormat.format(vo.getCalendar_start());
+				endDate = dateFormat.format(vo.getCalendar_end());
+				map.put("title",vo.getCalendar_title());
+				map.put("start",startDate);
+				map.put("end", endDate);
+				map.put("backgroundColor",vo.getCalendar_color());
+				map.put("borderColor",vo.getCalendar_color());
+				map.put("allDay", "false");
+				map.put("description",Integer.toString(vo.getCalendar_no()));
+				list.add(map);
+			}
+			return list;
+		}else
+			return null;
 	}
 }
