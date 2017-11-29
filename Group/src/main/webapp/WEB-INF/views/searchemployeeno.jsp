@@ -88,9 +88,9 @@
       <article class="container">
         <div class="col-md-12">
         <div class="page-header">
-    	    <h1>비밀번호 찾기 <small>password search (mail_send)</small></h1>
+    	    <h1>사원번호 받기 <small>employeeNo (mail_send)</small></h1>
         </div>
-        <form class="form-horizontal" action="${pageContext.servletContext.contextPath }/mail/mailSendPw" name="pwsearch" method="post" >
+        <form class="form-horizontal" action="${pageContext.servletContext.contextPath }/mail/mailSendNo" name="pwsearch" method="post" >
 
         <div class="form-group">
           <label class="col-sm-3 control-label" for="email">이메일</label>
@@ -108,7 +108,7 @@
         
         <div class="form-group">
           <div class="col-sm-12 text-center">
-          	<button type="button" class="btn btn-primary" onclick="search()">비밀번호 요청<i class="fa fa-check spaceLeft"></i></button>
+          	<button type="button" class="btn btn-primary" onclick="search()">사원번호 전송<i class="fa fa-check spaceLeft"></i></button>
           	<button class="btn btn-danger" type="reset" onclick="location.href='/group'">돌아가기<i class="fa fa-times spaceLeft"></i></button>
           </div>
         </div>

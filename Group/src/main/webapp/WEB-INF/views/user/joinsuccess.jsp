@@ -14,6 +14,8 @@
 		<div id="content">
 			<div id="user">
 				<p class="jr-success">
+				
+					사원번호는 ${emplyeeNo } 입니다.
 					회원가입을 축하합니다.<br>
 					가입승인을 기다려주세요
 					
