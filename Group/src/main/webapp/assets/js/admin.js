@@ -10,7 +10,7 @@ function initGrid() {
         colNames:['사번','이름', '소속', '직급','이메일','가입승인'],
         //컬럼모델
         colModel:[
-            {name:'employeeNo',align:"center"},
+            {name:'employeeNo', align:"center"},
             {name:'employeeName',align:"center",width:100},
             {name:'teamName',align:"center"},
             {name:'positionName',align:"center"},
@@ -19,7 +19,7 @@ function initGrid() {
         ],
         width:1200,
         //그리드타이틀
-        caption: "사원목록"
+        caption: "승인대기목록"
     });
 }
 
