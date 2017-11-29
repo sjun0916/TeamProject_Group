@@ -30,12 +30,10 @@
 					<!-- /.box-header -->
 					<div class="box-body">
 						<div class="box-group" id="accordion">
-							<!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
 							<div class="panel box box-primary">
 								<div class="box-header with-border">
 									<h4 class="box-title">
-										<a data-toggle="collapse" data-parent="#accordion"
-											href="#collapseOne" aria-expanded="false" class="collapsed">
+										<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">
 											결제 절차 확인 </a>
 									</h4>
 								</div>
@@ -43,8 +41,8 @@
 									aria-expanded="false" style="height: 0px;">
 									<div class="box-body">
 										<div class="form-group">
-											<label>결재인원 체크</label> <select id="submissionPersonnel"
-												class="form-control">
+											<label>결재인원 (최대 5명)</label>
+											<select id="submissionPersonnel" class="form-control">
 												<option value="1">단순 제출용(1명)</option>
 												<option value="2">2명</option>
 												<option value="3">3명</option>
@@ -54,12 +52,11 @@
 											
 											<div id="Personnel">
 												<div class="form-group">
-													<label>결제자1</label> <select
-														class="form-control select2 select2-hidden-accessible"
-														name="reg_manager1"
+													<label>결제자1</label>
+													<select class="form-control select2 select2-hidden-accessible" name="reg_manager1"
 														style="width: 100%;" tabindex="-1" aria-hidden="true">
-														<c:forEach items="${memberList}" var="vo">
-														<option value="${vo.member_enum}">[${vo.dep_name}]${vo.member_name}</option>
+														<c:forEach items="${userList}" var="vo">
+														<option value="${vo.employeeNo}">[${vo.teamId}]${vo.employeeName}</option>
 														</c:forEach>
 													</select>
 												</div>
@@ -71,25 +68,22 @@
 							<div class="panel box box-danger">
 								<div class="box-header with-border">
 									<h4 class="box-title">
-										<a data-toggle="collapse" data-parent="#accordion"
-											href="#collapseTwo" class="collapsed" aria-expanded="false">
+										<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed" aria-expanded="false">
 											결제 서류 선택 </a>
 									</h4>
 								</div>
-								<div id="collapseTwo" class="panel-collapse collapse"
-									aria-expanded="false" style="height: 0px;">
+								<div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
 									<div class="box-body">
 										<div class="form-group">
-											<label>서류 제목</label> <input type="text" id="reg_title" name="reg_title" class="form-control"
-												placeholder="제목을 입력하세요">
+											<label>서류 제목</label>
+												<input type="text" id="reg_title" name="reg_title" class="form-control" placeholder="제목을 입력하세요">
 										</div>
 										<div class="form-group">
 											<select class="form-control" id="type">
 												<c:forEach items="${reportList}" var="fileName" >
 													<option value="${fileName}">${fileName}</option>
 												</c:forEach>
-												<input type="hidden" id="reg_type" name="reg_type" value="${reportList.get(0)}"/>
-												<input type="hidden" id="reg_labelnum" name="reg_labelnum" value="${reportList.get(0)}"/>
+												<input type="hidden" id="reg_type" name="reg_type" value="${reportList.get(0)}">
 											</select>
 										</div>
 									</div>
@@ -98,26 +92,15 @@
 							<div class="panel box box-success">
 								<div class="box-header with-border">
 									<h4 class="box-title">
-										<a data-toggle="collapse" data-parent="#accordion"
-											href="#collapseThree" class="collapsed" aria-expanded="false">
+										<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false">
 											기타 참고사항 </a>
 									</h4>
 								</div>
-								<div id="collapseThree" class="panel-collapse collapse"
-									aria-expanded="false" style="height: 0px;">
+								<div id="collapseThree" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
 									<div class="box-body">
-									<label>라벨</label> <select id="reg_labe"
-												class="form-control">
-												<option value="0">없음</option>
-											<c:forEach var="vo" items="${labelList}">
-												<option value="${vo.label_num}">${vo.label_name}</option>
-											</c:forEach>
-											
-											</select>
 										<div class="form-group">
-										<label>commnet</label>
-											<textarea name="comment" class="form-control" rows="3"
-												placeholder="Enter ..."></textarea>
+										<label>comment</label>
+											<textarea name="reg_comment" class="form-control" rows="3" placeholder="Enter ..."></textarea>
 										</div>
 									</div>
 								</div>
@@ -132,6 +115,7 @@
 		</div>
 		<!-- /.box-body -->
 	</div>
+	
 	<!-- /.content -->
     <%@ include file="/WEB-INF/views/include/footer.jsp" %>
     <%@ include file="/WEB-INF/views/include/footerScript.jsp" %>
@@ -141,12 +125,8 @@
 var title;
 	function writeReport() {
 		var e = document.getElementById("type");
-		var f = document.getElementById("reg_labe");
 		var reportType = e.options[e.selectedIndex].value;
-		var labelNum = f.options[f.selectedIndex].text;
-		var labelName = f.options[f.selectedIndex].value;
 		document.getElementById("reg_type").value=reportType;
-		document.getElementById("reg_labelnum").value=labelName;
 		if($("#reg_title").val().trim()!=""){
 		var gsWin = window
 				.open('about:blank',
@@ -178,8 +158,8 @@ var title;
 								htmlCode += '<div class="form-group">';
 								htmlCode += '<label>결제자' + (i + 1) + '</label>';
 								htmlCode += '<select name="reg_manager'+(i+1)+'" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">';
-								<c:forEach items="${memberList}" var="vo">
-								htmlCode +='<option value="${vo.member_enum}">[${vo.dep_name}]${vo.member_name}</option>';
+								<c:forEach items="${userList}" var="vo">
+								htmlCode +='<option value="${vo.employeeNo}">[${vo.teamId}]${vo.employeeName}</option>';
 								</c:forEach>
 								htmlCode += '</select>';
 							}
@@ -190,7 +170,7 @@ var title;
 
 	})
 </script>
-<!-- Select2 -->
+<%-- <!-- Select2 -->
 <script
-	src="${pageContext.request.contextPath}/resources/plugins/select2/select2.full.min.js"></script>
+	src="${pageContext.request.contextPath}/resources/plugins/select2/select2.full.min.js"></script> --%>
 	</html>
