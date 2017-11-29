@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="report">
+
 	<select id="select" parameterType="UserVO"
 		resultType="com.group.approve.vo.ReportVo">
-		select REPORT_NO,REG_TITLE,REG_REGISTER,REG_STATE,REG_REASON from REPORT, REG_ID=#{employeeNo}
+		select REPORT_NO,REG_TITLE,REG_DATE,REG_STATE,REG_REASON from REPORT where REG_ID=#{employeeNo}
 	</select>
+	
 	
 	<select id="select2" parameterType="int"
 		resultType="com.group.approve.vo.ReportVo">
-		SELECT REPORT_NO,REG_TITLE,REG_REGISTER,REG_STATE,REG_REASON from REPORT
+		SELECT REPORT_NO,REG_TITLE,REG_DATE,REG_STATE,REG_REASON from REPORT
 		and label_num =#{label_num}
 	</select>
-	
 	
 	
 	<select id="selectOne" parameterType="int"
 		resultType="com.group.approve.vo.ReportVo">
 		select * from REPORT where REPORT_NO=#{employeeNo}
 	</select>
+	
+	
 	<select id="check" parameterType="UserVO"
 		resultType="com.group.approve.vo.ReportVo">
-		SELECT REPORT_NO,REG_TITLE,REG_REGISTER,REG_STATE,REG_REASON from REPORT
+		SELECT REPORT_NO,REG_TITLE,REG_DATE,REG_STATE,REG_REASON from REPORT
 		WHERE REPORT_NO IN
 		(SELECT REPORT_NO from REPORT
 		WHERE REPORT_NO IN(
@@ -56,9 +60,9 @@
   and REG_STATE !=3
 	</select>
 
+
 	<insert id="insert" parameterType="com.group.approve.vo.ReportVo">
-		insert into
-		REPORT(
+		insert into REPORT (
 		REPORT_NO,
 		REG_ID,
 		REG_DEP,
@@ -68,30 +72,30 @@
 		REG_MANAGER4,
 		REG_MANAGER5,
 		REG_TITLE,
-		REG_STATE,
-		REG_REGISTER,
-		REG_TYPE,
 		REG_CONT,
-		COMENT
-		)values
-		(
-		PK_REP_REORT_NO.nextval,
+		REG_STATE,
+		REG_DATE,
+		REG_TYPE,
+		REG_COMMENT
+		) VALUES (
+		REPORT_SEQ.NEXTVAL,
 		#{reg_id},
-		#{reg_dep,jdbcType=VARCHAR},
-		#{reg_manager1,jdbcType=VARCHAR},
-		#{reg_manager2,jdbcType=VARCHAR},
-		#{reg_manager3,jdbcType=VARCHAR},
-		#{reg_manager4,jdbcType=VARCHAR},
-		#{reg_manager5,jdbcType=VARCHAR},
-		#{reg_title,jdbcType=VARCHAR},
-		#{reg_state,jdbcType=VARCHAR},
+		#{reg_dep},
+		#{reg_manager1},
+		#{reg_manager2,jdbcType=INTEGER},
+		#{reg_manager3,jdbcType=INTEGER},
+		#{reg_manager4,jdbcType=INTEGER},
+		#{reg_manager5,jdbcType=INTEGER},
+		#{reg_title},
+		#{reg_cont},
+		#{reg_state},
 		SYSDATE,
 		#{reg_type,jdbcType=VARCHAR},
-		#{reg_cont,jdbcType=VARCHAR},
-		#{reg_labelnum,jdbcType=INTEGER},
-		#{comment,jdbcType=VARCHAR}
+		#{reg_comment,jdbcType=VARCHAR}
 		)
 	</insert>
+	
+	
 	<update id="updateReport" parameterType="com.group.approve.vo.ReportVo">
 		UPDATE REPORT
 		<choose>
@@ -146,16 +150,19 @@
 		</choose>
 		where REPORT_NO=#{report_no}
 	</update>
-		<update id="backReport" parameterType="com.group.approve.vo.ReportVo">
-	update REPORT set
+	
+	
+	<update id="backReport" parameterType="com.group.approve.vo.ReportVo">
+		update REPORT set
 		REG_REASON=#{reg_reason,jdbcType=VARCHAR},REG_STATE=0
 		where REPORT_NO=#{report_no,jdbcType=VARCHAR}
 	</update>
 	
+	
 	<select id="surch" parameterType="hashmap" resultType="com.group.approve.vo.ReportVo">
 			select * from
 			(select * from
-			(select REG_REGISTER
+			(select REG_DATE
 						  ,REG_ID
 						  ,REG_TITLE
 						  ,REPORT_NO
@@ -180,6 +187,8 @@
 		where REG_STATE = '1'
 		or REG_STATE='2')
 	</select>
+	
+	
 	<select id="endCont" parameterType="String" resultType="int">
 		select count(*) 
 		from REPORT
@@ -189,6 +198,8 @@
 		from REPORT 
 		where REG_STATE = '3')
 	</select>
+	
+	
 	<select id="backCont" parameterType="String" resultType="int">
 		select count(*) 
 		from REPORT
@@ -200,6 +211,4 @@
 	</select>
 	
 
-	
-	
 </mapper>

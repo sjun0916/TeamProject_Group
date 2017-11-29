@@ -1,40 +1,41 @@
 package com.group.approve.vo;
 
+import java.sql.Timestamp;
+
 public class ReportVo {
-	String report_no;
+	int report_no;
 	int reg_id;
 	String reg_dep;
-	String reg_manager1;
-	String reg_manager2;
-	String reg_manager3;
-	String reg_manager4;
-	String reg_manager5;
+	int reg_manager1;
+	int reg_manager2;
+	int reg_manager3;
+	int reg_manager4;
+	int reg_manager5;
 	String reg_title;
 	String reg_cont;
 	String reg_state;
 	String reg_reason;
-	String reg_register;
-	String reg_update1;
-	String reg_update2;
-	String reg_update3;
-	String reg_update4;
-	String reg_update5;
+	Timestamp reg_date;
+	Timestamp reg_update1;
+	Timestamp reg_update2;
+	Timestamp reg_update3;
+	Timestamp reg_update4;
+	Timestamp reg_update5;
 	String reg_type;
-	String comment;
-	int reg_labelnum;
-	String label_name;
-	String label_color;
-	public String getReport_no() {
+	String reg_comment;
+	
+	
+	public int getReport_no() {
 		return report_no;
 	}
-	public void setReport_no(String report_no) {
+	public void setReport_no(int report_no) {
 		this.report_no = report_no;
 	}
 	public int getReg_id() {
 		return reg_id;
 	}
-	public void setReg_id(int i) {
-		this.reg_id = i;
+	public void setReg_id(int reg_id) {
+		this.reg_id = reg_id;
 	}
 	public String getReg_dep() {
 		return reg_dep;
@@ -42,34 +43,34 @@ public class ReportVo {
 	public void setReg_dep(String reg_dep) {
 		this.reg_dep = reg_dep;
 	}
-	public String getReg_manager1() {
+	public int getReg_manager1() {
 		return reg_manager1;
 	}
-	public void setReg_manager1(String reg_manager1) {
+	public void setReg_manager1(int reg_manager1) {
 		this.reg_manager1 = reg_manager1;
 	}
-	public String getReg_manager2() {
+	public int getReg_manager2() {
 		return reg_manager2;
 	}
-	public void setReg_manager2(String reg_manager2) {
+	public void setReg_manager2(int reg_manager2) {
 		this.reg_manager2 = reg_manager2;
 	}
-	public String getReg_manager3() {
+	public int getReg_manager3() {
 		return reg_manager3;
 	}
-	public void setReg_manager3(String reg_manager3) {
+	public void setReg_manager3(int reg_manager3) {
 		this.reg_manager3 = reg_manager3;
 	}
-	public String getReg_manager4() {
+	public int getReg_manager4() {
 		return reg_manager4;
 	}
-	public void setReg_manager4(String reg_manager4) {
+	public void setReg_manager4(int reg_manager4) {
 		this.reg_manager4 = reg_manager4;
 	}
-	public String getReg_manager5() {
+	public int getReg_manager5() {
 		return reg_manager5;
 	}
-	public void setReg_manager5(String reg_manager5) {
+	public void setReg_manager5(int reg_manager5) {
 		this.reg_manager5 = reg_manager5;
 	}
 	public String getReg_title() {
@@ -96,40 +97,40 @@ public class ReportVo {
 	public void setReg_reason(String reg_reason) {
 		this.reg_reason = reg_reason;
 	}
-	public String getReg_register() {
-		return reg_register;
+	public Timestamp getReg_date() {
+		return reg_date;
 	}
-	public void setReg_register(String reg_register) {
-		this.reg_register = reg_register;
+	public void setReg_date(Timestamp reg_date) {
+		this.reg_date = reg_date;
 	}
-	public String getReg_update1() {
+	public Timestamp getReg_update1() {
 		return reg_update1;
 	}
-	public void setReg_update1(String reg_update1) {
+	public void setReg_update1(Timestamp reg_update1) {
 		this.reg_update1 = reg_update1;
 	}
-	public String getReg_update2() {
+	public Timestamp getReg_update2() {
 		return reg_update2;
 	}
-	public void setReg_update2(String reg_update2) {
+	public void setReg_update2(Timestamp reg_update2) {
 		this.reg_update2 = reg_update2;
 	}
-	public String getReg_update3() {
+	public Timestamp getReg_update3() {
 		return reg_update3;
 	}
-	public void setReg_update3(String reg_update3) {
+	public void setReg_update3(Timestamp reg_update3) {
 		this.reg_update3 = reg_update3;
 	}
-	public String getReg_update4() {
+	public Timestamp getReg_update4() {
 		return reg_update4;
 	}
-	public void setReg_update4(String reg_update4) {
+	public void setReg_update4(Timestamp reg_update4) {
 		this.reg_update4 = reg_update4;
 	}
-	public String getReg_update5() {
+	public Timestamp getReg_update5() {
 		return reg_update5;
 	}
-	public void setReg_update5(String reg_update5) {
+	public void setReg_update5(Timestamp reg_update5) {
 		this.reg_update5 = reg_update5;
 	}
 	public String getReg_type() {
@@ -138,29 +139,11 @@ public class ReportVo {
 	public void setReg_type(String reg_type) {
 		this.reg_type = reg_type;
 	}
-	public String getComment() {
-		return comment;
+	public String getReg_comment() {
+		return reg_comment;
 	}
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-	public int getReg_labelnum() {
-		return reg_labelnum;
-	}
-	public void setReg_labelnum(int reg_labelnum) {
-		this.reg_labelnum = reg_labelnum;
-	}
-	public String getLabel_name() {
-		return label_name;
-	}
-	public void setLabel_name(String label_name) {
-		this.label_name = label_name;
-	}
-	public String getLabel_color() {
-		return label_color;
-	}
-	public void setLabel_color(String label_color) {
-		this.label_color = label_color;
+	public void setReg_comment(String reg_comment) {
+		this.reg_comment = reg_comment;
 	}
 	
 }
