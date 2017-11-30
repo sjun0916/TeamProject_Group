@@ -47,9 +47,10 @@ public class ReportService {
 		return list;
 	}
 	
-	public ReportVo selectOne(int num) throws SQLException {
-		System.out.println("2222");
-		return dao.selectOne(num);
+	public ReportVo selectOne(ReportVo report) throws SQLException {
+		ReportVo v = dao.selectOne(report);
+		System.out.println("v ::: " + v);
+		return dao.selectOne(report);
 	}
 	
 	public int check(int num) throws SQLException {
