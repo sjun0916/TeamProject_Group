@@ -62,7 +62,7 @@
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- 유저 사진 경로 -->
-              <img src="${pageContext.request.contextPath}/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="${pageContext.request.contextPath}/resources/icon/person.png" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <!-- 미니 상태로 있을때 유저이름 -->
               <span class="hidden-xs">${authUser.employeeName }</span>
@@ -70,12 +70,11 @@
             <ul class="dropdown-menu">
               <!-- 유저 정보 클릭시 나오는 메뉴 -->
               <li class="user-header">
-                <img src="${pageContext.request.contextPath}/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="${pageContext.request.contextPath}/resources/icon/person.png" class="img-circle" alt="User Image">
 
                 <p>
                   [${authUser.teamName }][${authUser.positionName }] ${authUser.employeeName }
-<%--                   ${authUser.imageUrl} --%>
-                  <small>Member since 2017</small>
+                  ${authUser.imageUrl}
                 </p>
               </li>
               <!-- 유저 정보 메뉴 -->
@@ -108,7 +107,7 @@
       <!-- 왼쪽 사이드바 (유저) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="${pageContext.request.contextPath}/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="${pageContext.request.contextPath}/resources/icon/person.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>${authUser.employeeName }</p>
@@ -120,20 +119,21 @@
       <!-- search 검색 Form -->
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <input type="text" name="q" class="form-control" placeholder="Search">
           <span class="input-group-btn">
               <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
               </button>
             </span>
         </div>
       </form>
+      
       <!-- 사이드바 메뉴 -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header"><hr></li>
-        
+        <li class="header"></li>
+        <li><hr></li>
 		<li>
         	<a href="${pageContext.servletContext.contextPath }/searchemployee" class="menu item_1" id="top_gnb">
-        	<i class="fa fa-dashboard"></i>
+        	<i class="fa fa-thumbs-o-up"></i>
         	<span>사원 주소록</span>
         	</a>
         </li>
@@ -160,6 +160,7 @@
             <ul class="treeview-menu">
             	<li><a href="${pageContext.request.contextPath}/report/make"><i class="fa fa-circle-o"></i> 결재작성</a></li>
             	<li><a href="${pageContext.request.contextPath}/report/state"><i class="fa fa-circle-o"></i> 결재함</a></li>
+            	<li><a href="${pageContext.request.contextPath}/report/waiting"><i class="fa fa-circle-o"></i> 승인대기</a></li>
             </ul>
         </li>
         
@@ -189,14 +190,14 @@
         
         <li>
         	<a href="/group/PhotoList">
-        	<i class="fa fa-dashboard"></i>
+        	<i class="fa fa-image"></i>
         	<span>사진첩</span>
         	</a>
         </li>
         
         <li>
         	<a href="${pageContext.servletContext.contextPath }/message" class="menu item_4" id="top_gnb">
-        	<i class="fa fa-documnet"></i>
+        	<i class="fa fa-twitch"></i>
         	<span>쪽지</span>
         	</a>
         </li>
@@ -206,7 +207,7 @@
        <c:if test="${ authUser.getRole() == 'ADMIN' }">
         <li>
         	<a href="${pageContext.servletContext.contextPath}/user/admin" class="menu item_3" id="top_gnb">
-        	<i class="fa fa-laptop"></i>
+        	<i class="fa fa-cog"></i>
 <!--         	<i class="fa fa-gear"></i> -->
         	<span>관리자 설정</span>
         	</a>

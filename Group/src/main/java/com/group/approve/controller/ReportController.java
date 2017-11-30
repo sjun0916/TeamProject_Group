@@ -52,10 +52,7 @@ public class ReportController {
 	@RequestMapping("/report/state")
 	public String stateReport(HttpServletRequest request, @AuthUser UserVO authUser){
 		request.setAttribute("title", "서류 현황");
-		
 		List<ReportVo> list = service.select(authUser);
-		
-		System.out.println("list : " + list);
 		request.setAttribute("list",list);
 		return "report/state";
 	}
@@ -78,18 +75,10 @@ public class ReportController {
 	
 	
 	@RequestMapping("/report/waiting")
-	public String waitReport(HttpServletRequest request){
+	public String waitReport(HttpServletRequest request, @AuthUser UserVO authUser){
 		request.setAttribute("title", "승인대기중");
-		
-		List<ReportVo> list = null;
-		try {
-			list=service.check((UserVO) SessionUtil.getAttribute("login"));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
+		List<ReportVo> list = service.check(authUser);
+		System.out.println("LIST : " + list);
 		request.setAttribute("list",list);
 		return "report/state";
 	}

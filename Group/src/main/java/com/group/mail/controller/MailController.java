@@ -102,14 +102,14 @@ public class MailController {
 						  @RequestParam("receiverMail") String receiverMail
 						  ,@RequestParam("title") String title
 						  ,@RequestParam("content") String content
-						  ,@RequestParam("mailID") String mailID
+						  
 						  ,@RequestParam("mailPW") String mailPW
 						  , Model model
 						  ,@AuthUser UserVO authUser){
 		
 		MailVo vo = new MailVo();
 		
-		vo.setMailID(mailID);
+		vo.setMailID(authUser.getEmail());
 		vo.setMailPW(mailPW);
 		vo.setSenderMail(authUser.getEmail());
 		vo.setReceiverMail(receiverMail);

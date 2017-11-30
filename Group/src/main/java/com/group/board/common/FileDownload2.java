@@ -22,12 +22,10 @@ public class FileDownload2 {
      */
     @RequestMapping(value = "fileDownload2")
     public void fileDownload2(HttpServletRequest request,HttpServletResponse response) {
-        String path = "c:\\workspace\\fileupload\\"; 
+        String path =  request.getServletContext().getRealPath("/imgUpload"); 
        
         String filename = request.getParameter("filename");
         String downname = request.getParameter("downname");
-//        String[] arrFilename = filename.split(".");
-//        String realname = downname+"."+arrFilename[1];
         String realPath = "";
         System.out.println("downname: "+downname);
         if (filename == null || "".equals(filename)) {
@@ -40,8 +38,8 @@ public class FileDownload2 {
             System.out.println("UnsupportedEncodingException");
         }
         
-        realPath = path + downname.substring(0,4) + "\\"+downname;
-
+        realPath = path +"\\" +downname.substring(0,4) + "\\"+downname;
+System.out.println(realPath);
         File file1 = new File(realPath);
         if (!file1.exists()) {
             return ;

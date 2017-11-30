@@ -24,46 +24,52 @@
 	<!-- 컨텐트 헤더 -->
 	<section class="content-header">
 		<h1>
-			쪽지함 <small>ㅋㅋ</small>
+			<img src="<c:url value="/resources/icon/notes.png"/>" width="50" height="50"/>
+			쪽지 <small>message</small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
 			<li class="active">Here</li>
 		</ol>
 	</section>
-
+	<br>
 	<!-- ★★★★★★★★★★★여기에 추가★★★★★★★★★★★ -->
 	<!-- 컨텐트 메인 -->
 	<section class="content container-fluid">
+		
+		<div class="box">  
+               <div class="box-header with-border">
+                  <h3 class="box-title">Message Content</h3>
+               </div>
+               <form name="boardWriteForm" method="post" action="${pageContext.servletContext.contextPath }/board/write"> 
+                  <div class="box-body">
+                     <div class="form-group">
+                        <label>발신자<input type="text" id="contentTitle" name="contentTitle" class="form-control" value="${sender}"></label>
+                     </div>                    
+                                          
+                     <div class="form-group">
+                     	<b>내용</b>
+                        <textarea id="contentContent" class="textarea" name="contentContent"
+                           style="width: 100%; height: 300px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" readonly>${message}</textarea>
 
-		 <form name="boardWriteForm" method="post" action="${pageContext.servletContext.contextPath }/board/write">
-			<table class="board_view">
-				<colgroup>
-					<col width="15%">
-					<col width="*" />
-				</colgroup>
-				<tbody>
-					<tr >
-						<th scope="row" >발신자</th>
-						<td><input id="contentTitle" class="wdp_90" value="${sender}"  readonly style="border:0px;"></input></td>
-					</tr>
-					<tr>
-						<td colspan="2" class="view_text"><textarea rows="20"
-								cols="110" title="내용" id="contentContent" name="contentContent" readonly>${message}</textarea></td>
-					</tr>
-
-				</tbody>
-
-			</table>
-			<input type="hidden" id="employeeNo" name="employeeNo" value=${authUser.employeeNo }>
-			<input type="hidden" id="teamId" name="teamId" value=${authUser.teamId }>
-			<input type="hidden" id="boardId" name="boardId" value=${boardId }>
-			<div class="right">
-					<button type="button"  onClick="history.back();">돌아가기</button>
-			</div>
-				<span>
-				</span>
-		</form>
+                     </div>
+                	    <input type="hidden" id="employeeNo" name="employeeNo" value=${authUser.employeeNo }>
+				    	<input type="hidden" id="teamId" name="teamId" value=${authUser.teamId }>
+						<input type="hidden" id="boardId" name="boardId" value=${boardId }>
+                     <div class="pull-right">
+                        <button type="button" class="btn btn-primary" onClick="history.back();">
+                        돌아가기
+                        </button>
+                     </div>
+                     
+                  </div>
+             	    
+                  <div class="box-footer">
+                     <span></span>
+                  </div>
+                  
+               </form>
+            </div>
 
 	</section>
 	<!-- ★★★★★★★★★★★여기에 추가★★★★★★★★★★★ -->

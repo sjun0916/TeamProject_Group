@@ -29,17 +29,11 @@ public class ReportService {
 	
 	public List<ReportVo> select(UserVO vo) {
 		List<ReportVo> list = dao.select(vo);
-			System.out.println(list);
 		return list;
 	}
 	
 	public List<ReportVo> check(UserVO vo) {
-		List<ReportVo> list=null;
-		try {
-			list =dao.check(vo);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		List<ReportVo> list = dao.check(vo);
 		return list;
 	}
 	
@@ -54,6 +48,7 @@ public class ReportService {
 	}
 	
 	public ReportVo selectOne(int num) throws SQLException {
+		System.out.println("2222");
 		return dao.selectOne(num);
 	}
 	

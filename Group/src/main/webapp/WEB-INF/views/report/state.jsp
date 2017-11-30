@@ -60,7 +60,7 @@
 			<li class="active">state</li>
 		</ol>
 	</section>
-	<br>
+	<br><br>
 	<div class="col-xs-12">
 		<div class="box">
 			<div class="box-header">
@@ -95,28 +95,28 @@
 					<tbody>
 						<tr>
 							<th><input type="checkbox" name="firstbox" id="checkAll" value="" /></th>
-							<th>서류번호</th>
-							<th>제목</th>
-							<th>작성일</th>
-							<th>현황</th>
-							<th>사유</th>
+							<th width="130">서류번호</th>
+							<th width="500">제목</th>
+							<th width="200">작성일</th>
+							<th width="150">현황</th>
+							<th width="300">사유</th>
 						</tr>
 						<c:forEach items="${list}" var="vo">
 							<tr>
-								<td><input type="checkbox" name="box" value="${vo.report_no}" /></td>
-								<td>${vo.report_no}</td>
-								<td>${vo.reg_title}</td>
-								<td>${vo.reg_date}</td>
-								<td><c:if test="${vo.reg_state eq 0}">
+								<th><input type="checkbox" name="firstcheckbox" value="${vo.REPORT_NO}" /></th>
+								<td>${vo.REPORT_NO}</td>
+								<td>${vo.REG_TITLE}</td>
+								<td>${vo.REG_DATE}</td>
+								<td><c:if test="${vo.REG_STATE eq 0}">
 										<span class="label label-danger">반려됨</span>
-									</c:if> <c:if test="${vo.reg_state eq 1}">
+									</c:if> <c:if test="${vo.REG_STATE eq 1}">
 										<span class="label label-primary">등록 완료</span>
-									</c:if> <c:if test="${vo.reg_state eq 2}">
+									</c:if> <c:if test="${vo.REG_STATE eq 2}">
 										<span class="label label-warning">처리중</span>
-									</c:if> <c:if test="${vo.reg_state eq 3}">
+									</c:if> <c:if test="${vo.REG_STATE eq 3}">
 										<span class="label label-success">처리완료</span>
 									</c:if></td>
-								<td>${vo.reg_reason}</td>
+								<td>${vo.REG_REASON}</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -130,30 +130,26 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close" onclick="disable()">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="disable()">
 							<span aria-hidden="true" onclick="disable()">&times;</span>
 						</button>
 						<h4 class="modal-title" id="modal3Title"></h4>
 					</div>
-					<div class="modal-body"
-						style="min-height: 300px; max-height: 763px;">
+					<div class="modal-body" style="min-height: 300px; max-height: 763px;">
 						<div id="modal3StateColor" class="small-box bg-red">
 							<div class="inner">
 								<h3 id="modal3State">65</h3>
-
 								<p id="modal3No">Unique Visitors</p>
 							</div>
 							<div class="icon">
 								<i class="fa fa-fw fa-folder-open"></i>
 							</div>
-							<a href="#" onclick="doc()" class="small-box-footer"> 서류보기 <i
-								class="fa fa-arrow-circle-right">
+							<a href="#" onclick="doc()" class="small-box-footer"> 서류보기 
+								<i class="fa fa-arrow-circle-right">
 									<form name="report" action="" method="post">
-										<input type="hidden" name="reg_cont" id="reg_cont"
-											value="????????" />
+										<input type="hidden" name="reg_cont" id="reg_cont" value="????????" />
 									</form>
-							</i>
+								</i>
 							</a>
 						</div>
 						<dl class="dl-horizontal" id="reportDetail">
@@ -243,7 +239,7 @@
 		<!-- /.modal-dialog -->
 	</div>
 </div>
-
+<%-- 
 <!--라벨 지정 모달  -->
 <div class="example-modal">
 	<div class="modal" id="myModalPlus" role="dialog">
@@ -292,18 +288,9 @@
 											</a>
 										</c:if></li>
 								</c:forEach>
-
-
-
 							</ul>
-
-
 						</div>
-
-
 					</div>
-
-
 				</div>
 				<div class="modal-footer">
 					<button type="button" id="savePlus" style="width: 22%;"
@@ -317,32 +304,34 @@
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
-</div>
+</div> --%>
     <%@ include file="/WEB-INF/views/include/footer.jsp" %>
     <%@ include file="/WEB-INF/views/include/footerScript.jsp" %>
 </body>
 <script type="text/javascript">
 	$(function() {
-		$("tr:has('td')").children().not(':first-child').click(
+		$("tr:has('td')").click(
 						function() {
 							var data = $(this).parent().children().eq(1).text();
+							/* var reportNo = data.REPORT_NO; */
 							$
 									.ajax({
 										type : "POST",
 										url : '${pageContext.request.contextPath}/report/selectOne',
 										data : {
 											"data" : data
+											/* "reportNo" : data.report_no */
 										},
 										dataType : 'json',
 										success : function(data) {
-											var state = data.state;
+											var state = data.reg_state;
 											var v = data.data;
 											if (state = "success") {
 												$("#NOT_report_no").html(v.report_no);
 												$("#reg_cont").val(v.reg_cont);
 												$("#modal3Title").text(
 														v.reg_title);
-												if (v.reg_state == 0) {
+												if (v.reg_state== 0) {
 													$("#modal3StateColor")
 															.attr("class",
 																	"small-box bg-red");
@@ -351,7 +340,7 @@
 															"info-box bg-red");
 													$("#modal3State").text(
 															"반려됨");
-												} else if (v.reg_state == 1) {
+												} else if (v.reg_state== 1) {
 													$("#modal3StateColor")
 															.attr("class",
 																	"small-box bg-blue");
@@ -360,7 +349,7 @@
 															"info-box bg-blue");
 													$("#modal3State").text(
 															"등록됨");
-												} else if (v.reg_state == 2) {
+												} else if (v.reg_state== 2) {
 													$("#modal3StateColor")
 															.attr("class",
 																	"small-box bg-yellow");
@@ -369,7 +358,7 @@
 																	"info-box bg-yellow");
 													$("#modal3State").text(
 															"처리대기중");
-												} else if (v.reg_state == 3) {
+												} else if (v.reg_state== 3) {
 													$("#modal3StateColor")
 															.attr("class",
 																	"small-box bg-green");
@@ -392,7 +381,7 @@
 												html += "</dd>";
 												html += "<dt>제출일</dt>";
 												html += "<dd>";
-												html += v.reg_register;
+												html += v.reg_date;
 												html += "</dd>";
 												if (v.reg_manager1
 														&& v.reg_update1) {
@@ -444,10 +433,10 @@
 															+ v.reg_update5
 															+ "</dd>";
 												}
-												if (v.comment) {
+												if (v.reg_comment) {
 													html += "<dt>기타사항</dt>";
 													html += "<dd>";
-													html += v.comment;
+													html += v.reg_comment;
 													html += "</dd>";
 												}
 												if (v.reg_reason) {
@@ -463,7 +452,7 @@
 											}
 										},
 										error : function(e) {
-											alert(e.responseText);
+											alert("하하하\n" + e.responseText);
 										}
 									});
 						});
@@ -476,9 +465,9 @@
 
 		});
 
-		$("a[id^='LabelSequencePlus']").click(function(e) {
+/* 		$("a[id^='LabelSequencePlus']").click(function(e) {
 			e.preventDefault();
-		});
+		}); 
 
 		$(".disableLabel").click(function() {
 
@@ -494,7 +483,7 @@
 			}
 
 		});
-
+*/
 		$("#checkAll").click(function() {
 
 			if ($("input:checkbox[id='checkAll']").is(":checked")) {
@@ -509,6 +498,7 @@
 			}
 
 		});
+/*
 		$("#labelConnect")
 				.click(
 						function() {
@@ -530,7 +520,7 @@
 
 												$("#savePlus").click(function() {
 												var parentnum = 0;
-/* 
+ 
 												if ($(".disableLabel").hasClass("checked")) {
 												//highname =$(".checked").text().trim();
 												parentnum = $(".disableLabel.checked").attr("href");
@@ -557,7 +547,7 @@
 															alert("반드시 라벨을 선택해야 합니다");
 													$(this).attr("data-dismiss","modal");
 													}
- */
+
 												$("input[name$=box]:checkbox").each(function() {
 													$(this).attr("checked",false);
 													
@@ -569,6 +559,7 @@
 
 						});
 
+
 		$("#labelDisConnect").click(function() {
 
 			if ($("input[name=box]:checked").length == 0) {
@@ -576,11 +567,6 @@
 				alert("문서를 선택해주세요.");
 
 			}
-			
-				
-			
-			
-			
 			
 			$("input[name=box]:checked").each(function(i) {
 				var repno = $(this).val();
@@ -593,34 +579,17 @@
 					'report_no' : repno
 					},
 					'success' : function(data) {
-						
 						reLoad();
-					
-						
 					},
-
 						'dataType' : 'json'
-
 				})
-						
-				
-				
-				
-				
-				
 			});
 
 			
 			
 			$("input[name$=box]:checkbox").each(function() {
 				$(this).attr("checked",false);
-				
-				
 			});
-			
-			
-			
-			
 		});
 
 		$('[data-dismiss=modal]').on(
@@ -643,7 +612,7 @@
 			$(".modalscroll").css("height", "43em")
 
 		}
-
+*/
 		/*///////////////////////////////////////  */
 	
 		
