@@ -16,16 +16,17 @@ public class ReportDao {
 	
 	@Autowired
 	SqlSessionTemplate client;
-
+	
+	//서류작성
 	public int insert(ReportVo vo) throws SQLException {
 		return client.insert("report.insert", vo);
 	}
-
+	//서류 list 출력
 	public List<ReportVo> select(UserVO vo) {
 		return client.selectList("report.select", vo);
 	}
 
-	public List<ReportVo> check(UserVO vo) throws SQLException {
+	public List<ReportVo> check(UserVO vo) {
 		return client.selectList("report.check", vo);
 	}
 
@@ -34,6 +35,7 @@ public class ReportDao {
 	}
 
 	public ReportVo selectOne(int num) throws SQLException {
+		System.out.println("333");
 		return client.selectOne("report.selectOne", num);
 	}
 

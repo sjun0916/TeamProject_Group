@@ -3,61 +3,57 @@
 
 <mapper namespace="report">
 
-	<select id="select" parameterType="UserVO"
-		resultType="com.group.approve.vo.ReportVo">
-		select REPORT_NO,REG_TITLE,REG_DATE,REG_STATE,REG_REASON from REPORT where REG_ID=#{authUser.employeeNo}
+	<select id="select" parameterType="UserVO" resultType="java.util.HashMap">
+		select REPORT_NO,REG_TITLE,REG_DATE,REG_STATE,REG_REASON from REPORT where REG_ID=#{employeeNo}
 	</select>
 	
 	
-	<select id="select2" parameterType="int"
-		resultType="com.group.approve.vo.ReportVo">
+	<select id="select2" parameterType="int" resultType="com.group.approve.vo.ReportVo">
 		SELECT REPORT_NO,REG_TITLE,REG_DATE,REG_STATE,REG_REASON from REPORT
 		and label_num =#{label_num}
 	</select>
 	
 	
-	<select id="selectOne" parameterType="int"
-		resultType="com.group.approve.vo.ReportVo">
-		select * from REPORT where REPORT_NO=#{employeeNo}
+	<select id="selectOne" parameterType="int" resultType="com.group.approve.vo.ReportVo">
+		select * from REPORT where REPORT_NO=#{reportNo}
 	</select>
 	
 	
-	<select id="check" parameterType="UserVO"
-		resultType="com.group.approve.vo.ReportVo">
+	<select id="check" parameterType="UserVO" resultType="java.util.HashMap">
 		SELECT REPORT_NO,REG_TITLE,REG_DATE,REG_STATE,REG_REASON from REPORT
-		WHERE REPORT_NO IN
-		(SELECT REPORT_NO from REPORT
-		WHERE REPORT_NO IN(
-		select REPORT_NO from REPORT
-		WHERE REG_MANAGER1 =#{employeeNo}
-    	and REG_UPDATE1 IS NULL
-		)
-		OR REPORT_NO IN(
-		select REPORT_NO from REPORT
-		WHERE REG_MANAGER2 =#{employeeNo}
-		and REG_UPDATE1 is not null
-    	and REG_UPDATE2 is null
-		)
-		or REPORT_NO IN(
-		select REPORT_NO from REPORT
-		where REG_MANAGER3 =#{employeeNo}
-		and REG_UPDATE2 is not null
-    	and REG_UPDATE2 is null
-		)
-		or REPORT_NO IN(
-		select REPORT_NO from REPORT
-		where REG_MANAGER4 =#{employeeNo}
-		and REG_UPDATE3 is not null
-    	and REG_UPDATE4 is null
-		)or REPORT_NO IN(
-		select REPORT_NO from REPORT
-		where REG_MANAGER5 =#{emplyeeNo}
-		and REG_UPDATE4 is not null
-    	and REG_UPDATE5 is null
-		)
-  )
-  and REG_STATE !=0
-  and REG_STATE !=3
+	 		WHERE REPORT_NO IN
+			(SELECT REPORT_NO from REPORT
+			WHERE REPORT_NO IN(
+			select REPORT_NO from REPORT
+			WHERE REG_MANAGER1 =#{employeeNo}
+    		and REG_UPDATE1 IS NULL
+			)
+			OR REPORT_NO IN(
+			select REPORT_NO from REPORT
+			WHERE REG_MANAGER2 =#{employeeNo}
+			and REG_UPDATE1 is not null
+    		and REG_UPDATE2 is null
+			)
+			or REPORT_NO IN(
+			select REPORT_NO from REPORT
+			where REG_MANAGER3 =#{employeeNo}
+			and REG_UPDATE2 is not null
+    		and REG_UPDATE2 is null
+			)
+			or REPORT_NO IN(
+			select REPORT_NO from REPORT
+			where REG_MANAGER4 =#{employeeNo}
+			and REG_UPDATE3 is not null
+    		and REG_UPDATE4 is null
+			)or REPORT_NO IN(
+			select REPORT_NO from REPORT
+			where REG_MANAGER5 =#{employeeNo}
+			and REG_UPDATE4 is not null
+    		and REG_UPDATE5 is null
+			)
+	  	)
+ 		and REG_STATE !=0
+  		and REG_STATE !=3
 	</select>
 
 
