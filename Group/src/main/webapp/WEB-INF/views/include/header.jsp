@@ -62,7 +62,7 @@
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- 유저 사진 경로 -->
-              <img src="${pageContext.request.contextPath}/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="${pageContext.request.contextPath}/resources/icon/person.png" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <!-- 미니 상태로 있을때 유저이름 -->
               <span class="hidden-xs">${authUser.employeeName }</span>
@@ -70,11 +70,11 @@
             <ul class="dropdown-menu">
               <!-- 유저 정보 클릭시 나오는 메뉴 -->
               <li class="user-header">
-                <img src="${pageContext.request.contextPath}/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="${pageContext.request.contextPath}/resources/icon/person.png" class="img-circle" alt="User Image">
 
                 <p>
                   [${authUser.teamName }][${authUser.positionName }] ${authUser.employeeName }
-<%--                   ${authUser.imageUrl} --%>
+                  ${authUser.imageUrl}
                 </p>
               </li>
               <!-- 유저 정보 메뉴 -->
@@ -107,7 +107,7 @@
       <!-- 왼쪽 사이드바 (유저) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="${pageContext.request.contextPath}/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="${pageContext.request.contextPath}/resources/icon/person.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>${authUser.employeeName }</p>
