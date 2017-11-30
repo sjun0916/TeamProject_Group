@@ -53,12 +53,9 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Report <small>State panel</small>
+			<img src="<c:url value="/resources/icon/archives.png"/>" width="50" height="50"/>
+			문서결재함 <small>electronic document approval</small>
 		</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> report</a></li>
-			<li class="active">state</li>
-		</ol>
 	</section>
 	<br><br>
 	<div class="col-xs-12">

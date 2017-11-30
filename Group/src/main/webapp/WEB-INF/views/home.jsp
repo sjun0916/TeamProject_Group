@@ -3,8 +3,8 @@
 
 <!DOCTYPE html>
 <html>
-<title>Smart-Groupware[HOME]</title>
 <head>
+<title>Smart-Groupware</title>
 	<%@ include file="include/headerScript.jsp" %>
 </head>
 

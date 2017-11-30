@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>Smart-Groupware</title>
 <%@ include file="/WEB-INF/views/include/headerScript.jsp"%>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 
@@ -19,11 +20,9 @@
 	<!-- 컨텐츠 헤더 -->
 	<section class="content-header">
 		<h1>
+			<img src="<c:url value="/resources/icon/photo-camera.png"/>" width="50" height="50"/>
 			사진첩 <small>photo</small>
 		</h1>
-		<ol class="breadcrumb">
-			<a href="PhotoList"><i class="fa fa-dashboard"></i> 게시판</a>
-		</ol>
 	</section>
 	<!-- 컨텐츠 메인 -->
 	<section class="content container-fluid">

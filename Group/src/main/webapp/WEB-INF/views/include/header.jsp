@@ -84,7 +84,7 @@
                     <a href="${pageContext.servletContext.contextPath }/mypage" class="menu item_2" id="top_gnb">mypage</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="#">calendar</a>
+                    <a href="/group/calendar/main">calendar</a>
                   </div>
                   <div class="col-xs-4 text-center">
                     <a href="${pageContext.servletContext.contextPath}/logout">logout</a>

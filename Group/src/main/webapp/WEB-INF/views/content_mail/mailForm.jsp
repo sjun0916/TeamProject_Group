@@ -4,8 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<title>Smart-Groupware</title>
 <head>
+<title>Smart-Groupware</title>
 	<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 
 <script src="${pageContext.request.contextPath}/resources/plugins/jQuery/jQuery-2.2.0.min.js"></script>
@@ -28,18 +28,18 @@ $(function(){
    <!-- Content Header (Page header) -->
    <section class="content-header">
       <h1>
-      		<img src="<c:url value="/resources/icon/email.png"/>" width="50" height="50"/>
+      		<img src="<c:url value="/resources/icon/email_4.png"/>" width="50" height="50"/>
 			메일 <small>e-mail</small>
       </h1>
    </section>
-   <br>
+   
    <section class="content">
       <div class="row">
          <div class="col-md-12">
             <!-- 메일 쓰기 폼 -->
             <div class="box">  
                <div class="box-header with-border">
-                  <h3 class="box-title">Send Mail</h3>
+                  <h3 class="box-title">Send mail</h3>
                </div>
                <form name="mailForm" method="post" id="mailForm"
                    	 enctype="multipart/form-data" action="${pageContext.request.contextPath}/mail/send"> 
@@ -80,7 +80,6 @@ $(function(){
                         <button type="submit" class="btn btn-primary">
                            <i class="fa fa-envelope-o"></i> 보내기
                         </button>
-<!-- 						<input type="button" id="mailSend" class="btn btn-primary"> -->
                      </div>
                      
                   </div>

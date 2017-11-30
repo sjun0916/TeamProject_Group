@@ -2,7 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Smart-Groupware</title>
+	<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
+</head>
 <%@ include file ="/WEB-INF/views/include/header.jsp" %>
 <!-- Content Wrapper. Contains page content -->
 <!-- Content Wrapper. Contains page content -->
@@ -11,12 +19,9 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Calendar <small>Control panel</small>
+			<img src="<c:url value="/resources/icon/calendar.png"/>" width="50" height="50"/>
+			일정 <small>calendar</small>
 		</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class="active">Calendar</li>
-		</ol>
 	</section>
 
 	<!-- Main content -->

@@ -5,50 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>Smart-Groupware</title>
 <%@ include file="/WEB-INF/views/include/headerScript.jsp"%>
 <link rel='stylesheet' type='text/css'
 	href='<c:url value="/resources/boardCSS/NoticeList.css"/>'>
-<style>
-.sjgfont {
-	font-weight: 700;
-}
-
-.modalscroll {
-	width: 41em;
-	height: auto;
-	line-height: 2em;
-	/* border: 1px solid #ccc; */
-	padding: 0;
-	margin: 0;
-	overflow: auto;
-	overflow-x: hidden;
-}
-
-.label {
-	font-weight: 700;
-	line-height: 1;
-	white-space: nowrap;
-	vertical-align: baseline;
-	text-align: center;
-}
-
-.checked {
-	color: #3bc1c5 !important;
-	border: 2px solid #3bc1c5 !important;
-	font-weight: 700;
-}
-
-.panel-label {
-	display: inline-block;
-	max-width: 77px;
-	padding: 0 3px;
-	line-height: 20px;
-	font-size: 12px;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-}
-</style>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 <script>
 	function categoryChange(value) {
@@ -86,8 +46,8 @@
 				<table class="table table-hover">
 					<tbody>
 						<tr>
-							<th>번호</th>
-							<th><select id="category1" name="category1" onchange="categoryChange(this.value);">
+							<th width="10%">번호</th>
+							<th width="10%"><select id="category1" name="category1" onchange="categoryChange(this.value);">
 								<option value="">카테고리</option>
 								<option value="">전체보기</option>
 								<option value="영업부">[영업부]</option>
@@ -95,18 +55,18 @@
 								<option value="행정부">[행정부]</option>
 								<option value="개발부">[개발부]</option>
 							</select></th>
-							<th>제목</th>
-							<th>작성자</th>
-							<th>작성일</th>
-							<th>첨부</th>
-							<th>조회</th>
+							<th width="40%">제목</th>
+							<th width="10%">작성자</th>
+							<th width="10%">작성일</th>
+							<th width="10%">첨부</th>
+							<th width="10%">조회</th>
 						</tr>
 						<c:forEach var="listview" items="${listview2}" varStatus="loop">
 						<c:url var="link" value="NoticeRead">
 							<c:param name="noticenum" value="${listview.noticenum}" />
 						</c:url>
 							<tr>
-								<td><img src="<c:url value="/resources/icon/star.png"/>" width="25" height="25" /></td>
+								<td><img src="<c:url value="/resources/icon/star.png"/>" width="15" height="15" /></td>
 								<td><c:out value="${listview.departname}" /></td>
 								<td><a href="${link}"><b><c:out value="${listview.title}" /></b></a></td>
 								<td><c:if test="${listview.writerpos!=null}">
@@ -114,7 +74,7 @@
 									</c:if> <c:out value="${listview.writer}" /></td>
 								<td><c:out value="${listview.regdate}" /></td>
 								<td><c:if test="${listview.filecnt>0}">
-									<img src="<c:url value="/resources/icon/floppy-disk.png"/>"	width="25" height="25" /></c:if></td>
+									<img src="<c:url value="/resources/icon/floppy-disk.png"/>"	width="15" height="15" /></c:if></td>
 								<td><c:out value="${listview.hit}" /></td>
 							</tr>
 						</c:forEach>
@@ -131,15 +91,15 @@
 									</c:if> <c:out value="${listview.writer}" /></td>
 								<td><c:out value="${listview.regdate}" /></td>
 								<td><c:if test="${listview.filecnt>0}">
-									<img src="<c:url value="/resources/icon/floppy-disk.png"/>"	width="25" height="25" /></c:if></td>
+									<img src="<c:url value="/resources/icon/floppy-disk.png"/>"	width="15" height="15" /></c:if></td>
 								<td><c:out value="${listview.hit}" /></td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
-				<div class="pull-right">
-                        <button type="button" class="btn btn-primary" onclick="location.href='/group/NoticeForm'">글작성</button>
-                </div>
+				<div class="box-footer">
+                <button type="button" class="btn btn-primary pull-right btn-sm" onclick="location.href='/group/NoticeForm'">공지작성</button>
+            	</div>
 				<table class="tmptable" width="100%">
 				<tr>
 					<td colspan="7" align="center"><jsp:include page="/WEB-INF/views/common/pagingforSubmit.jsp" /></td>
@@ -148,19 +108,16 @@
 					<td colspan="7" align="center">
 						<div>
 							<%-- <input type="hidden" name="category1" value="${searchVO.category1}"/>  --%>
-							<input type="checkbox" name="searchType" value="title"
-								<c:if test="${fn:indexOf(searchVO.searchType, 'title')!=-1}">checked="checked"</c:if> />
-							<label class="chkselect" for="searchType1">제목</label> <input
-								type="checkbox" name="searchType" value="writer"
-								<c:if test="${fn:indexOf(searchVO.searchType, 'writer')!=-1}">checked="checked"</c:if> />
-							<label class="chkselect" for="searchType2">작성자</label> <input
-								type="text" name="searchKeyword" style="width: 150px;"
-								maxlength="50"
-								value='<c:out value="${searchVO.searchKeyword}"/>'
+							
+							<input type="checkbox" name="searchType" value="title" <c:if test="${fn:indexOf(searchVO.searchType, 'title')!=-1}">checked="checked"</c:if> />
+							
+							<label class="chkselect" for="searchType1">제목　</label>
+							<input type="checkbox" name="searchType" value="writer"	<c:if test="${fn:indexOf(searchVO.searchType, 'writer')!=-1}">checked="checked"</c:if> />
+							
+							<label class="chkselect" for="searchType2">작성자　</label>
+							<input type="text" name="searchKeyword" style="width: 150px; height:30px;" maxlength="50" value='<c:out value="${searchVO.searchKeyword}"/>'
 								onkeydown="if(event.keyCode == 13) { fn_formSubmit();}">
-							<input name="btn_search" value="검색" class="btn_sch" type="button"
-								onclick="fn_formSubmit()" />
-
+							<input name="btn_search" value="검색" class="pull-center btn btn-default btn-sm" type="button" onclick="fn_formSubmit()" />
 
 						</div>
 					</td>

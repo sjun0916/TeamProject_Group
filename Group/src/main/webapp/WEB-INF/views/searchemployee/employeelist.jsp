@@ -5,8 +5,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
-<title>Smart-Groupware</title>
 <head>
+<title>Smart-Groupware</title>
 	<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 <link rel="stylesheet" type="text/css" media="screen" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" type="text/css" media="screen" href="${pageContext.servletContext.contextPath}/assets/jqgrid/css/ui.jqgrid.css" />
@@ -52,19 +52,19 @@
 		  </form>
 		</div>
 		
-		<hr>
+		<br>
 		
 		 <div class="wrap">
 	    	<form id="searchEmployeeForm" name="searchEmployeeForm">
 				<table id="searchEmployeeTable">
 					<tbody align="center">
 					<tr >
-						<th scope="row" >팀명</th>
+						<th scope="row" >팀명　</th>
 						<td colspan="2">
-							<select id="teamId" name="teamId" style="width:178.4px; HEIGHT:20px">
+							<select id="teamId" name="teamId" style="width:170px; HEIGHT:25px">
 							</select>
 						</td>
-						<th scope="row" >이름</th>
+						<th scope="row" >　　/　　이름　</th>
 						<td colspan="2">
 							<input type="text" size=30  id="employeeName" name="employeeName">							
 						</td>
