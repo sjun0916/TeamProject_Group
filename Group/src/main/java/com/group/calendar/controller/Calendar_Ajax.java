@@ -37,8 +37,17 @@ public class Calendar_Ajax {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		String[] kind = request.getParameterValues("monthKind");
+		System.out.println("kindList value : ");
+		if(kind == null) {
+			System.out.println("kind is null");
+		}else {
+			for(int i=0;i<kind.length;i++) {
+				System.out.println(kind[i]);
+			}
+		}
 		System.out.println("calendar_ajax id : "+id);		//confirm
-		List<Calendar_Vo> listVo = service.selectCalenderKind(user, request.getParameterValues("monthKind"));
+		List<Calendar_Vo> listVo = service.selectCalenderKind(user, kind);
 //		System.out.println("calendar_ajax listVo length : "+listVo.size()); //confirm
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String startDate = null;
@@ -57,6 +66,7 @@ public class Calendar_Ajax {
 				map.put("description",Integer.toString(vo.getCalendar_no()));
 				list.add(map);
 			}
+			request.setAttribute("monthKind", kind);
 			return list;
 		}else
 			return null;
