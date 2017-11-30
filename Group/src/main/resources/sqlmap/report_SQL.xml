@@ -5,7 +5,7 @@
 
 	<select id="select" parameterType="UserVO"
 		resultType="com.group.approve.vo.ReportVo">
-		select REPORT_NO,REG_TITLE,REG_DATE,REG_STATE,REG_REASON from REPORT where REG_ID=#{employeeNo}
+		select REPORT_NO,REG_TITLE,REG_DATE,REG_STATE,REG_REASON from REPORT where REG_ID=#{authUser.employeeNo}
 	</select>
 	
 	
