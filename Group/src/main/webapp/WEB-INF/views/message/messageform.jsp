@@ -86,7 +86,6 @@
   </form>
 		</div>
 
-<hr>
 <!-- /.box-header -->
 	<div class="col-xs-12">
 		<div class="box">
