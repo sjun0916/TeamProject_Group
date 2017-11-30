@@ -39,6 +39,30 @@
 	<section class="content container-fluid">
 		
 		<hr>
+		
+		 <div class="wrap">
+	    	<form id="searchEmployeeForm" name="searchEmployeeForm">
+				<table id="searchEmployeeTable">
+					<tbody align="center">
+					<tr >
+						<th scope="row" >팀명</th>
+						<td colspan="2">
+							<select id="teamId" name="teamId" style="width:178.4px; HEIGHT:20px">
+							</select>
+						</td>
+						<th scope="row" >이름</th>
+						<td colspan="2">
+							<input type="text" size=30  id="employeeName" name="employeeName">							
+						</td>
+						<td>
+							<button type="button" class="search" id="searchEmployeeButton" tabindex="3">검색</button>
+						</td>
+					</tr>					
+					</tbody>					
+				</table>
+			</form>
+		</div>
+		<hr>
 
 		 <div id="list_div">
 			<table id="list"></table>
