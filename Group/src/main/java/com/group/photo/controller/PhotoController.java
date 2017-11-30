@@ -87,7 +87,7 @@ public class PhotoController {
 
 		String photonum = request.getParameter("photonum");
 
-		photoSvc.updatePhotoRead(photonum);
+	
 		PhotoVO photoInfo = photoSvc.selectPhotoOne(photonum);
 		List<?> listview = photoSvc.selectPhotoFileList(photonum);
 
