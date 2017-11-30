@@ -88,11 +88,14 @@
 			<div class="col-md-9">
 				<div class="box box-primary">
 					<div class="box-body no-padding">
-						<div class='ds-event-categories'>    
-							<label><input name='monthKind' id='kindcom' type='checkbox' value='compony'>회사</label>&nbsp;
-							<label><input name='monthKind' id='kindteam' type='checkbox' value='team'>부서</label>&nbsp;
-							<label><input name='monthKind' id='kindperson' type='checkbox' value='person'>개인</label>&nbsp;
-						</div>
+<!-- 						<div class='ds-event-categories'>     -->
+<!-- 							<label><input name='monthKind' id='kindcom' type='checkbox' value='compony' checked>회사</label>&nbsp; -->
+<!-- 							<label><input name='monthKind' id='kindteam' type='checkbox' value='team' checked>부서</label>&nbsp; -->
+<!-- 							<label><input name='monthKind' id='kindperson' type='checkbox' value='person' checked>개인</label>&nbsp; -->
+<%-- 							<input type="hidden" name=kind[] value=${ }> --%>
+<%-- 							<input type="hidden" name=kind[] value=${ }> --%>
+<%-- 							<input type="hidden" name=kind[] value=${ }> --%>
+<!-- 						</div> -->
 						<!-- THE CALENDAR -->
 						<div id="calendar"></div>
 					</div>
@@ -289,14 +292,14 @@ $(function() {
 	var d = date.getDate(), m = date.getMonth(), y = date.getFullYear();
 	calView();
 	//title에 checkbox 삽입 
-// 	var checkboxContainer = "<div class='ds-event-categories'>"+    
-// 		"<label><input name='monthKind' id='kindcom' type='checkbox' value='compony' checked>회사</label>&nbsp;"+
-// 		"<label><input name='monthKind' id='kindteam' type='checkbox' value='team' checked>부서</label>&nbsp;"+
-// 		"<label><input name='monthKind' id='kindperson' type='checkbox' value='person' checked>개인</label>&nbsp;"+
-// 		"</div>";
+	var checkboxContainer = "<div class='ds-event-categories'>"+    
+		"<label><input name='monthKind' id='kindcom' type='checkbox' value='compony' "+sessionStorage.getItem("kindCom")+">회사</label>&nbsp;"+
+		"<label><input name='monthKind' id='kindteam' type='checkbox' value='team' "+sessionStorage.getItem("kindTeam")+">부서</label>&nbsp;"+
+		"<label><input name='monthKind' id='kindperson' type='checkbox' value='person' "+sessionStorage.getItem("kindPerson")+">개인</label>&nbsp;"+
+		"</div>";
 
 	// Append it to FullCalendar.
-// 	$(".fc-toolbar").after(checkboxContainer);
+	$(".fc-toolbar").after(checkboxContainer);
 	var ch_list=Array();
 	$("[name='monthKind']").change(function() {
 		alert("event");

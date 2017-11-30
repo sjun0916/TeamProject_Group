@@ -101,7 +101,7 @@
 									</div>
 									<hr>
 									<div><a href="${pageContext.servletContext.contextPath }/user/join">사원 등록하기</a> |||| <a href="${pageContext.servletContext.contextPath }/search/searchemployeeno">사원번호 찾기</a> |||| <a href="${pageContext.servletContext.contextPath }/search/searchpassword">비밀번호 찾기</a></div>
-									<button type="button" class="btn btn-sm btn-primary btn-block" onClick="loginCheck()">로그인</button>
+									<button type="submit" class="btn btn-sm btn-primary btn-block" onClick="loginCheck()">로그인</button>
 								</form>
 							</div>
 						</div>

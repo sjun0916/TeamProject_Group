@@ -23,7 +23,8 @@
 	<!-- 컨텐츠 헤더 -->
 	<section class="content-header">
 	<h1>
-			부서 게시판 <small>board</small>
+			<img src="<c:url value="/resources/icon/email.png"/>" width="50" height="50"/>
+			부서게시판 <small>board</small>
 		</h1>
 	<ol class="breadcrumb">
 			<a href="BoardList"><i class="fa fa-dashboard"></i> 게시판</a>		

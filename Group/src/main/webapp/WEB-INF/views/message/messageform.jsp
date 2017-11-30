@@ -10,18 +10,61 @@
 <%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="${pageContext.servletContext.contextPath }/assets/js/common.js" type="text/javascript"></script>
 <script src="${pageContext.servletContext.contextPath }/assets/js/message.js" type="text/javascript"></script>
+
+<style>
+.sjgfont {
+	font-weight: 700;
+}
+
+.modalscroll {
+	width: 41em;
+	height: auto;
+	line-height: 2em;
+	/* border: 1px solid #ccc; */
+	padding: 0;
+	margin: 0;
+	overflow: auto;
+	overflow-x: hidden;
+}
+
+.label {
+	font-weight: 700;
+	line-height: 1;
+	white-space: nowrap;
+	vertical-align: baseline;
+	text-align: center;
+}
+
+.checked {
+	color: #3bc1c5 !important;
+	border: 2px solid #3bc1c5 !important;
+	font-weight: 700;
+}
+
+.panel-label {
+	display: inline-block;
+	max-width: 77px;
+	padding: 0 3px;
+	line-height: 20px;
+	font-size: 12px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+</style>
+
 </head>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <div class="content-wrapper">
 	<!-- 컨텐트 헤더 -->
 	<section class="content-header">
 		<h1>
-			쪽지 <small>ㅋㅋㅋㅋ</small>
+			<img src="<c:url value="/resources/icon/notes.png"/>" width="50" height="50"/>
+			쪽지 <small>message</small>
 		</h1>
 
 	</section>
@@ -41,38 +84,44 @@
       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
     </fieldset>
   </form>
-</div>
+		</div>
 
-			
-			
-			<h2>쪽지 리스트</h2>
+<!-- /.box-header -->
+	<div class="col-xs-12">
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title">쪽지함</h3>
 
-<table class="board_list">
-	<colgroup>
-		<col width="10%" />
-		<col width="*" />
-		<col width="15%" />
-		<col width="20%" />
-	</colgroup>
-	<thead>
-		<tr>
-			<th scope="col">발신자</th>
-			<th scope="col">내용</th>
-			<th scope="col">수신시간</th>
-			<th scope="col">답장</th>
-			<th scope="col">삭제</th>
+				<div class="box-tools" style="padding: 0px; text-align: right; float: left">
 
-		</tr>
-	</thead>
-	<tbody>
-		        <c:choose>
-                <c:when test="${fn:length(list) > 0}">
-                    <c:forEach items="${list }" var="row">
-                       
-                        <tr>
-                            <td>${row.sender }</td>
-                            <td class="title">
-                                <a href="${pageContext.request.contextPath }/message/view?messageId=${row.messageId}">
+
+					 <div class="input-group input-group-sm" style="width: 150px;">
+
+					</div>
+				</div>
+			</div>
+
+
+			<div class="box-body table-responsive no-padding">
+				<table class="table table-hover">
+					<tbody>
+						<tr align="center">
+							<th><input type="checkbox" name="firstbox" id="checkAll" value="" /></th>
+							<th width="200">발신자(사원번호)</th>
+							<th width="400">메세지 내용</th>
+							<th width="200">수신시간</th>
+							<th>　</th>
+							<th>답장</th>
+							<th>삭제</th>
+						</tr>
+						<c:choose>
+               			<c:when test="${fn:length(list) > 0}">
+                    	<c:forEach items="${list }" var="row">
+							<tr>
+								<td><input type="checkbox" name="box" value="${row.sender}" /></td>
+								<td>${row.sender }</td>
+								<td>
+								<a href="${pageContext.request.contextPath }/message/view?messageId=${row.messageId}">
                                 
 							          <c:choose>
 							           <c:when test="${fn:length(row.message) > 23}">
@@ -85,22 +134,26 @@
 								
                                 </a>
                                 <input type="hidden" id="IDX" value="temp">
-                            </td>
-                            <td>${row.writeDate }</td>
-                			<td><button id="sendMessageButton" onclick="openForm('${row.sender}')">답장</button></td>
-							<td><button id="deleteMessageButton" onclick="deleteMessage('${row.messageId}')">삭제</button></td>
-                        </tr>
-                       
-                    </c:forEach>
+								</td>
+								<td>${row.writeDate }</td>
+								<td>${vo.reg_date}</td>
+								
+								<td><button id="sendMessageButton" class="btn btn-primary" onclick="openForm('${row.sender}')">답장</button></td>
+								<td><button id="deleteMessageButton" class="btn btn-primary" onclick="deleteMessage('${row.messageId}')">삭제</button></td>
+							</tr>
+						</c:forEach>
                 </c:when>
                 <c:otherwise>
                     <tr>
-                        <td colspan="5">수신한 쪽지가 존재하지 않습니다.</td>
+                        <td colspan="6">수신한 쪽지가 존재하지 않습니다.</td>
                     </tr>
                 </c:otherwise>
             </c:choose>
-	</tbody>
-</table>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 <br />
 
 	</section>

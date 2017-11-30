@@ -70,10 +70,7 @@ public class PhotoService {
 	        return sqlSession.selectOne("selectPhotoOne", param);
 	    }
 	    
-	    public void updatePhotoRead(String param) {
-	        sqlSession.insert("updatePhotoRead", param);
-	    }
-	    
+
 	    public void deletePhotoOne(String param) {
 	        sqlSession.delete("deletePhotoOne", param);
 	    }
