@@ -63,7 +63,7 @@ $(function(){
 
 <%--                         <input type="text" id="mailID" name="mailID" class="form-control" value="${authUser.email}"><!-- placeholder="내 구글 ID 입력" --> --%>
 
-                        <input type="text" id="mailID" name="mailID" class="form-control" value="${authUser.email }">
+                        <input type="text" id="mailID" name="mailID" class="form-control" value="${authUser.email }" disabled>
 <%--                         <input type="text" id="mailID" name="mailID" value="${authUser.email }" class="form-control" disabled>  --%>
 
                      </div>
