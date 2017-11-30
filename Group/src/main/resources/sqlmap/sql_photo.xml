@@ -41,7 +41,7 @@
          
     </select> 
 <select id="selectPhotoOne" parameterType="String" resultType="com.group.photo.vo.PhotoVO">
-        SELECT PHOTONUM, TITLE, WRITER, WRITERPOS, DEPARTNAME, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE
+        SELECT PHOTONUM, TITLE, WRITER, WRITERPOS, DEPARTNAME, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE, REALNAME
           FROM PHOTO
          WHERE BRDDELETEFLAG='N'
            AND PHOTONUM=#{photonum}
@@ -57,11 +57,12 @@
         VALUES (#{photonum}, #{title}, #{departname}, #{writer},#{writerpos},#{realname}, SYSDATE,'N' )
     </insert>
     
-    <update id="updatePhotoRead" parameterType="com.group.photo.vo.PhotoVO">
+    <update id="updatePhoto" parameterType="com.group.photo.vo.PhotoVO">
         UPDATE PHOTO
            SET TITLE=#{title}
              , WRITER=#{writer}
              , WRITERPOS=#{writerpos}
+             , REALNAME=#{realname}
          WHERE BRDDELETEFLAG='N'
            AND PHOTONUM=#{photonum}
     </update> 
