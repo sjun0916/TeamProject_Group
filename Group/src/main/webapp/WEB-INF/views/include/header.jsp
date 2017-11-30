@@ -160,6 +160,7 @@
             <ul class="treeview-menu">
             	<li><a href="${pageContext.request.contextPath}/report/make"><i class="fa fa-circle-o"></i> 결재작성</a></li>
             	<li><a href="${pageContext.request.contextPath}/report/state"><i class="fa fa-circle-o"></i> 결재함</a></li>
+            	<li><a href="${pageContext.request.contextPath}/report/waiting"><i class="fa fa-circle-o"></i> 승인대기</a></li>
             </ul>
         </li>
         
