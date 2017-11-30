@@ -40,7 +40,7 @@
 
 							<td><img
 								src="\group\imgUpload\2017\<c:out value="${listview.realname}"/>"
-								width="400" height="300" /><br> <a href="${link}"><c:out
+								width="400" height="300" /><br> <c:out value="${listview.writer}"/><a href="${link}"><c:out
 										value="${listview.title}" /></a></td>
 							<c:if test="${status.count%3 eq 0 || status.last}">
 					</tr>
