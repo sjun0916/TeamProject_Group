@@ -31,7 +31,7 @@ public class PhotoController {
 	 */
 	@RequestMapping(value = "/PhotoList")
 	public String photoList(SearchVO searchVO, ModelMap modelMap) {
-
+		searchVO.setDisplayRowCount(9);
 		searchVO.pageCalculate( photoSvc.selectPhotoCount(searchVO) ); // startRow, endRow
 
 		List<?> listview  = photoSvc.selectPhotoList(searchVO);
@@ -67,6 +67,8 @@ public class PhotoController {
 		String[] filenum = request.getParameterValues("filenum");
 		System.out.println(photoInfo.getUploadfile());
 		FileUtil2 fs = new FileUtil2();
+		fs.setConPath(request.getServletContext().getRealPath("/imgUpload"));
+
 		List<FileVO> filelist = fs.saveAllFiles(photoInfo.getUploadfile());
 		Object[] arrFileVO = filelist.toArray();
 		FileVO tmpFileVO = new FileVO();

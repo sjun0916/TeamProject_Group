@@ -75,7 +75,6 @@
                 <p>
                   [${authUser.teamName }][${authUser.positionName }] ${authUser.employeeName }
 <%--                   ${authUser.imageUrl} --%>
-                  <small>Member since 2017</small>
                 </p>
               </li>
               <!-- 유저 정보 메뉴 -->
@@ -120,20 +119,21 @@
       <!-- search 검색 Form -->
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <input type="text" name="q" class="form-control" placeholder="Search">
           <span class="input-group-btn">
               <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
               </button>
             </span>
         </div>
       </form>
+      
       <!-- 사이드바 메뉴 -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header"><hr></li>
-        
+        <li class="header"></li>
+        <li><hr></li>
 		<li>
         	<a href="${pageContext.servletContext.contextPath }/searchemployee" class="menu item_1" id="top_gnb">
-        	<i class="fa fa-dashboard"></i>
+        	<i class="fa fa-thumbs-o-up"></i>
         	<span>사원 주소록</span>
         	</a>
         </li>
@@ -189,14 +189,14 @@
         
         <li>
         	<a href="/group/PhotoList">
-        	<i class="fa fa-dashboard"></i>
+        	<i class="fa fa-image"></i>
         	<span>사진첩</span>
         	</a>
         </li>
         
         <li>
         	<a href="${pageContext.servletContext.contextPath }/message" class="menu item_4" id="top_gnb">
-        	<i class="fa fa-documnet"></i>
+        	<i class="fa fa-twitch"></i>
         	<span>쪽지</span>
         	</a>
         </li>
@@ -206,7 +206,7 @@
        <c:if test="${ authUser.getRole() == 'ADMIN' }">
         <li>
         	<a href="${pageContext.servletContext.contextPath}/user/admin" class="menu item_3" id="top_gnb">
-        	<i class="fa fa-laptop"></i>
+        	<i class="fa fa-cog"></i>
 <!--         	<i class="fa fa-gear"></i> -->
         	<span>관리자 설정</span>
         	</a>

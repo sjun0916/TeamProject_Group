@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% request.setCharacterEncoding("UTF-8"); %>
+<%@ page session="true"%>
 <!doctype html>
 <html>
 <head>
@@ -428,27 +429,26 @@
             <a><img src="" alt="결제자 정보 확인"/></a>
             <ul class="hide">
                 <li>${vo.reg_manager1}</li>
-               <c:if test="${vo.reg_manager2 != '' || vo.reg_manager2 ne null}">
-                <li>${vo.reg_manager2}</li>
-              </c:if>
+              	 <c:if test="${vo.reg_manager2 != '' || vo.reg_manager2 ne null}">
+                	<li>${vo.reg_manager2}</li>
+             	 </c:if>
                  <c:if test="${vo.reg_manager3 != '' || vo.reg_manager3 ne null}">
-                <li>${vo.reg_manager3}</li>
-                </c:if>
-              <c:if test="${vo.reg_manager4 != '' || vo.reg_manager4 ne null}">
-                <li>${vo.reg_manager4}</li>
-               
-                </c:if>
-                <c:if test="${vo.reg_manager5 != '' || vo.reg_manager5 ne null}">
-                <li>${vo.reg_manager5}</li>
-                </c:if>
+                	<li>${vo.reg_manager3}</li>
+                 </c:if>
+             	 <c:if test="${vo.reg_manager4 != '' || vo.reg_manager4 ne null}">
+               		<li>${vo.reg_manager4}</li>
+                 </c:if>
+                 <c:if test="${vo.reg_manager5 != '' || vo.reg_manager5 ne null}">
+                	<li>${vo.reg_manager5}</li>
+                 </c:if>
                 
             </ul>
         </li>
         <li class="menu">
             <a><img src="" alt="comment"/></a>
             <ul class="hide">
-                <c:if test="${vo.comment != '' || vo.comment ne null}">
-                <li>${vo.comment}</li>
+                <c:if test="${vo.reg_comment != '' || vo.reg_comment ne null}">
+                <li>${vo.reg_comment}</li>
                 </c:if>
             </ul>
         </li>

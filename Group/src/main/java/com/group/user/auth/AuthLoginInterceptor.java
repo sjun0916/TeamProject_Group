@@ -31,6 +31,7 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 		
 		if( userVo == null ) {
 			response.sendRedirect( request.getContextPath() + "/user/login" );
+			System.out.println("로그인 실패!");
 			return false;
 		}
 				

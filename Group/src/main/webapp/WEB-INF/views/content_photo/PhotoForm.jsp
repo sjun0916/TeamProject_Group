@@ -7,6 +7,8 @@
 <head>
 <%@ include file="/WEB-INF/views/include/headerScript.jsp"%>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
+<link rel='stylesheet' type='text/css'
+	href='<c:url value="/resources/boardCSS/NoticeList.css"/>'>
 <script>
 	function fn_formSubmit() {
 		var form1 = document.form1;

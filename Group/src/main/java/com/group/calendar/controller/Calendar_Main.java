@@ -28,6 +28,7 @@ public class Calendar_Main {
 	Calendar_Service service;
 	@RequestMapping(value = "/calendar/main")
 	public String calendar(HttpServletRequest request) {
+		System.out.println("calendar");
 		return "content_calendar/calendar";
 	}
 	@RequestMapping(value = "/calendar/main",method=RequestMethod.POST)
@@ -38,6 +39,7 @@ public class Calendar_Main {
 			String[] calendar_title,
 			String[] calendar_cont,	
 			String[] calendar_remark){ 
+		System.out.println("saveCalendar");
 		List<Calendar_Vo> list =new ArrayList<Calendar_Vo>();
 		int id = 0;
 		UserVO user = null;
@@ -75,6 +77,7 @@ public class Calendar_Main {
 				id = user.getEmployeeNo();
 				System.out.println("Calendar_main id : "+id);	//confirm
 				list.get(i).setCalendar_regid(id);
+				list.get(i).setCalendar_team(user.getTeamName());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -101,6 +104,7 @@ public class Calendar_Main {
 		 (int calendar_no,Date calendar_start,Date calendar_end,
 		  String calendar_title,String calendar_cont,
 		  String calendar_remark,String calendar_color, String calendar_kind) {
+		System.out.println("main : modify");
 		Calendar_Vo vo = new Calendar_Vo();
 		vo.setCalendar_no(calendar_no);
 		vo.setCalendar_start(calendar_start);
@@ -122,6 +126,7 @@ public class Calendar_Main {
 	}
 	@RequestMapping(value = "/calendar/delete",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object>   remove(int calendar_no) {
+		System.out.println("main : remove");
 		///int calendar_no,Date calendar_start,Date calendar_end,String calendar_title,String calendar_cont,String calendar_remark,String calendar_color
 		Calendar_Vo vo = new Calendar_Vo();
 		vo.setCalendar_no(calendar_no);
@@ -137,6 +142,7 @@ public class Calendar_Main {
 	}
 	@RequestMapping(value = "/calender/select",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> select(HttpServletRequest request,Calendar_Vo vo) {
+		System.out.println("main : selectOne");
 		System.out.println(vo.getCalendar_no());
 		System.out.println("CalendarMain vo : "+vo);
 		Calendar_Vo selectVo = service.selectCalender(vo);
@@ -163,6 +169,7 @@ public class Calendar_Main {
 	}
 	@RequestMapping(value = "/calender/daylist",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> select(HttpServletRequest request, String date) {
+		System.out.println("main : selectDay");
 		Map<String, Object> jsonObject = new HashMap<String, Object>();
 		String[] spDate = date.split(" ");
 		spDate[0] =spDate[0].substring(0, 3);

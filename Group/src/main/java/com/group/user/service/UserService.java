@@ -33,9 +33,14 @@ public class UserService {
 		System.out.println("test");
 		return userDao.getPw(paramMap);
 	}
-//	public UserVO getPw(String employeeName, String email) {
-//		return userDao.getPw(employeeName ,email);
-//	}
+	
+//	사원번호 찾기
+	public String getNo(Map<String, Object> paramMap) {
+		// TODO Auto-generated method stub
+		System.out.println("test");
+		return userDao.getNo(paramMap);
+	}
+
 	
 	
 	public List<UserVO> getTeamList(){

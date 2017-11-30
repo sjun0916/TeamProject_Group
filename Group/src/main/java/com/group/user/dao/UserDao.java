@@ -41,15 +41,13 @@ public class UserDao {
 		System.out.println("test");
 		return sqlSession.selectOne("user.getPw",paramMap);
 	}
-//	public UserVO getPw( String employeeName, String email ){
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("employeeName", employeeName);
-//		map.put("password", email);
-//		UserVO vo = sqlSession.selectOne("user.getPw", map);
-//		
-//		return vo;
-//	}
-	
+
+//	사원번호 찾기
+	public String getNo(Map<String, Object> paramMap) {
+		// TODO Auto-generated method stub
+		System.out.println("test");
+		return sqlSession.selectOne("user.getNo",paramMap);
+	}
 
 	public List<UserVO> getTeamList(){
 		return sqlSession.selectList("user.getTeamList");

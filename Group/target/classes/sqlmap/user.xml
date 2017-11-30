@@ -68,7 +68,7 @@
 	<select id="userlist" resultType="UserVO">
 		select * from EMPLOYEE,TEAM
 		where ROLE !='ADMIN'
-		and EMPLOYEE.TEAM_ID=TEAM.TEAM_NAME
+		and EMPLOYEE.TEAM_ID=TEAM.TEAM_ID
 	</select>
 
 	
@@ -80,6 +80,16 @@
 	WHERE 
 	EMPLOYEE_NAME=#{employeeName} 
 	and EMAIL=#{email} 
+	</select>
+	
+	<!-- 사원번호 가져오기 -->
+	<select resultType="java.lang.String" parameterType="map"	id="getNo">
+	SELECT 
+	EMPLOYEE_NO
+	FROM EMPLOYEE 
+	WHERE 
+	EMPLOYEE_NAME=#{employeeName} 
+	and EMAIL=#{email}
 	</select>
 
 

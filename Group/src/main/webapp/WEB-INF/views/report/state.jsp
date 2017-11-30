@@ -60,34 +60,26 @@
 			<li class="active">state</li>
 		</ol>
 	</section>
+	<br>
 	<div class="col-xs-12">
 		<div class="box">
 			<div class="box-header">
 				<h3 class="box-title">${title}</h3>
 
-				<div class="box-tools"
-					style="padding: 0px; text-align: right; float: left">
-					<div class="dropdown">
-						<button class="btn btn-primary dropdown-toggle" type="button"
-							data-toggle="dropdown">
+				<div class="box-tools" style="padding: 0px; text-align: right; float: left">
+					<%-- <div class="dropdown">
+						<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
 							라벨 편집 <span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu">
-							<li><a class="sjgfont" href="#" id="labelConnect"><i
-									class="fa fa-tag"></i>문서에 라벨지정</a></li>
-							<li><a class="sjgfont" href="#" id="labelDisConnect"><i
-									class="fa fa-minus-square"></i>문서에서 라벨제거</a></li>
-							<li><a class="sjgfont"
-								href="${pageContext.request.contextPath}/label/select"><i
-									class="fa fa-gear"></i>라벨 관리</a></li>
+							<li><a class="sjgfont" href="#" id="labelConnect"><i class="fa fa-tag"></i>문서에 라벨지정</a></li>
+							<li><a class="sjgfont" href="#" id="labelDisConnect"><i class="fa fa-minus-square"></i>문서에서 라벨제거</a></li>
+							<li><a class="sjgfont" href="${pageContext.request.contextPath}/label/select"><i class="fa fa-gear"></i>라벨 관리</a></li>
 						</ul>
-					</div>
+					</div> --%>
 
-					<div class="input-group input-group-sm" style="width: 150px;">
-
-
-						<!-- 	<input type="text" name="table_search"
-							class="form-control pull-right" placeholder="Search">
+					 <div class="input-group input-group-sm" style="width: 150px;">
+						<!-- <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
 
 						<div class="input-group-btn">
 							<button type="submit" class="btn btn-default">
@@ -102,24 +94,19 @@
 				<table class="table table-hover">
 					<tbody>
 						<tr>
-							<th><input type="checkbox" name="firstbox" id="checkAll"
-								value="" /></th>
+							<th><input type="checkbox" name="firstbox" id="checkAll" value="" /></th>
 							<th>서류번호</th>
 							<th>제목</th>
 							<th>작성일</th>
-							<th>라벨</th>
 							<th>현황</th>
 							<th>사유</th>
 						</tr>
 						<c:forEach items="${list}" var="vo">
 							<tr>
-								<td><input type="checkbox" name="box"
-									value="${vo.report_no}" /></td>
+								<td><input type="checkbox" name="box" value="${vo.report_no}" /></td>
 								<td>${vo.report_no}</td>
 								<td>${vo.reg_title}</td>
-								<td>${vo.reg_register}</td>
-								<td><span class="label" style="background-color:${vo.label_color}; vertical-align: middle; margin-right: 10px;">
-												</span>${vo.label_name}</td>
+								<td>${vo.reg_date}</td>
 								<td><c:if test="${vo.reg_state eq 0}">
 										<span class="label label-danger">반려됨</span>
 									</c:if> <c:if test="${vo.reg_state eq 1}">
@@ -543,7 +530,7 @@
 
 												$("#savePlus").click(function() {
 												var parentnum = 0;
-
+/* 
 												if ($(".disableLabel").hasClass("checked")) {
 												//highname =$(".checked").text().trim();
 												parentnum = $(".disableLabel.checked").attr("href");
@@ -570,7 +557,7 @@
 															alert("반드시 라벨을 선택해야 합니다");
 													$(this).attr("data-dismiss","modal");
 													}
-
+ */
 												$("input[name$=box]:checkbox").each(function() {
 													$(this).attr("checked",false);
 													

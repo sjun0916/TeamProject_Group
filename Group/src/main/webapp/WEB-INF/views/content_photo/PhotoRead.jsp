@@ -7,13 +7,14 @@
 <head>
 <%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
-
+<link rel='stylesheet' type='text/css'
+	href='<c:url value="/resources/boardCSS/NoticeList.css"/>'>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- ì»¨íí¸ í¤ë -->
 	<section class="content-header">
 		<h1>
-			공지사항 <small>Photo</small>
+			사진첩 <small>Photo</small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -34,6 +35,7 @@
 				<tr>
 					<td>[<c:out value="${photoInfo.departname}" />게시글]
 					</td>
+					<td></td>
 					<td><c:out value="${photoInfo.title}" /></td>
 					<td><c:out value="${photoInfo.regdate}" /></td>
 				</tr>

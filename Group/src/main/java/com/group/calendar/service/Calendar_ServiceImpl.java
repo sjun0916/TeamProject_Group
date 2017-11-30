@@ -96,40 +96,60 @@ public class Calendar_ServiceImpl implements Calendar_Service {
 
 	@Override
 	public List<Calendar_Vo> selectCalenderKind(UserVO user, String[] kinds) {
+		System.out.println("selectCalendarKind start");
 		// TODO Auto-generated method stub
 		List<Calendar_Vo> list = new ArrayList<Calendar_Vo>();
-		try {
-			List<Calendar_Vo> tmpList = dao.selectCalenderT();
-			Iterator<Calendar_Vo> it = tmpList.iterator();
-			UserDao userDao = new UserDao();
-			while(it.hasNext()) {
-				Calendar_Vo tmp = it.next();
-				switch(tmp.getCalendar_kind()) {
-				case "compony" : for(String kind : kinds) {
-									if(kind.equals("compony"))
-										list.add(tmp);
-								}break;
-				case "team" : for(String kind : kinds) {
-								if(kind.equals("team")){
-									UserVO tmpUser = userDao.get(tmp.getCalendar_regid());
-									if(tmpUser.getTeamName().equals(user.getTeamName()))
-										list.add(tmp);
-								}
-							  }break;
-				case "person" : for(String kind : kinds) {
-									if(kind.equals("person")){
-										if(tmp.getCalendar_regid() == user.getEmployeeNo())
+		System.out.println("servise kinds : " +kinds);
+		if(kinds == null) {
+			kinds = new String[3];
+			kinds[0] = "compony";
+			kinds[1] = "team";
+			kinds[2] = "person";
+		}
+		if(kinds != null) {
+			try {
+				List<Calendar_Vo> tmpList = dao.selectCalenderT();
+				Iterator<Calendar_Vo> it = tmpList.iterator();
+				while(it.hasNext()) {
+					Calendar_Vo tmp = it.next();
+					System.out.println("service calendar_team : "+tmp.getCalendar_team());
+					System.out.println("service user_team : "+user.getTeamName());
+					switch(tmp.getCalendar_kind()) {
+					case "compony" : for(String kind : kinds) {
+										if(kind.equals("compony"))
+											list.add(tmp);
+									}break;
+					case "team" : for(String kind : kinds) {
+									if(kind.equals("team")){
+										if(tmp.getCalendar_team().equals(user.getTeamName()))
 											list.add(tmp);
 									}
-								}break;
+								  }break;
+					case "person" : for(String kind : kinds) {
+										if(kind.equals("person")){
+											if(tmp.getCalendar_regid() == user.getEmployeeNo())
+												list.add(tmp);
+										}
+									}break;
+					}
 				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		if(list.isEmpty())
 			return null;
+		else {
+			for(int i=0;i<list.size();i++) {
+//				UserVO user = dao.
+				System.out.println(
+					list.get(i).getCalendar_no()+","+
+					list.get(i).getCalendar_regid()+","+
+					list.get(i).getCalendar_kind());
+			}
+		}
+		
 		return list;
 	}
 
