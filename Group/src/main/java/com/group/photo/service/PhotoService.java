@@ -31,6 +31,9 @@ public class PhotoService {
 	    public List<?> selectPhotoList(SearchVO param) {
 	        return sqlSession.selectList("selectPhotoList", param);
 	    }
+	    public List<?> selectPhotoList2() {
+	        return sqlSession.selectList("selectPhotoList2");
+	    }
 	    
 
 	    
