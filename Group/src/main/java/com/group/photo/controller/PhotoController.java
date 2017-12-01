@@ -65,7 +65,7 @@ public class PhotoController {
 	 */
 	@RequestMapping(value = "/PhotoSave")
 	public String photoSave(HttpServletRequest request, PhotoVO photoInfo) {
-		String[] filenum = request.getParameterValues("filenum");
+		String[] filenum = request.getParameterValues("photofilenum");
 		System.out.println(photoInfo.getUploadfile());
 		FileUtil2 fs = new FileUtil2();
 		fs.setConPath(request.getServletContext().getRealPath("/imgUpload"));

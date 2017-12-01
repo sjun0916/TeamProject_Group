@@ -56,7 +56,7 @@ public class NoticeService {
 	            
 	            if (filenum != null) {
 	                HashMap<String, String[]> fparam = new HashMap<String, String[]>();
-	                fparam.put("filenum", filenum);
+	                fparam.put("noticefilenum", filenum);
 	                sqlSession.insert("deleteNoticeFile", fparam);
 	            }
 	            
