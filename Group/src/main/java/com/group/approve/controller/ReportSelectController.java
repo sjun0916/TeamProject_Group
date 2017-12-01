@@ -81,6 +81,8 @@ public class ReportSelectController {
 		
 		return "report/endReport";
 	}
+	
+	
 	@RequestMapping(value = "/report/image", method=RequestMethod.POST)
 	public String reportImage(Model model,@RequestParam("content")String content){
 		
@@ -88,13 +90,20 @@ public class ReportSelectController {
 		
 		return "report/toImage";
 	}
+	
+	
 	@RequestMapping(value = "/report/selectOne",method=RequestMethod.POST)
-	public @ResponseBody Map<String,Object> selectReport(int data){
+	public Map<String,Object> selectReport(ReportVo data, @RequestParam("report_no")int report_no){
+		data.setReport_no(report_no);
+		System.out.println("reportno : " + data.getReport_no());
 		Map<String, Object> jsonObject = new HashMap<String, Object>();
 		try {
 			ReportVo vo= service.selectOne(data);
+			System.out.println("report : " + data);
+			System.out.println("vo : " + vo);
 			jsonObject.put("state", "success");
-			jsonObject.put("data",vo);
+			jsonObject.put("data",data);
+			System.out.println(jsonObject);
 			
 		} catch (SQLException e) {
 			jsonObject.put("state", "fail");
@@ -102,6 +111,8 @@ public class ReportSelectController {
 		}
 		return jsonObject;
 	}
+	
+	
 	@RequestMapping(value = "/report/check",method=RequestMethod.POST)
 	public @ResponseBody Map<String,Object> updateReport(int num){
 		Map<String, Object> jsonObject = new HashMap<String, Object>();
@@ -116,6 +127,8 @@ public class ReportSelectController {
 		}
 		return jsonObject;
 	}
+	
+	
 	@RequestMapping(value = "/report/back",method=RequestMethod.POST)
 	public @ResponseBody Map<String,Object> updateReport(ReportVo vo){
 		System.out.println(vo.getReport_no());

@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>Smart-Groupware</title>
 <%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 <link rel='stylesheet' type='text/css'

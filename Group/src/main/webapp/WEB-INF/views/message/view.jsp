@@ -5,8 +5,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
-<title>Smart-Groupware</title>
 <head>
+<title>Smart-Groupware</title>
 	<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
@@ -24,7 +24,7 @@
 	<!-- 컨텐트 헤더 -->
 	<section class="content-header">
 		<h1>
-			<img src="<c:url value="/resources/icon/notes.png"/>" width="50" height="50"/>
+			<img src="<c:url value="/resources/icon/note.png"/>" width="50" height="50"/>
 			쪽지 <small>message</small>
 		</h1>
 		<ol class="breadcrumb">
@@ -32,7 +32,6 @@
 			<li class="active">Here</li>
 		</ol>
 	</section>
-	<br>
 	<!-- ★★★★★★★★★★★여기에 추가★★★★★★★★★★★ -->
 	<!-- 컨텐트 메인 -->
 	<section class="content container-fluid">
@@ -41,10 +40,10 @@
                <div class="box-header with-border">
                   <h3 class="box-title">Message Content</h3>
                </div>
-               <form name="boardWriteForm" method="post" action="${pageContext.servletContext.contextPath }/board/write"> 
+               <form name="boardWriteForm" method="post" > 
                   <div class="box-body">
                      <div class="form-group">
-                        <label>발신자<input type="text" id="contentTitle" name="contentTitle" class="form-control" value="${sender}"></label>
+                        <label>발신자<input type="text" id="contentTitle" name="contentTitle" class="form-control" value="${sender}" readonly style="border:0px;"></label>
                      </div>                    
                                           
                      <div class="form-group">
@@ -57,8 +56,8 @@
 				    	<input type="hidden" id="teamId" name="teamId" value=${authUser.teamId }>
 						<input type="hidden" id="boardId" name="boardId" value=${boardId }>
                      <div class="pull-right">
-                        <button type="button" class="btn btn-primary" onClick="history.back();">
-                        돌아가기
+                        <button type="button" class="btn btn-primary btn-sm" onClick="history.back();">
+                 	       돌아가기
                         </button>
                      </div>
                      

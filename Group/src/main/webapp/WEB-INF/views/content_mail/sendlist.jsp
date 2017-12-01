@@ -10,7 +10,7 @@
 <%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel='stylesheet' type='text/css' href='<c:url value="/resources/boardCSS/NoticeList.css"/>'>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="${pageContext.servletContext.contextPath }/assets/js/common.js" type="text/javascript"></script>
@@ -21,7 +21,8 @@
 	<!-- 컨텐트 헤더 -->
 	<section class="content-header">
 		<h1>
-			보낸메일함 <small>그룹웨어 내부에서 보낸 메일만 표시</small>
+			<img src="<c:url value="/resources/icon/email_2.png"/>" width="50" height="50"/>
+			보낸메일함 <small>send mail</small>
 		</h1>
 	</section>
 
@@ -32,34 +33,37 @@
 	<input type="hidden" name="receiverEmail" id="receiverEmail">
       <input type="hidden" id="senderEmail" value="${authUser.email}">
 			
-			<h2>메일 리스트</h2>
+			<div class="col-xs-12">
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title">메일함</h3>
 
-<table class="board_list">
-	<colgroup>
-		<col width="10%" />
-		<col width="*" />
-		<col width="15%" />
-		<col width="20%" />
-	</colgroup>
-	<thead>
-		<tr>
-			<th scope="col">메일번호</th>
-			<th scope="col">받은사람</th>
-			<th scope="col">제목</th>
-			<th scope="col">보낸시간</th>
+				<div class="box-tools" style="padding: 0px; text-align: right; float: left">
 
-		</tr>
-	</thead>
-	<tbody>
-		        <c:choose>
-                <c:when test="${fn:length(list) > 0}">
-                    <c:forEach items="${list }" var="row">
-                       
-                        <tr>
-                            <td>${row.mailNum }</td>
-                            <td>${row.receiverMail }</td>
-                            <td class="title">
-                                <a href="${pageContext.request.contextPath }/mail/view?mailNum=${row.mailNum}">
+					 <div class="input-group input-group-sm" style="width: 150px;">
+
+					</div>
+				</div>
+			</div>
+			<!-- /.box-header -->
+			<div class="box-body table-responsive no-padding">
+			<form id="form1" name="form1" method="post">
+				<table class="table table-hover">
+					<tbody>
+						<tr>
+							<th width="10%">메일번호</th>
+							<th width="15%">받은사람</th>
+							<th width="60%">제목</th>
+							<th width="15%">보낸시간</th>
+						</tr>
+
+						<c:choose>
+                			<c:when test="${fn:length(list) > 0}">
+                    		<c:forEach items="${list }" var="row">
+							<tr>
+								<td>${row.mailNum }</td>
+								<td>${row.receiverMail }</td>
+								<td class="title"> <a href="${pageContext.request.contextPath }/mail/view?mailNum=${row.mailNum}">
                                 
 							          <c:choose>
 							           <c:when test="${fn:length(row.title) > 23}">
@@ -71,22 +75,33 @@
 							          </c:choose>
 								
                                 </a>
-                                <input type="hidden" id="IDX" value="temp">
-                            </td>
-                            <td>${row.regdate }</td>
-                        </tr>
-                       
-                    </c:forEach>
-                </c:when>
-                <c:otherwise>
-                    <tr>
-                        <td colspan="5">수신한 메일이 존재하지 않습니다.</td>
-                    </tr>
-                </c:otherwise>
-            </c:choose>
-	</tbody>
-</table>
-<br />
+                                <input type="hidden" id="IDX" value="temp"></td>
+								<td>${row.regdate }</td>
+							</tr>
+						</c:forEach>
+						</c:when>
+          			    <c:otherwise>
+                   			 <tr>
+                        		<td colspan="5">수신한 메일이 존재하지 않습니다.</td>
+                    		</tr>
+                		</c:otherwise>
+            		</c:choose>
+					</tbody>
+				</table>
+				<div class="box-footer">
+                <button type="button" class="btn btn-primary pull-right btn-sm" onclick="location.href='/group/mail'">메일쓰기</button>
+            	</div>
+				<table class="tmptable" width="100%">
+				<tr>
+					<td colspan="7" align="center"><jsp:include page="/WEB-INF/views/common/pagingforSubmit.jsp" /></td>
+				</tr>
+			</table>
+			<br>
+		</form>
+			</div>
+
+		</div>
+	</div>
 
 	</section>
 	<!-- ★★★★★★★★★★★여기에 추가★★★★★★★★★★★ -->

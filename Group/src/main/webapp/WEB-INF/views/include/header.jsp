@@ -84,7 +84,7 @@
                     <a href="${pageContext.servletContext.contextPath }/mypage" class="menu item_2" id="top_gnb">mypage</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="#">calendar</a>
+                    <a href="/group/calendar/main">calendar</a>
                   </div>
                   <div class="col-xs-4 text-center">
                     <a href="${pageContext.servletContext.contextPath}/logout">logout</a>
@@ -160,6 +160,7 @@
             <ul class="treeview-menu">
             	<li><a href="${pageContext.request.contextPath}/report/make"><i class="fa fa-circle-o"></i> 결재작성</a></li>
             	<li><a href="${pageContext.request.contextPath}/report/state"><i class="fa fa-circle-o"></i> 결재함</a></li>
+            	<li><a href="${pageContext.request.contextPath}/report/waiting"><i class="fa fa-circle-o"></i> 승인대기</a></li>
             </ul>
         </li>
         
