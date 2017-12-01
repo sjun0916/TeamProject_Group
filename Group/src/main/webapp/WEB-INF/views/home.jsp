@@ -9,6 +9,13 @@
 <link rel='stylesheet' type='text/css'
 	href='<c:url value="/resources/boardCSS/NoticeList.css"/>'>
 <link rel='stylesheet' type='text/css' href='<c:url value="assets/css/calendar.css"/>'>
+	<script>
+// 	calendar submit()
+		function goTo()
+		{
+		  document.getElementbyId("monthView").submit();
+		}
+	</script>
 </head>
 
 <%@ include file="include/header.jsp"%>
@@ -17,207 +24,19 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- Content 헤더 -->
-	<script>
-// 	calendar submit()
-		function goTo()
-		{
-		  document.getElementbyId("monthView").submit();
-		}
-	</script>
+
 	<section class="content-header">
-
-
-
+		
+		
+<%-- 		<img src="${pageContext.request.contextPath}/resources/icon/rian.jpg" width="100%" height="300px"> --%>
 
 
 		<section class="content">
 
-
-			<div class="row">
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box bg-aqua">
-						<span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">Bookmarks</span> <span
-								class="info-box-number">41,410</span> <br> <small><a
-								href="#" class="small-box-footer pull-right">More info <i
-									class="fa fa-arrow-circle-right"></i></a></small>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box bg-green">
-						<span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">Likes</span> <span
-								class="info-box-number">41,410</span> <br> <small><a
-								href="#" class="small-box-footer pull-right">More info <i
-									class="fa fa-arrow-circle-right"></i></a></small>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box bg-yellow">
-						<span class="info-box-icon"><i class="fa fa-calendar"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">Events</span> <span
-								class="info-box-number">41,410</span> <br> <small><a
-								href="#" class="small-box-footer pull-right">More info <i
-									class="fa fa-arrow-circle-right"></i></a></small>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box bg-red">
-						<span class="info-box-icon"><i class="fa fa-comments-o"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">Comments</span> <span
-								class="info-box-number">41,410</span> <br> <small><a
-								href="#" class="small-box-footer pull-right">More info <i
-									class="fa fa-arrow-circle-right"></i></a></small>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
+			<div style="background-image: url('${pageContext.request.contextPath}/resources/icon/rian.jpg'); width:100%; height:300px;">
+			회사이미지 / 설명 등등 
 			</div>
-
-			<div class="row">
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box">
-						<span class="info-box-icon bg-aqua"><i
-							class="fa fa-envelope-o"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">Messages</span> <span
-								class="info-box-number">1,410</span>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box">
-						<span class="info-box-icon bg-green"><i
-							class="fa fa-flag-o"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">Bookmarks</span> <span
-								class="info-box-number">410</span>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box">
-						<span class="info-box-icon bg-yellow"><i
-							class="fa fa-files-o"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">Uploads</span> <span
-								class="info-box-number">13,648</span>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box">
-						<span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">Likes</span> <span
-								class="info-box-number">93,139</span>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-			</div>
-
-			<!-- Info boxes -->
-			<div class="row">
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box">
-						<span class="info-box-icon bg-aqua"><i
-							class="ion ion-ios-gear-outline"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">CPU Traffic</span> <span
-								class="info-box-number">90<small>%</small></span>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box">
-						<span class="info-box-icon bg-red"><i
-							class="fa fa-google-plus"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">Likes</span> <span
-								class="info-box-number">41,410</span>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-
-				<!-- fix for small devices only -->
-				<div class="clearfix visible-sm-block"></div>
-
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box">
-						<span class="info-box-icon bg-green"><i
-							class="ion ion-ios-cart-outline"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">Sales</span> <span
-								class="info-box-number">760</span>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box">
-						<span class="info-box-icon bg-yellow"><i
-							class="ion ion-ios-people-outline"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">New Members</span> <span
-								class="info-box-number">2,000</span>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-			</div>
-			<!-- /.row -->
+			<hr>
 
 			<div class="row">
 				<div class="col-md-12">
@@ -449,7 +268,7 @@
 				<!-- /.col -->
 
 				<div class="col-md-4">
-					<div class="box box-default">
+					<div class="box box-primary">
 						<div class="box-header with-border">
 							<h3 class="box-title">Calendar</h3>
 
@@ -467,37 +286,7 @@
 						<!-- /.box-header -->
 						<div class="box-body">
 							<div class="row">
-								달력 출력
-							</div>
-							<!-- /.row -->
-						</div>
-						<!-- /.box-body -->
-
-
-					
-						<!-- /.footer -->
-					</div>
-					<!-- /.box -->
-
-
-					<div class="box box-primary">
-						<div class="box-header with-border">
-							<h3 class="box-title">Calendar</h3>
-
-							<div class="box-tools pull-right">
-								<button type="button" class="btn btn-box-tool"
-									data-widget="collapse">
-									<i class="fa fa-minus"></i>
-								</button>
-								<button type="button" class="btn btn-box-tool"
-									onclick="location.href='/group/calendar/main'">
-									more<i class="fa fa-chevron-circle-right"></i>
-								</button>
-							</div>
-						</div>
-						<!-- /.box-header -->
-						<div class="box-body">
-							<form id="monthView" name="monthView">
+								<form id="monthView" name="monthView">
 								<table class="tTable" width="100%">
 								  <tr>
 								    <td><table class="tTable">
@@ -541,18 +330,44 @@
 									</tr>
 								</table>
 							</form>
+							</div>
+							<!-- /.row -->
 						</div>
 						<!-- /.box-body -->
-						<div class="box-footer text-center">
-							<a href="javascript:void(0)" class="uppercase">View All
-								Products</a>
+
+
+					
+						<!-- /.footer -->
+					</div>
+					<!-- /.box -->
+
+
+					<div class="box box-warning direct-chat direct-chat-warning">
+						<div class="box-header with-border">
+							<h3 class="box-title">Weather</h3>
+
+							<div class="box-tools pull-right">
+								<button type="button" class="btn btn-box-tool"
+									data-widget="collapse">
+									<i class="fa fa-minus"></i>
+								</button>
+								<button type="button" class="btn btn-box-tool"
+									onclick="location.href='/group/calendar/main'">
+									more<i class="fa fa-chevron-circle-right"></i>
+								</button>
+							</div>
+						</div>
+						<!-- /.box-header -->
+						<div class="box-body">
+							날씨api
 						</div>
 						<!-- /.box-body -->
+
 						
 					</div>
 
 
-					<div class="box box-warning direct-chat direct-chat-warning">
+					<div class="box box-fault">
 						<div class="box-header with-border">
 							<h3 class="box-title">?</h3>
 
