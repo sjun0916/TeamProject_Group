@@ -81,7 +81,7 @@
 								</c:otherwise>
 								</c:choose>	
 									<p>[${authUser.teamName }][${authUser.positionName }]
-										${authUser.employeeName } ${authUser.imageUrl}</p>
+										${authUser.employeeName }</p>
 								</li>
 								<!-- 유저 정보 메뉴 -->
 								<li class="user-footer">

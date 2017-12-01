@@ -25,6 +25,7 @@
 			document.mypage.password2.focus();
 			return
 		}
+		alert("정보와 비밀번호가 변경되었습니다. 다시 로그인 해주세요");
 		document.mypage.submit();
 	}
 </script>
@@ -52,6 +53,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
+            
             <form  name="mypage" class="form-horizontal" method="post" action="${pageContext.servletContext.contextPath }/mypage/modify" enctype="multipart/form-data" >
               <div class="box-body">
                 <div class="form-group">
@@ -67,7 +69,7 @@
 					</c:otherwise>
 					</c:choose>
                   </div>
-                </div>
+           		</div>
                 <div class="form-group">
                   <label for="imageUrl" class="col-sm-2 control-label">사진 변경</label>
                   <div class="col-sm-10">
@@ -170,4 +172,7 @@
 </div>
 <!-- /.content-wrapper -->
 
-<%@ include file ="/WEB-INF/views/include/footer.jsp" %>
+    <%@ include file="/WEB-INF/views/include/footer.jsp" %>
+    <%@ include file="/WEB-INF/views/include/footerScript.jsp" %>
+</body>
+</html>
