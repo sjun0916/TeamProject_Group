@@ -214,7 +214,7 @@
 
               <div class="box-tools pull-right">
               	<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                <button type="button" class="btn btn-box-tool"onclick="location.href='/group/NoticeList'">more<i class="fa fa-chevron-circle-right"></i></button>
+                <button type="button" class="btn btn-box-tool"onclick="location.href='/group/'">more<i class="fa fa-chevron-circle-right"></i></button>
               </div>
             </div>
             <!-- /.box-header -->
@@ -311,12 +311,9 @@
 
                   <div class="box-tools pull-right">
                     <span data-toggle="tooltip" title="" class="badge bg-yellow" data-original-title="3 New Messages">3</span>
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Contacts">
-                      <i class="fa fa-comments"></i></button>
-                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
-                    </button>
+
+	              	<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    	            <button type="button" class="btn btn-box-tool"onclick="location.href='/group/'">more<i class="fa fa-chevron-circle-right"></i></button>
                   </div>
                 </div>
                 <!-- /.box-header -->
@@ -341,10 +338,8 @@
 
                   <div class="box-tools pull-right">
                     <span class="label label-danger">8 </span>
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
-                    </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    	            <button type="button" class="btn btn-box-tool"onclick="location.href='/group/'">more<i class="fa fa-chevron-circle-right"></i></button>
                   </div>
                 </div>
                 <!-- /.box-header -->
@@ -414,9 +409,8 @@
               <h3 class="box-title">디자인5</h3>
 
               <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    	        <button type="button" class="btn btn-box-tool"onclick="location.href='/group/'">more<i class="fa fa-chevron-circle-right"></i></button>
               </div>
             </div>
             <!-- /.box-header -->
@@ -456,9 +450,8 @@
               <h3 class="box-title">디자인6</h3>
 
               <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    	        <button type="button" class="btn btn-box-tool"onclick="location.href='/group/'">more<i class="fa fa-chevron-circle-right"></i></button>
               </div>
             </div>
             <!-- /.box-header -->
@@ -478,9 +471,8 @@
               <h3 class="box-title">디자인7</h3>
 
               <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    	        <button type="button" class="btn btn-box-tool"onclick="location.href='/group/'">more<i class="fa fa-chevron-circle-right"></i></button>
               </div>
             </div>
             <!-- /.box-header -->
