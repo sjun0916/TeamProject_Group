@@ -215,7 +215,7 @@
 				<div class="col-md-12">
 					<div class="box">
 						<div class="box-header with-border">
-							<h3 class="box-title">디자인1</h3>
+							<h3 class="box-title">Document Approval</h3>
 
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool"
@@ -334,7 +334,7 @@
 							<!-- DIRECT CHAT -->
 							<div class="box box-warning direct-chat direct-chat-warning">
 								<div class="box-header with-border">
-									<h3 class="box-title">디자인2</h3>
+									<h3 class="box-title">Board</h3>
 
 									<div class="box-tools pull-right">
 										<span data-toggle="tooltip" title="" class="badge bg-yellow"
@@ -351,10 +351,9 @@
 									</div>
 								</div>
 								<!-- /.box-header -->
-								<div class="box-body">내용넣기</div>
+								<div class="box-body">게시판 3개출력</div>
 								<!-- /.box-body -->
-								<div class="box-footer">?</div>
-								<!-- /.box-footer-->
+				
 							</div>
 							<!--/.direct-chat -->
 						</div>
@@ -364,7 +363,7 @@
 							<!-- USERS LIST -->
 							<div class="box box-danger">
 								<div class="box-header with-border">
-									<h3 class="box-title">디자인3</h3>
+									<h3 class="box-title">Message</h3>
 
 									<div class="box-tools pull-right">
 										<span class="label label-danger">8 </span>
@@ -379,13 +378,9 @@
 									</div>
 								</div>
 								<!-- /.box-header -->
-								<div class="box-body no-padding">내용넣기</div>
+								<div class="box-body no-padding">쪽지 3개출력</div>
 								<!-- /.box-body -->
-								<div class="box-footer text-center">
-									<a href="javascript:void(0)" class="uppercase">View All
-										Users</a>
-								</div>
-								<!-- /.box-footer -->
+								
 							</div>
 							<!--/.box -->
 						</div>
@@ -448,7 +443,7 @@
 				<div class="col-md-4">
 					<div class="box box-default">
 						<div class="box-header with-border">
-							<h3 class="box-title">디자인5</h3>
+							<h3 class="box-title">Calendar</h3>
 
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool"
@@ -464,26 +459,14 @@
 						<!-- /.box-header -->
 						<div class="box-body">
 							<div class="row">
-								<div class="col-md-8">내용</div>
-								<!-- /.col -->
-								<div class="col-md-4">내용2</div>
-								<!-- /.col -->
+								달력 출력
 							</div>
 							<!-- /.row -->
 						</div>
 						<!-- /.box-body -->
 
 
-						<div class="box-footer no-padding">
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">링크 <span class="pull-right text-red"><i
-											class="fa fa-angle-down"></i> 12%</span></a></li>
-								<li><a href="#">링크 <span class="pull-right text-green"><i
-											class="fa fa-angle-up"></i> 4%</span></a></li>
-								<li><a href="#">링크 <span class="pull-right text-yellow"><i
-											class="fa fa-angle-left"></i> 0%</span></a></li>
-							</ul>
-						</div>
+					
 						<!-- /.footer -->
 					</div>
 					<!-- /.box -->
@@ -491,7 +474,7 @@
 
 					<div class="box box-primary">
 						<div class="box-header with-border">
-							<h3 class="box-title">디자인6</h3>
+							<h3 class="box-title">Weather</h3>
 
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool"
@@ -505,19 +488,17 @@
 							</div>
 						</div>
 						<!-- /.box-header -->
-						<div class="box-body">내용</div>
-						<!-- /.box-body -->
-						<div class="box-footer text-center">
-							<a href="javascript:void(0)" class="uppercase">View All
-								Products</a>
+						<div class="box-body">
+						날씨api
 						</div>
-						<!-- /.box-footer -->
+						<!-- /.box-body -->
+						
 					</div>
 
 
 					<div class="box box-warning direct-chat direct-chat-warning">
 						<div class="box-header with-border">
-							<h3 class="box-title">디자인7</h3>
+							<h3 class="box-title">?</h3>
 
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool"
@@ -531,13 +512,9 @@
 							</div>
 						</div>
 						<!-- /.box-header -->
-						<div class="box-body">내용</div>
+						<div class="box-body">?</div>
 						<!-- /.box-body -->
-						<div class="box-footer text-center">
-							<a href="javascript:void(0)" class="uppercase">View All
-								Products</a>
-						</div>
-						<!-- /.box-footer -->
+						
 					</div>
 					<!-- /.box -->
 				</div>
