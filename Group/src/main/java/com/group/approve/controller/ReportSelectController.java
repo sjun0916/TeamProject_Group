@@ -71,10 +71,10 @@ public class ReportSelectController {
 	public String endReport(@PathVariable String form, HttpServletRequest request,ReportVo reportVo,@RequestParam("content")String content,
 								@AuthUser UserVO authUser){
 		
-		reportVo.setReg_cont(content);
-		reportVo.setReg_id(authUser.getEmployeeNo());
-		reportVo.setReg_dep(authUser.getTeamId());
-		reportVo.setReg_state("1");
+		reportVo.setRegCont(content);
+		reportVo.setRegId(authUser.getEmployeeNo());
+		reportVo.setRegDep(authUser.getTeamId());
+		reportVo.setRegState("1");
 		service.insert(reportVo);
 		
 		System.out.println("결재서류 작성 완료");
@@ -93,16 +93,12 @@ public class ReportSelectController {
 	
 	
 	@RequestMapping(value = "/report/selectOne",method=RequestMethod.POST)
-	public Map<String,Object> selectReport(ReportVo data, @RequestParam("report_no")int report_no){
-		data.setReport_no(report_no);
-		System.out.println("reportno : " + data.getReport_no());
+	public @ResponseBody Map<String,Object> selectReport(int reportNo){
 		Map<String, Object> jsonObject = new HashMap<String, Object>();
 		try {
-			ReportVo vo= service.selectOne(data);
-			System.out.println("report : " + data);
-			System.out.println("vo : " + vo);
+			ReportVo vo= service.selectOne(reportNo);		
 			jsonObject.put("state", "success");
-			jsonObject.put("data",data);
+			jsonObject.put("data", vo);
 			System.out.println(jsonObject);
 			
 		} catch (SQLException e) {
@@ -131,8 +127,7 @@ public class ReportSelectController {
 	
 	@RequestMapping(value = "/report/back",method=RequestMethod.POST)
 	public @ResponseBody Map<String,Object> updateReport(ReportVo vo){
-		System.out.println(vo.getReport_no());
-		System.out.println(vo.getReport_no());
+		System.out.println(vo.getReportNo());
 		Map<String, Object> jsonObject = new HashMap<String, Object>();
 		int result =0;
 		try {

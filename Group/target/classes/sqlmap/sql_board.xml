@@ -21,6 +21,10 @@
         SELECT COUNT(*)
           FROM BOARD
          <include refid="includeBoard"/>
+          
+          <if test="category1 != null and category1 !=''">
+          AND DEPARTNAME = #{category1}
+          </if>
     </select> 
     
     <select id="selectBoardList" resultType="com.group.board.vo.BoardVO" parameterType="com.group.board.vo.SearchVO">

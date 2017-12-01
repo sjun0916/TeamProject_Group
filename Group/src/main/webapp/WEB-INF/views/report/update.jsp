@@ -49,7 +49,7 @@
 											<div id="Personnel">
 												<div class="form-group">
 													<label>결제자1</label>
-													<select class="form-control select2 select2-hidden-accessible" name="reg_manager1"
+													<select class="form-control select2 select2-hidden-accessible" name="regManager1"
 														style="width: 100%;" tabindex="-1" aria-hidden="true">
 														<c:forEach items="${userList}" var="vo">
 														<option value="${vo.employeeNo}">[${vo.teamId}]${vo.employeeName}</option>
@@ -72,14 +72,14 @@
 									<div class="box-body">
 										<div class="form-group">
 											<label>서류 제목</label>
-												<input type="text" id="reg_title" name="reg_title" class="form-control" placeholder="제목을 입력하세요">
+												<input type="text" id="regTitle" name="regTitle" class="form-control" placeholder="제목을 입력하세요">
 										</div>
 										<div class="form-group">
 											<select class="form-control" id="type">
 												<c:forEach items="${reportList}" var="fileName" >
 													<option value="${fileName}">${fileName}</option>
 												</c:forEach>
-												<input type="hidden" id="reg_type" name="reg_type" value="${reportList.get(0)}">
+												<input type="hidden" id="regType" name="regType" value="${reportList.get(0)}">
 											</select>
 										</div>
 									</div>
@@ -96,7 +96,7 @@
 									<div class="box-body">
 										<div class="form-group">
 										<label>comment</label>
-											<textarea name="reg_comment" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+											<textarea name="regComment" class="form-control" rows="3" placeholder="Enter ..."></textarea>
 										</div>
 									</div>
 								</div>
@@ -122,8 +122,8 @@ var title;
 	function writeReport() {
 		var e = document.getElementById("type");
 		var reportType = e.options[e.selectedIndex].value;
-		document.getElementById("reg_type").value=reportType;
-		if($("#reg_title").val().trim()!=""){
+		document.getElementById("regType").value=reportType;
+		if($("#regTitle").val().trim()!=""){
 		var gsWin = window
 				.open('about:blank',
 						'payviewer',

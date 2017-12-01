@@ -22,6 +22,10 @@
         SELECT COUNT(*)
           FROM NOTICE
          <include refid="includeNotice"/>
+           
+          <if test="category1 != null and category1 !=''">
+          AND DEPARTNAME = #{category1}
+          </if>
     </select> 
     
 <!--     페이징처리,카테고리기능  -->

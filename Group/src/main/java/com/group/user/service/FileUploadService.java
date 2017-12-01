@@ -12,11 +12,12 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileUploadService {
 	private static String SAVE_PATH = "C:\\Test";
 	private static String PREFIX_URL = "C:\\Test\\images";
-	
+	private String savePath = "";
+
 	public String restore(MultipartFile multipartFile) {
-		
+
 		String url = "";
-		
+		String saveFileName = "";
 		try {
 			String originalFileName = multipartFile.getOriginalFilename();
 			
@@ -26,22 +27,22 @@ public class FileUploadService {
 			
 			String extName = originalFileName.substring(originalFileName.lastIndexOf("."), originalFileName.length());	
 			Long size = multipartFile.getSize();
-			String saveFileName = genSaveFileName( extName );
+			saveFileName = genSaveFileName( extName );
 			
 			System.out.println( "#######" + originalFileName );
 			System.out.println( "#######" + extName );
 			System.out.println( "#######" + saveFileName );
 			System.out.println( "#######" + size );
 			
-			writeFile( multipartFile, SAVE_PATH, saveFileName );
+			writeFile( multipartFile, savePath, saveFileName );
 			
-			url = PREFIX_URL + saveFileName;
+			url = savePath + saveFileName;
 			
 		} catch( IOException ex ) {
 			throw new RuntimeException( ex );
 		}
 		
-		return url;
+		return saveFileName;
 	}
 
 	/**
@@ -60,7 +61,7 @@ public class FileUploadService {
 		byte[] fileData = multipartFile.getBytes();
 		
 		FileOutputStream fos
-			= new FileOutputStream( SAVE_PATH + "/" + saveFileName );
+			= new FileOutputStream( savePath + "/" + saveFileName );
 		fos.write( fileData );
 		fos.close();
 	}
@@ -79,5 +80,13 @@ public class FileUploadService {
 		fileName += extName;
 		
 		return fileName;
+	}
+
+	public String getSavePath() {
+		return savePath;
+	}
+
+	public void setSavePath(String savePath) {
+		this.savePath = savePath;
 	}
 }
