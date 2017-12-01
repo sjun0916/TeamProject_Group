@@ -146,5 +146,126 @@ public class ReportVo {
 		this.reg_comment = reg_comment;
 	}
 	
+	public int getReportNo() {
+		return report_no;
+	}
+	public void setReportNo(int report_no) {
+		this.report_no = report_no;
+	}
+	public int getRegId() {
+		return reg_id;
+	}
+	public void setRegId(int reg_id) {
+		this.reg_id = reg_id;
+	}
+	public String getRegDep() {
+		return reg_dep;
+	}
+	public void setRegDep(String reg_dep) {
+		this.reg_dep = reg_dep;
+	}
+	public int getRegManager1() {
+		return reg_manager1;
+	}
+	public void setRegManager1(int reg_manager1) {
+		this.reg_manager1 = reg_manager1;
+	}
+	public int getRegManager2() {
+		return reg_manager2;
+	}
+	public void setRegManager2(int reg_manager2) {
+		this.reg_manager2 = reg_manager2;
+	}
+	public int getRegManager3() {
+		return reg_manager3;
+	}
+	public void setRegManager3(int reg_manager3) {
+		this.reg_manager3 = reg_manager3;
+	}
+	public int getRegManager4() {
+		return reg_manager4;
+	}
+	public void setRegManager4(int reg_manager4) {
+		this.reg_manager4 = reg_manager4;
+	}
+	public int getRegManager5() {
+		return reg_manager5;
+	}
+	public void setRegManager5(int reg_manager5) {
+		this.reg_manager5 = reg_manager5;
+	}
+	public String getRegTitle() {
+		return reg_title;
+	}
+	public void setRegTitle(String reg_title) {
+		this.reg_title = reg_title;
+	}
+	public String getRegCont() {
+		return reg_cont;
+	}
+	public void setRegCont(String reg_cont) {
+		this.reg_cont = reg_cont;
+	}
+	public String getRegState() {
+		return reg_state;
+	}
+	public void setRegState(String reg_state) {
+		this.reg_state = reg_state;
+	}
+	public String getRegReason() {
+		return reg_reason;
+	}
+	public void setRegReason(String reg_reason) {
+		this.reg_reason = reg_reason;
+	}
+	public Timestamp getRegDate() {
+		return reg_date;
+	}
+	public void setRegDate(Timestamp reg_date) {
+		this.reg_date = reg_date;
+	}
+	public Timestamp getRegUpdate1() {
+		return reg_update1;
+	}
+	public void setRegUpdate1(Timestamp reg_update1) {
+		this.reg_update1 = reg_update1;
+	}
+	public Timestamp getRegUpdate2() {
+		return reg_update2;
+	}
+	public void setRegUpdate2(Timestamp reg_update2) {
+		this.reg_update2 = reg_update2;
+	}
+	public Timestamp getRegUpdate3() {
+		return reg_update3;
+	}
+	public void setRegUpdate3(Timestamp reg_update3) {
+		this.reg_update3 = reg_update3;
+	}
+	public Timestamp getRegUpdate4() {
+		return reg_update4;
+	}
+	public void setRegUpdate4(Timestamp reg_update4) {
+		this.reg_update4 = reg_update4;
+	}
+	public Timestamp getRegUpdate5() {
+		return reg_update5;
+	}
+	public void setRegUpdate5(Timestamp reg_update5) {
+		this.reg_update5 = reg_update5;
+	}
+	public String getRegType() {
+		return reg_type;
+	}
+	public void setRegType(String reg_type) {
+		this.reg_type = reg_type;
+	}
+	public String getRegComment() {
+		return reg_comment;
+	}
+	public void setRegComment(String reg_comment) {
+		this.reg_comment = reg_comment;
+	}
+	
 }
 

@@ -322,6 +322,7 @@
 										dataType : 'json',
 										success : function(data) {
 											var state = data.reg_state;
+											alert(state);
 											var v = data.data;
 											if (state = "success") {
 												$("#NOT_report_no").html(v.report_no);

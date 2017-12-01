@@ -14,7 +14,7 @@
 	</select>
 	
 	
-	<select id="selectOne" parameterType="int" resultType="com.group.approve.vo.ReportVo">
+	<select id="selectOne" parameterType="Integer" resultType="com.group.approve.vo.ReportVo">
 		select * from REPORT where REPORT_NO=#{report_no}
 	</select>
 	
