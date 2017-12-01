@@ -93,16 +93,13 @@ public class ReportSelectController {
 	
 	
 	@RequestMapping(value = "/report/selectOne",method=RequestMethod.POST)
-	public Map<String,Object> selectReport(ReportVo data, @RequestParam("report_no")int report_no){
-		data.setReport_no(report_no);
-		System.out.println("reportno : " + data.getReport_no());
+	public @ResponseBody Map<String,Object> selectReport(int report_no){
 		Map<String, Object> jsonObject = new HashMap<String, Object>();
+		System.out.println("requestMapping : " + report_no);
 		try {
-			ReportVo vo= service.selectOne(data);
-			System.out.println("report : " + data);
-			System.out.println("vo : " + vo);
+			ReportVo vo= service.selectOne(report_no);		
 			jsonObject.put("state", "success");
-			jsonObject.put("data",data);
+			jsonObject.put("data", vo);
 			System.out.println(jsonObject);
 			
 		} catch (SQLException e) {

@@ -14,7 +14,7 @@
 	</select>
 	
 	
-	<select id="selectOne" parameterType="com.group.approve.vo.ReportVo" resultType="com.group.approve.vo.ReportVo">
+	<select id="selectOne" parameterType="int" resultType="com.group.approve.vo.ReportVo">
 		select * from REPORT where REPORT_NO=#{report_no}
 	</select>
 	
@@ -25,29 +25,29 @@
 			(SELECT REPORT_NO from REPORT
 			WHERE REPORT_NO IN(
 			select REPORT_NO from REPORT
-			WHERE REG_MANAGER1 =#{employeeNo}
+			WHERE REG_MANAGER1 =1001
     		and REG_UPDATE1 IS NULL
 			)
 			OR REPORT_NO IN(
 			select REPORT_NO from REPORT
-			WHERE REG_MANAGER2 =#{employeeNo}
+			WHERE REG_MANAGER2 =0
 			and REG_UPDATE1 is not null
     		and REG_UPDATE2 is null
 			)
 			or REPORT_NO IN(
 			select REPORT_NO from REPORT
-			where REG_MANAGER3 =#{employeeNo}
+			where REG_MANAGER3 =0
 			and REG_UPDATE2 is not null
     		and REG_UPDATE2 is null
 			)
 			or REPORT_NO IN(
 			select REPORT_NO from REPORT
-			where REG_MANAGER4 =#{employeeNo}
+			where REG_MANAGER4 =0
 			and REG_UPDATE3 is not null
     		and REG_UPDATE4 is null
 			)or REPORT_NO IN(
 			select REPORT_NO from REPORT
-			where REG_MANAGER5 =#{employeeNo}
+			where REG_MANAGER5 =0
 			and REG_UPDATE4 is not null
     		and REG_UPDATE5 is null
 			)
