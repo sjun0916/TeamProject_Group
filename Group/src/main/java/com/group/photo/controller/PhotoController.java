@@ -60,6 +60,7 @@ public class PhotoController {
 	}
 
 	/**
+	 * 
 	 * 글 저장.
 	 */
 	@RequestMapping(value = "/PhotoSave")
