@@ -25,7 +25,7 @@
 			document.mypage.password2.focus();
 			return
 		}
-		alert("정보와 비밀번호가 변경되었습니다. 다시 로그인 해주세요");
+		alert("정보와 비밀번호가 변경되었습니다. ★다음 로그인 시 적용됩니다★");
 		document.mypage.submit();
 	}
 </script>

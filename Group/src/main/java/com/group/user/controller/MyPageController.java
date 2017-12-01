@@ -41,6 +41,6 @@ public class MyPageController {
 		userVo.setImageUrl(fileUploadService.restore(file));
 		myPageService.modify(userVo);
 		
-		return "redirect:/";
+		return "redirect:/mypage";
 	}
 }

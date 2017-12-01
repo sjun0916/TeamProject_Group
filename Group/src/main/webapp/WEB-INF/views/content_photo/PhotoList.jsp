@@ -25,50 +25,68 @@
 		</h1>
 	</section>
 	<!-- 컨텐츠 메인 -->
+	
+	
+	
+	
 	<section class="content container-fluid">
-		<form id="form1" name="form1" method="post">
-			<table>
+	
+	<div class="col-xs-12">
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title">Photo</h3>
 
+				<div class="box-tools" style="padding: 0px; text-align: right; float: left">
 
-				<tbody>
-					<tr>
-						<c:forEach var="listview" items="${listview}" varStatus="status">
-							<c:url var="link" value="PhotoRead">
+					 <div class="input-group input-group-sm" style="width: 150px;">
+
+					</div>
+				</div>
+			</div>
+			<!-- /.box-header -->
+			<div class="box-body table-responsive no-padding">
+			<form id="form1" name="form1" method="post">
+				<table class="table table-hover">
+					<tbody>
+							<tr>
+								<c:forEach var="listview" items="${listview}" varStatus="status">
+								<c:url var="link" value="PhotoRead">
 								<c:param name="photonum" value="${listview.photonum}" />
-							</c:url>
+								</c:url>
+								<td>
+								<img src="\group\imgUpload\2017\<c:out value="${listview.realname}"/>" width="150" height="150" />
+								<br><a href="${link}"><c:out value="${listview.title}" /></a>
+								<br><c:out value="${listview.writer}"/></td>
+								<c:if test="${status.count%3 eq 0 || status.last}">
+							</tr>
+							</c:if>
 
-							<td><img
-								src="\group\imgUpload\2017\<c:out value="${listview.realname}"/>"
-								width="400" height="300" /><br> <c:out value="${listview.writer}"/><a href="${link}"><c:out
-										value="${listview.title}" /></a></td>
-							<c:if test="${status.count%3 eq 0 || status.last}">
-					</tr>
-					</c:if>
-
-					</c:forEach>
-				</tbody>
-			</table>
-			<table class="tmptable">
+							</c:forEach>
+						
+					</tbody>
+				</table>
+				<div class="box-footer">
+                <button type="button" class="btn btn-primary pull-right btn-sm" onclick="location.href='/group/PhotoForm'">사진등록</button>
+            	</div>
+				<table class="tmptable" width="100%">
 				<tr>
-					<td><jsp:include
-							page="/WEB-INF/views/common/pagingforSubmit.jsp" /> <a
-						href="PhotoForm"><p style="text-align: right">글작성</a></td>
+					<td colspan="7" align="center"><jsp:include page="/WEB-INF/views/common/pagingforSubmit.jsp" /></td>
 				</tr>
 				<tr>
-					<td>
+					<td colspan="7" align="center">
 						<div>
 							<%-- <input type="hidden" name="category1" value="${searchVO.category1}"/>  --%>
 							<input type="checkbox" name="searchType" value="title"
 								<c:if test="${fn:indexOf(searchVO.searchType, 'title')!=-1}">checked="checked"</c:if> />
-							<label class="chkselect" for="searchType1">제목</label> <input
+							<label class="chkselect" for="searchType1">제목　</label> <input
 								type="checkbox" name="searchType" value="writer"
 								<c:if test="${fn:indexOf(searchVO.searchType, 'writer')!=-1}">checked="checked"</c:if> />
-							<label class="chkselect" for="searchType2">작성자</label> <input
-								type="text" name="searchKeyword" style="width: 150px;"
+							<label class="chkselect" for="searchType2">작성자　</label> <input
+								type="text" name="searchKeyword" style="width: 150px; height:27px;"
 								maxlength="50"
 								value='<c:out value="${searchVO.searchKeyword}"/>'
 								onkeydown="if(event.keyCode == 13) { fn_formSubmit();}">
-							<input name="btn_search" value="검색" class="btn_sch" type="button"
+							<input name="btn_search" value="검색" class="pull-center btn btn-default btn-sm" type="button"
 								onclick="fn_formSubmit()" />
 
 
@@ -76,9 +94,15 @@
 					</td>
 				</tr>
 			</table>
+			<br>
 		</form>
+			</div>
 
+		</div>
+	</div>
+	
 	</section>
+	
 	<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
