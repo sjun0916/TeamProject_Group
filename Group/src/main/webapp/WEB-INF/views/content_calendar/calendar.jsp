@@ -246,7 +246,7 @@ function calView(desc){
 		},
 	});		
 }
- 
+ //checkbox 유지
 // $(function chbCtl(){
 // 	if(sessionStorage.getItem("kindCom")=="checked"){
 // 		$('input:checkbox[id="kindcom"]').is(":checked") == true;
