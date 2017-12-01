@@ -64,7 +64,7 @@ public class NoticeController {
      */
     @RequestMapping(value = "/NoticeSave")
     public String noticeSave(HttpServletRequest request, NoticeVO noticeInfo) {
-        String[] filenum = request.getParameterValues("filenum");
+        String[] filenum = request.getParameterValues("noticefilenum");
         System.out.println(noticeInfo.getUploadfile());
         FileUtil3 fs = new FileUtil3();
         List<FileVO> filelist = fs.saveAllFiles(noticeInfo.getUploadfile());
