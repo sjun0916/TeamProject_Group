@@ -30,21 +30,21 @@
 					<ul class="nav navbar-nav">
 						<!-- 메일표시 (오른상단 네비)-->
 						<li class="dropdown messages-menu">
-							<!-- 링크걸기 --> <a href="#" class="dropdown-toggle"
+							<!-- 링크걸기 --> <a href="${pageContext.request.contextPath}/mail/receivelist" class="dropdown-toggle"
 							data-toggle="dropdown"> <i class="fa fa-envelope-o"></i> <span
-								class="label label-success">4</span>
+								class="label label-success">N</span>
 						</a>
 						</li>
-						<!-- 결재표시 (오른상단 네비) -->
+						<!-- 공지사항 숫자표시 (오른상단 네비) -->
 						<li class="dropdown notifications-menu">
-							<!-- 링크걸기 --> <a href="#" class="dropdown-toggle"
+							<!-- 링크걸기 --> <a href="${pageContext.request.contextPath}/NoticeList" class="dropdown-toggle"
 							data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span
 								class="label label-warning">10</span>
 						</a>
 						</li>
-						<!-- 공지사항 숫자표시 (오른상단 네비) -->
+						<!-- 결재표시 (오른상단 네비) -->
 						<li class="dropdown tasks-menu">
-							<!-- 링크걸기 --> <a href="#" class="dropdown-toggle"
+							<!-- 링크걸기 --> <a href="${pageContext.request.contextPath}/report/state" class="dropdown-toggle"
 							data-toggle="dropdown"> <i class="fa fa-flag-o"></i> <span
 								class="label label-danger">9</span>
 						</a>

@@ -21,7 +21,7 @@
 	<section class="content-header">
 		<h1>
 			<img src="<c:url value="/resources/icon/email_3.png"/>" width="50" height="50"/>
-			받은메일함 <small>receive mail</small>
+			받은메일함 <small>receive mail &nbsp;&nbsp;&nbsp;/받은 메일은 google에서도 확인 가능합니다.</small>
 		</h1>
 	</section>
 

@@ -31,6 +31,18 @@
 	<!-- Content 메인 -->
 	<section class="content container-fluid">
 		내용 <br> <br> <br>
+		
+		
+		<div id="report">
+			<h2>결재현황</h2><br>
+			<form id="report1" name="report1" method="post">
+				<table>
+					
+				</table>
+			</form>
+		</div>
+		
+		
 
 
 
