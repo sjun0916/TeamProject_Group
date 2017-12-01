@@ -8,6 +8,7 @@
 <%@ include file="include/headerScript.jsp"%>
 <link rel='stylesheet' type='text/css'
 	href='<c:url value="/resources/boardCSS/NoticeList.css"/>'>
+<link rel='stylesheet' type='text/css' href='<c:url value="assets/css/calendar.css"/>'>
 </head>
 
 <%@ include file="include/header.jsp"%>
@@ -16,6 +17,13 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- Content 헤더 -->
+	<script>
+// 	calendar submit()
+		function goTo()
+		{
+		  document.getElementbyId("monthView").submit();
+		}
+	</script>
 	<section class="content-header">
 
 
@@ -474,7 +482,7 @@
 
 					<div class="box box-primary">
 						<div class="box-header with-border">
-							<h3 class="box-title">Weather</h3>
+							<h3 class="box-title">Calendar</h3>
 
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool"
@@ -482,14 +490,62 @@
 									<i class="fa fa-minus"></i>
 								</button>
 								<button type="button" class="btn btn-box-tool"
-									onclick="location.href='/group/'">
+									onclick="location.href='/group/calendar/main'">
 									more<i class="fa fa-chevron-circle-right"></i>
 								</button>
 							</div>
 						</div>
 						<!-- /.box-header -->
 						<div class="box-body">
-						날씨api
+							<form id="monthView" name="monthView">
+								<table class="tTable" width="100%">
+								  <tr>
+								    <td><table class="tTable">
+								      <tr>
+								        <td class="tMonth"><h3>&nbsp;${iYear}년 ${iMonth}월&nbsp;</h3></td>
+								      </tr>
+						    		</table>
+						    		</td>				
+								<tr>
+									<td><table class="tTable">
+										<tbody>
+											<tr>
+												<th>Sun</th>								          
+												<th>Mon</th>
+												<th>Tue</th>
+												<th>Wed</th>
+												<th>Thu</th>
+												<th>Fri</th>
+												<th>Sat</th>
+											</tr>
+											<c:set var="cnt" value="1"/>
+											<c:forEach var="i" begin="1" end="${iTotalweeks}" step="1" varStatus="loop">
+												<tr>
+													<c:forEach var="j" begin="1" end="7" step="1" varStatus="loop2">
+														<c:choose>
+															<c:when test="${cnt<weekStartDay || (cnt-weekStartDay+1)>days}">
+																<td align="center" height="35">&nbsp;</td>
+															</c:when>
+															<c:otherwise>
+																<td align="center" height="35" id="day_${cnt-weekStartDay+1}">
+																	<span>${cnt-weekStartDay+1}</span><br>
+																</td>
+							      							</c:otherwise>
+														</c:choose>
+														<input type="hidden" value="${cnt=cnt+1}">
+													</c:forEach>
+												</tr>
+											</c:forEach>
+											</tbody>
+										</table></td>
+									</tr>
+								</table>
+							</form>
+						</div>
+						<!-- /.box-body -->
+						<div class="box-footer text-center">
+							<a href="javascript:void(0)" class="uppercase">View All
+								Products</a>
 						</div>
 						<!-- /.box-body -->
 						

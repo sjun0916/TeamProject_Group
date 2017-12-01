@@ -2,10 +2,13 @@ package com.group.home.controller;
 
 import java.net.InetAddress;
 import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -36,7 +39,7 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/home")
-	public String home(Locale locale, Model model) {
+	public String home(Locale locale, Model model, HttpServletRequest request) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		Date date = new Date();
@@ -54,7 +57,28 @@ public class HomeController {
         List<?> listview4 = photoSvc.selectPhotoList2(); 
         model.addAttribute("listview4", listview4);
         
-		
+		//calendar
+        Calendar ca = new GregorianCalendar();
+    		
+    	//calendar : today
+    	int iTYear=ca.get(Calendar.YEAR);
+    	int iTMonth=ca.get(Calendar.MONTH);
+    	GregorianCalendar cal = new GregorianCalendar (iTYear, iTMonth, 1); 
+    	
+    	int days=cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+    	int weekStartDay=cal.get(Calendar.DAY_OF_WEEK);
+    	System.out.println("view info\n days : "+days+"\n WeekStartDay : "+weekStartDay); // confirm 
+    		
+    	cal = new GregorianCalendar (iTYear, iTMonth, days);
+    	int iTotalweeks=cal.get(Calendar.WEEK_OF_MONTH);
+    	    
+    	request.setAttribute("weekStartDay", weekStartDay);
+    	request.setAttribute("iTotalweeks", iTotalweeks);
+    	request.setAttribute("days", days);
+    	request.setAttribute("iTYear", iTYear);
+    	request.setAttribute("iYear", iTYear);
+    	request.setAttribute("iMonth", iTMonth+1);
+    	
 		return "home";
 	}
 	

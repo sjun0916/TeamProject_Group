@@ -65,7 +65,7 @@ public class Calendar_Ajax {
 				map.put("backgroundColor",vo.getCalendar_color());
 				map.put("borderColor",vo.getCalendar_color());
 				map.put("allDay", "false");
-				map.put("description",Integer.toString(vo.getCalendar_no()));
+				map.put("no",Integer.toString(vo.getCalendar_no()));
 				list.add(map);
 			}
 			System.out.println("ajax return list size : "+list.size());

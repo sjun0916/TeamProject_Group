@@ -54,7 +54,7 @@
 					
 						<!-- THE CALENDAR -->
 						<div id="calendar">
-						<form id="monthView" name="monthView" method="post">
+						<form id="monthView" name="monthView">
 							<table>
 								<tr>
 									<td>
@@ -128,26 +128,26 @@
 								        			<c:otherwise>
 								        				<td align="center" height="35" id="day_${cnt-weekStartDay+1}">
 <!-- 								        				a link : daylist -->
-															<a href="<c:url value="calendar/daylist">
-																<c:param name="date" value="${iYear}${iMonth}${cnt-weekStartDay+1}"></c:param>
-															</c:url>" onclick="goTo()">
-															<c:import url="daylist"/>
+<%-- 															<a href="<c:url value="calendar/daylist"> --%>
+<%-- 																<c:param name="date" value="${iYear}${iMonth}${cnt-weekStartDay+1}"></c:param> --%>
+<%-- 															</c:url>" onclick="goTo()"> --%>
+<%-- 															<c:import url="daylist"/> --%>
 <%-- 															<c:set var="date" value="${iYear}${iMonth}${cnt-weekStartDay+1}"/> --%>
 <%-- 															<input type="hidden" name="date" value="${iYear}${iMonth}${cnt-weekStartDay+1}"> --%>
 <%-- 															<c:out value="${date}"/> --%>
 <%-- 															<% session.setAttribute("date", "${iYear}${iMonth}${cnt-weekStartDay+1}"); %> --%>
 															
 									        				<span>${cnt-weekStartDay+1}</span><br>
-									        				<c:if test="${event != 'null'}">
-										        				<c:forEach var="map" items="${event}" varStatus="event">
-										        					<c:set var="number" value="${cnt-weekStartDay+1}"/>
-										        					<c:if test="${map.key == number}">
-											        					<span><small>${map.value}</small></span><br>
-											        				</c:if>
-										        				</c:forEach>
-									        				</c:if>
-									        				kind:1 / kind:2 / kind:3
-								        				</a>
+<%-- 									        				<c:if test="${event != 'null'}"> --%>
+<%-- 										        				<c:forEach var="map" items="${event}" varStatus="event"> --%>
+<%-- 										        					<c:set var="number" value="${cnt-weekStartDay+1}"/> --%>
+<%-- 										        					<c:if test="${map.key == number}"> --%>
+<%-- 											        					<span><small>${map.value}</small></span><br> --%>
+<%-- 											        				</c:if> --%>
+<%-- 										        				</c:forEach> --%>
+<%-- 									        				</c:if> --%>
+<!-- 									        				kind:1 / kind:2 / kind:3 -->
+<!-- 								        				</a> -->
 								        				
 								        				</td>
 								        			</c:otherwise>
