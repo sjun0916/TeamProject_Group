@@ -54,7 +54,7 @@ public class PhotoService {
 	            
 	            if (filenum != null) {
 	                HashMap<String, String[]> fparam = new HashMap<String, String[]>();
-	                fparam.put("filenum", filenum);
+	                fparam.put("photofilenum", filenum);
 	                sqlSession.insert("deletePhotoFile", fparam);
 	            }
 	            
