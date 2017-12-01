@@ -8,14 +8,8 @@
 	</select>
 	
 	
-	<select id="select2" parameterType="int" resultType="com.group.approve.vo.ReportVo">
-		SELECT REPORT_NO,REG_TITLE,REG_DATE,REG_STATE,REG_REASON from REPORT
-		and label_num =#{label_num}
-	</select>
-	
-	
-	<select id="selectOne" parameterType="int" resultType="com.group.approve.vo.ReportVo">
-		select * from REPORT where REPORT_NO=#{report_no}
+	<select id="selectOne" parameterType="Integer" resultType="com.group.approve.vo.ReportVo">
+		select * from REPORT where REPORT_NO=#{reportNo}
 	</select>
 	
 	
@@ -25,29 +19,29 @@
 			(SELECT REPORT_NO from REPORT
 			WHERE REPORT_NO IN(
 			select REPORT_NO from REPORT
-			WHERE REG_MANAGER1 =1001
+			WHERE REG_MANAGER1 =#{employeeNo}
     		and REG_UPDATE1 IS NULL
 			)
 			OR REPORT_NO IN(
 			select REPORT_NO from REPORT
-			WHERE REG_MANAGER2 =0
+			WHERE REG_MANAGER2 =#{employeeNo}
 			and REG_UPDATE1 is not null
     		and REG_UPDATE2 is null
 			)
 			or REPORT_NO IN(
 			select REPORT_NO from REPORT
-			where REG_MANAGER3 =0
+			where REG_MANAGER3 =#{employeeNo}
 			and REG_UPDATE2 is not null
     		and REG_UPDATE2 is null
 			)
 			or REPORT_NO IN(
 			select REPORT_NO from REPORT
-			where REG_MANAGER4 =0
+			where REG_MANAGER4 =#{employeeNo}
 			and REG_UPDATE3 is not null
     		and REG_UPDATE4 is null
 			)or REPORT_NO IN(
 			select REPORT_NO from REPORT
-			where REG_MANAGER5 =0
+			where REG_MANAGER5 =#{employeeNo}
 			and REG_UPDATE4 is not null
     		and REG_UPDATE5 is null
 			)
@@ -75,19 +69,19 @@
 		REG_COMMENT
 		) VALUES (
 		REPORT_SEQ.NEXTVAL,
-		#{reg_id},
-		#{reg_dep},
-		#{reg_manager1},
-		#{reg_manager2,jdbcType=INTEGER},
-		#{reg_manager3,jdbcType=INTEGER},
-		#{reg_manager4,jdbcType=INTEGER},
-		#{reg_manager5,jdbcType=INTEGER},
-		#{reg_title},
-		#{reg_cont},
-		#{reg_state},
+		#{regId},
+		#{regDep},
+		#{regManager1},
+		#{regManager2,jdbcType=INTEGER},
+		#{regManager3,jdbcType=INTEGER},
+		#{regManager4,jdbcType=INTEGER},
+		#{regManager5,jdbcType=INTEGER},
+		#{regTitle},
+		#{regCont},
+		#{regState},
 		SYSDATE,
-		#{reg_type,jdbcType=VARCHAR},
-		#{reg_comment,jdbcType=VARCHAR}
+		#{regType,jdbcType=VARCHAR},
+		#{regComment,jdbcType=VARCHAR}
 		)
 	</insert>
 	
@@ -95,63 +89,63 @@
 	<update id="updateReport" parameterType="com.group.approve.vo.ReportVo">
 		UPDATE REPORT
 		<choose>
-		<when test="reg_update1 == null">
+		<when test="regUpdate1 == null">
 		set REG_UPDATE1 =SYSDATE
 		<choose>
-		<when test="reg_manager2 != null">
+		<when test="regManager2 != 0">
 		,REG_STATE=2
 		</when>
-		<when test="reg_manager2 == null">
+		<when test="regManager2 == 0">
 		,REG_STATE=3
 		</when>
 		</choose>
 		</when>
-		<when test="reg_update2 == null">
+		<when test="regUpdate2 == null">
 		set REG_UPDATE2 =SYSDATE
 		<choose>
-		<when test="reg_manager3 != null">
+		<when test="regManager3 != 0">
 		,REG_STATE=2
 		</when>
-		<when test="reg_manager3 == null">
+		<when test="regManager3 == 0">
 		,REG_STATE=3
 		</when>
 		</choose>
 		</when>
-		<when test="reg_update3 == null">
+		<when test="regUpdate3 == null">
 		set REG_UPDATE3 =SYSDATE
 		<choose>
-		<when test="reg_manager4 != null">
+		<when test="regManager4 != 0">
 		,REG_STATE=2
 		</when>
-		<when test="reg_manager4 == null">
+		<when test="regManager4 == 0">
 		,REG_STATE=3
 		</when>
 		</choose>
 		</when>
-		<when test="reg_update4 == null">
+		<when test="regUpdate4 == null">
 		set REG_UPDATE4 =SYSDATE
 		<choose>
-		<when test="reg_manager5 != null">
+		<when test="regManager5 != 0">
 		,REG_STATE=2
 		</when>
-		<when test="reg_manager5 == null">
+		<when test="regManager5 == 0">
 		,REG_STATE=3
 		</when>
 		</choose>
 		</when>
-		<when test="reg_update5 == null">
+		<when test="regUpdate5 == null">
 		set REG_UPDATE5 =SYSDATE
 		,REG_STATE=3
 		</when>
 		</choose>
-		where REPORT_NO=#{report_no}
+		where REPORT_NO=#{reportNo}
 	</update>
 	
 	
 	<update id="backReport" parameterType="com.group.approve.vo.ReportVo">
 		update REPORT set
-		REG_REASON=#{reg_reason,jdbcType=VARCHAR},REG_STATE=0
-		where REPORT_NO=#{report_no,jdbcType=VARCHAR}
+		REG_REASON=#{regReason,jdbcType=VARCHAR},REG_STATE=0
+		where REPORT_NO=#{reportNo,jdbcType=VARCHAR}
 	</update>
 	
 	
@@ -173,10 +167,10 @@
 	</select>
 	
 	
-	<select id="waitCont" parameterType="String" resultType="int">
+	<select id="waitCont" parameterType="int" resultType="int">
 		select count(*) 
 		from REPORT
-		where REG_ID=#{id,jdbcType=VARCHAR} 
+		where REG_ID=#{id} 
 		and REPORT_NO
 		in(select REPORT_NO
 		from REPORT
@@ -185,10 +179,10 @@
 	</select>
 	
 	
-	<select id="endCont" parameterType="String" resultType="int">
+	<select id="endCont" parameterType="int" resultType="int">
 		select count(*) 
 		from REPORT
-		where REG_ID=#{id,jdbcType=VARCHAR} 
+		where REG_ID=#{id} 
 		and REPORT_NO
 		in(select REPORT_NO
 		from REPORT 
@@ -196,10 +190,10 @@
 	</select>
 	
 	
-	<select id="backCont" parameterType="String" resultType="int">
+	<select id="backCont" parameterType="int" resultType="int">
 		select count(*) 
 		from REPORT
-		where REG_ID=#{id,jdbcType=VARCHAR} 
+		where REG_ID=#{id} 
 		and REPORT_NO 
 		in(select REPORT_NO
 		from REPORT 

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ConvertHtml {
 	@RequestMapping(value ="/report/convertHTML", method=RequestMethod.POST)
-    public String convertHTML(String reg_cont,HttpServletRequest request) {
-		request.setAttribute("reg_cont", reg_cont);
+    public String convertHTML(String regCont,HttpServletRequest request) {
+		request.setAttribute("regCont", regCont);
 		
 		return "report/getHTML";
 	}
