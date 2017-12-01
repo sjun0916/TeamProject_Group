@@ -9,19 +9,15 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.group.board.vo.FileVO;
-//Photo
-public class FileUtil2 {
-	
-	private String conPath;
+import com.group.notice.vo.FileVO;
+
+// Notice
+public class FileUtil3 {
     /**
      * 파일 업로드.
      */
     public List<FileVO> saveAllFiles(List<MultipartFile> upfiles) {
-//        String filePath = "c:\\workspace\\fileupload\\"; 
-    	String filePath = conPath;
-    	System.out.println("servletContextpath: "+filePath);
-    	
+        String filePath = "c:\\workspace\\fileupload\\"; 
         List<FileVO> filelist = new ArrayList<FileVO>();
 
         for (MultipartFile uploadfile : upfiles ) {
@@ -29,19 +25,17 @@ public class FileUtil2 {
                 continue;
             }
            
-            String tmpfile = getFileExtension(uploadfile.getOriginalFilename());
+
             String newName = getNewName();
-            String realName = newName+tmpfile;
             
             saveFile(uploadfile, filePath + "/" + newName.substring(0,4) + "/",
-            		realName);
+            		newName);
            
             FileVO filedo = new FileVO();
             filedo.setFilename(uploadfile.getOriginalFilename());
-            filedo.setRealname(realName);
+            filedo.setRealname(newName);
             filedo.setFilesize(uploadfile.getSize());
             filelist.add(filedo);
-            //FileVO에 넣고 filelist(List<FileVO>)에 추가시켜서 리셋
         }
         return filelist;
     }    
@@ -95,12 +89,4 @@ public class FileUtil2 {
     public String getRealPath(String path, String filename) {
         return path + filename.substring(0,4) + "/";
     }
-
-	public String getConPath() {
-		return conPath;
-	}
-
-	public void setConPath(String conPath) {
-		this.conPath = conPath;
-	}
 }

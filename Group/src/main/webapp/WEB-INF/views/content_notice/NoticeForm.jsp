@@ -83,7 +83,7 @@
                   <label for="attach" class="col-sm-2 control-label">파일첨부</label>
                   <div class="col-sm-10">
                     <c:forEach var="listview" items="${listview}" varStatus="status">
-								<input type="checkbox" name="filenum" class="form-control" value="<c:out value="${listview.filenum}"/>">
+								<input type="checkbox" name="noticefilenum" class="form-control" value="<c:out value="${listview.noticefilenum}"/>">
 								<a href="fileDownload?filename=<c:out value="${listview.filename}"/>&downname=<c:out value="${listview.realname }"/>">
 									<c:out value="${listview.filename}" />
 								</a>
