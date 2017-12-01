@@ -57,7 +57,7 @@
 			문서결재함 <small>electronic document approval</small>
 		</h1>
 	</section>
-	<br><br>
+	<br>
 	<div class="col-xs-12">
 		<div class="box">
 			<div class="box-header">
@@ -99,7 +99,7 @@
 							<th width="300">사유</th>
 						</tr>
 						<c:forEach items="${list}" var="vo">
-							<tr>
+							<tr id="${vo.REPORT_NO}">
 								<th><input type="checkbox" name="box" value="${vo.REPORT_NO}" /></th>
 								<td>${vo.REPORT_NO}</td>
 								<td>${vo.REG_TITLE}</td>
@@ -308,15 +308,16 @@
 <script type="text/javascript">
 	$(function() {
 		$("tr:has('td')").click(
-						function() {
+						function(event) {
 							var data = $(this).parent().children().eq(1).text();
-							var report_no = $("input[name=box]:checkbox").val();
-							$
-									.ajax({
+							//var report_no = $("input[name=box]:checked").val();
+							var report_no = $(event.target).parent().attr("ID");
+							
+							$.ajax({
 										type : "POST",
 										url : '${pageContext.request.contextPath}/report/selectOne',
 										data : {
-											"report_no" : report_no, "data" : data
+											"report_no" : report_no
 										},
 										dataType : 'json',
 										success : function(data) {
