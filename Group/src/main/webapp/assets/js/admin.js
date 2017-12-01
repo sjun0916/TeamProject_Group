@@ -1,6 +1,18 @@
 var dialog, form;
+function resizeJqGridWidth(grid_id, div_id, width){
+	// window에 resize 이벤트를 바인딩한다.
+	$(window).bind('resize', function() {
+		// 그리드의 width 초기화 
+	$('#' + grid_id).setGridWidth(width, false);
+		// 그리드의 width를 div 에 맞춰서 적용 
+	$('#' + grid_id).setGridWidth($('#' + div_id).width() , false);
+		//Resized to new width as per window
+	}).trigger('resize');
+}
+
+
 function initGrid() {
-     
+
     $("#list").jqGrid({
         //로컬그리드이용
         datatype: "local",
@@ -10,17 +22,21 @@ function initGrid() {
         colNames:['사번','이름', '소속', '직급','이메일','가입승인'],
         //컬럼모델
         colModel:[
-            {name:'employeeNo', align:"center"},
+        	
+            {name:'employeeNo', align:"center",width:100},
             {name:'employeeName',align:"center",width:100},
-            {name:'teamName',align:"center"},
-            {name:'positionName',align:"center"},
+            {name:'teamName',align:"center",width:100},
+            {name:'positionName',align:"center",width:100},
             {name:'email',align:"center",width:200},
             {name:'IDX', index:'IDX',align:"center", width:100,formatter:approveButton },
         ],
-        width:1200,
+        autowidth:true,
         //그리드타이틀
         caption: "승인대기목록"
     });
+    $(window).resize(function(){
+		$("#list").setGridWidth($(this).width() * .825);
+	});
 }
 
 function approve(email) {

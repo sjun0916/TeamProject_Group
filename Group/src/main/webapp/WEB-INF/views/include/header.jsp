@@ -54,7 +54,7 @@
 						<li class="dropdown user user-menu">
 							<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle"
 							data-toggle="dropdown"> <!-- 유저 사진 경로 --> 
-							<c:choose>
+								<c:choose>
 								<c:when test="${authUser.imageUrl!=null}">
 								<img
 									src="\group\profileImg\<c:out value="${authUser.imageUrl}"/>"
@@ -81,7 +81,7 @@
 								</c:otherwise>
 								</c:choose>	
 									<p>[${authUser.teamName }][${authUser.positionName }]
-										${authUser.employeeName } ${authUser.imageUrl}</p>
+										${authUser.employeeName }</p>
 								</li>
 								<!-- 유저 정보 메뉴 -->
 								<li class="user-footer">
