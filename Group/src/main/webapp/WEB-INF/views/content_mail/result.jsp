@@ -5,8 +5,8 @@
 
 <!DOCTYPE html>
 <html>
-<title>Smart-Groupware</title>
 <head>
+<title>Smart-Groupware</title>
 	<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 </head>
     <%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -32,7 +32,7 @@
 						<a href="${pageContext.request.contextPath}/home"> 홈 이동 </a>
 						</c:if>
 						<c:if test="${result eq 'fail'}" >
-						<img src="<c:url value="/resources/icon/mailfail.png"/>" width="35" height="35"/>
+						<img src="<c:url value="/resources/icon/mailFail.png"/>" width="35" height="35"/>
 						<br><br><br>
 						<p> 발송에 실패했습니다. 구글 계정을 다시 확인 해주세요 </p>
 						<br><br>

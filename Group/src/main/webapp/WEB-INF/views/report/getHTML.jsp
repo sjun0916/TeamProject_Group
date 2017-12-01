@@ -39,6 +39,6 @@ $(document).ready(function(){
 	</a>
 </div>
 <div id="previewImage" style="margin: 0 auto;" align="center">
-${reg_cont}
+${regCont}
 </div>
 

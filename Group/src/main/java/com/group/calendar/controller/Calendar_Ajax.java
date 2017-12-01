@@ -25,6 +25,7 @@ public class Calendar_Ajax {
 
 	@RequestMapping(value = "/calendar/data")
 	public @ResponseBody List<Map<String, String>> calendar(HttpServletRequest request) {
+		System.out.println("calendar_ajax start");
 		List<Map<String, String>> list = new ArrayList<>();
 		HttpSession session = request.getSession();
 		int id = 0;
@@ -53,6 +54,7 @@ public class Calendar_Ajax {
 		String startDate = null;
 		String endDate = null;
 		if(!(listVo==null)){
+			System.out.println("calendadr_ajax listVo != null");
 			for (Calendar_Vo vo : listVo) {
 				Map<String, String> map = new HashMap<>();
 				startDate = dateFormat.format(vo.getCalendar_start());
@@ -66,6 +68,7 @@ public class Calendar_Ajax {
 				map.put("description",Integer.toString(vo.getCalendar_no()));
 				list.add(map);
 			}
+			System.out.println("ajax return list size : "+list.size());
 			request.setAttribute("monthKind", kind);
 			return list;
 		}else

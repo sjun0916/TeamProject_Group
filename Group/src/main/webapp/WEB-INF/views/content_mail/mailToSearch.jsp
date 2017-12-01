@@ -58,20 +58,20 @@ table tr th {
                   </tr>
                </thead>
                <tbody>
-                  <c:forEach var="vo" items="${ member }">
+                  <c:forEach var="vo" items="${ user }">
                      <tr class="memberTr">
                         <td style="text-align: center;">
-                        <input type="checkbox" name="checkbox" class="flat-red" value="${ vo.member_email }">
+                        <input type="checkbox" name="checkbox" class="flat-red" value="${ vo.email }">
                         </td>
-                        <td>${ vo.dep_name }</td>
-                        <td>${ vo.rank_name}</td>
-                        <td>${ vo.member_name }</td>
-                        <td>${ vo.member_email }</td>
+                        <td>${ vo.teamName }</td>
+                        <td>${ vo.positionName}</td>
+                        <td>${ vo.employeeName }</td>
+                        <td>${ vo.email }</td>
                      </tr>
                   </c:forEach>
                </tbody>
                </table>
-               <c:if test="${ not empty member }">
+               <c:if test="${ not empty user }">
                <div class="box-footer">
                   <input type="button" id="Submit" value="Submit" class="btn btn-default btn-block">
                </div>

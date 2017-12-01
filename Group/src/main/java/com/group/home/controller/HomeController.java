@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.group.notice.service.NoticeService;
+import com.group.photo.service.PhotoService;
 
 /**
  * Handles requests for the application home page.
@@ -28,6 +29,9 @@ public class HomeController {
 	
 	@Autowired
     private NoticeService noticeSvc;
+	@Autowired
+	private PhotoService photoSvc;
+	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -46,6 +50,10 @@ public class HomeController {
 		List<?> listview3 = noticeSvc.selectNoticeList3();
         model.addAttribute("listview2", listview2);
         model.addAttribute("listview3", listview3);
+        
+        List<?> listview4 = photoSvc.selectPhotoList2(); 
+        model.addAttribute("listview4", listview4);
+        
 		
 		return "home";
 	}
