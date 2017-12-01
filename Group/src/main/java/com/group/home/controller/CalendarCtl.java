@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
+//@Controller
 public class CalendarCtl {
 	public int nullIntconv(String inv)
 	{   
@@ -23,7 +23,7 @@ public class CalendarCtl {
 		{}
 		return conv;
 	}
-	@RequestMapping(value = "/home/calendar")
+//	@RequestMapping(value = "/home")
 	public String calendar(HttpServletRequest request, HttpServletResponse response) {
 		response.setContentType("text/html;charset=UTF-8");
 		
@@ -59,6 +59,6 @@ public class CalendarCtl {
 	    request.setAttribute("iYear", iYear);
 	    request.setAttribute("iMonth", iMonth);
 	    
-		return "content_calendar/mainCalendar";
+		return "home";
 	}
 }

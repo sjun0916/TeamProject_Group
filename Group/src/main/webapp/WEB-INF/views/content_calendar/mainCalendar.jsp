@@ -9,7 +9,11 @@
 		    <td><table>
 		      <tr>
 		        <td width="6%">Year&nbsp;</td>
-		        <td width="7%">
+		        <td width="73%" rowspan="2" align="center"><h3>&nbsp;${iYear}년 ${iMonth}월&nbsp;</h3></td>
+				<td width="6%">Month&nbsp;</td>
+		      </tr>
+		      <tr>
+		        <td width="6%">
 				<!-- start year and end year in combo box to change year in calendar -->
 				<select name="iYear" onchange="submit()">
 			        <c:forEach var="iy" begin="${iTYear-5}" end="${iTYear+10}" step="1" varStatus="loop">
@@ -22,13 +26,9 @@
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-			   </select>&nbsp;&nbsp;</td>
-				       
-	        <td width="73%" align="center"><h3>&nbsp;${iYear}년 ${iMonth}월&nbsp;</h3></td>
-				        
-		        <td width="6%">Month&nbsp;</td>
-		        <td width="8%">
-									
+			   </select></td>
+			   
+		        <td width="6%">
 				<!-- print month in combo box to change month in calendar -->
 				<select name="iMonth" onchange="submit()">
 					<c:forEach var="im" begin="1" end="12" step="1" varStatus="loop">
@@ -47,7 +47,7 @@
   		</tr>
   							
 		<tr>
-			<td><table>
+			<td><table><style>align-content: center;</style>
 					<tbody>
 					<tr>
 						<th>Sun</th>								          
