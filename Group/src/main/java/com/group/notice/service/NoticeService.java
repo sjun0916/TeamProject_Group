@@ -12,7 +12,7 @@ import org.springframework.transaction.TransactionException;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
-import com.group.board.vo.FileVO;
+import com.group.notice.vo.FileVO;
 import com.group.board.vo.SearchVO;
 import com.group.notice.vo.NoticeVO;
 
