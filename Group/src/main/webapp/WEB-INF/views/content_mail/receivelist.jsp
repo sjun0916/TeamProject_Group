@@ -21,7 +21,7 @@
 	<section class="content-header">
 		<h1>
 			<img src="<c:url value="/resources/icon/email_3.png"/>" width="50" height="50"/>
-			받은메일함 <small>receive mail &nbsp;&nbsp;&nbsp;/받은 메일은 google에서도 확인 가능합니다.</small>
+			받은메일함 <small>receive mail</small>
 		</h1>
 	</section>
 
@@ -35,7 +35,7 @@
 	<div class="col-xs-12">
 		<div class="box">
 			<div class="box-header">
-				<h3 class="box-title">메일함</h3>
+				<h3 class="box-title">Mail Box <small>(구글 메일에서도 확인 가능합니다)</small></h3>
 
 				<div class="box-tools" style="padding: 0px; text-align: right; float: left">
 
