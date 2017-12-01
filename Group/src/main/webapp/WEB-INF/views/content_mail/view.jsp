@@ -5,8 +5,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
-<title>Smart-Groupware</title>
 <head>
+<title>Smart-Groupware</title>
 	<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
@@ -18,7 +18,8 @@
 	<!-- 컨텐트 헤더 -->
 	<section class="content-header">
 		<h1>
-			메일내용 <small>ㄴㅁ</small>
+			<img src="<c:url value="/resources/icon/email_3.png"/>" width="50" height="50"/>
+			메일 <small>content</small>
 		</h1>
 	</section>
 
@@ -26,35 +27,39 @@
 	<!-- 컨텐트 메인 -->
 	<section class="content container-fluid">
 
-		 <form name="boardWriteForm" method="post" action="${pageContext.servletContext.contextPath }/board/write">
-			<table class="board_view">
-				<colgroup>
-					<col width="15%">
-					<col width="*" />
-				</colgroup>
-				<tbody>
+		<div class="box">  
+               <div class="box-header with-border">
+                  <h3 class="box-title">Mail Content</h3>
+               </div>
+               <form name="boardWriteForm" method="post" action="${pageContext.servletContext.contextPath }/board/write"> 
+                  <div class="box-body">
+                     <div class="form-group">
+                        <label>제목<input type="text" id="contentTitle" name="contentTitle" class="form-control" value="${title}" readonly style="border:0px;"></label>
+                     </div>                    
+                                          
+                     <div class="form-group">
+                     	<b>내용</b>
+                        <textarea id="contentContent" class="textarea" name="contentContent"
+                           style="width: 100%; height: 300px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" readonly>${content}</textarea>
 
-					<tr>
-						<th scope="row" >제목</th>
-						<td><input id="contentTitle" class="wdp_90" value="${title}"  readonly style="border:0px;"></input></td>
-					</tr>
-					<tr>
-						<td colspan="2" class="view_text"><textarea rows="20"
-								cols="110" title="내용" id="contentContent" name="contentContent" readonly>${content}</textarea></td>
-					</tr>
-
-				</tbody>
-
-			</table>
-			<input type="hidden" id="employeeNo" name="employeeNo" value=${authUser.employeeNo }>
-			<input type="hidden" id="teamId" name="teamId" value=${authUser.teamId }>
-			<input type="hidden" id="boardId" name="boardId" value=${boardId }>
-			<div class="right">
-					<button type="button"  onClick="history.back();">돌아가기</button>
-			</div>
-				<span>
-				</span>
-		</form>
+                     </div>
+                	    <input type="hidden" id="employeeNo" name="employeeNo" value=${authUser.employeeNo }>
+				    	<input type="hidden" id="teamId" name="teamId" value=${authUser.teamId }>
+						<input type="hidden" id="boardId" name="boardId" value=${boardId }>
+                     <div class="pull-right">
+                        <button type="button" class="btn btn-primary btn-sm" onClick="history.back();">
+                 	       돌아가기
+                        </button>
+                     </div>
+                     
+                  </div>
+             	    
+                  <div class="box-footer">
+                     <span></span>
+                  </div>
+                  
+               </form>
+            </div>
 
 	</section>
 	<!-- ★★★★★★★★★★★여기에 추가★★★★★★★★★★★ -->

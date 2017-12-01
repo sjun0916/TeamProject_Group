@@ -53,12 +53,9 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Report <small>State panel</small>
+			<img src="<c:url value="/resources/icon/archives.png"/>" width="50" height="50"/>
+			문서결재함 <small>electronic document approval</small>
 		</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> report</a></li>
-			<li class="active">state</li>
-		</ol>
 	</section>
 	<br><br>
 	<div class="col-xs-12">
@@ -103,7 +100,7 @@
 						</tr>
 						<c:forEach items="${list}" var="vo">
 							<tr>
-								<th><input type="checkbox" name="firstcheckbox" value="${vo.REPORT_NO}" /></th>
+								<th><input type="checkbox" name="box" value="${vo.REPORT_NO}" /></th>
 								<td>${vo.REPORT_NO}</td>
 								<td>${vo.REG_TITLE}</td>
 								<td>${vo.REG_DATE}</td>
@@ -313,14 +310,13 @@
 		$("tr:has('td')").click(
 						function() {
 							var data = $(this).parent().children().eq(1).text();
-							/* var reportNo = data.REPORT_NO; */
+							var report_no = $("input[name=box]:checkbox").val();
 							$
 									.ajax({
 										type : "POST",
 										url : '${pageContext.request.contextPath}/report/selectOne',
 										data : {
-											"data" : data
-											/* "reportNo" : data.report_no */
+											"report_no" : report_no, "data" : data
 										},
 										dataType : 'json',
 										success : function(data) {

@@ -14,7 +14,7 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="${pageContext.servletContext.contextPath }/assets/js/common.js" type="text/javascript"></script>
 <script src="${pageContext.servletContext.contextPath }/assets/js/message.js" type="text/javascript"></script>
-
+<link rel='stylesheet' type='text/css' href='<c:url value="/resources/boardCSS/NoticeList.css"/>'>
 <style>
 .sjgfont {
 	font-weight: 700;
@@ -63,7 +63,7 @@
 	<!-- 컨텐트 헤더 -->
 	<section class="content-header">
 		<h1>
-			<img src="<c:url value="/resources/icon/notes.png"/>" width="50" height="50"/>
+			<img src="<c:url value="/resources/icon/note.png"/>" width="50" height="50"/>
 			쪽지 <small>message</small>
 		</h1>
 
@@ -106,13 +106,12 @@
 				<table class="table table-hover">
 					<tbody>
 						<tr align="center">
-							<th><input type="checkbox" name="firstbox" id="checkAll" value="" /></th>
-							<th width="200">발신자(사원번호)</th>
-							<th width="400">메세지 내용</th>
-							<th width="200">수신시간</th>
-							<th>　</th>
-							<th>답장</th>
-							<th>삭제</th>
+							<th width="5%"><input type="checkbox" name="firstbox" id="checkAll" value="" /></th>
+							<th width="10%">발신자(사원번호)</th>
+							<th width="55%">메세지 내용</th>
+							<th width="10%">수신시간</th>
+							<th width="10%">답장</th>
+							<th width="10%">삭제</th>
 						</tr>
 						<c:choose>
                			<c:when test="${fn:length(list) > 0}">
@@ -136,10 +135,8 @@
                                 <input type="hidden" id="IDX" value="temp">
 								</td>
 								<td>${row.writeDate }</td>
-								<td>${vo.reg_date}</td>
-								
-								<td><button id="sendMessageButton" class="btn btn-primary" onclick="openForm('${row.sender}')">답장</button></td>
-								<td><button id="deleteMessageButton" class="btn btn-primary" onclick="deleteMessage('${row.messageId}')">삭제</button></td>
+								<td><button id="sendMessageButton" class="btn btn-primary btn-xs" onclick="openForm('${row.sender}')">답장</button></td>
+								<td><button id="deleteMessageButton" class="btn btn-primary btn-xs" onclick="deleteMessage('${row.messageId}')">삭제</button></td>
 							</tr>
 						</c:forEach>
                 </c:when>
