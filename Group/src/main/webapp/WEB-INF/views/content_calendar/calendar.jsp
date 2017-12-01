@@ -1,3 +1,12 @@
+<!-- code : 200 -->
+<!-- syntaxerror unexpected and of json input -->
+<!-- no conversion form text to array -->
+<!-- request processing failed nested exception is nullpointerException -->
+<!-- server encountered and -->
+
+<!-- loadHtml(this, this.action, 'result') -->
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -46,20 +55,11 @@
 							<option value="compony">회사</option>
 						</select>
 					</div>
-<!-- 					<div class="form-group"> -->
-<!-- 						<label>색상 선택:</label> <input type="text" id="bgcolor" -->
-<!-- 							class="form-control my-colorpicker1 colorpicker-element"> -->
-<!-- 					</div> -->
-					<!-- /btn-group -->
 					<label>제목</label>
 					<div class="input-group input-group-sm">
 
 						<input id="new-event" type="text" class="form-control"
 							placeholder="제목을 입력하세요">
-						<div class="input-group-btn">
-							<button id="add-new-event" type="button"
-								class="btn btn-info btn-flat">일정추가</button>
-						</div>
 
 						<!-- /btn-group -->
 					</div>
@@ -93,14 +93,6 @@
 			<div class="col-md-9">
 				<div class="box box-primary">
 					<div class="box-body no-padding">
-<!-- 						<div class='ds-event-categories'>     -->
-<!-- 							<label><input name='monthKind' id='kindcom' type='checkbox' value='compony' checked>회사</label>&nbsp; -->
-<!-- 							<label><input name='monthKind' id='kindteam' type='checkbox' value='team' checked>부서</label>&nbsp; -->
-<!-- 							<label><input name='monthKind' id='kindperson' type='checkbox' value='person' checked>개인</label>&nbsp; -->
-<%-- 							<input type="hidden" name=kind[] value=${ }> --%>
-<%-- 							<input type="hidden" name=kind[] value=${ }> --%>
-<%-- 							<input type="hidden" name=kind[] value=${ }> --%>
-<!-- 						</div> -->
 						<!-- THE CALENDAR -->
 						<div id="calendar"></div>
 					</div>
@@ -125,16 +117,6 @@
               <div class="modal-body" style="min-height: 300px; max-height: 763px;">
               	<div class="form-group">
               	<div class="form-group">
-<!--                 <label>색상</label> -->
-
-<!--                 <div class="input-group my-colorpicker2 colorpicker-element"> -->
-<!--                   <input type="text" id="settingcolor" class="form-control" disabled=""> -->
-
-<!--                   <div class="input-group-addon"> -->
-<!--                     <i id="settingbg" style="background-color: rgb(222, 2, 2);" disabled=""></i> -->
-<!--                   </div> -->
-<!--                 </div> -->
-
 					<label>분류 선택:</label>
 					<div class="form-group">
 						<select name="kind" id="kind" disabled="">
@@ -186,7 +168,9 @@
 <%@ include file="/WEB-INF/views/content_calendar/calendarScript.jsp" %>
 
 <script>
+
 function calView(desc){
+	
 	$('#calendar').fullCalendar(
 		{
 			header : {
@@ -198,7 +182,7 @@ function calView(desc){
 				today : 'today'
 			},
 			//Random default events
-			events : "${pageContext.request.contextPath}/calendar/data",
+			events : eval(desc),
 			editable : false,
 			droppable : false, // this allows things to be dropped onto the calendar !!!
 			eventClick : function(calEvent, jsEvent, view) {
@@ -284,12 +268,9 @@ $(function() {
 				revertDuration : 0
 			//  original position after the drag
 			});
-
 		});
 	}
-
 	ini_events($('#external-events div.external-event'));
-
 	/* initialize the calendar
 	 -----------------------------------------------------------------*/
 	//Date for the calendar events (dummy data)
@@ -302,15 +283,11 @@ $(function() {
 		"<label><input name='monthKind' id='kindteam' type='checkbox' value='team' "+sessionStorage.getItem("kindTeam")+">부서</label>&nbsp;"+
 		"<label><input name='monthKind' id='kindperson' type='checkbox' value='person' "+sessionStorage.getItem("kindPerson")+">개인</label>&nbsp;"+
 		"</div>";
-
 	// Append it to FullCalendar.
 	$(".fc-toolbar").after(checkboxContainer);
 	var ch_list=Array();
 	$("[name='monthKind']").change(function() {
 		alert("event");
-		$.each($("input[name='monthKind']:checked"), function() {
-			ch_list.push($(this).val());
-		});
 		if($('input:checkbox[id="kindcom"]').is(":checked")==true){
 			ch_list.push($(this).val());
 			sessionStorage.setItem('kindCom', 'checked');
@@ -329,92 +306,34 @@ $(function() {
 		}else{
 			sessionStorage.removeItem('kindPerson');
 		};
-// 		$.each($("input[name='monthKind']:checked"), function() {
-// 			ch_list.push($(this).val());
-// 		});
-		
-// 		$("#calendar").load("",ch_list);
 		$.ajax({
 			type:"POST",  
 		    url:'${pageContext.request.contextPath}/calendar/data',      
-		    data:ch_list,
-		    dataType : 'json',
+		    data:$('input:checkbox[name="monthKind"]:checked').serialize(),
 		    success:function(data){   
 		    	alert("성공");
-		    	location.replace("${pageContext.request.contextPath}/calendar/main");
-		    	chbctl();
+		    	var jsonData = setCalendar(data.data);
+		    	calView(jsonData);
 		    }, 
 		    error:function(e){
 		     	alert("실패"); 
 		    }  
 		});
-// 		list.submit();	//calendar/save
-// 		return loadHtml($("document"), $("document").action, 'result');
 	});
-
+	function setCalendar(data){
+		  var date = new Date();
+		  var d = date.getDate();
+		  var m = date.getMonth();
+		  var y = date.getFullYear();
+		  var jsonData = JSON.stringify(data);
+		  return jsonData;
+	}
 	/* ADDING EVENTS */
 	$(document).on("click", "#calenders", function() {
 		alert("document.on 실행");
 		$(this).parents("#mark").remove("");
 	});
 		
-	var i = 0;
-	$("#add-new-event").click(
-		function(e) {
-		alert("add-new-event 실행");
-		// 			e.preventDefault();
-		// 			Get value and make sure it is not null
-		var kind = $("select[name=kind]").val();
-// 		var bgcode = $("#bgcolor").val();
-		var dateCode = $("#reservationtime").val();
-		var title = $("#new-event").val();
-		var cont = $("#cont").val();
-		var etc = $("#etc").val();
-		var date = $("#reservationtime").val().split("-");
-		var htmlcode = '';
-// 		var dateResult=/^(1\d{3}|201[0-9]|202[0-9])\/(0[1-9]|1[0-2])\/(0[1-9]|[1-2]\d|30)\/ (1[0-2]|[0-9])(:[0-5][0-9]){1} ([(A)|(P)][M])$/;
-		if(kind==""){
-			alert("일정 분류를 선택하세요");
-			return false;
-		}else if(date.length!=2){
-			alert("날짜를 입력하세요");
-			return false;
-// 		}else if(!dateResult.test(date[0].trim())||!dateResult.test(date[1].trim())){
-// 			alert("날짜를 올바르게");
-// 			alert(date[0].trim());
-// 			alert(date[1].trim());
-// 			return false;
-		}else if(title==""){
-			alert("제목을 입력하세요");
-			return false;
-		}
-		else{
-			htmlcode += '<div id="mark" class="box box-default box-solid collapsed-box">';
-			htmlcode += '<div class="box-header with-border">';
-			htmlcode += '<h3 class="box-title">' + title+ '</h3>';
-			htmlcode += '<div class="box-tools pull-right">';
-			htmlcode += '<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>';
-			htmlcode += '</button>';
-			htmlcode += '</div>';
-			htmlcode += '</div>';
-			htmlcode += '<div class="box-body" style="display: none;">';
-			htmlcode += '<div> 분류:'+ kind;
-			htmlcode += '</div><div> 기간:' + dateCode;
-			htmlcode += '</div><div> 내용:' + cont;
-			htmlcode += '</div><div> 기타사항:' + etc;
-			htmlcode += ' </div><div>';
-			htmlcode += '<input type="hidden" name="calendar_kind" value="'+kind+'"/>';
-			htmlcode += '<input type="hidden" name="calendar_start" value="'+date[0]+'"/>';
-			htmlcode += '<input type="hidden" name="calendar_end" value="'+date[1]+'"/>';
-			htmlcode += '<input type="hidden" name="calendar_title" value="'+title+'"/>';
-			htmlcode += '<input type="hidden" name="calendar_cont" value="'+cont+'"/>';
-			htmlcode += '<input type="hidden" name="calendar_remark" value="'+etc+'"/>';
-			htmlcode += '<input type="button" id="calenders" class="btn btn-block btn-default" value="삭제"/></div></div>';
-			htmlcode += ' </div>';
-			$("#list").first().prepend(htmlcode);
-			i++;
-		}
-	});
 	//Date range picker
 	$('#reservation').daterangepicker();
 	//Date range picker with time picker
@@ -442,7 +361,52 @@ window.onload = function() {
 	$(".datepicker.datepicker-inline").hide();
 };
 function submit() {
-	alert("submit 실행");
+	// 			e.preventDefault();
+	// 			Get value and make sure it is not null
+	var kind = $("select[name=kind]").val();
+//		var bgcode = $("#bgcolor").val();
+	var dateCode = $("#reservationtime").val();
+	var title = $("#new-event").val();
+	var cont = $("#cont").val();
+	var etc = $("#etc").val();
+	var date = $("#reservationtime").val().split("-");
+	var htmlcode = '';
+//		var dateResult=/^(1\d{3}|201[0-9]|202[0-9])\/(0[1-9]|1[0-2])\/(0[1-9]|[1-2]\d|30)\/ (1[0-2]|[0-9])(:[0-5][0-9]){1} ([(A)|(P)][M])$/;
+	if(kind==""){
+		alert("일정 분류를 선택하세요");
+		return false;
+	}else if(date.length!=2){
+		alert("날짜를 입력하세요");
+		return false;
+	}else if(title==""){
+		alert("제목을 입력하세요");
+		return false;
+	}
+	else{
+		htmlcode += '<div id="mark" class="box box-default box-solid collapsed-box">';
+		htmlcode += '<div class="box-header with-border">';
+		htmlcode += '<h3 class="box-title">' + title+ '</h3>';
+		htmlcode += '<div class="box-tools pull-right">';
+		htmlcode += '<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>';
+		htmlcode += '</button>';
+		htmlcode += '</div>';
+		htmlcode += '</div>';
+		htmlcode += '<div class="box-body" style="display: none;">';
+		htmlcode += '<div> 분류:'+ kind;
+		htmlcode += '</div><div> 기간:' + dateCode;
+		htmlcode += '</div><div> 내용:' + cont;
+		htmlcode += '</div><div> 기타사항:' + etc;
+		htmlcode += ' </div><div>';
+		htmlcode += '<input type="hidden" name="calendar_kind" value="'+kind+'"/>';
+		htmlcode += '<input type="hidden" name="calendar_start" value="'+date[0]+'"/>';
+		htmlcode += '<input type="hidden" name="calendar_end" value="'+date[1]+'"/>';
+		htmlcode += '<input type="hidden" name="calendar_title" value="'+title+'"/>';
+		htmlcode += '<input type="hidden" name="calendar_cont" value="'+cont+'"/>';
+		htmlcode += '<input type="hidden" name="calendar_remark" value="'+etc+'"/>';
+		htmlcode += '<input type="button" id="calenders" class="btn btn-block btn-default" value="삭제"/></div></div>';
+		htmlcode += ' </div>';
+		$("#list").first().prepend(htmlcode);
+	}
 	oksign.click();
 }
 function loadHtml(form, action, targetid) {
@@ -456,24 +420,22 @@ function loadHtml(form, action, targetid) {
 			alert(v.value);
 			param[v.name] = v.value;
 			var test = $("#param[v.name]").text();
-			alert(test);
 		});
+		param[kinds] = $('input:checkbox[name="monthKind"]:checked').serialize();
 	//jquery로 전송후 html형식의 리턴값을 target-url에 삽입
 	$(targetid).load(target, param); //단지 배열로 던지고자 할때는 이렇게 보내면 된다.
 	}else{
-		return false;
+		return false;	
 	}
 }
-	
+
+//when : event click
 Date.prototype.format = function(f) {
-	alert("date.prototype.format 실행");
     if (!this.valueOf()) return " ";
 	 
     var weekName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
     var d = this;
-
     return f.replace(/(yyyy|yy|MM|dd|E|hh|mm|ss|a\/p)/gi, function($1) {
-	   	alert("date.prototype.format.return 실행");
 	    switch ($1) {
 	    	case "yyyy": return d.getFullYear();
 	    	case "yy": return (d.getFullYear() % 1000).zf(2);
@@ -494,7 +456,6 @@ String.prototype.string = function(len){var s = '', i = 0; while (i++ < len) { s
 String.prototype.zf = function(len){return "0".string(len - this.length) + this;};
 Number.prototype.zf = function(len){return this.toString().zf(len);};
 function edit(){
-// 		$('#myModal3 h4').attr("disabled"); 
 	$('#myModal3 #settingcolor').removeAttr("disabled");
 	$('#myModal3 #kind').removeAttr("disabled");
 	$('#myModal3 #settingbg').removeAttr("disabled"); 
@@ -505,7 +466,6 @@ function edit(){
 	$('#myModal3 #delete').attr("type","hidden");
 	$('#myModal3 #modify').val("수정완료");
 }
-
 function cummitEdit(){
 	//커밋 ajax구현 부분
 	alert("cummitEdit 실행");
@@ -549,8 +509,8 @@ function cummitEdit(){
 	    }  
 	});
 }
+//when : cancel click
 function disable(){
-	alert("disable 실행");
 	$('#myModal3 .modal-footer #modify').text("수정");
 	$('#myModal3 #kind').attr("disabled","");
 	$('#myModal3 #settingcolor').attr("disabled","");
@@ -584,5 +544,4 @@ function remove(){
         }  
     });  
 }
-
 </script>

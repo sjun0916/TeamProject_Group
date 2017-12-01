@@ -1,7 +1,7 @@
-package com.group.board.vo;
+package com.group.photo.vo;
 
 public class FileVO {
-    private Integer filenum; 
+    private Integer photofilenum; 
     private String parentPK;
     private String filename;
     private String realname;
@@ -56,14 +56,21 @@ public class FileVO {
 
 
 
-	public Integer getFilenum() {
-		return filenum;
+	public Integer getPhotofilenum() {
+		return photofilenum;
 	}
 
 
 
-	public void setFilenum(Integer filenum) {
-		this.filenum = filenum;
+	public void setPhotofilenum(Integer photofilenum) {
+		this.photofilenum = photofilenum;
 	}
+
+
+
+
+
+
+
     
 }

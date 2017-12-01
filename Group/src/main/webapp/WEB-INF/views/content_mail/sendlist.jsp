@@ -22,7 +22,7 @@
 	<section class="content-header">
 		<h1>
 			<img src="<c:url value="/resources/icon/email_2.png"/>" width="50" height="50"/>
-			보낸메일함 <small>send mail</small>
+			보낸메일함 <small>send mail &nbsp;&nbsp;&nbsp;/보낸 메일은 현재 서버에서만 확인 가능합니다.</small>
 		</h1>
 	</section>
 
@@ -82,7 +82,7 @@
 						</c:when>
           			    <c:otherwise>
                    			 <tr>
-                        		<td colspan="5">수신한 메일이 존재하지 않습니다.</td>
+                        		<td colspan="5">발신한 메일이 존재하지 않습니다.</td>
                     		</tr>
                 		</c:otherwise>
             		</c:choose>

@@ -1,7 +1,7 @@
-package com.group.board.vo;
+package com.group.notice.vo;
 
 public class FileVO {
-    private Integer filenum; 
+    private Integer noticefilenum; 
     private String parentPK;
     private String filename;
     private String realname;
@@ -56,14 +56,18 @@ public class FileVO {
 
 
 
-	public Integer getFilenum() {
-		return filenum;
+	public Integer getNoticefilenum() {
+		return noticefilenum;
 	}
 
 
 
-	public void setFilenum(Integer filenum) {
-		this.filenum = filenum;
+	public void setNoticefilenum(Integer noticefilenum) {
+		this.noticefilenum = noticefilenum;
 	}
+
+
+
+
     
 }

@@ -35,64 +35,6 @@
 		</h1>
 	</section>
 
-	<!-- Content 메인 -->
-<!-- 	<section class="content container-fluid"> -->
-<!--       <div class="row"> -->
-<!--          <div class="col-md-12"> -->
-<!--             <div class="box">   -->
-<!--                <div class="box-header with-border"> -->
-<!--                   <h3 class="box-title">Board Write</h3> -->
-<!--                </div> -->
-<!--                <form name="form1" action="BoardSave" method="post" enctype="multipart/form-data">  -->
-<!--                   <div class="box-body"> -->
-<!--                      <div class="form-group"> -->
-<!--                      <div class="input-group input-group-sm"> -->
-<%--                         	<b>부서명　　　</b><c:out value="${authUser.teamName}"/> --%>
-<!--                      </div> -->
-<!--                      </div> -->
-<!--                      <div class="form-group"> -->
-<%--                         	<b>작성자　　　</b>[<c:out value="${authUser.positionName}"/>]<c:out value="${authUser.employeeName}"/> --%>
-<!--                      </div> -->
-<!--                      <div class="form-group"> -->
-<!--                         	<b>제　목　　　</b> -->
-<%--                         	<input type="text" class="form-control" name="title" size="70" maxlength="250" 	placeholder = "제목을 입력해주세요." value="<c:out value="${boardInfo.title}"/>"> --%>
-<!--                      </div> -->
-<!--                      <div class="form-group"> -->
-<!--                      		<b>첨　부　　　</b> -->
-<%--                         <c:forEach var="listview" items="${listview}" varStatus="status"> --%>
-<%-- 								<input type="checkbox" name="filenum" class="form-control" value="<c:out value="${listview.filenum}"/>"> --%>
-<%-- 								<a href="fileDownload?filename=<c:out value="${listview.filename}"/>&downname=<c:out value="${listview.realname }"/>"> --%>
-<%-- 									<c:out value="${listview.filename}" /> --%>
-<!-- 								</a> -->
-<%-- 								<c:out value="${listview.size2String()}" /> --%>
-<!-- 								<br/> -->
-<%-- 						</c:forEach> --%>
-<!-- 						<input type="file" class="form-control" id="attach" name="uploadfile" multiple="" /> -->
-<!--                      </div>                      -->
-                                          
-<!--                      <div class="form-group"> -->
-<!--                      		<b>내　용　　　</b> -->
-<%--                         <textarea id="compose-textarea" class="textarea" name="content" style="width: 100%; height: 300px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" placeholder = "내용을 입력해주세요."><c:out value="${boardInfo.content}" /></textarea> --%>
-<!--                      </div> -->
-                     
-<%--                      <input type="hidden"  name="membernum" value="<c:out value="${authUser.employeeNo}"/>"> --%>
-<%-- 					<input type="hidden"  name="writerpos" value="<c:out value="${authUser.positionName}"/>"> --%>
-<%-- 					<input type="hidden"  name="departname" value="<c:out value="${authUser.teamName}"/>"> --%>
-<%-- 					<input type="hidden"  name="writer"	value="<c:out value="${authUser.employeeName}"/>"> --%>
-<%-- 					<input type="hidden"  name="boardnum" value="<c:out value="${boardInfo.boardnum}"/>">  --%>
-                     
-<!--                      <div class="box-footer"> -->
-<!--                      	<button type="button" class="btn btn-default" onClick="history.back();">돌아가기</button> -->
-<!--                         <button type="button" class="btn btn-primary pull-right" onclick="fn_formSubmit()">글등록</button> -->
-<!--                      </div>           -->
-<!--                   </div> -->
-
-<!--                </form> -->
-<!--             </div> -->
-<!--          </div> -->
-<!--       </div> -->
-<!--    </section> -->
-
 
 	<section class="content container-fluid">
 	<div class="box box-info">

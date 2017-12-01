@@ -15,58 +15,60 @@
 	<!-- ì»¨íí¸ í¤ë -->
 	<section class="content-header">
 		<h1>
-			사진첩 <small>Photo</small>
+			<img src="<c:url value="/resources/icon/photo-camera.png"/>" width="50" height="50"/>
+			사진첩 <small>photo</small>
 		</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-			<li class="active">Here</li>
-		</ol>
+		
 	</section>
 
-	<!-- ì»¨íí¸ ë©ì¸ -->
+
+
 	<section class="content container-fluid">
-		<table border="1" style="width: 600px">
-			<caption>게시판</caption>
-			<colgroup>
-				<col width='20%'/>
-				<col width='*%'/>
-				<col width='20%'/>
-			</colgroup>
-			<tbody>
-				<tr>
-					<td>[<c:out value="${photoInfo.departname}" />게시글]
-					</td>
-					<td></td>
-					<td><c:out value="${photoInfo.title}" /></td>
-					<td><c:out value="${photoInfo.regdate}" /></td>
-				</tr>
-				<tr>
-					<td colspan="2">작성자:[<c:out value="${photoInfo.writerpos}" />]<c:out
-							value="${photoInfo.writer}" /></td>
-					<td>
-							<c:forEach var="listview" items="${listview}" varStatus="status">
+	<div class="col-md-9">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Read Photo</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div class="mailbox-read-info">
+                <h5>[<c:out value="${photoInfo.departname}" />사진글]</h5><br><h3><c:out value="${photoInfo.title}" />
+                <span class="mailbox-read-time pull-right"><c:forEach var="listview" items="${listview}" varStatus="status">
 								<a
-									href="fileDownload2?filename=<c:out value="${listview.filename}"/>&downname=<c:out value="${listview.realname}"/>">
+									href="fileDownload2?filename=<c:out value="${listview.filename}"/>&downname=<c:out value="${listview.realname }"/>">
 									<c:out value="${listview.filename}" />
 								</a>
 								<c:out value="${listview.size2String()}" />
 								<br />
-							</c:forEach>
-						</td>
-				</tr>
+							</c:forEach></span></h3>
+                <h5><small>작성자 : [<c:out value="${photoInfo.writerpos}" />]<c:out value="${photoInfo.writer}" /></small>
+                  <span class="mailbox-read-time pull-right"><c:out value="${photoInfo.regdate}" /></span></h5>
+              </div>
 
-			
-			</tbody>
-		</table>
-		<a href="PhotoList">돌아가기</a> 
- 		<c:if test="${authUser.role == 'ADMIN'}">
-		<a href="PhotoDelete?photonum=<c:out value="${photoInfo.photonum}"/>">삭제</a>
-		<a href="PhotoForm?photonum=<c:out value="${photoInfo.photonum}"/>">수정</a>
-		</c:if>
-		
-			
+              <!-- /.mailbox-read-message -->
+            </div>
+            <!-- /.box-body -->
+            
+            
+            
+            <div class="box-footer">
+              <div class="pull-right">
+              	
+                <button type="button" class="btn btn-default" onClick="location.href='PhotoForm?photonum=<c:out value="${photoInfo.photonum}"/>'">Update</button>
+                <button type="button" class="btn btn-default" onClick="location.href='PhotoDelete?photonum=<c:out value="${photoInfo.photonum}"/>'"><i class="fa fa-trash-o"></i> Delete</button>
+              </div>
+              <button type="button" class="btn btn-default" onClick="location.href='PhotoList'">돌아가기</button>
+            </div>
+
+            <!-- /.box-footer -->
+          </div>
+          <!-- /. box -->
+          
+        </div>
+
 	</section>
 	<!-- /.content -->
+
 </div>
 <!-- /.content-wrapper -->
     <%@ include file="/WEB-INF/views/include/footer.jsp" %>

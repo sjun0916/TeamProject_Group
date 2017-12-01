@@ -44,20 +44,7 @@
 	
 	<!-- 보낸 메일함 -->
 	<select id="getEmail2" resultType="com.group.mail.vo.MailVo" parameterType="UserVo">
-		SELECT 
-		RECEIVER_MAIL receiverMail,
-		SENDER_MAIL senderMail,
-		MAILNUM mailNum,
-		(
-		SELECT EMAIL
-		FROM EMPLOYEE
-		WHERE EMAIL = MAIL.RECEIVER_MAIL) RECEIVER,
-		TITLE title,
-		REGDATE REGDATE
-		FROM MAIL
-		WHERE SENDER_MAIL = #{senderMail}
-		ORDER
-		BY REGDATE DESC
+		SELECT * FROM MAIL WHERE SENDER_MAIL = #{senderMail}
 	</select>
 	
 	<!-- 메일 내용 -->

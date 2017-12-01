@@ -98,15 +98,16 @@ public class Calendar_ServiceImpl implements Calendar_Service {
 	public List<Calendar_Vo> selectCalenderKind(UserVO user, String[] kinds) {
 		System.out.println("selectCalendarKind start");
 		// TODO Auto-generated method stub
-		List<Calendar_Vo> list = new ArrayList<Calendar_Vo>();
+		List<Calendar_Vo> list = null;
 		System.out.println("servise kinds : " +kinds);
-		if(kinds == null) {
-			kinds = new String[3];
-			kinds[0] = "compony";
-			kinds[1] = "team";
-			kinds[2] = "person";
-		}
+//		if(kinds == null) {
+//			kinds = new String[3];
+//			kinds[0] = "compony";
+//			kinds[1] = "team";
+//			kinds[2] = "person";
+//		}
 		if(kinds != null) {
+			list = new ArrayList<Calendar_Vo>();
 			try {
 				List<Calendar_Vo> tmpList = dao.selectCalenderT();
 				Iterator<Calendar_Vo> it = tmpList.iterator();
@@ -137,11 +138,11 @@ public class Calendar_ServiceImpl implements Calendar_Service {
 				e.printStackTrace();
 			}
 		}
-		if(list.isEmpty())
-			return null;
+		if(list==null || list.isEmpty())
+			list = null;
 		else {
+			//confirm
 			for(int i=0;i<list.size();i++) {
-//				UserVO user = dao.
 				System.out.println(
 					list.get(i).getCalendar_no()+","+
 					list.get(i).getCalendar_regid()+","+

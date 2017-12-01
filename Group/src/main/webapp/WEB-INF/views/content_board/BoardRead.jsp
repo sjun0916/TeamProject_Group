@@ -32,7 +32,7 @@
 		}
 		var form = document.form2;
 
-		form.action = "boardReplyDelete";
+		form.action = "BoardReplyDelete";
 		form.renum.value = renum;
 		form.submit();
 	}
@@ -67,7 +67,7 @@
 			return;
 		}
 
-		form.action = "boardReplySave";
+		form.action = "BoardReplySave";
 		form.submit();
 	}
 
@@ -131,10 +131,10 @@
             
             <div class="box-footer">
               <div class="pull-right">
-              	<c:if test="${boardInfo.membernum} == ${authUser.employeeNo}">
-                <button type="button" class="btn btn-default" onClick="location.href='BoardForm?noticenum=<c:out value="${boardInfo.boardnum}"/>'">Update</button>
-                <button type="button" class="btn btn-default" onClick="location.href='BoardDelete?noticenum=<c:out value="${boardInfo.boardnum}"/>'"><i class="fa fa-trash-o"></i> Delete</button>
-                </c:if>
+<%--               	<c:if test="(${boardInfo.membernum} == ${authUser.employeeNo}) || (${authUser.role == 'ADMIN'})"> --%>
+                <button type="button" class="btn btn-default" onClick="location.href='BoardForm?boardnum=<c:out value="${boardInfo.boardnum}"/>'">Update</button>
+                <button type="button" class="btn btn-default" onClick="location.href='BoardDelete?boardnum=<c:out value="${boardInfo.boardnum}"/>'"><i class="fa fa-trash-o"></i> Delete</button>
+<%--                 </c:if> --%>
               </div>
               <button type="button" class="btn btn-default" onClick="location.href='BoardList'">돌아가기</button>
             </div>

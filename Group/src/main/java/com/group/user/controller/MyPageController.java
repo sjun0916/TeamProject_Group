@@ -1,5 +1,8 @@
 package com.group.user.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -31,7 +34,9 @@ public class MyPageController {
 	
 	@RequestMapping( value="/modify", method=RequestMethod.POST )
 	public String modify( @ModelAttribute UserVO userVo,
-			@RequestParam( "file" ) MultipartFile file) {
+			@RequestParam( "file" ) MultipartFile file, HttpServletRequest request) {
+		fileUploadService.setSavePath(
+				request.getServletContext().getRealPath("/profileImg"));
 		
 		userVo.setImageUrl(fileUploadService.restore(file));
 		myPageService.modify(userVo);

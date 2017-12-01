@@ -40,6 +40,16 @@
          ORDER BY PHOTONUM DESC
          
     </select> 
+       <select id="selectPhotoList2" resultType="com.group.photo.vo.PhotoVO">
+        SELECT PHOTONUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE, REALNAME
+             , (SELECT COUNT(*) FROM PHOTOFILE WHERE PHOTONUM=DS.PHOTONUM) FILECNT 
+          FROM (
+            SELECT PHOTONUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, REGDATE, REALNAME
+          FROM VIEW_PHOTO
+          ) DS
+        
+         
+    </select> 
 <select id="selectPhotoOne" parameterType="String" resultType="com.group.photo.vo.PhotoVO">
         SELECT PHOTONUM, TITLE, WRITER, WRITERPOS, DEPARTNAME, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE, REALNAME
           FROM PHOTO
@@ -75,14 +85,14 @@
     </delete> 
 
     <!-- =============================================================================== -->
-    <select id="selectPhotoFileList" resultType="com.group.board.vo.FileVO" parameterType="String">
+    <select id="selectPhotoFileList" resultType="com.group.photo.vo.FileVO" parameterType="String">
         SELECT PHOTOFILENUM, FILENAME, REALNAME, FILESIZE
           FROM PHOTOFILE
          WHERE PHOTONUM=#{photonum}
          ORDER BY PHOTOFILENUM DESC 
     </select> 
 
-    <insert id="insertPhotoFile" parameterType="com.group.board.vo.FileVO" >
+    <insert id="insertPhotoFile" parameterType="com.group.photo.vo.FileVO" >
         INSERT INTO PHOTOFILE (PHOTONUM, PHOTOFILENUM, FILENAME, REALNAME, FILESIZE)
         VALUES (#{parentPK}, PHOTOFILENUM_SEQ.NEXTVAL, #{filename}, #{realname}, #{filesize})
     </insert>
@@ -91,7 +101,7 @@
         DELETE 
           FROM PHOTOFILE
          WHERE PHOTOFILENUM IN (
-              <foreach item="item" index="index" collection="filenum" separator=",">
+              <foreach item="item" index="index" collection="photofilenum" separator=",">
                      ${item}
               </foreach>  
         )             
