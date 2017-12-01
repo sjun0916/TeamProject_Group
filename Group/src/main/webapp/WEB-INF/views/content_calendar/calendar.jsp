@@ -10,9 +10,9 @@
 <head>
 <title>Smart-Groupware</title>
 	<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
+	<%@ include file ="/WEB-INF/views/include/header.jsp" %>
 </head>
-<%@ include file ="/WEB-INF/views/include/header.jsp" %>
-<!-- Content Wrapper. Contains page content -->
+
 <!-- Content Wrapper. Contains page content -->
 
 <div class="content-wrapper">
@@ -93,14 +93,6 @@
 			<div class="col-md-9">
 				<div class="box box-primary">
 					<div class="box-body no-padding">
-<!-- 						<div class='ds-event-categories'>     -->
-<!-- 							<label><input name='monthKind' id='kindcom' type='checkbox' value='compony' checked>회사</label>&nbsp; -->
-<!-- 							<label><input name='monthKind' id='kindteam' type='checkbox' value='team' checked>부서</label>&nbsp; -->
-<!-- 							<label><input name='monthKind' id='kindperson' type='checkbox' value='person' checked>개인</label>&nbsp; -->
-<%-- 							<input type="hidden" name=kind[] value=${ }> --%>
-<%-- 							<input type="hidden" name=kind[] value=${ }> --%>
-<%-- 							<input type="hidden" name=kind[] value=${ }> --%>
-<!-- 						</div> -->
 						<!-- THE CALENDAR -->
 						<div id="calendar"></div>
 					</div>
@@ -186,6 +178,24 @@
 <%@ include file="/WEB-INF/views/content_calendar/calendarScript.jsp" %>
 
 <script>
+function chbCtl(){
+	if(sessionStorage.getItem("kindCom")=="checked"){
+		$('input:checkbox[id="kindcom"]').is(":checked") == true;
+	}else{
+		$('input:checkbox[id="kindcom"]').is(":checked") == false;
+	}
+	if(sessionStorage.getItem('kindTeam')=="checked"){
+		$('input:checkbox[id="kindteam"]').is(":checked") == true;
+	}else{
+		$('input:checkbox[id="kindteam"]').is(":checked") == false;
+	}
+	if(sessionStorage.getItem('kindPerson')=="checked"){
+		$('input:checkbox[id="kindperson"]').is(":checked") == true;
+	}else{
+		$('input:checkbox[id="kindperson"]').is(":checked") == false;
+	}
+};
+
 function calView(desc){
 	$('#calendar').fullCalendar(
 		{
@@ -198,7 +208,26 @@ function calView(desc){
 				today : 'today'
 			},
 			//Random default events
-			events : "${pageContext.request.contextPath}/calendar/data",
+			
+			events : function() {
+				//calendar_ajax에 전달
+				$.ajax({
+					type:"POST",  
+				    url:'${pageContext.request.contextPath}/calendar/data',      
+				    data:$('input:checkbox[name="monthKind"]:checked').serialize(),
+				    success:function(data){   
+				    	alert("성공");
+				    	calView();
+//		 		    	location.replace("${pageContext.request.contextPath}/calendar/main");
+				    	chbctl();
+				    }, 
+				    error:function(request,status,error){
+				    	 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				     	alert("실패"); 
+				    }  
+				});
+			}),
+// 			"${pageContext.request.contextPath}/calendar/data",
 			editable : false,
 			droppable : false, // this allows things to be dropped onto the calendar !!!
 			eventClick : function(calEvent, jsEvent, view) {
@@ -244,23 +273,7 @@ function calView(desc){
 	});		
 }
  
-$(function chbCtl(){
-	if(sessionStorage.getItem("kindCom")=="checked"){
-		$('input:checkbox[id="kindcom"]').is(":checked") == true;
-	}else{
-		$('input:checkbox[id="kindcom"]').is(":checked") == false;
-	}
-	if(sessionStorage.getItem('kindTeam')=="checked"){
-		$('input:checkbox[id="kindteam"]').is(":checked") == true;
-	}else{
-		$('input:checkbox[id="kindteam"]').is(":checked") == false;
-	}
-	if(sessionStorage.getItem('kindPerson')=="checked"){
-		$('input:checkbox[id="kindperson"]').is(":checked") == true;
-	}else{
-		$('input:checkbox[id="kindperson"]').is(":checked") == false;
-	}
-});
+
 $(function() {
 	/* initialize the external events
 	 -----------------------------------------------------------------*/
@@ -329,27 +342,36 @@ $(function() {
 		}else{
 			sessionStorage.removeItem('kindPerson');
 		};
-// 		$.each($("input[name='monthKind']:checked"), function() {
-// 			ch_list.push($(this).val());
-// 		});
-		
-// 		$("#calendar").load("",ch_list);
+		//calendar_ajax에 전달
 		$.ajax({
 			type:"POST",  
 		    url:'${pageContext.request.contextPath}/calendar/data',      
-		    data:ch_list,
-		    dataType : 'json',
+		    data:$('input:checkbox[name="monthKind"]:checked').serialize(),
 		    success:function(data){   
 		    	alert("성공");
-		    	location.replace("${pageContext.request.contextPath}/calendar/main");
-		    	chbctl();
+		    	calView();
+// 		    	location.replace("${pageContext.request.contextPath}/calendar/main");
+		    	if(sessionStorage.getItem("kindCom")=="checked"){
+		    		$('input:checkbox[id="kindcom"]').is(":checked") == true;
+		    	}else{
+		    		$('input:checkbox[id="kindcom"]').is(":checked") == false;
+		    	}
+		    	if(sessionStorage.getItem('kindTeam')=="checked"){
+		    		$('input:checkbox[id="kindteam"]').is(":checked") == true;
+		    	}else{
+		    		$('input:checkbox[id="kindteam"]').is(":checked") == false;
+		    	}
+		    	if(sessionStorage.getItem('kindPerson')=="checked"){
+		    		$('input:checkbox[id="kindperson"]').is(":checked") == true;
+		    	}else{
+		    		$('input:checkbox[id="kindperson"]').is(":checked") == false;
+		    	}
 		    }, 
-		    error:function(e){
+		    error:function(request,status,error){
+		    	 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		     	alert("실패"); 
 		    }  
 		});
-// 		list.submit();	//calendar/save
-// 		return loadHtml($("document"), $("document").action, 'result');
 	});
 
 	/* ADDING EVENTS */
@@ -361,11 +383,10 @@ $(function() {
 	var i = 0;
 	$("#add-new-event").click(
 		function(e) {
-		alert("add-new-event 실행");
+		
 		// 			e.preventDefault();
 		// 			Get value and make sure it is not null
 		var kind = $("select[name=kind]").val();
-// 		var bgcode = $("#bgcolor").val();
 		var dateCode = $("#reservationtime").val();
 		var title = $("#new-event").val();
 		var cont = $("#cont").val();
@@ -379,11 +400,6 @@ $(function() {
 		}else if(date.length!=2){
 			alert("날짜를 입력하세요");
 			return false;
-// 		}else if(!dateResult.test(date[0].trim())||!dateResult.test(date[1].trim())){
-// 			alert("날짜를 올바르게");
-// 			alert(date[0].trim());
-// 			alert(date[1].trim());
-// 			return false;
 		}else if(title==""){
 			alert("제목을 입력하세요");
 			return false;
