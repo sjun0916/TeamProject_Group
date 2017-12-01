@@ -34,11 +34,8 @@ public class ReportDao {
 		return client.selectList("user.userlist");
 	}
 
-	public ReportVo selectOne(int report_no) throws SQLException {
-		System.out.println("dao:" + report_no);
-		ReportVo v = client.selectOne("report.selectOne", new Integer(report_no));
-		System.out.println(v);
-		return v;
+	public ReportVo selectOne(int reportNo) throws SQLException {
+		return client.selectOne("report.selectOne",reportNo);
 	}
 
 	public int check(int num) throws SQLException {

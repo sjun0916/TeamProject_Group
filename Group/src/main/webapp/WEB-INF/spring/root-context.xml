@@ -28,7 +28,7 @@ http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
     </bean> -->
      
     <bean id="dataSourceSpied" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
-        <constructor-arg ref="dataSourceSpied" />
+        <constructor-arg ref="dataSource" />
         <property name="logFormatter">
             <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
                 <property name="loggingType" value="MULTI_LINE" />
