@@ -6,8 +6,8 @@
 <!DOCTYPE html>
 <html>
 <!-- 회원수정 -->
-<title>Smart-Groupware</title>
 <head>
+<title>Smart-Groupware</title>
 	<%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
 
 <meta http-equiv="content-type" content="text/html; charset=utf-8">

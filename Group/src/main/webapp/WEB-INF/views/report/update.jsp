@@ -11,13 +11,9 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			서류관리 <small>서류작성하기</small>
+			<img src="<c:url value="/resources/icon/approval.png"/>" width="50" height="50"/>
+			전자결재 <small>write document</small>
 		</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">Report</a></li>
-			<li class="active">Make</li>
-		</ol>
 	</section>
 
 	<!-- Main content -->

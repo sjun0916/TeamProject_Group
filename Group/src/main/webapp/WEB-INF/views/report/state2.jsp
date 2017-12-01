@@ -47,12 +47,9 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Report <small>State panel</small>
+			<img src="<c:url value="/resources/icon/approval.png"/>" width="50" height="50"/>
+			전자결재 <small>write document</small>
 		</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> report</a></li>
-			<li class="active">state</li>
-		</ol>
 	</section>
 	<div class="col-xs-12">
 		<div class="box">

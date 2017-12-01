@@ -113,7 +113,6 @@ public class Calendar_ServiceImpl implements Calendar_Service {
 				while(it.hasNext()) {
 					Calendar_Vo tmp = it.next();
 					System.out.println("service calendar_team : "+tmp.getCalendar_team());
-					System.out.println("service user_team : "+user.getTeamName());
 					switch(tmp.getCalendar_kind()) {
 					case "compony" : for(String kind : kinds) {
 										if(kind.equals("compony"))
