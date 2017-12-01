@@ -22,7 +22,7 @@
 	<section class="content-header">
 		<h1>
 			<img src="<c:url value="/resources/icon/email_2.png"/>" width="50" height="50"/>
-			보낸메일함 <small>send mail &nbsp;&nbsp;&nbsp;/보낸 메일은 현재 서버에서만 확인 가능합니다.</small>
+			보낸메일함 <small>send mail</small>
 		</h1>
 	</section>
 
@@ -36,7 +36,7 @@
 			<div class="col-xs-12">
 		<div class="box">
 			<div class="box-header">
-				<h3 class="box-title">메일함</h3>
+				<h3 class="box-title">Mail Box <small>(보낸 메일은 현재 서버에서만 확인 가능합니다)</small></h3>
 
 				<div class="box-tools" style="padding: 0px; text-align: right; float: left">
 
