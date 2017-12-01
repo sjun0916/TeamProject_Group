@@ -32,7 +32,7 @@
 		}
 		var form = document.form2;
 
-		form.action = "boardReplyDelete";
+		form.action = "BoardReplyDelete";
 		form.renum.value = renum;
 		form.submit();
 	}
@@ -67,7 +67,7 @@
 			return;
 		}
 
-		form.action = "boardReplySave";
+		form.action = "BoardReplySave";
 		form.submit();
 	}
 
