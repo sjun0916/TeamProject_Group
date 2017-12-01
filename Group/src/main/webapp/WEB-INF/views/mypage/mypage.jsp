@@ -57,7 +57,15 @@
                 <div class="form-group">
                   <label for="team" class="col-sm-2 control-label">프로필 사진</label>
                   <div class="col-sm-10">
-                    ${authUser.imageUrl}
+                    <c:choose>
+					<c:when test="${authUser.imageUrl!=null}">
+					<img src="\group\profileImg\<c:out value="${authUser.imageUrl}"/>"
+					class="img-circle" alt="User Image" width="50" height="50">
+					</c:when>
+					<c:otherwise>
+					<img src="${pageContext.request.contextPath}/resources/icon/person.png" class="img-circle" alt="User Image" width="50" height="50">
+					</c:otherwise>
+					</c:choose>
                   </div>
                 </div>
                 <div class="form-group">
