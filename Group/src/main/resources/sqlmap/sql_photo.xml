@@ -40,6 +40,16 @@
          ORDER BY PHOTONUM DESC
          
     </select> 
+       <select id="selectPhotoList2" resultType="com.group.photo.vo.PhotoVO">
+        SELECT PHOTONUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE, REALNAME
+             , (SELECT COUNT(*) FROM PHOTOFILE WHERE PHOTONUM=DS.PHOTONUM) FILECNT 
+          FROM (
+            SELECT PHOTONUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, REGDATE, REALNAME
+          FROM PHOTO
+          ) DS
+        
+         
+    </select> 
 <select id="selectPhotoOne" parameterType="String" resultType="com.group.photo.vo.PhotoVO">
         SELECT PHOTONUM, TITLE, WRITER, WRITERPOS, DEPARTNAME, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE, REALNAME
           FROM PHOTO
