@@ -17,10 +17,13 @@ function initGrid() {
             {name:'email',align:"center",width:200},
             {name:'IDX', index:'IDX',align:"center", width:100,formatter:sendmessageButton },
         ],
-        width:1200,
+        autowidth:true,
         //그리드타이틀
         caption: "사원목록"
     });
+    $(window).resize(function(){
+		$("#list").setGridWidth($(this).width() * .825);
+	});
 }
 
 // 버튼 생성
