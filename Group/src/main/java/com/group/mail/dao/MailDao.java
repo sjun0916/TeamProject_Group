@@ -39,4 +39,5 @@ public class MailDao {
 		return sqlSession.selectOne("mail.getDetailMail", mailVo);
 		
 	}
+	
 }
