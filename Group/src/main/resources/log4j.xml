@@ -31,6 +31,17 @@
 	<logger name="org.springframework.web">
 		<level value="info" />
 	</logger>
+	
+	<!-- Query Loggers (현아 추가)-->
+    <logger name="jdbc.sqlonly" additivity="false"> 
+        <level value="INFO"/> 
+        <appender-ref ref="console"/> 
+    </logger>
+     
+    <logger name="jdbc.resultsettable" additivity="false"> 
+        <level value="INFO"/> 
+        <appender-ref ref="console"/> 
+    </logger> 
 
 	<!-- Root Logger -->
 	<root>
