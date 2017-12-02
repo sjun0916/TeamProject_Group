@@ -178,7 +178,7 @@
 									</div>
 								</div>
 								<!-- /.box-header -->
-								<div class="box-body">게시판 3개출력</div>
+
 								<table class="table table-hover">
 									<tr>
 										<th width="10%">번호</th>
@@ -194,7 +194,9 @@
 										<tr>
 											<td><c:out value="${listview.boardnum}" /></td>
 											<td><a href="${link}"><c:out
-														value="${listview.title}" /></a></td>
+														value="${listview.title}" /></a> <c:if
+													test="${listview.replycnt>0}">(<c:out
+														value="${listview.replycnt}" />)</c:if></td>
 											<td><c:if test="${listview.writerpos!=null}">
 									[<c:out value="${listview.writerpos}" />]
 									</c:if> <c:out value="${listview.writer}" /></td>
