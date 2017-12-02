@@ -88,7 +88,7 @@
 							<div class="row">
 
 								<div id="notice">
-									<form id="form1" name="form1" method="post">
+									
 										<table class="table table-hover">
 											<tbody>
 												<tr>
@@ -143,7 +143,7 @@
 											</tbody>
 										</table>
 										<br>
-									</form>
+	
 								</div>
 
 
@@ -172,7 +172,7 @@
 											<i class="fa fa-minus"></i>
 										</button>
 										<button type="button" class="btn btn-box-tool"
-											onclick="location.href='/group/'">
+											onclick="location.href='/group/BoardList'">
 											more<i class="fa fa-chevron-circle-right"></i>
 										</button>
 									</div>
