@@ -19,8 +19,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.group.board.service.BoardService;
 import com.group.notice.service.NoticeService;
 import com.group.photo.service.PhotoService;
+import com.group.user.auth.AuthUser;
+import com.group.user.vo.UserVO;
 
 /**
  * Handles requests for the application home page.
@@ -34,12 +37,14 @@ public class HomeController {
     private NoticeService noticeSvc;
 	@Autowired
 	private PhotoService photoSvc;
+	@Autowired
+	private BoardService boardSvc;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/home")
-	public String home(Locale locale, Model model, HttpServletRequest request) {
+	public String home(Locale locale, Model model, HttpServletRequest request,@AuthUser UserVO authUser) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		Date date = new Date();
@@ -49,13 +54,19 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
+		//메인공지
 		List<?> listview2 = noticeSvc.selectNoticeList2();
 		List<?> listview3 = noticeSvc.selectNoticeList3();
         model.addAttribute("listview2", listview2);
         model.addAttribute("listview3", listview3);
-        
+        //메인사진첩
         List<?> listview4 = photoSvc.selectPhotoList2(); 
         model.addAttribute("listview4", listview4);
+        //메인부서게시판
+        //System.out.println("homeSession부서: "+authUser.getTeamName());
+        List<?> listview5 = boardSvc.selectBoardList2(authUser.getTeamName());
+        
+        model.addAttribute("listview5", listview5);
         
 		//calendar
         Calendar ca = new GregorianCalendar();

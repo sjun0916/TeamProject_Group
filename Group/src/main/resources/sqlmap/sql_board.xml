@@ -2,142 +2,165 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 <mapper namespace="Board">
-    <sql id="includeBoard">
-        WHERE BRDDELETEFLAG='N'
+	<sql id="includeBoard">
+		WHERE BRDDELETEFLAG='N'
 
-         <if test="searchKeyword!=null and searchKeyword!='' and searchType!=''">
-              <foreach item="item" index="index" collection="searchTypeArr" separator=" OR " open="AND (" close=")">
-                     ${item} LIKE '%'||#{searchKeyword}||'%'
-              </foreach>
-        </if>               
-    </sql>
-    <!-- 
-    item:전달받은 인자값을 다른이름으로 대체
-    collection: 전달받은 인자값
-    separator: 한번 이상 반복할 때 반복되는 사이에 해당 문을 넣어줌
-     -->
+		<if test="searchKeyword!=null and searchKeyword!='' and searchType!=''">
+			<foreach item="item" index="index" collection="searchTypeArr"
+				separator=" OR " open="AND (" close=")">
+				${item} LIKE '%'||#{searchKeyword}||'%'
+			</foreach>
+		</if>
+	</sql>
+	<!-- item:전달받은 인자값을 다른이름으로 대체 collection: 전달받은 인자값 separator: 한번 이상 반복할 
+		때 반복되는 사이에 해당 문을 넣어줌 -->
 
-    <select id="selectBoardCount" resultType="Integer" parameterType="com.group.board.vo.SearchVO">
-        SELECT COUNT(*)
-          FROM BOARD
-         <include refid="includeBoard"/>
-          
-          <if test="category1 != null and category1 !=''">
-          AND DEPARTNAME = #{category1}
-          </if>
-    </select> 
-    
-    <select id="selectBoardList" resultType="com.group.board.vo.BoardVO" parameterType="com.group.board.vo.SearchVO">
-        SELECT BOARDNUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE, HIT
-             , (SELECT COUNT(*) FROM BOARDFILE WHERE BOARDNUM=DS.BOARDNUM) FILECNT
-             , (SELECT COUNT(*) FROM BOARDREPLY WHERE BOARDNUM=DS.BOARDNUM AND REDELETEFLAG='N') REPLYCNT
-          FROM (
-            SELECT BOARDNUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, REGDATE, HIT
-              , ROW_NUMBER() OVER(ORDER BY BOARDNUM DESC) BOARDNUM_SEQ
-          FROM BOARD
-          
-          
-          <include refid="includeBoard"/>
-          
-          <if test="category1 != null and category1 !=''">
-          AND DEPARTNAME = #{category1}
-          </if>
-         
-          ) DS
-         WHERE BOARDNUM_SEQ BETWEEN ${rowStart} AND ${rowEnd}
-         ORDER BY BOARDNUM DESC
-         
-    </select> 
-  
-    
-    <insert id="insertBoard" parameterType="com.group.board.vo.BoardVO" >
-    	<selectKey resultType="String" keyProperty="boardnum" order="BEFORE">
-            SELECT BOARDNUM_SEQ.NEXTVAL FROM DUAL
-        </selectKey> 
-        INSERT INTO BOARD(BOARDNUM, TITLE, DEPARTNAME, MEMBERNUM, WRITER, WRITERPOS, CONTENT, REGDATE, HIT, BRDDELETEFLAG)
-        VALUES (#{boardnum}, #{title}, #{departname}, #{membernum}, #{writer},#{writerpos}, #{content}, SYSDATE, 0, 'N' )
-    </insert>
-    
-    <update id="updateBoard" parameterType="com.group.board.vo.BoardVO">
-        UPDATE BOARD
-           SET TITLE=#{title}
-             , WRITER=#{writer}
-             , WRITERPOS=#{writerpos}
-             , CONTENT=#{content} 
-         WHERE BRDDELETEFLAG='N'
-           AND BOARDNUM=#{boardnum}
-    </update> 
-        
-    <select id="selectBoardOne" parameterType="String" resultType="com.group.board.vo.BoardVO">
-        SELECT BOARDNUM, TITLE,MEMBERNUM, WRITER, WRITERPOS, DEPARTNAME, CONTENT, TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE
-          FROM BOARD
-         WHERE BRDDELETEFLAG='N'
-           AND BOARDNUM=#{boardnum}
-    </select> 
+	<select id="selectBoardCount" resultType="Integer"
+		parameterType="com.group.board.vo.SearchVO">
+		SELECT COUNT(*)
+		FROM BOARD
+		<include refid="includeBoard" />
 
-    <update id="updateBoardRead" parameterType="String">
-        UPDATE BOARD
-           SET HIT = HIT + 1 
-         WHERE BOARDNUM=#{boardnum}
-    </update> 
- 
-    <delete id="deleteBoardOne" parameterType="String">
-        UPDATE BOARD
-           SET BRDDELETEFLAG='Y' 
-         WHERE BOARDNUM=#{boardnum}
-    </delete> 
+		<if test="category1 != null and category1 !=''">
+			AND DEPARTNAME = #{category1}
+		</if>
+	</select>
 
-    <!-- =============================================================================== -->
-    <select id="selectBoardFileList" resultType="com.group.board.vo.FileVO" parameterType="String">
-        SELECT FILENUM, FILENAME, REALNAME, FILESIZE
-          FROM BOARDFILE
-         WHERE BOARDNUM=#{boardnum}
-         ORDER BY FILENUM DESC 
-    </select> 
+	<select id="selectBoardList" resultType="com.group.board.vo.BoardVO"
+		parameterType="com.group.board.vo.SearchVO">
+		SELECT BOARDNUM, TITLE, DEPARTNAME, WRITER, WRITERPOS,
+		TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE, HIT
+		, (SELECT COUNT(*) FROM BOARDFILE WHERE BOARDNUM=DS.BOARDNUM) FILECNT
+		, (SELECT COUNT(*) FROM BOARDREPLY WHERE BOARDNUM=DS.BOARDNUM AND
+		REDELETEFLAG='N') REPLYCNT
+		FROM (
+		SELECT BOARDNUM, TITLE, DEPARTNAME, WRITER, WRITERPOS, REGDATE, HIT
+		, ROW_NUMBER() OVER(ORDER BY BOARDNUM DESC) BOARDNUM_SEQ
+		FROM BOARD
 
-    <insert id="insertBoardFile" parameterType="com.group.board.vo.FileVO" >
-        INSERT INTO BOARDFILE (BOARDNUM, FILENUM, FILENAME, REALNAME, FILESIZE)
-        VALUES (#{parentPK}, FILENUM_SEQ.NEXTVAL, #{filename}, #{realname}, #{filesize})
-    </insert>
-    
-    <delete id="deleteBoardFile" parameterType="hashmap"> 
-        DELETE 
-          FROM BOARDFILE
-         WHERE FILENUM IN (
-              <foreach item="item" index="index" collection="filenum" separator=",">
-                     ${item}
-              </foreach>  
-        )             
-    </delete> 
 
-    <!-- =============================================================================== -->
-    <select id="selectBoardReplyList" resultType="com.group.board.vo.BoardReplyVO" parameterType="String">
-        SELECT BOARDNUM, RENUM, REWRITER,REWRITERPOS,MEMBERNUM, REDELETEFLAG, REMEMO, REDATE 
-          FROM BOARDREPLY
-         WHERE BOARDNUM=#{boardnum} AND REDELETEFLAG='N'
-         ORDER BY RENUM
-    </select>
-        
-    <insert id="insertBoardReply" parameterType="com.group.board.vo.BoardReplyVO" >
-        <selectKey resultType="String" keyProperty="renum" order="BEFORE">
-            SELECT NVL(MAX(RENUM),0)+1 FROM BOARDREPLY
-        </selectKey>
-            
-        INSERT INTO BOARDREPLY(BOARDNUM, RENUM, REWRITER,REWRITERPOS,MEMBERNUM, REDELETEFLAG, REMEMO, REDATE)
-        VALUES (#{boardnum}, #{renum}, #{rewriter}, #{rewriterpos},#{membernum} , 'N', #{rememo}, SYSDATE)
-    </insert>
+		<include refid="includeBoard" />
 
-    <update id="deleteBoardReply" parameterType="String"> 
-        UPDATE BOARDREPLY
-           SET REDELETEFLAG='Y' 
-         WHERE RENUM=#{renum}       
-    </update> 
+		<if test="category1 != null and category1 !=''">
+			AND DEPARTNAME = #{category1}
+		</if>
 
-    <update id="updateBoardReply" parameterType="com.group.board.vo.BoardReplyVO">
-        UPDATE BOARDREPLY
-           SET REMEMO=#{rememo} 
-         WHERE RENUM=#{renum}
-    </update> 
-         
+		) DS
+		WHERE BOARDNUM_SEQ BETWEEN ${rowStart} AND ${rowEnd}
+		ORDER BY BOARDNUM DESC
+
+	</select>
+	<select id="selectBoardList2" resultType="com.group.board.vo.BoardVO"
+		parameterType="String">
+		SELECT *
+		FROM VIEW_BOARD
+		WHERE DEPARTNAME = #{value}
+
+
+
+	</select>
+
+
+	<insert id="insertBoard" parameterType="com.group.board.vo.BoardVO">
+		<selectKey resultType="String" keyProperty="boardnum" order="BEFORE">
+			SELECT BOARDNUM_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO BOARD(BOARDNUM, TITLE, DEPARTNAME, MEMBERNUM, WRITER,
+		WRITERPOS, CONTENT, REGDATE, HIT, BRDDELETEFLAG)
+		VALUES (#{boardnum}, #{title}, #{departname}, #{membernum},
+		#{writer},#{writerpos}, #{content}, SYSDATE, 0, 'N' )
+	</insert>
+
+	<update id="updateBoard" parameterType="com.group.board.vo.BoardVO">
+		UPDATE BOARD
+		SET TITLE=#{title}
+		, WRITER=#{writer}
+		, WRITERPOS=#{writerpos}
+		, CONTENT=#{content}
+		WHERE BRDDELETEFLAG='N'
+		AND BOARDNUM=#{boardnum}
+	</update>
+
+	<select id="selectBoardOne" parameterType="String"
+		resultType="com.group.board.vo.BoardVO">
+		SELECT BOARDNUM, TITLE,MEMBERNUM, WRITER, WRITERPOS, DEPARTNAME, CONTENT,
+		TO_CHAR(REGDATE,'yyyy-mm-dd') REGDATE
+		FROM BOARD
+		WHERE BRDDELETEFLAG='N'
+		AND BOARDNUM=#{boardnum}
+	</select>
+
+	<update id="updateBoardRead" parameterType="String">
+		UPDATE BOARD
+		SET HIT = HIT + 1
+		WHERE BOARDNUM=#{boardnum}
+	</update>
+
+	<delete id="deleteBoardOne" parameterType="String">
+		UPDATE BOARD
+		SET BRDDELETEFLAG='Y'
+		WHERE BOARDNUM=#{boardnum}
+	</delete>
+
+	<!-- =============================================================================== -->
+	<select id="selectBoardFileList" resultType="com.group.board.vo.FileVO"
+		parameterType="String">
+		SELECT FILENUM, FILENAME, REALNAME, FILESIZE
+		FROM BOARDFILE
+		WHERE BOARDNUM=#{boardnum}
+		ORDER BY FILENUM DESC
+	</select>
+
+	<insert id="insertBoardFile" parameterType="com.group.board.vo.FileVO">
+		INSERT INTO BOARDFILE (BOARDNUM, FILENUM, FILENAME, REALNAME,
+		FILESIZE)
+		VALUES (#{parentPK}, FILENUM_SEQ.NEXTVAL, #{filename}, #{realname},
+		#{filesize})
+	</insert>
+
+	<delete id="deleteBoardFile" parameterType="hashmap">
+		DELETE
+		FROM BOARDFILE
+		WHERE FILENUM IN (
+		<foreach item="item" index="index" collection="filenum"
+			separator=",">
+			${item}
+		</foreach>
+		)
+	</delete>
+
+	<!-- =============================================================================== -->
+	<select id="selectBoardReplyList" resultType="com.group.board.vo.BoardReplyVO"
+		parameterType="String">
+		SELECT BOARDNUM, RENUM, REWRITER,REWRITERPOS,MEMBERNUM, REDELETEFLAG,
+		REMEMO, REDATE
+		FROM BOARDREPLY
+		WHERE BOARDNUM=#{boardnum} AND REDELETEFLAG='N'
+		ORDER BY RENUM
+	</select>
+
+	<insert id="insertBoardReply" parameterType="com.group.board.vo.BoardReplyVO">
+		<selectKey resultType="String" keyProperty="renum" order="BEFORE">
+			SELECT NVL(MAX(RENUM),0)+1 FROM BOARDREPLY
+		</selectKey>
+
+		INSERT INTO BOARDREPLY(BOARDNUM, RENUM,
+		REWRITER,REWRITERPOS,MEMBERNUM, REDELETEFLAG, REMEMO, REDATE)
+		VALUES (#{boardnum}, #{renum}, #{rewriter}, #{rewriterpos},#{membernum} ,
+		'N', #{rememo}, SYSDATE)
+	</insert>
+
+	<update id="deleteBoardReply" parameterType="String">
+		UPDATE BOARDREPLY
+		SET REDELETEFLAG='Y'
+		WHERE RENUM=#{renum}
+	</update>
+
+	<update id="updateBoardReply" parameterType="com.group.board.vo.BoardReplyVO">
+		UPDATE BOARDREPLY
+		SET REMEMO=#{rememo}
+		WHERE RENUM=#{renum}
+	</update>
+
 </mapper>
 
