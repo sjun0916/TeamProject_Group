@@ -100,12 +100,12 @@ public class Calendar_ServiceImpl implements Calendar_Service {
 		// TODO Auto-generated method stub
 		List<Calendar_Vo> list = null;
 		System.out.println("servise kinds : " +kinds);
-//		if(kinds == null) {
-//			kinds = new String[3];
-//			kinds[0] = "compony";
-//			kinds[1] = "team";
-//			kinds[2] = "person";
-//		}
+		if(kinds == null) {
+			kinds = new String[3];
+			kinds[0] = "compony";
+			kinds[1] = "team";
+			kinds[2] = "person";
+		}
 		if(kinds != null) {
 			list = new ArrayList<Calendar_Vo>();
 			try {

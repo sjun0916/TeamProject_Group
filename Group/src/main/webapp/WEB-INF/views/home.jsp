@@ -8,6 +8,14 @@
 <%@ include file="include/headerScript.jsp"%>
 <link rel='stylesheet' type='text/css'
 	href='<c:url value="/resources/boardCSS/NoticeList.css"/>'>
+<link rel='stylesheet' type='text/css' href='<c:url value="assets/css/calendar.css"/>'>
+	<script>
+// 	calendar submit()
+		function goTo()
+		{
+		  document.getElementbyId("monthView").submit();
+		}
+	</script>
 </head>
 
 <%@ include file="include/header.jsp"%>
@@ -16,206 +24,25 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- Content 헤더 -->
+
 	<section class="content-header">
-
-
-
+		
+		
+<%-- 		<img src="${pageContext.request.contextPath}/resources/icon/rian.jpg" width="100%" height="300px"> --%>
 
 
 		<section class="content">
 
-
-			<div class="row">
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box bg-aqua">
-						<span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">Bookmarks</span> <span
-								class="info-box-number">41,410</span> <br> <small><a
-								href="#" class="small-box-footer pull-right">More info <i
-									class="fa fa-arrow-circle-right"></i></a></small>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box bg-green">
-						<span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">Likes</span> <span
-								class="info-box-number">41,410</span> <br> <small><a
-								href="#" class="small-box-footer pull-right">More info <i
-									class="fa fa-arrow-circle-right"></i></a></small>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box bg-yellow">
-						<span class="info-box-icon"><i class="fa fa-calendar"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">Events</span> <span
-								class="info-box-number">41,410</span> <br> <small><a
-								href="#" class="small-box-footer pull-right">More info <i
-									class="fa fa-arrow-circle-right"></i></a></small>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box bg-red">
-						<span class="info-box-icon"><i class="fa fa-comments-o"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">Comments</span> <span
-								class="info-box-number">41,410</span> <br> <small><a
-								href="#" class="small-box-footer pull-right">More info <i
-									class="fa fa-arrow-circle-right"></i></a></small>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
+			<div style="background-image: url('${pageContext.request.contextPath}/resources/icon/rian.jpg'); width:100%; height:300px;">
+			회사이미지 / 설명 등등 
 			</div>
-
-			<div class="row">
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box">
-						<span class="info-box-icon bg-aqua"><i
-							class="fa fa-envelope-o"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">Messages</span> <span
-								class="info-box-number">1,410</span>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box">
-						<span class="info-box-icon bg-green"><i
-							class="fa fa-flag-o"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">Bookmarks</span> <span
-								class="info-box-number">410</span>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box">
-						<span class="info-box-icon bg-yellow"><i
-							class="fa fa-files-o"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">Uploads</span> <span
-								class="info-box-number">13,648</span>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box">
-						<span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">Likes</span> <span
-								class="info-box-number">93,139</span>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-			</div>
-
-			<!-- Info boxes -->
-			<div class="row">
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box">
-						<span class="info-box-icon bg-aqua"><i
-							class="ion ion-ios-gear-outline"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">CPU Traffic</span> <span
-								class="info-box-number">90<small>%</small></span>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box">
-						<span class="info-box-icon bg-red"><i
-							class="fa fa-google-plus"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">Likes</span> <span
-								class="info-box-number">41,410</span>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-
-				<!-- fix for small devices only -->
-				<div class="clearfix visible-sm-block"></div>
-
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box">
-						<span class="info-box-icon bg-green"><i
-							class="ion ion-ios-cart-outline"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">Sales</span> <span
-								class="info-box-number">760</span>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box">
-						<span class="info-box-icon bg-yellow"><i
-							class="ion ion-ios-people-outline"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">New Members</span> <span
-								class="info-box-number">2,000</span>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-			</div>
-			<!-- /.row -->
+			<hr>
 
 			<div class="row">
 				<div class="col-md-12">
 					<div class="box">
 						<div class="box-header with-border">
-							<h3 class="box-title">디자인1</h3>
+							<h3 class="box-title">Document Approval</h3>
 
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool"
@@ -334,7 +161,7 @@
 							<!-- DIRECT CHAT -->
 							<div class="box box-warning direct-chat direct-chat-warning">
 								<div class="box-header with-border">
-									<h3 class="box-title">디자인2</h3>
+									<h3 class="box-title">Board</h3>
 
 									<div class="box-tools pull-right">
 										<span data-toggle="tooltip" title="" class="badge bg-yellow"
@@ -351,10 +178,9 @@
 									</div>
 								</div>
 								<!-- /.box-header -->
-								<div class="box-body">내용넣기</div>
+								<div class="box-body">게시판 3개출력</div>
 								<!-- /.box-body -->
-								<div class="box-footer">?</div>
-								<!-- /.box-footer-->
+				
 							</div>
 							<!--/.direct-chat -->
 						</div>
@@ -364,7 +190,7 @@
 							<!-- USERS LIST -->
 							<div class="box box-danger">
 								<div class="box-header with-border">
-									<h3 class="box-title">디자인3</h3>
+									<h3 class="box-title">Message</h3>
 
 									<div class="box-tools pull-right">
 										<span class="label label-danger">8 </span>
@@ -379,13 +205,9 @@
 									</div>
 								</div>
 								<!-- /.box-header -->
-								<div class="box-body no-padding">내용넣기</div>
+								<div class="box-body no-padding">쪽지 3개출력</div>
 								<!-- /.box-body -->
-								<div class="box-footer text-center">
-									<a href="javascript:void(0)" class="uppercase">View All
-										Users</a>
-								</div>
-								<!-- /.box-footer -->
+								
 							</div>
 							<!--/.box -->
 						</div>
@@ -445,9 +267,9 @@
 				<!-- /.col -->
 
 				<div class="col-md-4">
-					<div class="box box-default">
+					<div class="box box-primary">
 						<div class="box-header with-border">
-							<h3 class="box-title">디자인5</h3>
+							<h3 class="box-title">Calendar</h3>
 
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool"
@@ -463,34 +285,65 @@
 						<!-- /.box-header -->
 						<div class="box-body">
 							<div class="row">
-								<div class="col-md-8">내용</div>
-								<!-- /.col -->
-								<div class="col-md-4">내용2</div>
-								<!-- /.col -->
+								<form id="monthView" name="monthView">
+								<table class="tTable" width="100%">
+								  <tr>
+								    <td><table class="tTable">
+								      <tr>
+								        <td class="tMonth"><h3>&nbsp;${iYear}년 ${iMonth}월&nbsp;</h3></td>
+								      </tr>
+						    		</table>
+						    		</td>				
+								<tr>
+									<td><table class="tTable">
+										<tbody>
+											<tr>
+												<th>Sun</th>								          
+												<th>Mon</th>
+												<th>Tue</th>
+												<th>Wed</th>
+												<th>Thu</th>
+												<th>Fri</th>
+												<th>Sat</th>
+											</tr>
+											<c:set var="cnt" value="1"/>
+											<c:forEach var="i" begin="1" end="${iTotalweeks}" step="1" varStatus="loop">
+												<tr>
+													<c:forEach var="j" begin="1" end="7" step="1" varStatus="loop2">
+														<c:choose>
+															<c:when test="${cnt<weekStartDay || (cnt-weekStartDay+1)>days}">
+																<td align="center" height="35">&nbsp;</td>
+															</c:when>
+															<c:otherwise>
+																<td align="center" height="35" id="day_${cnt-weekStartDay+1}">
+																	<span>${cnt-weekStartDay+1}</span><br>
+																</td>
+							      							</c:otherwise>
+														</c:choose>
+														<input type="hidden" value="${cnt=cnt+1}">
+													</c:forEach>
+												</tr>
+											</c:forEach>
+											</tbody>
+										</table></td>
+									</tr>
+								</table>
+							</form>
 							</div>
 							<!-- /.row -->
 						</div>
 						<!-- /.box-body -->
 
 
-						<div class="box-footer no-padding">
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">링크 <span class="pull-right text-red"><i
-											class="fa fa-angle-down"></i> 12%</span></a></li>
-								<li><a href="#">링크 <span class="pull-right text-green"><i
-											class="fa fa-angle-up"></i> 4%</span></a></li>
-								<li><a href="#">링크 <span class="pull-right text-yellow"><i
-											class="fa fa-angle-left"></i> 0%</span></a></li>
-							</ul>
-						</div>
+					
 						<!-- /.footer -->
 					</div>
 					<!-- /.box -->
 
 
-					<div class="box box-primary">
+					<div class="box box-warning direct-chat direct-chat-warning">
 						<div class="box-header with-border">
-							<h3 class="box-title">디자인6</h3>
+							<h3 class="box-title">Weather</h3>
 
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool"
@@ -498,25 +351,24 @@
 									<i class="fa fa-minus"></i>
 								</button>
 								<button type="button" class="btn btn-box-tool"
-									onclick="location.href='/group/'">
+									onclick="location.href='/group/calendar/main'">
 									more<i class="fa fa-chevron-circle-right"></i>
 								</button>
 							</div>
 						</div>
 						<!-- /.box-header -->
-						<div class="box-body">내용</div>
-						<!-- /.box-body -->
-						<div class="box-footer text-center">
-							<a href="javascript:void(0)" class="uppercase">View All
-								Products</a>
+						<div class="box-body">
+							날씨api
 						</div>
-						<!-- /.box-footer -->
+						<!-- /.box-body -->
+
+						
 					</div>
 
 
-					<div class="box box-warning direct-chat direct-chat-warning">
+					<div class="box box-fault">
 						<div class="box-header with-border">
-							<h3 class="box-title">디자인7</h3>
+							<h3 class="box-title">?</h3>
 
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool"
@@ -530,13 +382,9 @@
 							</div>
 						</div>
 						<!-- /.box-header -->
-						<div class="box-body">내용</div>
+						<div class="box-body">?</div>
 						<!-- /.box-body -->
-						<div class="box-footer text-center">
-							<a href="javascript:void(0)" class="uppercase">View All
-								Products</a>
-						</div>
-						<!-- /.box-footer -->
+						
 					</div>
 					<!-- /.box -->
 				</div>
