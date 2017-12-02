@@ -412,8 +412,8 @@
 						<!-- /.box-header -->
 						<div class="box-body">
 							<div class="table-responsive">
-								<form id="form2" name="form2" method="post" >
-									<table >
+								<form id="form2" name="form2" method="post">
+									<table>
 										<tr>
 											<c:forEach var="listview" items="${listview4}"
 												varStatus="status">
@@ -425,14 +425,13 @@
 													src="\group\imgUpload\2017\<c:out value="${listview.realname}"/>"
 													width="100" height="90" /><br> <small>제목:&nbsp;<a
 														href="${link}"><c:out value="${listview.title}" /></a></small> <br>
-													<small>작성자:&nbsp;[<c:out
-															value="${listview.departname}" />] <c:out
-															value="${listview.writer}" /></small></td>
-															<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-															
-										
-										</c:forEach>
+													<small>[<c:out value="${listview.departname}" />]
+														<c:out value="${listview.writer}" /></small></td>
+												<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+
+											</c:forEach>
 										</tr>
 									</table>
 								</form>
