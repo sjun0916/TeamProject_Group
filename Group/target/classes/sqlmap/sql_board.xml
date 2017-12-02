@@ -55,6 +55,7 @@
 		SELECT *
 		FROM VIEW_BOARD
 		WHERE DEPARTNAME = #{value}
+		AND ROWNUM &lt;= 3
 
 
 

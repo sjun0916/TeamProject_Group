@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.group.board.service.BoardService;
-import com.group.board.vo.BoardVO;
 import com.group.notice.service.NoticeService;
 import com.group.photo.service.PhotoService;
 import com.group.user.auth.AuthUser;
@@ -64,9 +63,15 @@ public class HomeController {
 		List<?> listview4 = photoSvc.selectPhotoList2(); 
 		model.addAttribute("listview4", listview4);
 		//메인부서게시판        
-		int mainBoardCount = 3;//메인 부서게시판 출력량
-		List<?> tmplistview5 = boardSvc.selectBoardList2(authUser.getTeamName());
-		List<?> listview5 = tmplistview5.subList(0, mainBoardCount);
+//		int mainBoardCount = 3;  //메인 부서게시판 출력량
+		List<?> listview5 = boardSvc.selectBoardList2(authUser.getTeamName());
+//		System.out.println("listsize: "+listview5.size());
+//		if(listview5.size()>mainBoardCount) {
+//			List<?> tmplistview5 = listview5;
+//			listview5.clear();
+//			listview5=tmplistview5.subList(0, mainBoardCount);
+//		}
+//		
 		model.addAttribute("listview5", listview5);
 
 		//calendar
