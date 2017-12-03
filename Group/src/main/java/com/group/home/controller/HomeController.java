@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.group.board.service.BoardService;
+import com.group.message.service.MessageService;
+import com.group.message.vo.MessageVO;
 import com.group.notice.service.NoticeService;
 import com.group.photo.service.PhotoService;
 import com.group.user.auth.AuthUser;
@@ -39,6 +41,8 @@ public class HomeController {
 	private PhotoService photoSvc;
 	@Autowired
 	private BoardService boardSvc;
+	@Autowired
+	private MessageService messageSvc;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -63,16 +67,15 @@ public class HomeController {
 		List<?> listview4 = photoSvc.selectPhotoList2(); 
 		model.addAttribute("listview4", listview4);
 		//메인부서게시판        
-//		int mainBoardCount = 3;  //메인 부서게시판 출력량
 		List<?> listview5 = boardSvc.selectBoardList2(authUser.getTeamName());
-//		System.out.println("listsize: "+listview5.size());
-//		if(listview5.size()>mainBoardCount) {
-//			List<?> tmplistview5 = listview5;
-//			listview5.clear();
-//			listview5=tmplistview5.subList(0, mainBoardCount);
-//		}
-//		
 		model.addAttribute("listview5", listview5);
+		//메인 쪽지
+		MessageVO messageVo= new MessageVO();
+		messageVo.setEmployeeNo(authUser.getEmployeeNo());
+		List<MessageVO> list = 
+				messageSvc.getMessage2( messageVo );
+		
+		model.addAttribute( "list", list );
 
 		//calendar
 		Calendar ca = new GregorianCalendar();

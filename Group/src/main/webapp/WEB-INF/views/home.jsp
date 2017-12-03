@@ -88,62 +88,62 @@
 							<div class="row">
 
 								<div id="notice">
-									
-										<table class="table table-hover">
-											<tbody>
+
+									<table class="table table-hover">
+										<tbody>
+											<tr>
+												<th width="10%">번호</th>
+												<th width="35%">제목</th>
+												<th width="15%">작성자</th>
+												<th width="15%">작성일</th>
+												<th width="10%">첨부</th>
+											</tr>
+											<c:forEach var="listview" items="${listview2}"
+												varStatus="loop">
+												<c:url var="link" value="NoticeRead">
+													<c:param name="noticenum" value="${listview.noticenum}" />
+												</c:url>
 												<tr>
-													<th width="10%">번호</th>
-													<th width="35%">제목</th>
-													<th width="15%">작성자</th>
-													<th width="15%">작성일</th>
-													<th width="10%">첨부</th>
+													<td><img
+														src="<c:url value="/resources/icon/star.png"/>" width="15"
+														height="15" /></td>
+													<td><a href="${link}"><b><c:out
+																	value="${listview.title}" /></b></a></td>
+													<td><c:if test="${listview.writerpos!=null}">
+									[<c:out value="${listview.writerpos}" />]
+									</c:if> <c:out value="${listview.writer}" /></td>
+													<td><c:out value="${listview.regdate}" /></td>
+													<td><c:if test="${listview.filecnt>0}">
+															<img
+																src="<c:url value="/resources/icon/floppy-disk.png"/>"
+																width="15" height="15" />
+														</c:if></td>
 												</tr>
-												<c:forEach var="listview" items="${listview2}"
-													varStatus="loop">
-													<c:url var="link" value="NoticeRead">
-														<c:param name="noticenum" value="${listview.noticenum}" />
-													</c:url>
-													<tr>
-														<td><img
-															src="<c:url value="/resources/icon/star.png"/>"
-															width="15" height="15" /></td>
-														<td><a href="${link}"><b><c:out
-																		value="${listview.title}" /></b></a></td>
-														<td><c:if test="${listview.writerpos!=null}">
+											</c:forEach>
+											<c:forEach var="listview" items="${listview3}"
+												varStatus="loop">
+												<c:url var="link" value="NoticeRead">
+													<c:param name="noticenum" value="${listview.noticenum}" />
+												</c:url>
+												<tr>
+													<td><c:out value="${listview.noticenum}" /></td>
+													<td><a href="${link}"><c:out
+																value="${listview.title}" /></a></td>
+													<td><c:if test="${listview.writerpos!=null}">
 									[<c:out value="${listview.writerpos}" />]
 									</c:if> <c:out value="${listview.writer}" /></td>
-														<td><c:out value="${listview.regdate}" /></td>
-														<td><c:if test="${listview.filecnt>0}">
-																<img
-																	src="<c:url value="/resources/icon/floppy-disk.png"/>"
-																	width="15" height="15" />
-															</c:if></td>
-													</tr>
-												</c:forEach>
-												<c:forEach var="listview" items="${listview3}"
-													varStatus="loop">
-													<c:url var="link" value="NoticeRead">
-														<c:param name="noticenum" value="${listview.noticenum}" />
-													</c:url>
-													<tr>
-														<td><c:out value="${listview.noticenum}" /></td>
-														<td><a href="${link}"><c:out
-																	value="${listview.title}" /></a></td>
-														<td><c:if test="${listview.writerpos!=null}">
-									[<c:out value="${listview.writerpos}" />]
-									</c:if> <c:out value="${listview.writer}" /></td>
-														<td><c:out value="${listview.regdate}" /></td>
-														<td><c:if test="${listview.filecnt>0}">
-																<img
-																	src="<c:url value="/resources/icon/floppy-disk.png"/>"
-																	width="15" height="15" />
-															</c:if></td>
-													</tr>
-												</c:forEach>
-											</tbody>
-										</table>
-										<br>
-	
+													<td><c:out value="${listview.regdate}" /></td>
+													<td><c:if test="${listview.filecnt>0}">
+															<img
+																src="<c:url value="/resources/icon/floppy-disk.png"/>"
+																width="15" height="15" />
+														</c:if></td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+									<br>
+
 								</div>
 
 
@@ -229,13 +229,51 @@
 											<i class="fa fa-minus"></i>
 										</button>
 										<button type="button" class="btn btn-box-tool"
-											onclick="location.href='/group/'">
+											onclick="location.href='/group/message'">
 											more<i class="fa fa-chevron-circle-right"></i>
 										</button>
 									</div>
 								</div>
 								<!-- /.box-header -->
-								<div class="box-body no-padding">쪽지 3개출력</div>
+								<div class="box-body no-padding">
+									<table class="table table-hover">
+
+										<tr align="center">
+											<th width="20%">발신자(사원번호)</th>
+											<th width="40%">메세지 내용</th>
+											<th width="10%">수신시간</th>
+
+										</tr>
+										<c:choose>
+											<c:when test="${fn:length(list) > 0}">
+												<c:forEach items="${list}" var="row">
+													<tr>
+														<td>${row.sender }</td>
+														<td><a
+															href="${pageContext.request.contextPath }/message/view?messageId=${row.messageId}">
+
+																<c:choose>
+																	<c:when test="${fn:length(row.message) > 23}">
+																		<c:out value="${fn:substring(row.message,0,23)}" />....
+							           </c:when>
+																	<c:otherwise>
+																		<c:out value="${row.message}" />
+																	</c:otherwise>
+																</c:choose>
+														</a></td>
+														<td>${row.writeDate }</td>
+													</tr>
+												</c:forEach>
+											</c:when>
+											<c:otherwise>
+												<tr>
+													<td colspan="3">수신한 쪽지가 존재하지 않습니다.</td>
+												</tr>
+											</c:otherwise>
+										</c:choose>
+
+									</table>
+								</div>
 								<!-- /.box-body -->
 
 							</div>

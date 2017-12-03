@@ -131,10 +131,10 @@
             
             <div class="box-footer">
               <div class="pull-right">
-              	<c:if test="(${boardInfo.membernum} == ${authUser.employeeNo}) || (${authUser.role == 'ADMIN'})">
+<%--               	<c:if test="(${boardInfo.membernum} == ${authUser.employeeNo}) || (${authUser.role == 'ADMIN'})"> --%>
                 <button type="button" class="btn btn-default" onClick="location.href='BoardForm?boardnum=<c:out value="${boardInfo.boardnum}"/>'">Update</button>
                 <button type="button" class="btn btn-default" onClick="location.href='BoardDelete?boardnum=<c:out value="${boardInfo.boardnum}"/>'"><i class="fa fa-trash-o"></i> Delete</button>
-                </c:if>
+<%--                 </c:if> --%>
               </div>
               <button type="button" class="btn btn-default" onClick="location.href='BoardList'">돌아가기</button>
             </div>
