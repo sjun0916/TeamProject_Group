@@ -32,6 +32,9 @@ public class BoardService {
     public List<?> selectBoardList(SearchVO param) {
         return sqlSession.selectList("selectBoardList", param);
     }
+    public List<?> selectBoardList2(String departname) {
+        return sqlSession.selectList("selectBoardList2", departname);
+    }
     
     /**
      * 글 저장.

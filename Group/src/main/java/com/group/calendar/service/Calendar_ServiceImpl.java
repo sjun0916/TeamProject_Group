@@ -83,7 +83,7 @@ public class Calendar_ServiceImpl implements Calendar_Service {
 
 	@Override
 	public List<Calendar_Vo> dayCalendarList(UserVO user, Date date) {
-		y// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 		System.out.println("service dayCalendarList start");
 		List<Calendar_Vo> list=new ArrayList<Calendar_Vo>();
 		List<Calendar_Vo> tmpList = selectCalendarKind(user);
