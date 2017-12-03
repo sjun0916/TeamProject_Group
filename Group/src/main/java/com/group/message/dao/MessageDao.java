@@ -36,4 +36,7 @@ public class MessageDao {
 	public List<MessageVO> getMessage(MessageVO messageVo) {
 		return sqlSession.selectList("message.getMessage", messageVo);
 	}
+	public List<MessageVO> getMessage2(MessageVO messageVo) {
+		return sqlSession.selectList("message.getMessage2", messageVo);
+	}
 }
