@@ -43,6 +43,7 @@
 							</c:forEach></span></h3>
                 <h5><small>작성자 : [<c:out value="${photoInfo.writerpos}" />]<c:out value="${photoInfo.writer}" /></small>
                   <span class="mailbox-read-time pull-right"><c:out value="${photoInfo.regdate}" /></span></h5>
+                  <img src="\group\imgUpload\2017\<c:out value="${photoInfo.realname}"/>"/>
               </div>
 
               <!-- /.mailbox-read-message -->
@@ -53,9 +54,10 @@
             
             <div class="box-footer">
               <div class="pull-right">
-              	
+              	<c:if test="${authUser.role == 'ADMIN'}">
                 <button type="button" class="btn btn-default" onClick="location.href='PhotoForm?photonum=<c:out value="${photoInfo.photonum}"/>'">Update</button>
                 <button type="button" class="btn btn-default" onClick="location.href='PhotoDelete?photonum=<c:out value="${photoInfo.photonum}"/>'"><i class="fa fa-trash-o"></i> Delete</button>
+              </c:if>
               </div>
               <button type="button" class="btn btn-default" onClick="location.href='PhotoList'">돌아가기</button>
             </div>
