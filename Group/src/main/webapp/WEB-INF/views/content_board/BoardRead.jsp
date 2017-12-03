@@ -131,10 +131,10 @@
             
             <div class="box-footer">
               <div class="pull-right">
-<%--               	<c:if test="(${boardInfo.membernum} == ${authUser.employeeNo}) || (${authUser.role == 'ADMIN'})"> --%>
+              	<c:if test="(${boardInfo.membernum} == ${authUser.employeeNo}) || (${authUser.role == 'ADMIN'})">
                 <button type="button" class="btn btn-default" onClick="location.href='BoardForm?boardnum=<c:out value="${boardInfo.boardnum}"/>'">Update</button>
                 <button type="button" class="btn btn-default" onClick="location.href='BoardDelete?boardnum=<c:out value="${boardInfo.boardnum}"/>'"><i class="fa fa-trash-o"></i> Delete</button>
-<%--                 </c:if> --%>
+                </c:if>
               </div>
               <button type="button" class="btn btn-default" onClick="location.href='BoardList'">돌아가기</button>
             </div>
@@ -152,10 +152,11 @@
  				
 <%--  				<button type="button" class="btn btn-default btn-xs" onClick="location.href='fn_replyDelete('<c:out value="${replylist.renum}"/>')'">삭제</button> --%>
 <%--  				<button type="button" class="btn btn-default btn-xs" onClick="location.href='fn_replyUpdate('<c:out value="${replylist.renum}"/>')'">수정</button> --%>
+
 				<a href="#"	onclick="fn_replyDelete('<c:out value="${replylist.renum}"/>')"><small>삭제</small></a> / 
 				<a href="#"	onclick="fn_replyUpdate('<c:out value="${replylist.renum}"/>')"><small>수정</small></a>
+			</c:if>	
 				
-				</c:if>
 				</div>
 				<br />
 				<div id="reply<c:out value="${replylist.renum}"/>">
