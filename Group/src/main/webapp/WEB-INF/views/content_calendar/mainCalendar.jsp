@@ -12,8 +12,8 @@ var date = ${iYear}${Month}${iTDay};
 
 $.ajax({
 	type:"POST",  
-    url:'${pageContext.request.contextPath}/calendar/dayList',      
-    data:
+    url:'${pageContext.request.contextPath}/calendar/dayList',
+    data : date,
     dataType : 'json',
     success:function(data){
     	var state =data.state;
@@ -51,6 +51,10 @@ $.ajax({
 							<th>내용</th>
 							<th>날짜</th>
 						</tr>
+						<c:forEach>
+						<tr>
+						</tr>
+						</c:forEach>
 						
 					</tbody>
 				</table></td>
