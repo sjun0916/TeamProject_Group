@@ -40,4 +40,8 @@ public class MessageService {
 		List<MessageVO> list = messageDao.getMessage(messageVo);
 		return list;
 	}
+	public List<MessageVO> getMessage2(MessageVO messageVo) {
+		List<MessageVO> list = messageDao.getMessage2(messageVo);
+		return list;
+	}
 }

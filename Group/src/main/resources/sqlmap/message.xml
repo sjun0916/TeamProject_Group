@@ -64,6 +64,24 @@
 		BY WRITEDATE DESC
 
 	</select>
+	<select id="getMessage2" resultType="messageVO" parameterType="UserVO">
+		SELECT RECEIVER_EMPLOYEE_NO receiverEmployeeNo,
+		SENDER_EMPLOYEE_NO senderEmployeeNo,
+		MESSAGE_ID MESSAGEID,
+		(
+		SELECT EMPLOYEE_NO
+		FROM EMPLOYEE
+		WHERE EMPLOYEE_NO = MESSAGE.SENDER_EMPLOYEE_NO) SENDER,
+		MESSAGE_CONTENT message,
+		WRITE_DATE WRITEDATE
+		FROM MESSAGE
+		WHERE RECEIVER_EMPLOYEE_NO = #{employeeNo} 
+		AND ROWNUM &lt;= 3
+		ORDER
+		BY WRITEDATE DESC
+
+	</select>
+	
 
 
 	<delete id="deleteMessage" parameterType="messageVO">
