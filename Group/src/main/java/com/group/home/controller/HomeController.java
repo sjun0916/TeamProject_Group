@@ -111,7 +111,7 @@ public class HomeController {
 			  iYear=iTYear;
 			  iMonth=iTMonth;
 		}
-		if(!option.isEmpty()) {
+		if(option != null) {
 			if(option.equals("prev")) {
 				if(iMonth==0) {
 					iMonth=11;
