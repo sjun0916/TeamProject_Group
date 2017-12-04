@@ -70,8 +70,7 @@
 							<div class="input-group-addon">
 								<i class="fa fa-clock-o"></i>
 							</div>
-							<input type="text" class="form-control pull-right"
-								id="reservationtime">
+							<input type="text" class="form-control pull-right" id="reservationtime1" name="Datetime">
 						</div>
 						<div class="form-group">
 							<label>내용</label>
@@ -86,8 +85,7 @@
 						<!-- /input-group -->
 					</div>
 				</div>
-				<button type="button" class="btn btn-block btn-info btn-lg"
-					onclick="submit();">일정 등록</button>
+				<button type="button" class="btn btn-block btn-info btn-lg"	onclick="submit();">일정 등록</button>
 			</div>
 			<!-- /.col -->
 			<div class="col-md-9">
@@ -119,11 +117,20 @@
               	<div class="form-group">
 					<label>분류 선택:</label>
 					<div class="form-group">
+						<c:choose>
+						<c:when test="${authUser.role == 'ADMIN' }">
 						<select name="kind" id="kind" disabled="">
-							<option value="person">개인</option>
+							<option value="person" selected>개인</option>
 							<option value="team">부서</option>
 							<option value="compony">회사</option>
 						</select>
+						</c:when>
+						<c:otherwise>
+						<select name="kind" id="kind" disabled="">
+							<option value="person" selected>개인</option>
+						</select>
+						</c:otherwise>
+						</c:choose>
 					</div>
                 <!-- /.input group -->
                 <div class="form-group">
@@ -132,7 +139,12 @@
                   <div class="input-group-addon">
                     <i class="fa fa-clock-o"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="reservationtime2" disabled="">
+                  <input type="text" class="form-control pull-right" id="reservationtime2" name="Datetime" disabled="">
+                  <input type="text" class="form-control pull-right" id="reservationtime3" name="Datetime" disabled="">
+                  <input type="hidden" class="form-control pull-right" id="reservationtime2_hidden" name="Datetime" disabled="">
+                  <input type="hidden" class="form-control pull-right" id="reservationtime3_hidden" name="Datetime" disabled="">
+                  
+                  
                 </div>
                 <!-- /.input group -->
               </div>
@@ -204,13 +216,17 @@ function calView(desc){
 			            }
 			            if(state="success"){
 				        	var dt1 = new Date(datainfo.calendar_start).format("MM/dd/yyyy hh:mm a/p");
+				        	dt1.split(" ");
 						    var dt2 = new Date(datainfo.calendar_end).format("MM/dd/yyyy hh:mm a/p");
 						    $('#myModal3 h4').text(datainfo.calendar_title); 
 							$('#myModal3 #title').val(datainfo.calendar_title);
 							$('#myModal3 #kind').val(datainfo.calendar_kind);
 							$('#myModal3 #settingcolor').val(datainfo.calendar_color); 
 							$('#myModal3 #settingbg').attr("style",'background-color:'+datainfo.calendar_color+';'); 
-							$('#myModal3 #reservationtime2').val(dt1+"-"+dt2); 
+							$('#myModal3 #reservationtime2').val(dt1);
+							$('#myModel3 #reservationtime2_hidden').val(dt1[1]+" "+dt1[2]);
+							$('#myModal3 #reservationtime3').val(dt2);
+							$('#myModel3 #reservationtime3_hidden').val(dt2[1]+" "+dt2[2]);
 							$('#myModal3 #cont').val(datainfo.calendar_cont); 
 							$('#myModal3 #etc').val(datainfo.calendar_remark);
 							$('#myModal3 #seq').val(datainfo.calendar_no); 
@@ -265,20 +281,24 @@ $(function() {
 	
 	//date picker
 	$('#reservation').daterangepicker();
-	//Date range picker with time picker
-	$('#reservationtime').daterangepicker({
+// 	Date range picker with time picker
+	
+ 	$('#reservationtime1').daterangepicker({
 		timePicker : true,
 		timePickerIncrement : 30,
 		format : 'YYYY/MM/DD/ h:mm A'
 	});
-	$('#reservationtime2').daterangepicker({
-		timePicker : true,
-		timePickerIncrement : 30,
-		format : 'YYYY/MM/DD/ h:mm A'
+	
+	$('#reservationtime2').datepicker({
+		altFormat: 'YYYY/MM/DD/'
 	});
+   	$('#reservationtime3').datepicker({
+   		altFormat: 'YYYY/MM/DD/'
+   	});
+	
 	//Date range as a button
 	
-	//Colorpicker
+	Colorpicker
 	$(".my-colorpicker1").colorpicker();		
 	$(".my-colorpicker2").colorpicker();
 	$('#datepicker').datepicker({
@@ -289,16 +309,16 @@ window.onload = function() {
 	$(".datepicker.datepicker-inline").hide();
 };
 function submit() {
-	alert("start submit");
 	// 			e.preventDefault();
 	// 			Get value and make sure it is not null
 	var kind = $("select[name=kind]").val();
+	
 //		var bgcode = $("#bgcolor").val();
-	var dateCode = $("#reservationtime").val();
+	var dateCode = $("#reservationtime1").val();
 	var title = $("#new-event").val();
 	var cont = $("#cont").val();
 	var etc = $("#etc").val();
-	var date = $("#reservationtime").val().split("-");
+	var date = $("#reservationtime1").val().split("-");
 	var htmlcode = '';
 //		var dateResult=/^(1\d{3}|201[0-9]|202[0-9])\/(0[1-9]|1[0-2])\/(0[1-9]|[1-2]\d|30)\/ (1[0-2]|[0-9])(:[0-5][0-9]){1} ([(A)|(P)][M])$/;
 	if(kind==""){
@@ -312,6 +332,7 @@ function submit() {
 		return false;
 	}
 	else{
+		
 		htmlcode += '<div id="mark" class="box box-default box-solid collapsed-box">';
 		htmlcode += '<div class="box-header with-border">';
 		htmlcode += '<h3 class="box-title">' + title+ '</h3>';
@@ -378,15 +399,17 @@ Date.prototype.format = function(f) {
 	    }
 	});
 };
-	 
 String.prototype.string = function(len){var s = '', i = 0; while (i++ < len) { s += this; } return s;};
 String.prototype.zf = function(len){return "0".string(len - this.length) + this;};
 Number.prototype.zf = function(len){return this.toString().zf(len);};
 function edit(){
+	
 	$('#myModal3 #settingcolor').removeAttr("disabled");
 	$('#myModal3 #kind').removeAttr("disabled");
-	$('#myModal3 #settingbg').removeAttr("disabled"); 
+	$('#myModal3 #settingbg').removeAttr("disabled");
 	$('#myModal3 #reservationtime2').removeAttr("disabled");
+	$('#myModal3 #reservationtime3').removeAttr("disabled");
+// 	$('#myModal3 #reservationtime2').attr("onclick", editDatepicker());
 	$('#myModal3 #cont').removeAttr("disabled");
 	$('#myModal3 #etc').removeAttr("disabled");
 	$('#myModal3 #modify').attr("onclick",'cummitEdit()');
@@ -398,8 +421,8 @@ function cummitEdit(){
 	var date = $(".example-modal #reservationtime2").val().split("-");
 	var url='${pageContext.request.contextPath}/calendar/update';
 	var calendar_no1=$(".example-modal #seq").val();
-	var calendar_start1=date[0];
-	var calendar_end1=date[1];
+	var calendar_start1=$(".example-modal #reservationtime2").val()+" "+$(".example-modal #reservationtime2_hidden").val();
+	var calendar_end1=$(".example-modal #reservationtime3").val()+" "+$(".example-modal #reservationtime3_hidden").val();
 	var calendar_title1=$(".example-modal #title").val();
 	var calendar_cont1=$(".example-modal #cont").val();
 	var calendar_remark1=$(".example-modal #etc").val();

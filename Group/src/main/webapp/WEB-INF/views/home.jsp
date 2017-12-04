@@ -13,9 +13,7 @@
 	href='<c:url value="assets/css/calendar.css"/>'>
 <script>
 	// 	calendar submit()
-	function goTo() {
-		document.getElementbyId("monthView").submit();
-	}
+	
 </script>
 </head>
 
@@ -66,7 +64,6 @@
 							<table class="table table-hover">
 					<tbody>
 						<tr>
-							<!-- <th><input type="checkbox" name="firstbox" id="checkAll" value="" /></th> -->
 							<th width="10%">서류번호</th>
 							<th width="35%">제목</th>
 							<th width="20%">작성일</th>
@@ -75,7 +72,6 @@
 						</tr>
 						<c:forEach items="${list2}" var="vo">
 							<tr id="${vo.REPORT_NO}">
-								<!-- <th><input type="checkbox" name="box" value="#" /></th> -->
 								<td>${vo.REPORT_NO}</td>
 								<td>${vo.REG_TITLE}</td>
 								<td>${vo.REG_DATE}</td>
@@ -379,7 +375,7 @@
 									<i class="fa fa-minus"></i>
 								</button>
 								<button type="button" class="btn btn-box-tool"
-									onclick="location.href='/group/'">
+									onclick="location.href='/group/calendar/main'">
 									more<i class="fa fa-chevron-circle-right"></i>
 								</button>
 							</div>
@@ -387,13 +383,28 @@
 						<!-- /.box-header -->
 						<div class="box-body">
 							<div class="row">
-								<form id="monthView" name="monthView">
-									<table class="tTable" width="100%">
+								<form id="monthView" name="monthView" action="home" method="post">
+									<input type="hidden" name="year" value="${iYear}">
+									<input type="hidden" name="month" value="${iMonth}">
+									<table class="tTable">
 										<tr>
 											<td><table class="tTable">
 													<tr>
+														<c:url value="/home" var="prevMonth">
+															<c:param name="iYear" value="${iYear}"/>
+															<c:param name="iMonth" value="${iMonth }"/>
+															<c:param name="option" value="prev"/>
+														</c:url>
+														<td><a href="${prevMonth}" ><input type="button" class="btn btn-dark" value="이전달" ></a></td>
 														<td class="tMonth"><h3>&nbsp;${iYear}년
 																${iMonth}월&nbsp;</h3></td>
+															<c:url value="/home" var="nextMonth">
+																<c:param name="iYear" value="${iYear}"/>
+																<c:param name="iMonth" value="${iMonth }"/>
+																<c:param name="option" value="next"/>
+															</c:url>
+														<td><a href="${nextMonth}" ><input type="button" class="btn btn-dark" value="다음달"></a></td>
+														
 													</tr>
 												</table></td>
 										<tr>
@@ -467,7 +478,7 @@
 							  <tr>
 							    <td><table>
 							      <tr>
-							      <td width="73%" rowspan="2" align="center"><h4><label>${iYear}년 ${iMonth}월 ${iTDay}일</label></h4></td>
+							      <td width="73%" rowspan="2" align="center"><h4><label>${iTYear}년 ${iTMonth}월 ${iTDay}일</label></h4></td>
 							      </tr>
 					    		</table></td>
 					  		</tr>
@@ -475,16 +486,16 @@
 							<tr>
 								<td><table>
 										<tbody>
-											<tr>
-												<th>분류</th>
-												<th>제목</th>
-												<th>내용</th>
-												<th>시작일</th>
-												<th>종료일</th>
-											</tr>
 											<c:choose>
-											<c:when test="${calList}==0">오늘 일정이 없습니다.</c:when>
-											<c:otherwise>
+												<c:when test="${calList==null}">오늘 일정이 없습니다.</c:when>
+												<c:otherwise>
+													<tr>
+														<th>분류</th>
+														<th>제목</th>
+														<th>내용</th>
+														<th>시작일</th>
+														<th>종료일</th>
+													</tr>
 												<c:forEach var="calList" items="${calList}" varStatus="status">
 													<tr>
 														<td><c:out value="${calList.calendar_kind}"/></td>
@@ -496,7 +507,6 @@
 												</c:forEach>
 											</c:otherwise>
 											</c:choose>
-											
 										</tbody>
 									</table></td>
 								</tr>
@@ -505,39 +515,13 @@
 
 					</div>
 
-
-					<div class="box box-fault">
-						<div class="box-header with-border">
-							<h3 class="box-title">?</h3>
-
-							<div class="box-tools pull-right">
-								<button type="button" class="btn btn-box-tool"
-									data-widget="collapse">
-									<i class="fa fa-minus"></i>
-								</button>
-								<button type="button" class="btn btn-box-tool"
-									onclick="location.href='/group/'">
-									more<i class="fa fa-chevron-circle-right"></i>
-								</button>
-							</div>
-						</div>
-						<!-- /.box-header -->
-						<div class="box-body">
-							
-						</div>
-						<!-- /.box-body -->
-
 					</div>
 					<!-- /.box -->
-
 
 					</div>
 
 				</div>
 				<!-- /.col -->
-
-
-
 
 			</div>
 			<!-- /.row -->

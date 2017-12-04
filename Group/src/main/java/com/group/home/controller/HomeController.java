@@ -93,31 +93,61 @@ public class HomeController {
 		request.setAttribute("list2",list2);
 		int waitCount = reportSvc.check2(authUser);
 		request.setAttribute("waitCount", waitCount);
-
-		//calendar
+		
+		int iYear=nullIntconv(request.getParameter("iYear"));
+		int iMonth=nullIntconv(request.getParameter("iMonth"))-1;
+		String option = request.getParameter("option");
+		System.out.println("option : "+option);
 		Calendar ca = new GregorianCalendar();
-
-		//calendar : today
+		
+		//today
+		int iTDay=ca.get(Calendar.DATE);
 		int iTYear=ca.get(Calendar.YEAR);
 		int iTMonth=ca.get(Calendar.MONTH);
-		int iTDay = ca.get(Calendar.DATE);
-		GregorianCalendar cal = new GregorianCalendar (iTYear, iTMonth, 1); 
+		
+		System.out.println("Today : "+iTYear+iTMonth+iTDay); //confirm
+		if(iYear==0)
+		{
+			  iYear=iTYear;
+			  iMonth=iTMonth;
+		}
+		if(option != null) {
+			if(option.equals("prev")) {
+				if(iMonth==0) {
+					iMonth=11;
+					iYear--;
+				}else
+				iMonth--;
+			}else if(option.equals("next")) {
+				if(iMonth==11) {
+					iMonth=0;
+					iYear++;
+				}else 
+				iMonth++;
+				
+			}
+		}
+		System.out.println("HomeCtl date : "+iYear+"/"+iMonth);
+		GregorianCalendar cal = new GregorianCalendar (iYear, iMonth, 1);
+		
+		
 
 		int days=cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 		int weekStartDay=cal.get(Calendar.DAY_OF_WEEK);
 		System.out.println("view info\n days : "+days+"\n WeekStartDay : "+weekStartDay); // confirm 
 
-		cal = new GregorianCalendar (iTYear, iTMonth, days);
+		cal = new GregorianCalendar (iYear, iMonth, days);
 		int iTotalweeks=cal.get(Calendar.WEEK_OF_MONTH);
 		
 		List<Calendar_Vo> todayList = getTodayList(iTYear, iTMonth, iTDay, authUser);
-
+		System.out.println("todayList : "+todayList);
 		request.setAttribute("weekStartDay", weekStartDay);
 		request.setAttribute("iTotalweeks", iTotalweeks);
 		request.setAttribute("days", days);
+		request.setAttribute("iYear", iYear);
+		request.setAttribute("iMonth", iMonth+1);
 		request.setAttribute("iTYear", iTYear);
-		request.setAttribute("iYear", iTYear);
-		request.setAttribute("iMonth", iTMonth+1);
+		request.setAttribute("iTMonth", iTMonth+1);
 		request.setAttribute("calList", todayList);
 		request.setAttribute("iTDay", iTDay);
 
@@ -153,28 +183,31 @@ public class HomeController {
 		return "redirect:/";
 	}
 	
+	public int nullIntconv(String inv)
+	{   
+		int conv=0;
+			
+		try{
+			System.out.println("nullIntconv_inv : "+inv); //confirm
+			conv=Integer.parseInt(inv);
+		}
+		catch(Exception e)
+		{}
+		return conv;
+	}
+	
 	public List<Calendar_Vo> getTodayList(int iYear, int iMonth, int iDay, UserVO user){
 		Date date = new Date(iYear-1900,iMonth,iDay);
 		
 		List<Calendar_Vo> tmpList = new ArrayList<Calendar_Vo>();
 		
-		try {
-			
-			System.out.println("User : "+user);	//confirm
-			System.out.println("Date : "+date);	//confirm
-				
+		try {	
 			List<Calendar_Vo> list = service.selectCalendarKind(user);
-			System.out.println("list size : "+list.size()); 	//confirm
 			if(!list.isEmpty()) {
 				Iterator<Calendar_Vo> it = list.iterator();
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 				while(it.hasNext()) {
 					Calendar_Vo temp = it.next();
-					System.out.println("today : "+date);
-					System.out.println("start : "+temp.getCalendar_start());
-					System.out.println("end : "+temp.getCalendar_end());
-					System.out.println("compareTo1 : "+temp.getCalendar_start().compareTo(date));
-					System.out.println("compareTo2 : "+temp.getCalendar_end().compareTo(date));
 					if(temp.getCalendar_start().compareTo(date)<=0) { 
 						if(temp.getCalendar_end().compareTo(date)>=0) {
 							if(temp.getCalendar_kind().equals("compony"))
@@ -188,20 +221,11 @@ public class HomeController {
 					}
 				}
 			}
-			System.out.println("dayList size : "+tmpList.size()); 	//confirm
 			
 //			jsonObject.put("data", list);
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-//		return jsonObject;
-		//comfirm
-		Iterator<Calendar_Vo> it = tmpList.iterator();
-		while(it.hasNext()) {
-			Calendar_Vo temp = it.next();
-			System.out.println(temp.getCalendar_title());
-			System.out.println(temp.getCalendar_start());
 		}
 		if(tmpList.isEmpty())
 			tmpList = null;
