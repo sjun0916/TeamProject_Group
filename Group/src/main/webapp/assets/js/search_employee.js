@@ -7,7 +7,7 @@ function initGrid() {
         //그리드 높이
         height: 500,
         //컬럼명들
-        colNames:['사번','이름', '소속', '직급','이메일','메세지 전송'],
+        colNames:['사번','이름', '소속', '직급','이메일','메세지'],
         //컬럼모델
         colModel:[
             {name:'employeeNo',align:"center"},
@@ -29,7 +29,7 @@ function initGrid() {
 // 버튼 생성
 function sendmessageButton (cellvalue, options, rowObject) {
 
-  return '<input type="button" id="sendMessageButton" onclick="openForm(\''+rowObject.email+'\')" value="메세지 보내기"/>';
+  return '<input type="button" id="sendMessageButton" onclick="openForm(\''+rowObject.email+'\')" value="쪽지보내기"/>';
 }
 
 

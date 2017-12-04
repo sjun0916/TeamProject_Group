@@ -56,7 +56,11 @@
 								<td>
 								<img src="\group\imgUpload\2017\<c:out value="${listview.realname}"/>" width="150" height="150" />
 								<br><a href="${link}"><c:out value="${listview.title}" /></a>
-								<br><c:out value="${listview.writer}"/></td>
+								<br>
+								<c:if test="${listview.departname!=null}">
+								[<c:out value="${listview.departname}"/>]
+								</c:if>
+								<c:out value="${listview.writer}"/></td>
 								<c:if test="${status.count%3 eq 0 || status.last}">
 							</tr>
 							</c:if>
@@ -66,7 +70,9 @@
 					</tbody>
 				</table>
 				<div class="box-footer">
+				<c:if test="${authUser.role == 'ADMIN'}">
                 <button type="button" class="btn btn-primary pull-right btn-sm" onclick="location.href='/group/PhotoForm'">사진등록</button>
+            	</c:if>
             	</div>
 				<table class="tmptable" width="100%">
 				<tr>

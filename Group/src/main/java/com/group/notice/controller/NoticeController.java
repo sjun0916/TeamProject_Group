@@ -11,10 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.group.board.common.FileUtil;
-import com.group.board.vo.FileVO;
+import com.group.board.common.FileUtil3;
 import com.group.board.vo.SearchVO;
 import com.group.notice.service.NoticeService;
+import com.group.notice.vo.FileVO;
 import com.group.notice.vo.NoticeVO;
 
 @Controller
@@ -64,9 +64,9 @@ public class NoticeController {
      */
     @RequestMapping(value = "/NoticeSave")
     public String noticeSave(HttpServletRequest request, NoticeVO noticeInfo) {
-        String[] filenum = request.getParameterValues("filenum");
+        String[] filenum = request.getParameterValues("noticefilenum");
         System.out.println(noticeInfo.getUploadfile());
-        FileUtil fs = new FileUtil();
+        FileUtil3 fs = new FileUtil3();
         List<FileVO> filelist = fs.saveAllFiles(noticeInfo.getUploadfile());
 
         noticeSvc.insertNotice(noticeInfo, filelist, filenum);

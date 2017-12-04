@@ -1,12 +1,3 @@
-<!-- code : 200 -->
-<!-- syntaxerror unexpected and of json input -->
-<!-- no conversion form text to array -->
-<!-- request processing failed nested exception is nullpointerException -->
-<!-- server encountered and -->
-
-<!-- loadHtml(this, this.action, 'result') -->
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -168,7 +159,6 @@
 <%@ include file="/WEB-INF/views/content_calendar/calendarScript.jsp" %>
 
 <script>
-
 function calView(desc){
 	
 	$('#calendar').fullCalendar(
@@ -182,13 +172,42 @@ function calView(desc){
 				today : 'today'
 			},
 			//Random default events
-			events : eval(desc),
+			events : '${pageContext.request.contextPath}/calendar/data',
+			//continue : kind 별 event load
+// 			events : function() {
+// 		          $.ajax({
+// 		              url: '${pageContext.request.contextPath}/calendar/data',
+// 		              data:$('input:checkbox[name="monthKind"]:checked').serialize(), 
+// 		              type: 'POST',
+// 		              dataType: 'json',
+// 		              contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+// // 		              timeout: 10000,               
+// 		              success: function(data) {
+// 		                  var events = [];
+// 		                  if(data != 'empty'){
+// 		                      $.each(data, function(key, val) {
+// 		                        //alert(val.start);
+// 		                          events.push({
+// 		                              no: val.no,
+// 		                              title: val.title,
+// 		                              start: val.startDate,
+// 		                              end: val.endDate,
+// 		                          });
+// 		                      });
+// 		                  }
+// 		                  //callback(events);
+// 		              },
+// 		              error:function(request, textStatus, errorThrown){
+// 		            	  alert("code : "+request.status+"\nmessage : "+request.requestText+"\nerror:"+errorThrown);
+// 		                alert('error: ' + textStatus);
+// 		              }
+// 		          });
+// 		     },
 			editable : false,
 			droppable : false, // this allows things to be dropped onto the calendar !!!
 			eventClick : function(calEvent, jsEvent, view) {
 // 				alert("fullcalendar.eventClick 실행");
 			   	$.ajax({    
-//			 		alert("fullcalendar.eventClick.ajax 실행");	//2
 			       	type:"POST",  
 			       	url:'${pageContext.request.contextPath}/calender/select',      
 			       	data:{"calendar_no":calEvent.description},
@@ -227,30 +246,29 @@ function calView(desc){
 		},
 	});		
 }
- 
-$(function chbCtl(){
-	if(sessionStorage.getItem("kindCom")=="checked"){
-		$('input:checkbox[id="kindcom"]').is(":checked") == true;
-	}else{
-		$('input:checkbox[id="kindcom"]').is(":checked") == false;
-	}
-	if(sessionStorage.getItem('kindTeam')=="checked"){
-		$('input:checkbox[id="kindteam"]').is(":checked") == true;
-	}else{
-		$('input:checkbox[id="kindteam"]').is(":checked") == false;
-	}
-	if(sessionStorage.getItem('kindPerson')=="checked"){
-		$('input:checkbox[id="kindperson"]').is(":checked") == true;
-	}else{
-		$('input:checkbox[id="kindperson"]').is(":checked") == false;
-	}
-});
+ //checkbox 유지
+// $(function chbCtl(){
+// 	if(sessionStorage.getItem("kindCom")=="checked"){
+// 		$('input:checkbox[id="kindcom"]').is(":checked") == true;
+// 	}else{
+// 		$('input:checkbox[id="kindcom"]').is(":checked") == false;
+// 	}
+// 	if(sessionStorage.getItem('kindTeam')=="checked"){
+// 		$('input:checkbox[id="kindteam"]').is(":checked") == true;
+// 	}else{
+// 		$('input:checkbox[id="kindteam"]').is(":checked") == false;
+// 	}
+// 	if(sessionStorage.getItem('kindPerson')=="checked"){
+// 		$('input:checkbox[id="kindperson"]').is(":checked") == true;
+// 	}else{
+// 		$('input:checkbox[id="kindperson"]').is(":checked") == false;
+// 	}
+// });
 $(function() {
 	/* initialize the external events
 	 -----------------------------------------------------------------*/
 	function ini_events(ele) {
 		ele.each(function() {
-			alert("ele.each 실행");
 			// create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
 			// it doesn't need to have a start or end
 			var eventObject = {
@@ -278,59 +296,61 @@ $(function() {
 	var d = date.getDate(), m = date.getMonth(), y = date.getFullYear();
 	calView();
 	//title에 checkbox 삽입 
-	var checkboxContainer = "<div class='ds-event-categories'>"+    
-		"<label><input name='monthKind' id='kindcom' type='checkbox' value='compony' "+sessionStorage.getItem("kindCom")+">회사</label>&nbsp;"+
-		"<label><input name='monthKind' id='kindteam' type='checkbox' value='team' "+sessionStorage.getItem("kindTeam")+">부서</label>&nbsp;"+
-		"<label><input name='monthKind' id='kindperson' type='checkbox' value='person' "+sessionStorage.getItem("kindPerson")+">개인</label>&nbsp;"+
-		"</div>";
-	// Append it to FullCalendar.
-	$(".fc-toolbar").after(checkboxContainer);
-	var ch_list=Array();
-	$("[name='monthKind']").change(function() {
-		alert("event");
-		if($('input:checkbox[id="kindcom"]').is(":checked")==true){
-			ch_list.push($(this).val());
-			sessionStorage.setItem('kindCom', 'checked');
-		}else{
-			sessionStorage.removeItem('kindCom');
-		};
-		if($('input:checkbox[id="kindteam"]').is(":checked")==true){
-			ch_list.push($(this).val());
-			sessionStorage.setItem('kindTeam', 'checked');
-		}else{
-			sessionStorage.removeItem('kindTeam');
-		};
-		if($('input:checkbox[id="kindperson"]').is(":checked")==true){
-			ch_list.push($(this).val());
-			sessionStorage.setItem('kindPerson', 'checked');
-		}else{
-			sessionStorage.removeItem('kindPerson');
-		};
-		$.ajax({
-			type:"POST",  
-		    url:'${pageContext.request.contextPath}/calendar/data',      
-		    data:$('input:checkbox[name="monthKind"]:checked').serialize(),
-		    success:function(data){   
-		    	alert("성공");
-		    	var jsonData = setCalendar(data.data);
-		    	calView(jsonData);
-		    }, 
-		    error:function(e){
-		     	alert("실패"); 
-		    }  
-		});
-	});
-	function setCalendar(data){
-		  var date = new Date();
-		  var d = date.getDate();
-		  var m = date.getMonth();
-		  var y = date.getFullYear();
-		  var jsonData = JSON.stringify(data);
-		  return jsonData;
-	}
+// 	var checkboxContainer = "<div class='ds-event-categories'>"+    
+// 		"<label><input name='monthKind' id='kindcom' type='checkbox' value='compony' "+sessionStorage.getItem("kindCom")+">회사</label>&nbsp;"+
+// 		"<label><input name='monthKind' id='kindteam' type='checkbox' value='team' "+sessionStorage.getItem("kindTeam")+">부서</label>&nbsp;"+
+// 		"<label><input name='monthKind' id='kindperson' type='checkbox' value='person' "+sessionStorage.getItem("kindPerson")+">개인</label>&nbsp;"+
+// 		"</div>";
+// 	// Append it to FullCalendar.
+// 	$(".fc-toolbar").after(checkboxContainer);
+// 	var ch_list=Array();
+// 	$("[name='monthKind']").change(function() {
+// 		alert("event");
+// 		if($('input:checkbox[id="kindcom"]').is(":checked")==true){
+// 			ch_list.push($(this).val());
+// 			sessionStorage.setItem('kindCom', 'checked');
+// 		}else{
+// 			sessionStorage.removeItem('kindCom');
+// 		};
+// 		if($('input:checkbox[id="kindteam"]').is(":checked")==true){
+// 			ch_list.push($(this).val());
+// 			sessionStorage.setItem('kindTeam', 'checked');
+// 		}else{
+// 			sessionStorage.removeItem('kindTeam');
+// 		};
+// 		if($('input:checkbox[id="kindperson"]').is(":checked")==true){
+// 			ch_list.push($(this).val());
+// 			sessionStorage.setItem('kindPerson', 'checked');
+// 		}else{
+// 			sessionStorage.removeItem('kindPerson');
+// 		};
+// 		$.ajax({
+// 			type:"POST",  
+// 		    url:'${pageContext.request.contextPath}/calendar/data',      
+// 		    data:$('input:checkbox[name="monthKind"]:checked').serialize(),
+// 		    dataType : "json",
+// 		    contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+// 		    success:function(data){   
+// 		    	alert("change 성공");
+// // 		    	var jsonData = setCalendar(data.data);
+		    	
+// 		    }, 
+// 		    error:function(e){
+// 		     	alert("실패"); 
+// 		     	alert("code : "+request.status+"\nmessage : "+request.requestText+"\nerror:"+errorThrown);
+// 		    }  
+// 		});
+// 	});
+// 	function setCalendar(data){
+// 		  var date = new Date();
+// 		  var d = date.getDate();
+// 		  var m = date.getMonth();
+// 		  var y = date.getFullYear();
+// 		  var jsonData = JSON.stringify(data).replace(/\\/gi, "");
+// 		  return jsonData;
+// 	}
 	/* ADDING EVENTS */
 	$(document).on("click", "#calenders", function() {
-		alert("document.on 실행");
 		$(this).parents("#mark").remove("");
 	});
 		
@@ -357,7 +377,6 @@ $(function() {
 	});
 });
 window.onload = function() {
-// 		alert("window.onload 실행");
 	$(".datepicker.datepicker-inline").hide();
 };
 function submit() {
@@ -410,14 +429,12 @@ function submit() {
 	oksign.click();
 }
 function loadHtml(form, action, targetid) {
-	alert("loadHtml 실행");
 	// 파라미터의 취득
 	var fm = $(form);
 	var param = {};
 	if(fm.contents().size()>3){
 		// 폼 내용을 배열로 변환
 		$(fm.serializeArray()).each(function(i, v) {
-			alert(v.value);
 			param[v.name] = v.value;
 			var test = $("#param[v.name]").text();
 		});
@@ -428,7 +445,6 @@ function loadHtml(form, action, targetid) {
 		return false;	
 	}
 }
-
 //when : event click
 Date.prototype.format = function(f) {
     if (!this.valueOf()) return " ";
@@ -468,7 +484,6 @@ function edit(){
 }
 function cummitEdit(){
 	//커밋 ajax구현 부분
-	alert("cummitEdit 실행");
 	var date = $(".example-modal #reservationtime2").val().split("-");
 	var url='${pageContext.request.contextPath}/calendar/update';
 	var calendar_no1=$(".example-modal #seq").val();
@@ -523,7 +538,6 @@ function disable(){
 }
 // 	삭제
 function remove(){
-	alert("remove 실행");
 	var url='${pageContext.request.contextPath}/calendar/delete';  
    	var calendar_no=$(".example-modal #seq").val();
 	$.ajax({

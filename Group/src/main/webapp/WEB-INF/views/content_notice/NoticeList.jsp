@@ -98,7 +98,9 @@
 					</tbody>
 				</table>
 				<div class="box-footer">
+				<c:if test="${authUser.role == 'ADMIN'}">
                 <button type="button" class="btn btn-primary pull-right btn-sm" onclick="location.href='/group/NoticeForm'">공지작성</button>
+            	</c:if>
             	</div>
 				<table class="tmptable" width="100%">
 				<tr>
@@ -107,7 +109,7 @@
 				<tr>
 					<td colspan="7" align="center">
 						<div>
-							<%-- <input type="hidden" name="category1" value="${searchVO.category1}"/>  --%>
+					
 							
 							<input type="checkbox" name="searchType" value="title" <c:if test="${fn:indexOf(searchVO.searchType, 'title')!=-1}">checked="checked"</c:if> />
 							

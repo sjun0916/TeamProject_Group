@@ -48,7 +48,7 @@ public class Calendar_Ajax {
 			}
 		}
 		System.out.println("calendar_ajax id : "+id);		//confirm
-		List<Calendar_Vo> listVo = service.selectCalenderKind(user, kind);
+		List<Calendar_Vo> listVo = service.selectCalendarKind(user);
 //		System.out.println("calendar_ajax listVo length : "+listVo.size()); //confirm
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String startDate = null;
@@ -65,7 +65,7 @@ public class Calendar_Ajax {
 				map.put("backgroundColor",vo.getCalendar_color());
 				map.put("borderColor",vo.getCalendar_color());
 				map.put("allDay", "false");
-				map.put("description",Integer.toString(vo.getCalendar_no()));
+				map.put("no",Integer.toString(vo.getCalendar_no()));
 				list.add(map);
 			}
 			System.out.println("ajax return list size : "+list.size());

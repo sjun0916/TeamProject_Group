@@ -36,7 +36,7 @@
 			<div class="col-xs-12">
 		<div class="box">
 			<div class="box-header">
-				<h3 class="box-title">메일함</h3>
+				<h3 class="box-title">Mail Box <small>(보낸 메일은 현재 서버에서만 확인 가능합니다)</small></h3>
 
 				<div class="box-tools" style="padding: 0px; text-align: right; float: left">
 
@@ -82,7 +82,7 @@
 						</c:when>
           			    <c:otherwise>
                    			 <tr>
-                        		<td colspan="5">수신한 메일이 존재하지 않습니다.</td>
+                        		<td colspan="5">발신한 메일이 존재하지 않습니다.</td>
                     		</tr>
                 		</c:otherwise>
             		</c:choose>

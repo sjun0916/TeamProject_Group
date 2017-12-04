@@ -12,7 +12,7 @@ import org.springframework.transaction.TransactionException;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
-import com.group.board.vo.FileVO;
+import com.group.notice.vo.FileVO;
 import com.group.board.vo.SearchVO;
 import com.group.notice.vo.NoticeVO;
 
@@ -56,7 +56,7 @@ public class NoticeService {
 	            
 	            if (filenum != null) {
 	                HashMap<String, String[]> fparam = new HashMap<String, String[]>();
-	                fparam.put("filenum", filenum);
+	                fparam.put("noticefilenum", filenum);
 	                sqlSession.insert("deleteNoticeFile", fparam);
 	            }
 	            
