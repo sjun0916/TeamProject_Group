@@ -41,7 +41,7 @@
 				<div class="col-md-12">
 					<div class="box">
 						<div class="box-header with-border">
-							<h3 class="box-title">결재함</h3>
+							<h3 class="box-title">Approval</h3>
 							
 							&emsp;<small>승인대기: <c:out value="${waitCount}"/></small>
 							
@@ -459,7 +459,7 @@
 
 					<div class="box box-fault">
 						<div class="box-header with-border">
-							<h3 class="box-title">오늘의 일정</h3>
+							<h3 class="box-title">Schedule for Today</h3>
 
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool"
