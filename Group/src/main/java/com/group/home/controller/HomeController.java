@@ -116,12 +116,15 @@ public class HomeController {
 				if(iMonth==0) {
 					iMonth=11;
 					iYear--;
-				}
+				}else
+				iMonth--;
 			}else if(option.equals("next")) {
 				if(iMonth==11) {
 					iMonth=0;
 					iYear++;
-				}
+				}else 
+				iMonth++;
+				
 			}
 		}
 		System.out.println("HomeCtl date : "+iYear+"/"+iMonth);
@@ -133,17 +136,18 @@ public class HomeController {
 		int weekStartDay=cal.get(Calendar.DAY_OF_WEEK);
 		System.out.println("view info\n days : "+days+"\n WeekStartDay : "+weekStartDay); // confirm 
 
-		cal = new GregorianCalendar (iTYear, iTMonth, days);
+		cal = new GregorianCalendar (iYear, iMonth, days);
 		int iTotalweeks=cal.get(Calendar.WEEK_OF_MONTH);
 		
 		List<Calendar_Vo> todayList = getTodayList(iTYear, iTMonth, iTDay, authUser);
-
+		System.out.println("todayList : "+todayList);
 		request.setAttribute("weekStartDay", weekStartDay);
 		request.setAttribute("iTotalweeks", iTotalweeks);
 		request.setAttribute("days", days);
-		request.setAttribute("iTYear", iYear);
-		request.setAttribute("iYear", iTYear);
+		request.setAttribute("iYear", iYear);
 		request.setAttribute("iMonth", iMonth+1);
+		request.setAttribute("iTYear", iTYear);
+		request.setAttribute("iTMonth", iTMonth+1);
 		request.setAttribute("calList", todayList);
 		request.setAttribute("iTDay", iTDay);
 

@@ -395,15 +395,15 @@
 															<c:param name="iMonth" value="${iMonth }"/>
 															<c:param name="option" value="prev"/>
 														</c:url>
-														<td><a href="${prevMonth}"><input type="button" class="prevBt" value="이전달" ></a></td>
+														<td><a href="${prevMonth}" ><input type="button" class="btn btn-dark" value="이전달" ></a></td>
 														<td class="tMonth"><h3>&nbsp;${iYear}년
 																${iMonth}월&nbsp;</h3></td>
 															<c:url value="/home" var="nextMonth">
-																<c:param name="year" value="${iYear}"/>
-																<c:param name="month" value="${iMonth }"/>
+																<c:param name="iYear" value="${iYear}"/>
+																<c:param name="iMonth" value="${iMonth }"/>
 																<c:param name="option" value="next"/>
 															</c:url>
-														<td><a href="${nextMonth}"><input type="button" class="nextBt" value="다음달"></a></td>
+														<td><a href="${nextMonth}" ><input type="button" class="btn btn-dark" value="다음달"></a></td>
 														
 													</tr>
 												</table></td>
@@ -478,7 +478,7 @@
 							  <tr>
 							    <td><table>
 							      <tr>
-							      <td width="73%" rowspan="2" align="center"><h4><label>${iYear}년 ${iMonth}월 ${iTDay}일</label></h4></td>
+							      <td width="73%" rowspan="2" align="center"><h4><label>${iTYear}년 ${iTMonth}월 ${iTDay}일</label></h4></td>
 							      </tr>
 					    		</table></td>
 					  		</tr>
@@ -487,7 +487,7 @@
 								<td><table>
 										<tbody>
 											<c:choose>
-												<c:when test="${calList}==null">오늘 일정이 없습니다.</c:when>
+												<c:when test="${calList==null}">오늘 일정이 없습니다.</c:when>
 												<c:otherwise>
 													<tr>
 														<th>분류</th>
@@ -515,39 +515,13 @@
 
 					</div>
 
-
-					<div class="box box-fault">
-						<div class="box-header with-border">
-							<h3 class="box-title">?</h3>
-
-							<div class="box-tools pull-right">
-								<button type="button" class="btn btn-box-tool"
-									data-widget="collapse">
-									<i class="fa fa-minus"></i>
-								</button>
-								<button type="button" class="btn btn-box-tool"
-									onclick="location.href='/group/'">
-									more<i class="fa fa-chevron-circle-right"></i>
-								</button>
-							</div>
-						</div>
-						<!-- /.box-header -->
-						<div class="box-body">
-							
-						</div>
-						<!-- /.box-body -->
-
 					</div>
 					<!-- /.box -->
-
 
 					</div>
 
 				</div>
 				<!-- /.col -->
-
-
-
 
 			</div>
 			<!-- /.row -->
