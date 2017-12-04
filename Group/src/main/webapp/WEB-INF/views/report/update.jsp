@@ -153,7 +153,7 @@ var title;
 							for (var i = 0; i < personnel; i++) {
 								htmlCode += '<div class="form-group">';
 								htmlCode += '<label>결재자' + (i + 1) + '</label>';
-								htmlCode += '<select name="reg_manager'+(i+1)+'" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">';
+								htmlCode += '<select name="regManager'+(i+1)+'" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">';
 								<c:forEach items="${userList}" var="vo">
 								htmlCode +='<option value="${vo.employeeNo}">[${vo.teamId}]${vo.employeeName}</option>';
 								</c:forEach>

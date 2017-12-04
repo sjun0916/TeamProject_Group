@@ -146,6 +146,7 @@ public class Calendar_Main {
 	@RequestMapping(value = "/calender/select",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> select(HttpServletRequest request,Calendar_Vo vo) {
 		System.out.println("main : selectOne");
+
 		System.out.println("1"+vo.getCalendar_no());
 		System.out.println("2"+vo.getCalendar_regid());
 		System.out.println("3"+vo.getCalendar_cont());
@@ -157,6 +158,7 @@ public class Calendar_Main {
 		System.out.println("9"+vo.getCalendar_end());
 		System.out.println("10"+vo.getCalendar_regdate());
 		System.out.println("11"+vo.getCalendar_start());
+
 		System.out.println("CalendarMain vo : "+vo);
 		System.out.println("main vo_num"+vo.getCalendar_no());
 		Calendar_Vo selectVo = service.selectCalendar(vo);
