@@ -465,6 +465,7 @@ function disable(){
 	$('#myModal3 #settingcolor').attr("disabled","");
 	$('#myModal3 #settingbg').attr("disabled",""); 
 	$('#myModal3 #reservationtime2').attr("disabled","");
+	$('#myModal3 #reservationtime3').attr("disabled","");
 	$('#myModal3 #cont').attr("disabled","");
 	$('#myModal3 #etc').attr("disabled","");
 	$('#myModal3 #delete').attr("type","button");
