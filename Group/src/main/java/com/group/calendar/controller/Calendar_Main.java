@@ -146,7 +146,6 @@ public class Calendar_Main {
 	@RequestMapping(value = "/calender/select",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> select(HttpServletRequest request,Calendar_Vo vo) {
 		System.out.println("main : selectOne");
-		System.out.println(vo.getCalendar_no());
 		System.out.println("CalendarMain vo : "+vo);
 		Calendar_Vo selectVo = service.selectCalendar(vo);
 		System.out.println("CalendarMain selectCalendar : "+selectVo);
