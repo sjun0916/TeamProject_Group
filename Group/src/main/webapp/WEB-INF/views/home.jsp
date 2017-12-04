@@ -66,7 +66,6 @@
 							<table class="table table-hover">
 					<tbody>
 						<tr>
-							<!-- <th><input type="checkbox" name="firstbox" id="checkAll" value="" /></th> -->
 							<th width="10%">서류번호</th>
 							<th width="35%">제목</th>
 							<th width="20%">작성일</th>
@@ -75,7 +74,6 @@
 						</tr>
 						<c:forEach items="${list2}" var="vo">
 							<tr id="${vo.REPORT_NO}">
-								<!-- <th><input type="checkbox" name="box" value="#" /></th> -->
 								<td>${vo.REPORT_NO}</td>
 								<td>${vo.REG_TITLE}</td>
 								<td>${vo.REG_DATE}</td>

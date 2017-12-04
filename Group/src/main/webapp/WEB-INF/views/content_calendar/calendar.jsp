@@ -119,11 +119,20 @@
               	<div class="form-group">
 					<label>분류 선택:</label>
 					<div class="form-group">
+						<c:choose>
+						<c:when test="${authUser.role == 'ADMIN' }">
 						<select name="kind" id="kind" disabled="">
-							<option value="person">개인</option>
+							<option value="person" selected>개인</option>
 							<option value="team">부서</option>
 							<option value="compony">회사</option>
 						</select>
+						</c:when>
+						<c:otherwise>
+						<select name="kind" id="kind" disabled="">
+							<option value="person" selected>개인</option>
+						</select>
+						</c:otherwise>
+						</c:choose>
 					</div>
                 <!-- /.input group -->
                 <div class="form-group">
