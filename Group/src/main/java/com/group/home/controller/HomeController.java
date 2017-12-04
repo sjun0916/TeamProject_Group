@@ -23,6 +23,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.group.approve.service.ReportService;
+import com.group.approve.vo.ReportVo;
 import com.group.board.service.BoardService;
 import com.group.calendar.service.Calendar_Service;
 import com.group.calendar.vo.Calendar_Vo;
@@ -48,6 +50,8 @@ public class HomeController {
 	private BoardService boardSvc;
 	@Autowired
 	private MessageService messageSvc;
+	@Autowired
+	private ReportService reportSvc;
 	@Resource(name = "calendar_Service")
 	Calendar_Service service;
 	
@@ -84,6 +88,11 @@ public class HomeController {
 				messageSvc.getMessage2( messageVo );
 		
 		model.addAttribute( "list", list );
+		//메인 결제
+		List<ReportVo> list2 = reportSvc.select2(authUser);
+		request.setAttribute("list2",list2);
+		int waitCount = reportSvc.check2(authUser);
+		request.setAttribute("waitCount", waitCount);
 
 		//calendar
 		Calendar ca = new GregorianCalendar();

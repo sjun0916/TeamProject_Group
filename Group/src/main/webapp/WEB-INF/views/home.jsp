@@ -43,7 +43,11 @@
 				<div class="col-md-12">
 					<div class="box">
 						<div class="box-header with-border">
-							<h3 class="box-title">Document Approval</h3>
+							<h3 class="box-title">결재함</h3>
+							<c:if test="${waitCount>0}">
+							&emsp;<small>승인대기: <c:out value="${waitCount}"/></small>
+							</c:if>
+						
 
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool"
@@ -51,14 +55,46 @@
 									<i class="fa fa-minus"></i>
 								</button>
 								<button type="button" class="btn btn-box-tool"
-									onclick="location.href='/group/'">
+									onclick="location.href='/group/report/state'">
 									more<i class="fa fa-chevron-circle-right"></i>
 								</button>
 							</div>
 						</div>
 						<!-- /.box-header -->
 						<div class="box-body">
-							<div class="row">내용</div>
+							<div class="row">
+							<table class="table table-hover">
+					<tbody>
+						<tr>
+							<!-- <th><input type="checkbox" name="firstbox" id="checkAll" value="" /></th> -->
+							<th width="10%">서류번호</th>
+							<th width="35%">제목</th>
+							<th width="20%">작성일</th>
+							<th width="15%">현황</th>
+							<th width="20%">사유</th>
+						</tr>
+						<c:forEach items="${list2}" var="vo">
+							<tr id="${vo.REPORT_NO}">
+								<!-- <th><input type="checkbox" name="box" value="#" /></th> -->
+								<td>${vo.REPORT_NO}</td>
+								<td>${vo.REG_TITLE}</td>
+								<td>${vo.REG_DATE}</td>
+								<td><c:if test="${vo.REG_STATE eq 0}">
+										<span class="label label-danger">반려됨</span>
+									</c:if> <c:if test="${vo.REG_STATE eq 1}">
+										<span class="label label-primary">등록 완료</span>
+									</c:if> <c:if test="${vo.REG_STATE eq 2}">
+										<span class="label label-warning">처리중</span>
+									</c:if> <c:if test="${vo.REG_STATE eq 3}">
+										<span class="label label-success">처리완료</span>
+									</c:if></td>
+								<td>${vo.REG_REASON}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+							
+							</div>
 						</div>
 					</div>
 				</div>
@@ -470,7 +506,6 @@
 
 					</div>
 
-<<<<<<< HEAD
 
 					<div class="box box-fault">
 						<div class="box-header with-border">
@@ -495,8 +530,7 @@
 
 					</div>
 					<!-- /.box -->
-=======
->>>>>>> branch 'master' of https://github.com:443/sjun0916/TeamProject_Group
+
 				</div>
 				<!-- /.col -->
 

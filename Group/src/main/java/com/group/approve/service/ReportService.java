@@ -31,10 +31,18 @@ public class ReportService {
 		List<ReportVo> list = dao.select(vo);
 		return list;
 	}
+	public List<ReportVo> select2(UserVO vo) {
+		List<ReportVo> list = dao.select2(vo);
+		return list;
+	}
 	
 	public List<ReportVo> check(UserVO vo) {
 		List<ReportVo> list = dao.check(vo);
 		return list;
+	}
+	public int check2(UserVO vo) {
+		int waitCount = dao.check2(vo);
+		return waitCount;
 	}
 	
 	public List<UserVO> getUser() {
