@@ -142,7 +142,7 @@
                 </c:when>
                 <c:otherwise>
                     <tr>
-                        <td colspan="6">수신한 쪽지가 존재하지 않습니다.</td>
+                        <td colspan="6">수신한 쪽지가 존재하지 않습니다</td>
                     </tr>
                 </c:otherwise>
             </c:choose>

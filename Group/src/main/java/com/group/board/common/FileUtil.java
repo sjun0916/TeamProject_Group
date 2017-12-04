@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.group.board.vo.FileVO;
 
+//Board
 public class FileUtil {
     /**
      * 파일 업로드.

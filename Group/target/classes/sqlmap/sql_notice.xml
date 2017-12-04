@@ -115,14 +115,14 @@
     </delete> 
 
     <!-- =============================================================================== -->
-    <select id="selectNoticeFileList" resultType="com.group.board.vo.FileVO" parameterType="String">
+    <select id="selectNoticeFileList" resultType="com.group.notice.vo.FileVO" parameterType="String">
         SELECT NOTICEFILENUM, FILENAME, REALNAME, FILESIZE
           FROM NOTICEFILE
          WHERE NOTICENUM=#{noticenum}
          ORDER BY NOTICEFILENUM DESC 
     </select> 
 
-    <insert id="insertNoticeFile" parameterType="com.group.board.vo.FileVO" >
+    <insert id="insertNoticeFile" parameterType="com.group.notice.vo.FileVO" >
         INSERT INTO NOTICEFILE (NOTICENUM, NOTICEFILENUM, FILENAME, REALNAME, FILESIZE)
         VALUES (#{parentPK}, NOTICEFILENUM_SEQ.NEXTVAL, #{filename}, #{realname}, #{filesize})
     </insert>
@@ -131,7 +131,7 @@
         DELETE 
           FROM NOTICEFILE
          WHERE NOTICEFILENUM IN (
-              <foreach item="item" index="index" collection="filenum" separator=",">
+              <foreach item="item" index="index" collection="noticefilenum" separator=",">
                      ${item}
               </foreach>  
         )             
