@@ -2,12 +2,16 @@ package com.group.home.controller;
 
 import java.net.InetAddress;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -19,7 +23,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.group.approve.service.ReportService;
+import com.group.approve.vo.ReportVo;
 import com.group.board.service.BoardService;
+import com.group.calendar.service.Calendar_Service;
+import com.group.calendar.vo.Calendar_Vo;
 import com.group.message.service.MessageService;
 import com.group.message.vo.MessageVO;
 import com.group.notice.service.NoticeService;
@@ -31,8 +39,7 @@ import com.group.user.vo.UserVO;
  * Handles requests for the application home page.
  */
 @Controller
-public class HomeController {
-
+public class HomeController {	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@Autowired
@@ -43,6 +50,11 @@ public class HomeController {
 	private BoardService boardSvc;
 	@Autowired
 	private MessageService messageSvc;
+	@Autowired
+	private ReportService reportSvc;
+	@Resource(name = "calendar_Service")
+	Calendar_Service service;
+	
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -76,28 +88,68 @@ public class HomeController {
 				messageSvc.getMessage2( messageVo );
 		
 		model.addAttribute( "list", list );
-
-		//calendar
+		//메인 결제
+		List<ReportVo> list2 = reportSvc.select2(authUser);
+		request.setAttribute("list2",list2);
+		int waitCount = reportSvc.check2(authUser);
+		request.setAttribute("waitCount", waitCount);
+		
+		int iYear=nullIntconv(request.getParameter("iYear"));
+		int iMonth=nullIntconv(request.getParameter("iMonth"))-1;
+		String option = request.getParameter("option");
+		System.out.println("option : "+option);
 		Calendar ca = new GregorianCalendar();
-
-		//calendar : today
+		
+		//today
+		int iTDay=ca.get(Calendar.DATE);
 		int iTYear=ca.get(Calendar.YEAR);
 		int iTMonth=ca.get(Calendar.MONTH);
-		GregorianCalendar cal = new GregorianCalendar (iTYear, iTMonth, 1); 
+		
+		System.out.println("Today : "+iTYear+iTMonth+iTDay); //confirm
+		if(iYear==0)
+		{
+			  iYear=iTYear;
+			  iMonth=iTMonth;
+		}
+		if(option != null) {
+			if(option.equals("prev")) {
+				if(iMonth==0) {
+					iMonth=11;
+					iYear--;
+				}else
+				iMonth--;
+			}else if(option.equals("next")) {
+				if(iMonth==11) {
+					iMonth=0;
+					iYear++;
+				}else 
+				iMonth++;
+				
+			}
+		}
+		System.out.println("HomeCtl date : "+iYear+"/"+iMonth);
+		GregorianCalendar cal = new GregorianCalendar (iYear, iMonth, 1);
+		
+		
 
 		int days=cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 		int weekStartDay=cal.get(Calendar.DAY_OF_WEEK);
 		System.out.println("view info\n days : "+days+"\n WeekStartDay : "+weekStartDay); // confirm 
 
-		cal = new GregorianCalendar (iTYear, iTMonth, days);
+		cal = new GregorianCalendar (iYear, iMonth, days);
 		int iTotalweeks=cal.get(Calendar.WEEK_OF_MONTH);
-
+		
+		List<Calendar_Vo> todayList = getTodayList(iTYear, iTMonth, iTDay, authUser);
+		System.out.println("todayList : "+todayList);
 		request.setAttribute("weekStartDay", weekStartDay);
 		request.setAttribute("iTotalweeks", iTotalweeks);
 		request.setAttribute("days", days);
+		request.setAttribute("iYear", iYear);
+		request.setAttribute("iMonth", iMonth+1);
 		request.setAttribute("iTYear", iTYear);
-		request.setAttribute("iYear", iTYear);
-		request.setAttribute("iMonth", iTMonth+1);
+		request.setAttribute("iTMonth", iTMonth+1);
+		request.setAttribute("calList", todayList);
+		request.setAttribute("iTDay", iTDay);
 
 		return "home";
 	}
@@ -129,5 +181,54 @@ public class HomeController {
 		session.invalidate();
 
 		return "redirect:/";
+	}
+	
+	public int nullIntconv(String inv)
+	{   
+		int conv=0;
+			
+		try{
+			System.out.println("nullIntconv_inv : "+inv); //confirm
+			conv=Integer.parseInt(inv);
+		}
+		catch(Exception e)
+		{}
+		return conv;
+	}
+	
+	public List<Calendar_Vo> getTodayList(int iYear, int iMonth, int iDay, UserVO user){
+		Date date = new Date(iYear-1900,iMonth,iDay);
+		
+		List<Calendar_Vo> tmpList = new ArrayList<Calendar_Vo>();
+		
+		try {	
+			List<Calendar_Vo> list = service.selectCalendarKind(user);
+			if(!list.isEmpty()) {
+				Iterator<Calendar_Vo> it = list.iterator();
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+				while(it.hasNext()) {
+					Calendar_Vo temp = it.next();
+					if(temp.getCalendar_start().compareTo(date)<=0) { 
+						if(temp.getCalendar_end().compareTo(date)>=0) {
+							if(temp.getCalendar_kind().equals("compony"))
+								temp.setCalendar_kind("회사");
+							else if(temp.getCalendar_kind().equals("team"))
+								temp.setCalendar_kind("부서");
+							else if(temp.getCalendar_kind().equals("person"))
+								temp.setCalendar_kind("개인");
+							tmpList.add(temp);
+						}
+					}
+				}
+			}
+			
+//			jsonObject.put("data", list);
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(tmpList.isEmpty())
+			tmpList = null;
+		return tmpList;
 	}
 }

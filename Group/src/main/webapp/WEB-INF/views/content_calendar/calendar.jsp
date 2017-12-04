@@ -40,11 +40,20 @@
 					</div>
 					<div class="form-group">
 						<label>분류 선택:</label>
+						<c:choose>
+						<c:when test="${authUser.role == 'ADMIN' }">
 						<select name="kind">
 							<option value="person" selected>개인</option>
 							<option value="team">부서</option>
 							<option value="compony">회사</option>
 						</select>
+						</c:when>
+						<c:otherwise>
+						<select name="kind">
+							<option value="person" selected>개인</option>
+						</select>
+						</c:otherwise>
+						</c:choose>
 					</div>
 					<label>제목</label>
 					<div class="input-group input-group-sm">
@@ -61,8 +70,7 @@
 							<div class="input-group-addon">
 								<i class="fa fa-clock-o"></i>
 							</div>
-							<input type="text" class="form-control pull-right"
-								id="reservationtime">
+							<input type="text" class="form-control pull-right" id="reservationtime1" name="Datetime">
 						</div>
 						<div class="form-group">
 							<label>내용</label>
@@ -77,8 +85,7 @@
 						<!-- /input-group -->
 					</div>
 				</div>
-				<button type="button" class="btn btn-block btn-info btn-lg"
-					onclick="submit();">일정 등록</button>
+				<button type="button" class="btn btn-block btn-info btn-lg"	onclick="submit();">일정 등록</button>
 			</div>
 			<!-- /.col -->
 			<div class="col-md-9">
@@ -110,11 +117,20 @@
               	<div class="form-group">
 					<label>분류 선택:</label>
 					<div class="form-group">
+						<c:choose>
+						<c:when test="${authUser.role == 'ADMIN' }">
 						<select name="kind" id="kind" disabled="">
-							<option value="person">개인</option>
+							<option value="person" selected>개인</option>
 							<option value="team">부서</option>
 							<option value="compony">회사</option>
 						</select>
+						</c:when>
+						<c:otherwise>
+						<select name="kind" id="kind" disabled="">
+							<option value="person" selected>개인</option>
+						</select>
+						</c:otherwise>
+						</c:choose>
 					</div>
                 <!-- /.input group -->
                 <div class="form-group">
@@ -123,7 +139,12 @@
                   <div class="input-group-addon">
                     <i class="fa fa-clock-o"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="reservationtime2" disabled="">
+                  <input type="text" class="form-control pull-right" id="reservationtime2" name="Datetime" disabled="">
+                  <input type="text" class="form-control pull-right" id="reservationtime3" name="Datetime" disabled="">
+                  <input type="hidden" class="form-control pull-right" id="reservationtime2_hidden" name="Datetime" disabled="">
+                  <input type="hidden" class="form-control pull-right" id="reservationtime3_hidden" name="Datetime" disabled="">
+                  
+                  
                 </div>
                 <!-- /.input group -->
               </div>
@@ -173,36 +194,7 @@ function calView(desc){
 			},
 			//Random default events
 			events : '${pageContext.request.contextPath}/calendar/data',
-			//continue : kind 별 event load
-// 			events : function() {
-// 		          $.ajax({
-// 		              url: '${pageContext.request.contextPath}/calendar/data',
-// 		              data:$('input:checkbox[name="monthKind"]:checked').serialize(), 
-// 		              type: 'POST',
-// 		              dataType: 'json',
-// 		              contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-// // 		              timeout: 10000,               
-// 		              success: function(data) {
-// 		                  var events = [];
-// 		                  if(data != 'empty'){
-// 		                      $.each(data, function(key, val) {
-// 		                        //alert(val.start);
-// 		                          events.push({
-// 		                              no: val.no,
-// 		                              title: val.title,
-// 		                              start: val.startDate,
-// 		                              end: val.endDate,
-// 		                          });
-// 		                      });
-// 		                  }
-// 		                  //callback(events);
-// 		              },
-// 		              error:function(request, textStatus, errorThrown){
-// 		            	  alert("code : "+request.status+"\nmessage : "+request.requestText+"\nerror:"+errorThrown);
-// 		                alert('error: ' + textStatus);
-// 		              }
-// 		          });
-// 		     },
+
 			editable : false,
 			droppable : false, // this allows things to be dropped onto the calendar !!!
 			eventClick : function(calEvent, jsEvent, view) {
@@ -210,7 +202,7 @@ function calView(desc){
 			   	$.ajax({    
 			       	type:"POST",  
 			       	url:'${pageContext.request.contextPath}/calender/select',      
-			       	data:{"calendar_no":calEvent.description},
+			       	data:{"calendar_no":calEvent.no},
 			       	dataType : 'json',
 			       	success:function(data){   
 			           	var state =data.state;
@@ -224,16 +216,21 @@ function calView(desc){
 			            }
 			            if(state="success"){
 				        	var dt1 = new Date(datainfo.calendar_start).format("MM/dd/yyyy hh:mm a/p");
+				        	dt1.split(" ");
 						    var dt2 = new Date(datainfo.calendar_end).format("MM/dd/yyyy hh:mm a/p");
 						    $('#myModal3 h4').text(datainfo.calendar_title); 
 							$('#myModal3 #title').val(datainfo.calendar_title);
 							$('#myModal3 #kind').val(datainfo.calendar_kind);
 							$('#myModal3 #settingcolor').val(datainfo.calendar_color); 
 							$('#myModal3 #settingbg').attr("style",'background-color:'+datainfo.calendar_color+';'); 
-							$('#myModal3 #reservationtime2').val(dt1+"-"+dt2); 
+							$('#myModal3 #reservationtime2').val(dt1);
+							$('#myModel3 #reservationtime2_hidden').val(dt1[1]+" "+dt1[2]);
+							$('#myModal3 #reservationtime3').val(dt2);
+							$('#myModel3 #reservationtime3_hidden').val(dt2[1]+" "+dt2[2]);
 							$('#myModal3 #cont').val(datainfo.calendar_cont); 
 							$('#myModal3 #etc').val(datainfo.calendar_remark);
 							$('#myModal3 #seq').val(datainfo.calendar_no); 
+							$('#myModal3 #modify').val("수정");
 							$('#myModal3').modal();
 			            }else{
 				        	alert("일정 불러오기를 실패하였습니다");
@@ -241,36 +238,17 @@ function calView(desc){
 			       }, 
 				   error:function(e){  
 				   		alert(e.responseText);  
-				   }  
+				   }
 			});
 		},
 	});		
 }
- //checkbox 유지
-// $(function chbCtl(){
-// 	if(sessionStorage.getItem("kindCom")=="checked"){
-// 		$('input:checkbox[id="kindcom"]').is(":checked") == true;
-// 	}else{
-// 		$('input:checkbox[id="kindcom"]').is(":checked") == false;
-// 	}
-// 	if(sessionStorage.getItem('kindTeam')=="checked"){
-// 		$('input:checkbox[id="kindteam"]').is(":checked") == true;
-// 	}else{
-// 		$('input:checkbox[id="kindteam"]').is(":checked") == false;
-// 	}
-// 	if(sessionStorage.getItem('kindPerson')=="checked"){
-// 		$('input:checkbox[id="kindperson"]').is(":checked") == true;
-// 	}else{
-// 		$('input:checkbox[id="kindperson"]').is(":checked") == false;
-// 	}
-// });
+
 $(function() {
 	/* initialize the external events
 	 -----------------------------------------------------------------*/
 	function ini_events(ele) {
 		ele.each(function() {
-			// create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-			// it doesn't need to have a start or end
 			var eventObject = {
 				title : $.trim($(this).text()),
 				value : $.trim($(this).html())
@@ -278,7 +256,6 @@ $(function() {
 			};
 			// store the Event Object in the DOM element so we can get to it later
 			$(this).data('eventObject', eventObject);
-			
 			// make the event draggable using jQuery UI
 			$(this).draggable({
 				zIndex : 1070,
@@ -295,81 +272,33 @@ $(function() {
 	var date = new Date();
 	var d = date.getDate(), m = date.getMonth(), y = date.getFullYear();
 	calView();
-	//title에 checkbox 삽입 
-// 	var checkboxContainer = "<div class='ds-event-categories'>"+    
-// 		"<label><input name='monthKind' id='kindcom' type='checkbox' value='compony' "+sessionStorage.getItem("kindCom")+">회사</label>&nbsp;"+
-// 		"<label><input name='monthKind' id='kindteam' type='checkbox' value='team' "+sessionStorage.getItem("kindTeam")+">부서</label>&nbsp;"+
-// 		"<label><input name='monthKind' id='kindperson' type='checkbox' value='person' "+sessionStorage.getItem("kindPerson")+">개인</label>&nbsp;"+
-// 		"</div>";
-// 	// Append it to FullCalendar.
-// 	$(".fc-toolbar").after(checkboxContainer);
-// 	var ch_list=Array();
-// 	$("[name='monthKind']").change(function() {
-// 		alert("event");
-// 		if($('input:checkbox[id="kindcom"]').is(":checked")==true){
-// 			ch_list.push($(this).val());
-// 			sessionStorage.setItem('kindCom', 'checked');
-// 		}else{
-// 			sessionStorage.removeItem('kindCom');
-// 		};
-// 		if($('input:checkbox[id="kindteam"]').is(":checked")==true){
-// 			ch_list.push($(this).val());
-// 			sessionStorage.setItem('kindTeam', 'checked');
-// 		}else{
-// 			sessionStorage.removeItem('kindTeam');
-// 		};
-// 		if($('input:checkbox[id="kindperson"]').is(":checked")==true){
-// 			ch_list.push($(this).val());
-// 			sessionStorage.setItem('kindPerson', 'checked');
-// 		}else{
-// 			sessionStorage.removeItem('kindPerson');
-// 		};
-// 		$.ajax({
-// 			type:"POST",  
-// 		    url:'${pageContext.request.contextPath}/calendar/data',      
-// 		    data:$('input:checkbox[name="monthKind"]:checked').serialize(),
-// 		    dataType : "json",
-// 		    contentType : "application/x-www-form-urlencoded;charset=UTF-8",
-// 		    success:function(data){   
-// 		    	alert("change 성공");
-// // 		    	var jsonData = setCalendar(data.data);
-		    	
-// 		    }, 
-// 		    error:function(e){
-// 		     	alert("실패"); 
-// 		     	alert("code : "+request.status+"\nmessage : "+request.requestText+"\nerror:"+errorThrown);
-// 		    }  
-// 		});
-// 	});
-// 	function setCalendar(data){
-// 		  var date = new Date();
-// 		  var d = date.getDate();
-// 		  var m = date.getMonth();
-// 		  var y = date.getFullYear();
-// 		  var jsonData = JSON.stringify(data).replace(/\\/gi, "");
-// 		  return jsonData;
-// 	}
-	/* ADDING EVENTS */
+	var lbContainer = $("<div class='lbContainer'><label style='background-color: #259613; color: #ffffff;'>회사</label>&nbsp;<label style='background-color: #efa110; color: #ffffff;'>부서</label>&nbsp;<label style='background-color: #2377ff; color: #ffffff;'>개인</label></div>");
+	$(".fc-right").append(lbContainer);
+	
 	$(document).on("click", "#calenders", function() {
 		$(this).parents("#mark").remove("");
 	});
-		
-	//Date range picker
+	
+	//date picker
 	$('#reservation').daterangepicker();
-	//Date range picker with time picker
-	$('#reservationtime').daterangepicker({
+// 	Date range picker with time picker
+	
+ 	$('#reservationtime1').daterangepicker({
 		timePicker : true,
 		timePickerIncrement : 30,
 		format : 'YYYY/MM/DD/ h:mm A'
 	});
-	$('#reservationtime2').daterangepicker({
-		timePicker : true,
-		timePickerIncrement : 30,
-		format : 'YYYY/MM/DD/ h:mm A'
+	
+	$('#reservationtime2').datepicker({
+		altFormat: 'YYYY/MM/DD/'
 	});
+   	$('#reservationtime3').datepicker({
+   		altFormat: 'YYYY/MM/DD/'
+   	});
+	
 	//Date range as a button
 	
-	//Colorpicker
+	Colorpicker
 	$(".my-colorpicker1").colorpicker();		
 	$(".my-colorpicker2").colorpicker();
 	$('#datepicker').datepicker({
@@ -383,12 +312,13 @@ function submit() {
 	// 			e.preventDefault();
 	// 			Get value and make sure it is not null
 	var kind = $("select[name=kind]").val();
+	
 //		var bgcode = $("#bgcolor").val();
-	var dateCode = $("#reservationtime").val();
+	var dateCode = $("#reservationtime1").val();
 	var title = $("#new-event").val();
 	var cont = $("#cont").val();
 	var etc = $("#etc").val();
-	var date = $("#reservationtime").val().split("-");
+	var date = $("#reservationtime1").val().split("-");
 	var htmlcode = '';
 //		var dateResult=/^(1\d{3}|201[0-9]|202[0-9])\/(0[1-9]|1[0-2])\/(0[1-9]|[1-2]\d|30)\/ (1[0-2]|[0-9])(:[0-5][0-9]){1} ([(A)|(P)][M])$/;
 	if(kind==""){
@@ -402,6 +332,7 @@ function submit() {
 		return false;
 	}
 	else{
+		
 		htmlcode += '<div id="mark" class="box box-default box-solid collapsed-box">';
 		htmlcode += '<div class="box-header with-border">';
 		htmlcode += '<h3 class="box-title">' + title+ '</h3>';
@@ -445,6 +376,7 @@ function loadHtml(form, action, targetid) {
 		return false;	
 	}
 }
+
 //when : event click
 Date.prototype.format = function(f) {
     if (!this.valueOf()) return " ";
@@ -467,15 +399,17 @@ Date.prototype.format = function(f) {
 	    }
 	});
 };
-	 
 String.prototype.string = function(len){var s = '', i = 0; while (i++ < len) { s += this; } return s;};
 String.prototype.zf = function(len){return "0".string(len - this.length) + this;};
 Number.prototype.zf = function(len){return this.toString().zf(len);};
 function edit(){
+	
 	$('#myModal3 #settingcolor').removeAttr("disabled");
 	$('#myModal3 #kind').removeAttr("disabled");
-	$('#myModal3 #settingbg').removeAttr("disabled"); 
+	$('#myModal3 #settingbg').removeAttr("disabled");
 	$('#myModal3 #reservationtime2').removeAttr("disabled");
+	$('#myModal3 #reservationtime3').removeAttr("disabled");
+// 	$('#myModal3 #reservationtime2').attr("onclick", editDatepicker());
 	$('#myModal3 #cont').removeAttr("disabled");
 	$('#myModal3 #etc').removeAttr("disabled");
 	$('#myModal3 #modify').attr("onclick",'cummitEdit()');
@@ -487,8 +421,8 @@ function cummitEdit(){
 	var date = $(".example-modal #reservationtime2").val().split("-");
 	var url='${pageContext.request.contextPath}/calendar/update';
 	var calendar_no1=$(".example-modal #seq").val();
-	var calendar_start1=date[0];
-	var calendar_end1=date[1];
+	var calendar_start1=$(".example-modal #reservationtime2").val()+" "+$(".example-modal #reservationtime2_hidden").val();
+	var calendar_end1=$(".example-modal #reservationtime3").val()+" "+$(".example-modal #reservationtime3_hidden").val();
 	var calendar_title1=$(".example-modal #title").val();
 	var calendar_cont1=$(".example-modal #cont").val();
 	var calendar_remark1=$(".example-modal #etc").val();
@@ -526,7 +460,7 @@ function cummitEdit(){
 }
 //when : cancel click
 function disable(){
-	$('#myModal3 .modal-footer #modify').text("수정");
+	$('#myModal3 .modal-footer #modify').val("수정");
 	$('#myModal3 #kind').attr("disabled","");
 	$('#myModal3 #settingcolor').attr("disabled","");
 	$('#myModal3 #settingbg').attr("disabled",""); 

@@ -8,7 +8,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Daum 에디터 - 등록화면 예제</title>
+    <title>결재 서류 에디터</title>
     <!--
         다음오픈에디터 사용 튜토리얼은 이 페이지로 대신합니다.
         추가적인 기능 개발 및 플러그인 개발 튜토리얼은 홈페이지를 확인해주세요.

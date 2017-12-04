@@ -48,7 +48,7 @@
 											
 											<div id="Personnel">
 												<div class="form-group">
-													<label>결재자1</label>
+													<label>결재자1</label>&nbsp;&nbsp;&nbsp; <small>[001]인사부 / [002]행정부 / [003]개발부 / [004]영업부</small>
 													<select class="form-control select2 select2-hidden-accessible" name="regManager1"
 														style="width: 100%;" tabindex="-1" aria-hidden="true">
 														<c:forEach items="${userList}" var="vo">
@@ -153,7 +153,7 @@ var title;
 							for (var i = 0; i < personnel; i++) {
 								htmlCode += '<div class="form-group">';
 								htmlCode += '<label>결재자' + (i + 1) + '</label>';
-								htmlCode += '<select name="reg_manager'+(i+1)+'" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">';
+								htmlCode += '<select name="regManager'+(i+1)+'" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">';
 								<c:forEach items="${userList}" var="vo">
 								htmlCode +='<option value="${vo.employeeNo}">[${vo.teamId}]${vo.employeeName}</option>';
 								</c:forEach>
