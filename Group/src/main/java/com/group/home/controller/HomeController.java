@@ -2,12 +2,16 @@ package com.group.home.controller;
 
 import java.net.InetAddress;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -20,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.group.board.service.BoardService;
+import com.group.calendar.service.Calendar_Service;
+import com.group.calendar.vo.Calendar_Vo;
 import com.group.message.service.MessageService;
 import com.group.message.vo.MessageVO;
 import com.group.notice.service.NoticeService;
@@ -31,8 +37,7 @@ import com.group.user.vo.UserVO;
  * Handles requests for the application home page.
  */
 @Controller
-public class HomeController {
-
+public class HomeController {	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@Autowired
@@ -43,6 +48,9 @@ public class HomeController {
 	private BoardService boardSvc;
 	@Autowired
 	private MessageService messageSvc;
+	@Resource(name = "calendar_Service")
+	Calendar_Service service;
+	
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -83,6 +91,7 @@ public class HomeController {
 		//calendar : today
 		int iTYear=ca.get(Calendar.YEAR);
 		int iTMonth=ca.get(Calendar.MONTH);
+		int iTDay = ca.get(Calendar.DATE);
 		GregorianCalendar cal = new GregorianCalendar (iTYear, iTMonth, 1); 
 
 		int days=cal.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -91,6 +100,8 @@ public class HomeController {
 
 		cal = new GregorianCalendar (iTYear, iTMonth, days);
 		int iTotalweeks=cal.get(Calendar.WEEK_OF_MONTH);
+		
+		List<Calendar_Vo> todayList = getTodayList(iTYear, iTMonth, iTDay, authUser);
 
 		request.setAttribute("weekStartDay", weekStartDay);
 		request.setAttribute("iTotalweeks", iTotalweeks);
@@ -98,6 +109,8 @@ public class HomeController {
 		request.setAttribute("iTYear", iTYear);
 		request.setAttribute("iYear", iTYear);
 		request.setAttribute("iMonth", iTMonth+1);
+		request.setAttribute("calList", todayList);
+		request.setAttribute("iTDay", iTDay);
 
 		return "home";
 	}
@@ -129,5 +142,60 @@ public class HomeController {
 		session.invalidate();
 
 		return "redirect:/";
+	}
+	
+	public List<Calendar_Vo> getTodayList(int iYear, int iMonth, int iDay, UserVO user){
+		Date date = new Date(iYear-1900,iMonth,iDay);
+		
+		List<Calendar_Vo> tmpList = new ArrayList<Calendar_Vo>();
+		
+		try {
+			
+			System.out.println("User : "+user);	//confirm
+			System.out.println("Date : "+date);	//confirm
+				
+			List<Calendar_Vo> list = service.selectCalendarKind(user);
+			System.out.println("list size : "+list.size()); 	//confirm
+			if(!list.isEmpty()) {
+				Iterator<Calendar_Vo> it = list.iterator();
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+				while(it.hasNext()) {
+					Calendar_Vo temp = it.next();
+					System.out.println("today : "+date);
+					System.out.println("start : "+temp.getCalendar_start());
+					System.out.println("end : "+temp.getCalendar_end());
+					System.out.println("compareTo1 : "+temp.getCalendar_start().compareTo(date));
+					System.out.println("compareTo2 : "+temp.getCalendar_end().compareTo(date));
+					if(temp.getCalendar_start().compareTo(date)<=0) { 
+						if(temp.getCalendar_end().compareTo(date)>=0) {
+							if(temp.getCalendar_kind().equals("compony"))
+								temp.setCalendar_kind("회사");
+							else if(temp.getCalendar_kind().equals("team"))
+								temp.setCalendar_kind("부서");
+							else if(temp.getCalendar_kind().equals("person"))
+								temp.setCalendar_kind("개인");
+							tmpList.add(temp);
+						}
+					}
+				}
+			}
+			System.out.println("dayList size : "+tmpList.size()); 	//confirm
+			
+//			jsonObject.put("data", list);
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		return jsonObject;
+		//comfirm
+		Iterator<Calendar_Vo> it = tmpList.iterator();
+		while(it.hasNext()) {
+			Calendar_Vo temp = it.next();
+			System.out.println(temp.getCalendar_title());
+			System.out.println(temp.getCalendar_start());
+		}
+		if(tmpList.isEmpty())
+			tmpList = null;
+		return tmpList;
 	}
 }

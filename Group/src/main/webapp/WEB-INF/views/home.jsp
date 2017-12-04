@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -411,7 +412,7 @@
 
 					<div class="box box-fault">
 						<div class="box-header with-border">
-							<h3 class="box-title">Weather</h3>
+							<h3 class="box-title">오늘의 일정</h3>
 
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool"
@@ -425,12 +426,77 @@
 							</div>
 						</div>
 						<!-- /.box-header -->
-						<div class="box-body">날씨api</div>
+						<div class="box-body">
+							<table class="scheduleTable">
+							  <tr>
+							    <td><table>
+							      <tr>
+							      <td width="73%" rowspan="2" align="center"><h4><label>${iYear}년 ${iMonth}월 ${iTDay}일</label></h4></td>
+							      </tr>
+					    		</table></td>
+					  		</tr>
+					<!--   		일정목록		 -->
+							<tr>
+								<td><table>
+										<tbody>
+											<tr>
+												<th>분류</th>
+												<th>제목</th>
+												<th>내용</th>
+												<th>시작일</th>
+												<th>종료일</th>
+											</tr>
+											<c:choose>
+											<c:when test="${calList}==0">오늘 일정이 없습니다.</c:when>
+											<c:otherwise>
+												<c:forEach var="calList" items="${calList}" varStatus="status">
+													<tr>
+														<td><c:out value="${calList.calendar_kind}"/></td>
+														<td><c:out value="${calList.calendar_title}"/></td>
+														<td><c:out value="${calList.calendar_cont}"/></td>
+														<td><fmt:formatDate value="${calList.calendar_start}" pattern="yyyy-MM-dd" /></td>
+														<td><fmt:formatDate value="${calList.calendar_end}" pattern="yyyy-MM-dd" /></td>
+													</tr>
+												</c:forEach>
+											</c:otherwise>
+											</c:choose>
+											
+										</tbody>
+									</table></td>
+								</tr>
+							</table></div>
 						<!-- /.box-body -->
 
 
 					</div>
 
+<<<<<<< HEAD
+
+					<div class="box box-fault">
+						<div class="box-header with-border">
+							<h3 class="box-title">?</h3>
+
+							<div class="box-tools pull-right">
+								<button type="button" class="btn btn-box-tool"
+									data-widget="collapse">
+									<i class="fa fa-minus"></i>
+								</button>
+								<button type="button" class="btn btn-box-tool"
+									onclick="location.href='/group/'">
+									more<i class="fa fa-chevron-circle-right"></i>
+								</button>
+							</div>
+						</div>
+						<!-- /.box-header -->
+						<div class="box-body">
+							
+						</div>
+						<!-- /.box-body -->
+
+					</div>
+					<!-- /.box -->
+=======
+>>>>>>> branch 'master' of https://github.com:443/sjun0916/TeamProject_Group
 				</div>
 				<!-- /.col -->
 

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,6 +28,7 @@ import com.group.user.vo.UserVO;
 public class Calendar_Main {
 	@Resource(name = "calendar_Service")
 	Calendar_Service service;
+	
 	@RequestMapping(value = "/calendar/main")
 	public String calendar(HttpServletRequest request) {
 		System.out.println("calendar");
@@ -169,27 +171,37 @@ public class Calendar_Main {
 		return jsonObject;
 	}
 	@RequestMapping(value = "/calender/daylist",method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> select(HttpServletRequest request, Date date) {
+	public @ResponseBody List<Calendar_Vo> select(HttpServletRequest request, Date date) {
 		System.out.println("main : selectDay");
-		Map<String, Object> jsonObject = new HashMap<String, Object>();
-		HttpSession session = request.getSession();
-		Calendar_Vo vo =new Calendar_Vo();		
+//		Map<String, Object> jsonObject = new HashMap<String, Object>();
+		List<Calendar_Vo> tmpList = new ArrayList<Calendar_Vo>();
+		HttpSession session = request.getSession();	
 		try {
 			UserVO user = (UserVO) session.getAttribute("authUser");
-			System.out.println("User : "+user);
-			System.out.println("Date : "+date);
-			List<Calendar_Vo> list = service.dayCalendarList(user, date);
-			System.out.println("list size : "+list.size());
-			Iterator<Calendar_Vo> it = list.iterator();
-			while(it.hasNext()) {
-				Calendar_Vo tmp = it.next();
-				tmp.getCalendar_no();
+			System.out.println("User : "+user);	//confrim
+			System.out.println("Date : "+date);	//confirm
+			
+			List<Calendar_Vo> list = service.selectCalendarKind(user);
+			System.out.println("list empty? :"+list.isEmpty());
+			System.out.println("list size : "+list.size()); 	//confirm
+			if(!list.isEmpty()) {
+				Iterator<Calendar_Vo> it = list.iterator();
+				while(it.hasNext()) {
+					Calendar_Vo temp = it.next();
+					if(temp.getCalendar_start().compareTo(date)<=0)
+						if(temp.getCalendar_end().compareTo(date)>=0)
+							tmpList.add(temp);
+				}
 			}
-			jsonObject.put("data", list);
+			System.out.println("list size : "+tmpList.size()); 	//confirm
+			
+//			jsonObject.put("data", list);
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return jsonObject;
+//		return jsonObject;
+		request.setAttribute("dayList", tmpList);
+		return tmpList;
 	}
 }

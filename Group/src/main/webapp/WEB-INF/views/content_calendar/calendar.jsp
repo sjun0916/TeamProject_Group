@@ -383,6 +383,7 @@ function submit() {
 	// 			e.preventDefault();
 	// 			Get value and make sure it is not null
 	var kind = $("select[name=kind]").val();
+	alert('${"authUser"}');
 //		var bgcode = $("#bgcolor").val();
 	var dateCode = $("#reservationtime").val();
 	var title = $("#new-event").val();
