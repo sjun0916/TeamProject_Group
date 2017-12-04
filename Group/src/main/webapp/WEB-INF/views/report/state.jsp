@@ -144,7 +144,7 @@
 							<dd>서류번호 위치</dd>
 							<dt>제출일</dt>
 							<dd>제출 날짜 위치</dd>
-							<dt>결제자1</dt>
+							<dt>결재자1</dt>
 							<dd>이름</dd>
 							<dd>날짜</dd>
 							<dt>기타사항</dt>
@@ -199,7 +199,7 @@
 						<dd>제목 위치</dd>
 						<dt>제출일</dt>
 						<dd>제출 날짜 위치</dd>
-						<dt>결제자1</dt>
+						<dt>결재자1</dt>
 						<dd>이름</dd>
 						<dd>날짜</dd>
 						<dt>기타사항</dt>
@@ -308,7 +308,7 @@
 												html += "</dd>";
 												if (v.regManager1
 														&& v.regUpdate1) {
-													html += "<dt>결제자1</dt>";
+													html += "<dt>결재자1</dt>";
 													html += "<dd>"
 															+ v.regManager1
 															+ "</dd>";
@@ -318,7 +318,7 @@
 												}
 												if (v.regManager2
 														&& v.regUpdate2) {
-													html += "<dt>결제자2</dt>";
+													html += "<dt>결재자2</dt>";
 													html += "<dd>"
 															+ v.regManager2
 															+ "</dd>";
@@ -328,7 +328,7 @@
 												}
 												if (v.regManager3
 														&& v.regUpdate3) {
-													html += "<dt>결제자3</dt>";
+													html += "<dt>결재자3</dt>";
 													html += "<dd>"
 															+ v.regManager3
 															+ "</dd>";
@@ -338,7 +338,7 @@
 												}
 												if (v.regManager4
 														&& v.regUpdate4) {
-													html += "<dt>결제자4</dt>";
+													html += "<dt>결재자4</dt>";
 													html += "<dd>"
 															+ v.regManager4
 															+ "</dd>";
@@ -348,7 +348,7 @@
 												}
 												if (v.regManager5
 														&& v.regUpdate5) {
-													html += "<dt>결제자5</dt>";
+													html += "<dt>결재자5</dt>";
 													html += "<dd>"
 															+ v.regManager5
 															+ "</dd>";
@@ -375,7 +375,7 @@
 											}
 										},
 										error : function(e) {
-											alert(e.responseText);
+											alert("제목을 눌러주세요.");
 										}
 									});
 						});

@@ -23,7 +23,7 @@
 		</ol>
 	</section>
 	<script>
-		function goTo()
+		function goTo() 
 		{
 		  document.getElementbyId("monthView").submit();
 		}

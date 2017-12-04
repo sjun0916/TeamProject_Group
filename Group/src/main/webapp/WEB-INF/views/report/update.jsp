@@ -30,7 +30,7 @@
 								<div class="box-header with-border">
 									<h4 class="box-title">
 										<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">
-											결제 절차 확인 </a>
+											결재 절차 확인 </a>
 									</h4>
 								</div>
 								<div id="collapseOne" class="panel-collapse collapse"
@@ -48,7 +48,7 @@
 											
 											<div id="Personnel">
 												<div class="form-group">
-													<label>결제자1</label>
+													<label>결재자1</label>
 													<select class="form-control select2 select2-hidden-accessible" name="regManager1"
 														style="width: 100%;" tabindex="-1" aria-hidden="true">
 														<c:forEach items="${userList}" var="vo">
@@ -65,7 +65,7 @@
 								<div class="box-header with-border">
 									<h4 class="box-title">
 										<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed" aria-expanded="false">
-											결제 서류 선택 </a>
+											결재 서류 선택 </a>
 									</h4>
 								</div>
 								<div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
@@ -152,8 +152,8 @@ var title;
 							var htmlCode = '';
 							for (var i = 0; i < personnel; i++) {
 								htmlCode += '<div class="form-group">';
-								htmlCode += '<label>결제자' + (i + 1) + '</label>';
-								htmlCode += '<select name="reg_manager'+(i+1)+'" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">';
+								htmlCode += '<label>결재자' + (i + 1) + '</label>';
+								htmlCode += '<select name="regManager'+(i+1)+'" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">';
 								<c:forEach items="${userList}" var="vo">
 								htmlCode +='<option value="${vo.employeeNo}">[${vo.teamId}]${vo.employeeName}</option>';
 								</c:forEach>
