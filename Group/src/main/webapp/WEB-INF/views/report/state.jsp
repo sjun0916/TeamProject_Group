@@ -375,7 +375,7 @@
 											}
 										},
 										error : function(e) {
-											alert(e.responseText);
+											alert("제목을 눌러주세요.");
 										}
 									});
 						});

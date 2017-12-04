@@ -25,9 +25,15 @@ public class ReportDao {
 	public List<ReportVo> select(UserVO vo) {
 		return client.selectList("report.select", vo);
 	}
+	public List<ReportVo> select2(UserVO vo) {
+		return client.selectList("report.select2", vo);
+	}
 
 	public List<ReportVo> check(UserVO vo) {
 		return client.selectList("report.check", vo);
+	}
+	public int check2(UserVO vo) {
+		return client.selectOne("report.check2", vo);
 	}
 
 	public List<UserVO> getUser() throws SQLException {

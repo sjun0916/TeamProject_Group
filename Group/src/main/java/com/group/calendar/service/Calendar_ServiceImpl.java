@@ -37,6 +37,7 @@ public class Calendar_ServiceImpl implements Calendar_Service {
 	@Override
 	public Calendar_Vo selectCalendar(Calendar_Vo vo) {
 		// TODO Auto-generated method stub
+		System.out.println("service vo_num : "+vo.getCalendar_no());
 		Calendar_Vo selectvo = null ;
 		try {
 			selectvo =dao.selectCalender(vo);

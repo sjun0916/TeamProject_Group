@@ -1,23 +1,30 @@
 package com.group.home.controller;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.group.calendar.controller.Calendar_Main;
+import com.group.calendar.service.Calendar_Service;
 import com.group.calendar.vo.Calendar_Vo;
+import com.group.user.vo.UserVO;
 
 @Controller
 public class CalendarCtl {
+	@Resource(name = "calendar_Service")
+	Calendar_Service service;
+	
 	public int nullIntconv(String inv)
 	{   
 		int conv=0;
@@ -34,7 +41,6 @@ public class CalendarCtl {
 	public String calendar(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("into /home/calendar");
 		response.setContentType("text/html;charset=UTF-8");
-		Calendar_Main main = new Calendar_Main();
 		int iYear=nullIntconv(request.getParameter("iYear"));
 		int iMonth=nullIntconv(request.getParameter("iMonth"))-1;
 		int iDay = nullIntconv(request.getParameter("iDay"));
@@ -53,6 +59,7 @@ public class CalendarCtl {
 			  iMonth=iTMonth;
 			  iDay = iTDay;
 		}
+		
 		Date date = new Date(iYear-1900,iMonth,iDay);
 		GregorianCalendar cal = new GregorianCalendar (iYear, iMonth, 1); 
 		
@@ -63,8 +70,34 @@ public class CalendarCtl {
 		cal = new GregorianCalendar (iYear, iMonth, days);
 		int iTotalweeks=cal.get(Calendar.WEEK_OF_MONTH);
 		
-		Map<String, Object> tmpMap = main.select(request, date);
-		List<Calendar_Vo> tmpList =(List<Calendar_Vo>) tmpMap.get("data");
+		List<Calendar_Vo> tmpList = new ArrayList<Calendar_Vo>();
+		HttpSession session = request.getSession();	
+		try {
+			UserVO user = (UserVO) session.getAttribute("authUser");
+			System.out.println("User : "+user);	//confrim
+			System.out.println("Date : "+date);	//confirm
+				
+			List<Calendar_Vo> list = service.selectCalendarKind(user);
+			System.out.println("list size : "+list.size()); 	//confirm
+			if(!list.isEmpty()) {
+				Iterator<Calendar_Vo> it = list.iterator();
+				while(it.hasNext()) {
+					Calendar_Vo temp = it.next();
+					
+					if(temp.getCalendar_start().compareTo(date)<=0) 
+						if(temp.getCalendar_end().compareTo(date)>=0) 
+							tmpList.add(temp);
+				}
+			}
+			System.out.println("dayList size : "+tmpList.size()); 	//confirm
+			
+//			jsonObject.put("data", list);
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		return jsonObject;
+		//comfirm
 		Iterator<Calendar_Vo> it = tmpList.iterator();
 		while(it.hasNext()) {
 			Calendar_Vo temp = it.next();

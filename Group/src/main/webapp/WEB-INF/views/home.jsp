@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -33,16 +34,20 @@
 
 		<section class="content">
 
-			<div
-				style="background-image: url('${pageContext.request.contextPath}/resources/icon/rian.jpg'); width:100%; height:300px;">
-				회사이미지 / 설명 등등</div>
-			<hr>
+<!-- 			<div -->
+<%-- 				style="background-image: url('${pageContext.request.contextPath}/resources/icon/rian.jpg'); width:100%; height:300px;"> --%>
+<!-- 				회사이미지 / 설명 등등</div> -->
+<!-- 			<hr> -->
 
 			<div class="row">
 				<div class="col-md-12">
 					<div class="box">
 						<div class="box-header with-border">
-							<h3 class="box-title">Document Approval</h3>
+							<h3 class="box-title">결재함</h3>
+							
+							&emsp;<small>승인대기: <c:out value="${waitCount}"/></small>
+							
+						
 
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool"
@@ -50,14 +55,46 @@
 									<i class="fa fa-minus"></i>
 								</button>
 								<button type="button" class="btn btn-box-tool"
-									onclick="location.href='/group/'">
+									onclick="location.href='/group/report/state'">
 									more<i class="fa fa-chevron-circle-right"></i>
 								</button>
 							</div>
 						</div>
 						<!-- /.box-header -->
 						<div class="box-body">
-							<div class="row">내용</div>
+							<div class="row">
+							<table class="table table-hover">
+					<tbody>
+						<tr>
+							<!-- <th><input type="checkbox" name="firstbox" id="checkAll" value="" /></th> -->
+							<th width="10%">서류번호</th>
+							<th width="35%">제목</th>
+							<th width="20%">작성일</th>
+							<th width="15%">현황</th>
+							<th width="20%">사유</th>
+						</tr>
+						<c:forEach items="${list2}" var="vo">
+							<tr id="${vo.REPORT_NO}">
+								<!-- <th><input type="checkbox" name="box" value="#" /></th> -->
+								<td>${vo.REPORT_NO}</td>
+								<td>${vo.REG_TITLE}</td>
+								<td>${vo.REG_DATE}</td>
+								<td><c:if test="${vo.REG_STATE eq 0}">
+										<span class="label label-danger">반려됨</span>
+									</c:if> <c:if test="${vo.REG_STATE eq 1}">
+										<span class="label label-primary">등록 완료</span>
+									</c:if> <c:if test="${vo.REG_STATE eq 2}">
+										<span class="label label-warning">처리중</span>
+									</c:if> <c:if test="${vo.REG_STATE eq 3}">
+										<span class="label label-success">처리완료</span>
+									</c:if></td>
+								<td>${vo.REG_REASON}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+							
+							</div>
 						</div>
 					</div>
 				</div>
@@ -157,15 +194,13 @@
 
 
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<!-- DIRECT CHAT -->
 							<div class="box box-warning direct-chat direct-chat-warning">
 								<div class="box-header with-border">
 									<h3 class="box-title">Board</h3>
 
 									<div class="box-tools pull-right">
-										<span data-toggle="tooltip" title="" class="badge bg-yellow"
-											data-original-title="3 New Messages">3</span>
 
 										<button type="button" class="btn btn-box-tool"
 											data-widget="collapse">
@@ -216,14 +251,13 @@
 						</div>
 						<!-- /.col -->
 
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<!-- USERS LIST -->
 							<div class="box box-danger">
 								<div class="box-header with-border">
 									<h3 class="box-title">Message</h3>
 
 									<div class="box-tools pull-right">
-										<span class="label label-danger">8 </span>
 										<button type="button" class="btn btn-box-tool"
 											data-widget="collapse">
 											<i class="fa fa-minus"></i>
@@ -240,8 +274,8 @@
 
 										<tr align="center">
 											<th width="20%">발신자(사원번호)</th>
-											<th width="40%">메세지 내용</th>
-											<th width="10%">수신시간</th>
+											<th width="50%">메세지 내용</th>
+											<th width="30%">수신시간</th>
 
 										</tr>
 										<c:choose>
@@ -412,9 +446,9 @@
 					<!-- /.box -->
 
 
-					<div class="box box-warning direct-chat direct-chat-warning">
+					<div class="box box-fault">
 						<div class="box-header with-border">
-							<h3 class="box-title">Weather</h3>
+							<h3 class="box-title">오늘의 일정</h3>
 
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool"
@@ -428,9 +462,46 @@
 							</div>
 						</div>
 						<!-- /.box-header -->
-						<div class="box-body">날씨api</div>
+						<div class="box-body">
+							<table class="scheduleTable">
+							  <tr>
+							    <td><table>
+							      <tr>
+							      <td width="73%" rowspan="2" align="center"><h4><label>${iYear}년 ${iMonth}월 ${iTDay}일</label></h4></td>
+							      </tr>
+					    		</table></td>
+					  		</tr>
+					<!--   		일정목록		 -->
+							<tr>
+								<td><table>
+										<tbody>
+											<tr>
+												<th>분류</th>
+												<th>제목</th>
+												<th>내용</th>
+												<th>시작일</th>
+												<th>종료일</th>
+											</tr>
+											<c:choose>
+											<c:when test="${calList}==0">오늘 일정이 없습니다.</c:when>
+											<c:otherwise>
+												<c:forEach var="calList" items="${calList}" varStatus="status">
+													<tr>
+														<td><c:out value="${calList.calendar_kind}"/></td>
+														<td><c:out value="${calList.calendar_title}"/></td>
+														<td><c:out value="${calList.calendar_cont}"/></td>
+														<td><fmt:formatDate value="${calList.calendar_start}" pattern="yyyy-MM-dd" /></td>
+														<td><fmt:formatDate value="${calList.calendar_end}" pattern="yyyy-MM-dd" /></td>
+													</tr>
+												</c:forEach>
+											</c:otherwise>
+											</c:choose>
+											
+										</tbody>
+									</table></td>
+								</tr>
+							</table></div>
 						<!-- /.box-body -->
-
 
 					</div>
 
@@ -451,11 +522,17 @@
 							</div>
 						</div>
 						<!-- /.box-header -->
-						<div class="box-body">?</div>
+						<div class="box-body">
+							
+						</div>
 						<!-- /.box-body -->
 
 					</div>
 					<!-- /.box -->
+
+
+					</div>
+
 				</div>
 				<!-- /.col -->
 
