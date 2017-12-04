@@ -470,33 +470,6 @@
 
 					</div>
 
-<<<<<<< HEAD
-
-					<div class="box box-fault">
-						<div class="box-header with-border">
-							<h3 class="box-title">?</h3>
-
-							<div class="box-tools pull-right">
-								<button type="button" class="btn btn-box-tool"
-									data-widget="collapse">
-									<i class="fa fa-minus"></i>
-								</button>
-								<button type="button" class="btn btn-box-tool"
-									onclick="location.href='/group/'">
-									more<i class="fa fa-chevron-circle-right"></i>
-								</button>
-							</div>
-						</div>
-						<!-- /.box-header -->
-						<div class="box-body">
-							
-						</div>
-						<!-- /.box-body -->
-
-					</div>
-					<!-- /.box -->
-=======
->>>>>>> branch 'master' of https://github.com:443/sjun0916/TeamProject_Group
 				</div>
 				<!-- /.col -->
 

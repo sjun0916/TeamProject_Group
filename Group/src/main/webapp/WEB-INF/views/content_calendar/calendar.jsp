@@ -206,7 +206,8 @@ function calView(desc){
 			editable : false,
 			droppable : false, // this allows things to be dropped onto the calendar !!!
 			eventClick : function(calEvent, jsEvent, view) {
-// 				alert("fullcalendar.eventClick 실행");
+				alert("fullcalendar.eventClick 실행");
+				alert("kind:"+calEvent.kind);
 			   	$.ajax({    
 			       	type:"POST",  
 			       	url:'${pageContext.request.contextPath}/calender/select',      
@@ -241,7 +242,7 @@ function calView(desc){
 			       }, 
 				   error:function(e){  
 				   		alert(e.responseText);  
-				   }  
+				   }
 			});
 		},
 	});		
@@ -380,10 +381,10 @@ window.onload = function() {
 	$(".datepicker.datepicker-inline").hide();
 };
 function submit() {
+	alert("start submit");
 	// 			e.preventDefault();
 	// 			Get value and make sure it is not null
 	var kind = $("select[name=kind]").val();
-	alert('${"authUser"}');
 //		var bgcode = $("#bgcolor").val();
 	var dateCode = $("#reservationtime").val();
 	var title = $("#new-event").val();
