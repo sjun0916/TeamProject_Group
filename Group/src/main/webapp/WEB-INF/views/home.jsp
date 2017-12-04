@@ -41,6 +41,7 @@
 					<div class="box">
 						<div class="box-header with-border">
 							<h3 class="box-title">Document Approval</h3>
+
 							
 							&emsp;&emsp;<span class="label label-danger">승인대기: <c:out value="${waitCount}"/></span>
 <%-- 							&emsp;<small>승인대기: <c:out value="${waitCount}"/></small> --%>
@@ -564,8 +565,6 @@
 
 						<!-- /.footer -->
 					</div>
-
-
 
 
 
