@@ -11,6 +11,7 @@
 	href='<c:url value="/resources/boardCSS/NoticeList.css"/>'>
 <link rel='stylesheet' type='text/css'
 	href='<c:url value="assets/css/calendar.css"/>'>
+	
 <script>
 	// 	calendar submit()
 	
@@ -26,16 +27,70 @@
 
 	<section class="content-header">
 
-
+		
 		<%-- 		<img src="${pageContext.request.contextPath}/resources/icon/rian.jpg" width="100%" height="300px"> --%>
 
 
 		<section class="content">
+		
+		
+			<div id="myCarousel" class="carousel slide" data-ride="carousel"> 
+	
+	<!--페이지-->
+	<ol class="carousel-indicators">
+		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		<li data-target="#myCarousel" data-slide-to="1"></li>
+		<li data-target="#myCarousel" data-slide-to="2"></li>
+		<li data-target="#myCarousel" data-slide-to="3"></li>
+	</ol>
+	<!--페이지-->
 
-			<div style="background-image: url('http://cdn.acus.kr/pyungkang/menu/1439799254929458.jpg'); width:100%; height:300px;">
+	<div class="carousel-inner">
+		<!--슬라이드1-->
+		<div class="item active"> 
+			<img src="http://cdn.acus.kr/pyungkang/menu/1439799254929458.jpg" style="width:100%; height:250px;" alt="First slide">
+			<div class="container">
+				<div class="carousel-caption">
+				</div>
 			</div>
-			<hr>
+		</div>
+		<!--슬라이드1-->
 
+		<!--슬라이드2-->
+		<div class="item"> 
+			<img src="http://samoeng.co.kr/introduction/img/banner.jpg" style="width:100%; height:250px;" data-src="" alt="Second slide">
+			<div class="container">
+				<div class="carousel-caption">
+				</div>
+			</div>
+		</div>
+		<!--슬라이드2-->
+		
+		<div class="item"> 
+			<img src="http://www.woosunginc.biz/default/img/pintbox/images/subimg_01.jpg" style="width:100%; height:250px;" data-src="" alt="Second slide">
+			<div class="container">
+				<div class="carousel-caption">
+				</div>
+			</div>
+		</div>
+		
+		<!--슬라이드3-->
+		<div class="item"> 
+			<img src="http://seeqlive.com/image/C_banner_1.png" style="width:100%; height:250px;" data-src="" alt="Third slide">
+			<div class="container">
+				<div class="carousel-caption">
+				</div>
+			</div>
+		</div>
+		<!--슬라이드3-->
+	</div>
+	
+	<!--이전, 다음 버튼-->
+	<a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> 
+	<a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a> 
+	</div>
+<hr>
+		
 			<div class="row">
 				<div class="col-md-12">
 					<div class="box">
