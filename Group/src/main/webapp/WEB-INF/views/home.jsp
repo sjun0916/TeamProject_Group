@@ -34,10 +34,10 @@
 
 		<section class="content">
 
-			<div
-				style="background-image: url('${pageContext.request.contextPath}/resources/icon/rian.jpg'); width:100%; height:300px;">
-				회사이미지 / 설명 등등</div>
-			<hr>
+<!-- 			<div -->
+<%-- 				style="background-image: url('${pageContext.request.contextPath}/resources/icon/rian.jpg'); width:100%; height:300px;"> --%>
+<!-- 				회사이미지 / 설명 등등</div> -->
+<!-- 			<hr> -->
 
 			<div class="row">
 				<div class="col-md-12">
@@ -158,15 +158,13 @@
 
 
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<!-- DIRECT CHAT -->
 							<div class="box box-warning direct-chat direct-chat-warning">
 								<div class="box-header with-border">
 									<h3 class="box-title">Board</h3>
 
 									<div class="box-tools pull-right">
-										<span data-toggle="tooltip" title="" class="badge bg-yellow"
-											data-original-title="3 New Messages">3</span>
 
 										<button type="button" class="btn btn-box-tool"
 											data-widget="collapse">
@@ -217,14 +215,13 @@
 						</div>
 						<!-- /.col -->
 
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<!-- USERS LIST -->
 							<div class="box box-danger">
 								<div class="box-header with-border">
 									<h3 class="box-title">Message</h3>
 
 									<div class="box-tools pull-right">
-										<span class="label label-danger">8 </span>
 										<button type="button" class="btn btn-box-tool"
 											data-widget="collapse">
 											<i class="fa fa-minus"></i>
@@ -241,8 +238,8 @@
 
 										<tr align="center">
 											<th width="20%">발신자(사원번호)</th>
-											<th width="40%">메세지 내용</th>
-											<th width="10%">수신시간</th>
+											<th width="50%">메세지 내용</th>
+											<th width="30%">수신시간</th>
 
 										</tr>
 										<c:choose>
@@ -413,7 +410,7 @@
 					<!-- /.box -->
 
 
-					<div class="box box-warning direct-chat direct-chat-warning">
+					<div class="box box-fault">
 						<div class="box-header with-border">
 							<h3 class="box-title">오늘의 일정</h3>
 
@@ -473,6 +470,7 @@
 
 					</div>
 
+<<<<<<< HEAD
 
 					<div class="box box-fault">
 						<div class="box-header with-border">
@@ -497,6 +495,8 @@
 
 					</div>
 					<!-- /.box -->
+=======
+>>>>>>> branch 'master' of https://github.com:443/sjun0916/TeamProject_Group
 				</div>
 				<!-- /.col -->
 
