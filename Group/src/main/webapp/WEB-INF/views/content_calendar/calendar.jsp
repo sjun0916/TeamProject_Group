@@ -40,11 +40,20 @@
 					</div>
 					<div class="form-group">
 						<label>분류 선택:</label>
+						<c:choose>
+						<c:when test="${authUser.role == 'ADMIN' }">
 						<select name="kind">
 							<option value="person" selected>개인</option>
 							<option value="team">부서</option>
 							<option value="compony">회사</option>
 						</select>
+						</c:when>
+						<c:otherwise>
+						<select name="kind">
+							<option value="person" selected>개인</option>
+						</select>
+						</c:otherwise>
+						</c:choose>
 					</div>
 					<label>제목</label>
 					<div class="input-group input-group-sm">
@@ -173,44 +182,21 @@ function calView(desc){
 			},
 			//Random default events
 			events : '${pageContext.request.contextPath}/calendar/data',
-			//continue : kind 별 event load
-// 			events : function() {
-// 		          $.ajax({
-// 		              url: '${pageContext.request.contextPath}/calendar/data',
-// 		              data:$('input:checkbox[name="monthKind"]:checked').serialize(), 
-// 		              type: 'POST',
-// 		              dataType: 'json',
-// 		              contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-// // 		              timeout: 10000,               
-// 		              success: function(data) {
-// 		                  var events = [];
-// 		                  if(data != 'empty'){
-// 		                      $.each(data, function(key, val) {
-// 		                        //alert(val.start);
-// 		                          events.push({
-// 		                              no: val.no,
-// 		                              title: val.title,
-// 		                              start: val.startDate,
-// 		                              end: val.endDate,
-// 		                          });
-// 		                      });
-// 		                  }
-// 		                  //callback(events);
-// 		              },
-// 		              error:function(request, textStatus, errorThrown){
-// 		            	  alert("code : "+request.status+"\nmessage : "+request.requestText+"\nerror:"+errorThrown);
-// 		                alert('error: ' + textStatus);
-// 		              }
-// 		          });
-// 		     },
+
 			editable : false,
 			droppable : false, // this allows things to be dropped onto the calendar !!!
 			eventClick : function(calEvent, jsEvent, view) {
+
+				alert("fullcalendar.eventClick 실행");
+				alert("kind:"+calEvent.kind);
+
+				alert("description : "+calEvent.no);
 // 				alert("fullcalendar.eventClick 실행");
+
 			   	$.ajax({    
 			       	type:"POST",  
 			       	url:'${pageContext.request.contextPath}/calender/select',      
-			       	data:{"calendar_no":calEvent.description},
+			       	data:{"calendar_no":calEvent.no},
 			       	dataType : 'json',
 			       	success:function(data){   
 			           	var state =data.state;
@@ -241,36 +227,17 @@ function calView(desc){
 			       }, 
 				   error:function(e){  
 				   		alert(e.responseText);  
-				   }  
+				   }
 			});
 		},
 	});		
 }
- //checkbox 유지
-// $(function chbCtl(){
-// 	if(sessionStorage.getItem("kindCom")=="checked"){
-// 		$('input:checkbox[id="kindcom"]').is(":checked") == true;
-// 	}else{
-// 		$('input:checkbox[id="kindcom"]').is(":checked") == false;
-// 	}
-// 	if(sessionStorage.getItem('kindTeam')=="checked"){
-// 		$('input:checkbox[id="kindteam"]').is(":checked") == true;
-// 	}else{
-// 		$('input:checkbox[id="kindteam"]').is(":checked") == false;
-// 	}
-// 	if(sessionStorage.getItem('kindPerson')=="checked"){
-// 		$('input:checkbox[id="kindperson"]').is(":checked") == true;
-// 	}else{
-// 		$('input:checkbox[id="kindperson"]').is(":checked") == false;
-// 	}
-// });
+
 $(function() {
 	/* initialize the external events
 	 -----------------------------------------------------------------*/
 	function ini_events(ele) {
 		ele.each(function() {
-			// create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-			// it doesn't need to have a start or end
 			var eventObject = {
 				title : $.trim($(this).text()),
 				value : $.trim($(this).html())
@@ -278,7 +245,6 @@ $(function() {
 			};
 			// store the Event Object in the DOM element so we can get to it later
 			$(this).data('eventObject', eventObject);
-			
 			// make the event draggable using jQuery UI
 			$(this).draggable({
 				zIndex : 1070,
@@ -295,61 +261,7 @@ $(function() {
 	var date = new Date();
 	var d = date.getDate(), m = date.getMonth(), y = date.getFullYear();
 	calView();
-	//title에 checkbox 삽입 
-// 	var checkboxContainer = "<div class='ds-event-categories'>"+    
-// 		"<label><input name='monthKind' id='kindcom' type='checkbox' value='compony' "+sessionStorage.getItem("kindCom")+">회사</label>&nbsp;"+
-// 		"<label><input name='monthKind' id='kindteam' type='checkbox' value='team' "+sessionStorage.getItem("kindTeam")+">부서</label>&nbsp;"+
-// 		"<label><input name='monthKind' id='kindperson' type='checkbox' value='person' "+sessionStorage.getItem("kindPerson")+">개인</label>&nbsp;"+
-// 		"</div>";
-// 	// Append it to FullCalendar.
-// 	$(".fc-toolbar").after(checkboxContainer);
-// 	var ch_list=Array();
-// 	$("[name='monthKind']").change(function() {
-// 		alert("event");
-// 		if($('input:checkbox[id="kindcom"]').is(":checked")==true){
-// 			ch_list.push($(this).val());
-// 			sessionStorage.setItem('kindCom', 'checked');
-// 		}else{
-// 			sessionStorage.removeItem('kindCom');
-// 		};
-// 		if($('input:checkbox[id="kindteam"]').is(":checked")==true){
-// 			ch_list.push($(this).val());
-// 			sessionStorage.setItem('kindTeam', 'checked');
-// 		}else{
-// 			sessionStorage.removeItem('kindTeam');
-// 		};
-// 		if($('input:checkbox[id="kindperson"]').is(":checked")==true){
-// 			ch_list.push($(this).val());
-// 			sessionStorage.setItem('kindPerson', 'checked');
-// 		}else{
-// 			sessionStorage.removeItem('kindPerson');
-// 		};
-// 		$.ajax({
-// 			type:"POST",  
-// 		    url:'${pageContext.request.contextPath}/calendar/data',      
-// 		    data:$('input:checkbox[name="monthKind"]:checked').serialize(),
-// 		    dataType : "json",
-// 		    contentType : "application/x-www-form-urlencoded;charset=UTF-8",
-// 		    success:function(data){   
-// 		    	alert("change 성공");
-// // 		    	var jsonData = setCalendar(data.data);
-		    	
-// 		    }, 
-// 		    error:function(e){
-// 		     	alert("실패"); 
-// 		     	alert("code : "+request.status+"\nmessage : "+request.requestText+"\nerror:"+errorThrown);
-// 		    }  
-// 		});
-// 	});
-// 	function setCalendar(data){
-// 		  var date = new Date();
-// 		  var d = date.getDate();
-// 		  var m = date.getMonth();
-// 		  var y = date.getFullYear();
-// 		  var jsonData = JSON.stringify(data).replace(/\\/gi, "");
-// 		  return jsonData;
-// 	}
-	/* ADDING EVENTS */
+
 	$(document).on("click", "#calenders", function() {
 		$(this).parents("#mark").remove("");
 	});
@@ -380,10 +292,10 @@ window.onload = function() {
 	$(".datepicker.datepicker-inline").hide();
 };
 function submit() {
+	alert("start submit");
 	// 			e.preventDefault();
 	// 			Get value and make sure it is not null
 	var kind = $("select[name=kind]").val();
-	alert('${"authUser"}');
 //		var bgcode = $("#bgcolor").val();
 	var dateCode = $("#reservationtime").val();
 	var title = $("#new-event").val();
