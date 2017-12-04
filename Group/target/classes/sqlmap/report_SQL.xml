@@ -55,6 +55,7 @@
 	  	)
  		and REG_STATE !=0
   		and REG_STATE !=3
+  		order by REPORT_NO desc
 	</select>
 	<select id="check2" parameterType="UserVO" resultType="int">
 		SELECT COUNT(*) from REPORT
@@ -91,6 +92,7 @@
 	  	)
  		and REG_STATE !=0
   		and REG_STATE !=3
+  		
 	</select>
 
 

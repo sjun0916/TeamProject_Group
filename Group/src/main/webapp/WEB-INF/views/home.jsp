@@ -44,9 +44,9 @@
 					<div class="box">
 						<div class="box-header with-border">
 							<h3 class="box-title">결재함</h3>
-							<c:if test="${waitCount>0}">
+							
 							&emsp;<small>승인대기: <c:out value="${waitCount}"/></small>
-							</c:if>
+							
 						
 
 							<div class="box-tools pull-right">
