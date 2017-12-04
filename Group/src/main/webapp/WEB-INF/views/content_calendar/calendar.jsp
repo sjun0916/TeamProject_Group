@@ -186,13 +186,7 @@ function calView(desc){
 			editable : false,
 			droppable : false, // this allows things to be dropped onto the calendar !!!
 			eventClick : function(calEvent, jsEvent, view) {
-
-				alert("fullcalendar.eventClick 실행");
-				alert("kind:"+calEvent.kind);
-
-				alert("description : "+calEvent.no);
 // 				alert("fullcalendar.eventClick 실행");
-
 			   	$.ajax({    
 			       	type:"POST",  
 			       	url:'${pageContext.request.contextPath}/calender/select',      
@@ -220,6 +214,7 @@ function calView(desc){
 							$('#myModal3 #cont').val(datainfo.calendar_cont); 
 							$('#myModal3 #etc').val(datainfo.calendar_remark);
 							$('#myModal3 #seq').val(datainfo.calendar_no); 
+							$('#myModal3 #modify').val("수정");
 							$('#myModal3').modal();
 			            }else{
 				        	alert("일정 불러오기를 실패하였습니다");
@@ -261,12 +256,14 @@ $(function() {
 	var date = new Date();
 	var d = date.getDate(), m = date.getMonth(), y = date.getFullYear();
 	calView();
-
+	var lbContainer = $("<div class='lbContainer'><label style='background-color: #259613; color: #ffffff;'>회사</label>&nbsp;<label style='background-color: #efa110; color: #ffffff;'>부서</label>&nbsp;<label style='background-color: #2377ff; color: #ffffff;'>개인</label></div>");
+	$(".fc-right").append(lbContainer);
+	
 	$(document).on("click", "#calenders", function() {
 		$(this).parents("#mark").remove("");
 	});
-		
-	//Date range picker
+	
+	//date picker
 	$('#reservation').daterangepicker();
 	//Date range picker with time picker
 	$('#reservationtime').daterangepicker({
@@ -358,6 +355,7 @@ function loadHtml(form, action, targetid) {
 		return false;	
 	}
 }
+
 //when : event click
 Date.prototype.format = function(f) {
     if (!this.valueOf()) return " ";
@@ -439,7 +437,7 @@ function cummitEdit(){
 }
 //when : cancel click
 function disable(){
-	$('#myModal3 .modal-footer #modify').text("수정");
+	$('#myModal3 .modal-footer #modify').val("수정");
 	$('#myModal3 #kind').attr("disabled","");
 	$('#myModal3 #settingcolor').attr("disabled","");
 	$('#myModal3 #settingbg').attr("disabled",""); 
