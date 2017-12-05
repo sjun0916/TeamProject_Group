@@ -8,6 +8,8 @@
 <head>
 <title>Smart-Groupware</title>
 <%@ include file="/WEB-INF/views/include/headerScript.jsp" %>
+<link rel="stylesheet" type="text/css" media="screen" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" type="text/css" media="screen" href="${pageContext.servletContext.contextPath}/assets/jqgrid/css/ui.jqgrid.css" />
 
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -79,7 +81,7 @@
       <label for="name">전송할 내용을 입력하세요</label>
       <input type="hidden" name="receiverEmployeeNo" id="receiverEmployeeNo">
       <input type="hidden" id="senderemployeeNo" value="${authUser.employeeNo}">
- 	  <textarea id = "messageArea" rows="15" cols="48" name="contents"></textarea>
+ 	  <textarea id = "messageArea" rows="12" cols="41" name="contents"></textarea>
       <!-- Allow form submission with keyboard without duplicating the dialog button -->
       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
     </fieldset>
