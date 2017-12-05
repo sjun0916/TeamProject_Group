@@ -175,10 +175,10 @@
 									class="fa fa-circle-o"></i> 결재작성</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/report/state"><i
-									class="fa fa-circle-o"></i> 결재함</a></li>
+									class="fa fa-circle-o"></i> 결재요청</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/report/waiting"><i
-									class="fa fa-circle-o"></i> 승인대기</a></li>
+									class="fa fa-circle-o"></i> 결재대기</a></li>
 						</ul></li>
 
 					<li class="treeview"><a href="#"> <i
