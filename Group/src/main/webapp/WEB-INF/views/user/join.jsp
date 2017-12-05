@@ -46,18 +46,7 @@ function joinCheck(){
 		document.loginform.email.focus();
 		return false;
 	}
-	
-<<<<<<< HEAD
-=======
-	var regex=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
-	 
-	if(regex.test(document.loginform.email.value) === false) {
-		alert("잘못된 이메일 형식입니다. 구글 이메일을 입력해 주세요.");
-		document.loginform.email.focus();
-		return
-	}
-	 
->>>>>>> branch 'master' of https://github.com/sjun0916/TeamProject_Group.git
+
 	if(document.loginform.password.value==""){
 		alert("비밀번호를 입력해 주세요.");
 		document.loginform.password.focus();
@@ -116,6 +105,12 @@ function joinCheck(){
         </div>
         </div>
         <div class="form-group">
+            <label class="col-sm-3 control-label" for="employeeName">이름</label>
+          <div class="col-sm-6">
+            <input class="form-control" id="employeeName" name="employeeName" type="text" placeholder="이름">
+          </div>
+        </div>
+        <div class="form-group">
           <label class="col-sm-3 control-label" for="email">이메일</label>
         <div class="col-sm-6">
           <input class="form-control" id="email" name="email" type="email" placeholder="구글 이메일">
@@ -127,12 +122,6 @@ function joinCheck(){
           <input class="form-control" id="password" name="password" type="password" placeholder="비밀번호">
         <p class="help-block">숫자, 특수문자 포함 8자 이상</p>
         </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label" for="employeeName">이름</label>
-          <div class="col-sm-6">
-            <input class="form-control" id="employeeName" name="employeeName" type="text" placeholder="이름">
-          </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label" for="positionId">직급</label>
