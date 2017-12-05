@@ -117,20 +117,20 @@
               	<div class="form-group">
 					<label>분류 선택:</label>
 					<div class="form-group-select">
-						<c:choose>
-						<c:when test="${authUser.role == 'ADMIN' }">
-						<select name="kind">
+<%-- 						<c:choose> --%>
+<%-- 						<c:when test="${authUser.role == 'ADMIN' }"> --%>
+						<select id="kind" disabled="">
 							<option value="person" selected>개인</option>
 							<option value="team">부서</option>
 							<option value="compony">회사</option>
 						</select>
-						</c:when>
-						<c:otherwise>
-						<select name="kind">
-							<option value="person" selected>개인</option>
-						</select>
-						</c:otherwise>
-						</c:choose>
+<%-- 						</c:when> --%>
+<%-- 						<c:otherwise> --%>
+<!-- 						<select name="kind" disabled=""> -->
+<!-- 							<option value="person" selected>개인</option> -->
+<!-- 						</select> -->
+<%-- 						</c:otherwise> --%>
+<%-- 						</c:choose> --%>
 					</div>
                 <!-- /.input group -->
                 <div class="form-group">
@@ -409,9 +409,11 @@ String.prototype.string = function(len){var s = '', i = 0; while (i++ < len) { s
 String.prototype.zf = function(len){return "0".string(len - this.length) + this;};
 Number.prototype.zf = function(len){return this.toString().zf(len);};
 function edit(){
-	
+	var userValue = "${authUser.role}";
 	$('#myModal3 #settingcolor').removeAttr("disabled");
-	$('#myModal3 #kind').removeAttr("disabled");
+	if(userValue=="ADMIN"){
+		$('#myModal3 #kind').removeAttr("disabled");
+	}
 	$('#myModal3 #settingbg').removeAttr("disabled");
 	$('#myModal3 #reservationtime2').removeAttr("disabled");
 	$('#myModal3 #reservationtime3').removeAttr("disabled");
