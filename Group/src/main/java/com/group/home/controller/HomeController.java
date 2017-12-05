@@ -94,6 +94,9 @@ public class HomeController {
 		int waitCount = reportSvc.check2(authUser);
 		request.setAttribute("waitCount", waitCount);
 		
+		/*---------------------------------------------------
+		 * 메인 달력
+		 ---------------------------------------------------*/
 		int iYear=nullIntconv(request.getParameter("iYear"));
 		int iMonth=nullIntconv(request.getParameter("iMonth"))-1;
 		String option = request.getParameter("option");
@@ -105,7 +108,6 @@ public class HomeController {
 		int iTYear=ca.get(Calendar.YEAR);
 		int iTMonth=ca.get(Calendar.MONTH);
 		
-		System.out.println("Today : "+iTYear+iTMonth+iTDay); //confirm
 		if(iYear==0)
 		{
 			  iYear=iTYear;
@@ -123,24 +125,19 @@ public class HomeController {
 					iMonth=0;
 					iYear++;
 				}else 
-				iMonth++;
-				
+				iMonth++;		
 			}
 		}
-		System.out.println("HomeCtl date : "+iYear+"/"+iMonth);
 		GregorianCalendar cal = new GregorianCalendar (iYear, iMonth, 1);
-		
-		
 
 		int days=cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 		int weekStartDay=cal.get(Calendar.DAY_OF_WEEK);
-		System.out.println("view info\n days : "+days+"\n WeekStartDay : "+weekStartDay); // confirm 
 
 		cal = new GregorianCalendar (iYear, iMonth, days);
 		int iTotalweeks=cal.get(Calendar.WEEK_OF_MONTH);
 		
 		List<Calendar_Vo> todayList = getTodayList(iTYear, iTMonth, iTDay, authUser);
-		System.out.println("todayList : "+todayList);
+		
 		request.setAttribute("weekStartDay", weekStartDay);
 		request.setAttribute("iTotalweeks", iTotalweeks);
 		request.setAttribute("days", days);
@@ -150,7 +147,7 @@ public class HomeController {
 		request.setAttribute("iTMonth", iTMonth+1);
 		request.setAttribute("calList", todayList);
 		request.setAttribute("iTDay", iTDay);
-
+		
 		return "home";
 	}
 
@@ -182,7 +179,9 @@ public class HomeController {
 
 		return "redirect:/";
 	}
-	
+	/*-----------------------------------------------------------------
+	 * String -> int 변환
+	 ------------------------------------------------------------------*/
 	public int nullIntconv(String inv)
 	{   
 		int conv=0;
@@ -196,9 +195,11 @@ public class HomeController {
 		return conv;
 	}
 	
+	/*-----------------------------------------------------------------------
+	 * 메인 오늘 일정 출력 
+	 -----------------------------------------------------------------------*/
 	public List<Calendar_Vo> getTodayList(int iYear, int iMonth, int iDay, UserVO user){
 		Date date = new Date(iYear-1900,iMonth,iDay);
-		
 		List<Calendar_Vo> tmpList = new ArrayList<Calendar_Vo>();
 		
 		try {	
@@ -221,8 +222,6 @@ public class HomeController {
 					}
 				}
 			}
-			
-//			jsonObject.put("data", list);
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
