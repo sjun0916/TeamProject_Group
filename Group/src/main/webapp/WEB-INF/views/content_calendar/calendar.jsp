@@ -116,21 +116,12 @@
               	<div class="form-group">
               	<div class="form-group">
 					<label>분류 선택:</label>
-					<div class="form-group">
-						<c:choose>
-						<c:when test="${authUser.role == 'ADMIN' }">
+					<div class="form-group-select">
 						<select name="kind" id="kind" disabled="">
 							<option value="person" selected>개인</option>
-							<option value="team">부서</option>
-							<option value="compony">회사</option>
+							<option value="person">부서</option>
+							<option value="person">회사</option>
 						</select>
-						</c:when>
-						<c:otherwise>
-						<select name="kind" id="kind" disabled="">
-							<option value="person" selected>개인</option>
-						</select>
-						</c:otherwise>
-						</c:choose>
 					</div>
                 <!-- /.input group -->
                 <div class="form-group">
@@ -159,9 +150,9 @@
                   <input type="hidden" id="title" >
                 </div>
               </div>
-              <div class="modal-footer"> 
+              <div class="modal-footer">               
                 <input type="button" style="width: 25%" id="modify" class="btn btn-primary" onclick="edit()" value="수정">
-                <input type="button" style="width: 25%" id="delte" class="btn btn-primary" onclick="remove()" value="삭제" />
+                <input type="button" style="width: 25%" id="delete" class="btn btn-primary" onclick="remove()" value="삭제" />
                 <button type="button" style="width: 25%" class="btn btn-secondary" data-dismiss="modal" onclick="disable()" >닫기</button>
              
               </div>
@@ -180,6 +171,9 @@
 <%@ include file="/WEB-INF/views/content_calendar/calendarScript.jsp" %>
 
 <script>
+// function getSession(){
+<%-- 	var member = <%=(String)session.getAttribute("authUser")%> --%>
+// }
 function calView(desc){
 	
 	$('#calendar').fullCalendar(
@@ -204,15 +198,18 @@ function calView(desc){
 			       	url:'${pageContext.request.contextPath}/calender/select',      
 			       	data:{"calendar_no":calEvent.no},
 			       	dataType : 'json',
-			       	success:function(data){   
-			           	var state =data.state;
+			       	success:function(data){
+			       		var state =data.state;
 			           	var datainfo = data.select;
-			           	if(data.admin=="true"){
-		           			$('#myModal3 #delete').attr("type","hidden");
-			           		$('#myModal3 #modify').attr("type","hidden");
-			            }else{
-				           	$('#myModal3 #delte').attr("type","button");
-				            $('#myModal3 #modify').attr("type","button");
+			           	
+			           	var userValue = "${authUser.role}";
+			           	alert(datainfo.calendar_kind);
+			           	if(userValue=="USER" && (datainfo.calendar_kind)!="person"){
+	           				$('#myModal3 #delete').attr("type","hidden");
+		           			$('#myModal3 #modify').attr("type","hidden");
+			           	}else{
+			   				$('#myModal3 #modify').attr("type","button");
+				           	$('#myModal3 #delete').attr("type","button");
 			            }
 			            if(state="success"){
 				        	var dt1 = new Date(datainfo.calendar_start).format("MM/dd/yyyy hh:mm a/p");
@@ -221,6 +218,7 @@ function calView(desc){
 						    $('#myModal3 h4').text(datainfo.calendar_title); 
 							$('#myModal3 #title').val(datainfo.calendar_title);
 							$('#myModal3 #kind').val(datainfo.calendar_kind);
+							$('#myModal3 #kind').prop("selected", true);
 							$('#myModal3 #settingcolor').val(datainfo.calendar_color); 
 							$('#myModal3 #settingbg').attr("style",'background-color:'+datainfo.calendar_color+';'); 
 							$('#myModal3 #reservationtime2').val(dt1);
@@ -298,7 +296,7 @@ $(function() {
 	
 	//Date range as a button
 	
-	Colorpicker
+// 	Colorpicker
 	$(".my-colorpicker1").colorpicker();		
 	$(".my-colorpicker2").colorpicker();
 	$('#datepicker').datepicker({
