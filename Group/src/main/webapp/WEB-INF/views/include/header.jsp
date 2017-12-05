@@ -39,14 +39,14 @@
 						<li class="dropdown notifications-menu">
 							<!-- 링크걸기 --> <a href="${pageContext.request.contextPath}/NoticeList" class="dropdown-toggle"
 							data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span
-								class="label label-warning">10</span>
+								class="label label-warning">N</span>
 						</a>
 						</li>
 						<!-- 결재표시 (오른상단 네비) -->
 						<li class="dropdown tasks-menu">
 							<!-- 링크걸기 --> <a href="${pageContext.request.contextPath}/report/state" class="dropdown-toggle"
 							data-toggle="dropdown"> <i class="fa fa-flag-o"></i> <span
-								class="label label-danger">9</span>
+								class="label label-danger">N</span>
 						</a>
 						</li>
 

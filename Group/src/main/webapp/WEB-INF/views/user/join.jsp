@@ -30,7 +30,7 @@
 <script src="${pageContext.servletContext.contextPath }/assets/js/join.js" type="text/javascript"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	    
-    <script>
+    <script type="text/javascript">
 
 function joinCheck(){
 	if(document.loginform.employeeName.value==""){
@@ -43,6 +43,15 @@ function joinCheck(){
 		document.loginform.email.focus();
 		return
 	}
+	
+	var regex=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+	 
+	if(regex.test(document.loginform.email.value) === false) {
+		alert("잘못된 이메일 형식입니다. 구글 이메일을 입력해 주세요.");
+		document.loginform.email.focus();
+		return
+	}
+	 
 	if(document.loginform.password.value==""){
 		alert("비밀번호를 입력해 주세요.");
 		document.loginform.password.focus();
@@ -69,7 +78,7 @@ function joinCheck(){
            </div>
            <!-- Collect the nav links, forms, and other content for toggling -->
            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-               <ul class="nav navbar-nav navbar-right">
+               <!-- <ul class="nav navbar-nav navbar-right">
                    <li>
                        <a href="#about">About</a>
                    </li>
@@ -79,7 +88,7 @@ function joinCheck(){
                    <li>
                        <a href="#contact">Contact</a>
                    </li>
-               </ul>
+               </ul> -->
            </div>
            <!-- /.navbar-collapse -->
        </div>
@@ -103,7 +112,7 @@ function joinCheck(){
         <div class="form-group">
           <label class="col-sm-3 control-label" for="email">이메일</label>
         <div class="col-sm-6">
-          <input class="form-control" id="email" name="email" type="text" placeholder="구글 이메일">
+          <input class="form-control" id="email" name="email" type="email" placeholder="구글 이메일">
         </div>
         </div>
         <div class="form-group">

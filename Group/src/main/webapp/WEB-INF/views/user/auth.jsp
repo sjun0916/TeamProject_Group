@@ -4,6 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>1234
+<script type = "text/javascript">
+<%
+	if(request.getParameter("employeeNo") == "" && request.getParameter("employeeNo") == null
+		&& request.getParameter("password") == "" && request.getParameter("password") == null){
+		%> history.go(-1);
+<%	}
+%> 
+</script>  
 </head>
 <body>
 

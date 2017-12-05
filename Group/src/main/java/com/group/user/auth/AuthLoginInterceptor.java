@@ -1,5 +1,7 @@
 package com.group.user.auth;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,22 +24,31 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 		HttpServletResponse response, 
 		Object handler)
 		throws Exception {
+		
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter printwriter = response.getWriter();
 
 		int employeeNo = Integer.parseInt(request.getParameter( "employeeNo" ));
 		String password = request.getParameter( "password" );
 		
 		UserVO userVo = userService.getUser(employeeNo, password);
-
 		
 		if( userVo == null ) {
-			response.sendRedirect( request.getContextPath() + "/user/login" );
-			System.out.println("로그인 실패!");
+			
+			printwriter.print("<script>alert('사원번호와 비밀번호를 확인해주세요.'); history.go(-1);</script>");
+			printwriter.flush();
+			printwriter.close();
+			
 			return false;
 		}
-				
+		
 		//승인받지 않은 회원일경우
 		if( userVo.getIsAuthority().equals("N")) {
-			response.sendRedirect( request.getContextPath() + "/user/notapproval" );
+			
+			printwriter.print("<script>alert('승인 대기중입니다. 관리자에게 문의하세요.'); history.go(-1);</script>");
+			printwriter.flush();
+			printwriter.close();
+			
 			return false;
 		}
 		
@@ -45,10 +56,11 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession( true );
 		session.setAttribute( "authUser", userVo );
 		response.sendRedirect( request.getContextPath()+"/home" );
-
+		
 		System.out.println(userVo.getRole());
 		System.out.println(session.getAttribute("authUser"));
 		return true;
+		
 	}
 
 }
