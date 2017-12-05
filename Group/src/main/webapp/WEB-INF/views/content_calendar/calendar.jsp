@@ -117,11 +117,20 @@
               	<div class="form-group">
 					<label>분류 선택:</label>
 					<div class="form-group-select">
-						<select name="kind" id="kind" disabled="">
+						<c:choose>
+						<c:when test="${authUser.role == 'ADMIN' }">
+						<select name="kind">
 							<option value="person" selected>개인</option>
-							<option value="person">부서</option>
-							<option value="person">회사</option>
+							<option value="team">부서</option>
+							<option value="compony">회사</option>
 						</select>
+						</c:when>
+						<c:otherwise>
+						<select name="kind">
+							<option value="person" selected>개인</option>
+						</select>
+						</c:otherwise>
+						</c:choose>
 					</div>
                 <!-- /.input group -->
                 <div class="form-group">
@@ -201,9 +210,8 @@ function calView(desc){
 			       	success:function(data){
 			       		var state =data.state;
 			           	var datainfo = data.select;
-			           	
 			           	var userValue = "${authUser.role}";
-			           	alert(datainfo.calendar_kind);
+// 			           	alert(datainfo.calendar_kind);
 			           	if(userValue=="USER" && (datainfo.calendar_kind)!="person"){
 	           				$('#myModal3 #delete').attr("type","hidden");
 		           			$('#myModal3 #modify').attr("type","hidden");
