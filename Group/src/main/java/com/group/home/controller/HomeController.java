@@ -203,7 +203,7 @@ public class HomeController {
 		
 		try {	
 			List<Calendar_Vo> list = service.selectCalendarKind(user);
-			if(!list.isEmpty()) {
+			if(list!=null) {
 				Iterator<Calendar_Vo> it = list.iterator();
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 				while(it.hasNext()) {
