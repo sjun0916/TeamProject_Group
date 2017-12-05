@@ -190,7 +190,7 @@
 	<update id="backReport" parameterType="com.group.approve.vo.ReportVo">
 		update REPORT set
 		REG_REASON=#{regReason,jdbcType=VARCHAR},REG_STATE=0
-		where REPORT_NO=#{reportNo,jdbcType=VARCHAR}
+		where REPORT_NO=#{reportNo}
 	</update>
 	
 	
@@ -203,7 +203,7 @@
 						  ,REPORT_NO
 						  ,REG_STATE
 			from REPORT
-			where REG_ID != #{sessionid,jdbcType=VARCHAR}) 
+			where REG_ID != #{employeeNo}) 
 			where
 			     REPORT_NO like '%'||#{keyword,jdbcType=VARCHAR}||'%'
 					or REG_ID like '%'||#{keyword,jdbcType=VARCHAR}||'%'
