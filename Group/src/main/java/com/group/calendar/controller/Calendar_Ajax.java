@@ -23,6 +23,10 @@ public class Calendar_Ajax {
 	@Resource(name = "calendar_Service")
 	Calendar_Service service;
 
+	/*----------------------------------------------------------------------------------
+	 * 캘린더 메인 화면
+	 * 회원의 모든 분류에 해당하는 일정 정보 가져오기
+	 -----------------------------------------------------------------------------------*/
 	@RequestMapping(value = "/calendar/data")
 	public @ResponseBody List<Map<String, String>> calendar(HttpServletRequest request) {
 		System.out.println("calendar_ajax start");
@@ -33,7 +37,6 @@ public class Calendar_Ajax {
 		try {
 			user= (UserVO) session.getAttribute("authUser");
 			id = user.getEmployeeNo();
-			System.out.println("calendar_ajax user : "+user); 	//confirm
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -47,14 +50,11 @@ public class Calendar_Ajax {
 				System.out.println(kind[i]);
 			}
 		}
-		System.out.println("calendar_ajax id : "+id);		//confirm
 		List<Calendar_Vo> listVo = service.selectCalendarKind(user);
-//		System.out.println("calendar_ajax listVo length : "+listVo.size()); //confirm
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String startDate = null;
 		String endDate = null;
 		if(!(listVo==null)){
-			System.out.println("calendadr_ajax listVo != null");
 			for (Calendar_Vo vo : listVo) {
 				Map<String, String> map = new HashMap<>();
 				startDate = dateFormat.format(vo.getCalendar_start());

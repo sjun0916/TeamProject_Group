@@ -29,11 +29,17 @@ public class Calendar_Main {
 	@Resource(name = "calendar_Service")
 	Calendar_Service service;
 	
+	/*-------------------------------------
+	 * 캘린더 메인 화면
+	 --------------------------------------*/
 	@RequestMapping(value = "/calendar/main")
 	public String calendar(HttpServletRequest request) {
 		System.out.println("calendar");
 		return "content_calendar/calendar";
 	}
+	/*----------------------------------------
+	 * 일정 추가
+	 ---------------------------------------*/
 	@RequestMapping(value = "/calendar/main",method=RequestMethod.POST)
 	public String savecalendar(HttpServletRequest request,
 			String[] calendar_kind,
@@ -92,6 +98,9 @@ public class Calendar_Main {
 		request.setAttribute("calendarList",service.selectCalendarKind(user));
 		return "content_calendar/calendar";
 	}
+	/*------------------------------------
+	 * 분류별 일정 색상 설정
+	 -------------------------------------*/
 	public String getKindColor(String kind) {
 		String color = null;
 		
@@ -102,6 +111,9 @@ public class Calendar_Main {
 		}
 		return color;
 	}
+	/*------------------------------------------------------------------
+	 * 일정 수정
+	 -------------------------------------------------------------------*/
 	@RequestMapping(value = "/calendar/update",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object>   modify
 		 (int calendar_no,Date calendar_start,Date calendar_end,
@@ -127,10 +139,12 @@ public class Calendar_Main {
 		}
 		return jsonObject;
 	}
+	/*-----------------------------------------------------------------------
+	 * 일정 삭제
+	 -----------------------------------------------------------------------*/
 	@RequestMapping(value = "/calendar/delete",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object>   remove(int calendar_no) {
 		System.out.println("main : remove");
-		///int calendar_no,Date calendar_start,Date calendar_end,String calendar_title,String calendar_cont,String calendar_remark,String calendar_color
 		Calendar_Vo vo = new Calendar_Vo();
 		vo.setCalendar_no(calendar_no);
 		Map<String, Object> jsonObject = new HashMap<String, Object>();
@@ -143,26 +157,13 @@ public class Calendar_Main {
 		}
 		return jsonObject;
 	}
+	/*--------------------------------------------------------------------------------
+	 * 선택된 일정 확인
+	 ------------------------------------------------------------------------------*/
 	@RequestMapping(value = "/calender/select",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> select(HttpServletRequest request,Calendar_Vo vo) {
-		System.out.println("main : selectOne");
-
-		System.out.println("1"+vo.getCalendar_no());
-		System.out.println("2"+vo.getCalendar_regid());
-		System.out.println("3"+vo.getCalendar_cont());
-		System.out.println("4"+vo.getCalendar_color());
-		System.out.println("5"+vo.getCalendar_remark());
-		System.out.println("6"+vo.getCalendar_kind());
-		System.out.println("7"+vo.getCalendar_team());
-		System.out.println("8"+vo.getCalendar_title());
-		System.out.println("9"+vo.getCalendar_end());
-		System.out.println("10"+vo.getCalendar_regdate());
-		System.out.println("11"+vo.getCalendar_start());
-
-		System.out.println("CalendarMain vo : "+vo);
-		System.out.println("main vo_num"+vo.getCalendar_no());
 		Calendar_Vo selectVo = service.selectCalendar(vo);
-		System.out.println("CalendarMain selectCalendar : "+selectVo);
+		
 		Map<String, Object> jsonObject = new HashMap<String, Object>();
 		HttpSession session = request.getSession();
 		if(selectVo!=null){
@@ -183,6 +184,9 @@ public class Calendar_Main {
 		}
 		return jsonObject;
 	}
+	/*-------------------------------------------------------------------------------
+	 * 날짜별 일정 확인
+	 -------------------------------------------------------------------------------*/
 	@RequestMapping(value = "/calender/daylist",method=RequestMethod.POST)
 	public @ResponseBody List<Calendar_Vo> select(HttpServletRequest request, Date date) {
 		System.out.println("main : selectDay");
@@ -191,12 +195,8 @@ public class Calendar_Main {
 		HttpSession session = request.getSession();	
 		try {
 			UserVO user = (UserVO) session.getAttribute("authUser");
-			System.out.println("User : "+user);	//confrim
-			System.out.println("Date : "+date);	//confirm
-			
 			List<Calendar_Vo> list = service.selectCalendarKind(user);
-			System.out.println("list empty? :"+list.isEmpty());
-			System.out.println("list size : "+list.size()); 	//confirm
+			
 			if(!list.isEmpty()) {
 				Iterator<Calendar_Vo> it = list.iterator();
 				while(it.hasNext()) {
@@ -206,14 +206,10 @@ public class Calendar_Main {
 							tmpList.add(temp);
 				}
 			}
-			System.out.println("list size : "+tmpList.size()); 	//confirm
-			
-//			jsonObject.put("data", list);
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		return jsonObject;
 		request.setAttribute("dayList", tmpList);
 		return tmpList;
 	}

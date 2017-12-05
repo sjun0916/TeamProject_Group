@@ -20,6 +20,10 @@ public class Calendar_ServiceImpl implements Calendar_Service {
 	
 	@Resource(name = "calendar_Dao")
 	Calendar_Dao dao;
+	/*--------------------------------------------------------------------------------
+	 * 일정 추가
+	 * @see com.group.calendar.service.Calendar_Service#insertCalendar(java.util.Map)
+	 --------------------------------------------------------------------------------*/
 	@Override
 	public int insertCalendar(Map<String, Object> map) {
 		// TODO Auto-generated method stub
@@ -30,10 +34,13 @@ public class Calendar_ServiceImpl implements Calendar_Service {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return result;
 	}
 
+	/*
+	 * 일정 번호로 일정 확인
+	 * @see com.group.calendar.service.Calendar_Service#selectCalendar(com.group.calendar.vo.Calendar_Vo)
+	 */
 	@Override
 	public Calendar_Vo selectCalendar(Calendar_Vo vo) {
 		// TODO Auto-generated method stub
@@ -48,6 +55,10 @@ public class Calendar_ServiceImpl implements Calendar_Service {
 		return selectvo;
 	}
 
+	/*----------------------------------------------------------------------------------------------------
+	 * 일정 삭제
+	 * @see com.group.calendar.service.Calendar_Service#deleteCalendar(com.group.calendar.vo.Calendar_Vo)
+	 ----------------------------------------------------------------------------------------------------*/
 	@Override
 	public int deleteCalendar(Calendar_Vo vo) throws SQLException{
 		// TODO Auto-generated method stub
@@ -61,6 +72,10 @@ public class Calendar_ServiceImpl implements Calendar_Service {
 		return 0;
 	}
 
+	/*------------------------------------------------------------------------------------------------------
+	 * 일정 수정
+	 * @see com.group.calendar.service.Calendar_Service#updateCalendar(com.group.calendar.vo.Calendar_Vo)
+	 ------------------------------------------------------------------------------------------------------*/
 	@Override
 	public int updateCalendar(Calendar_Vo vo) throws SQLException {
 	// TODO Auto-generated method stub
@@ -68,6 +83,10 @@ public class Calendar_ServiceImpl implements Calendar_Service {
 		return dao.updateCalender(vo);
 	}
 
+	/*----------------------------------------------------------------------------------------
+	 * 회원의 모든 일정 확인
+	 * @see com.group.calendar.service.Calendar_Service#selectCalendarAll(int)
+	 ----------------------------------------------------------------------------------------*/
 	@Override
 	public List<Calendar_Vo> selectCalendarAll(int id) {
 		// TODO Auto-generated method stub
@@ -78,10 +97,13 @@ public class Calendar_ServiceImpl implements Calendar_Service {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return list;
 	}
 
+	/*---------------------------------------------------------------------------------------------------
+	 * 해당 날짜의 일정 확인
+	 * @see com.group.calendar.service.Calendar_Service#dayCalendarList(com.group.user.vo.UserVO, java.util.Date)
+	 --------------------------------------------------------------------------------------------------*/
 	@Override
 	public List<Calendar_Vo> dayCalendarList(UserVO user, Date date) {
 		// TODO Auto-generated method stub
@@ -107,6 +129,10 @@ public class Calendar_ServiceImpl implements Calendar_Service {
 		return list;
 	}
 
+	/*--------------------------------------------------------------------------------------------
+	 * 회원의 모든 분류에 해당하는 일정 확인
+	 * @see com.group.calendar.service.Calendar_Service#selectCalendarKind(com.group.user.vo.UserVO)
+	 ---------------------------------------------------------------------------------------------*/
 	@Override
 	public List<Calendar_Vo> selectCalendarKind(UserVO user) {
 		System.out.println("selectCalendarKind start");
@@ -135,16 +161,6 @@ public class Calendar_ServiceImpl implements Calendar_Service {
 		}
 		if(list==null || list.isEmpty())
 			list = null;
-		else {
-			//confirm
-			for(int i=0;i<list.size();i++) {
-				System.out.println(
-					list.get(i).getCalendar_no()+","+
-					list.get(i).getCalendar_regid()+","+
-					list.get(i).getCalendar_kind());
-			}
-		}
-		
 		return list;
 	}
 

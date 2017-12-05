@@ -5,7 +5,7 @@
 <!-- 맵핑될 DAO 인터페이스의 name 을 줍니다. -->
 	<mapper namespace="calendar">
 	<!-- id 속성은 DAO 의 메소드와 같아야 한다. 여기의 memberVO 는 Mybatis-confg.xml 에 Alias 되어있습니다. -->
-	
+<!-- 	모든 일정 확인 -->
 	<select id="selectAll" resultMap="selectResultMap">
 		SELECT * FROM CALENDAR
 	</select>
