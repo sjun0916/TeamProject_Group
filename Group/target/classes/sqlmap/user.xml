@@ -69,6 +69,7 @@
 		select * from EMPLOYEE,TEAM
 		where ROLE !='ADMIN'
 		and EMPLOYEE.TEAM_ID=TEAM.TEAM_ID
+		order by EMPLOYEE.TEAM_ID
 	</select>
 
 	

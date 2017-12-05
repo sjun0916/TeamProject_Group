@@ -11,11 +11,10 @@
 	href='<c:url value="/resources/boardCSS/NoticeList.css"/>'>
 <link rel='stylesheet' type='text/css'
 	href='<c:url value="assets/css/calendar.css"/>'>
+	
 <script>
 	// 	calendar submit()
-	function goTo() {
-		document.getElementbyId("monthView").submit();
-	}
+	
 </script>
 </head>
 
@@ -28,25 +27,80 @@
 
 	<section class="content-header">
 
-
+		
 		<%-- 		<img src="${pageContext.request.contextPath}/resources/icon/rian.jpg" width="100%" height="300px"> --%>
 
 
 		<section class="content">
+		
+		
+			<div id="myCarousel" class="carousel slide" data-ride="carousel"> 
+	
+	<!--페이지-->
+	<ol class="carousel-indicators">
+		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		<li data-target="#myCarousel" data-slide-to="1"></li>
+		<li data-target="#myCarousel" data-slide-to="2"></li>
+		<li data-target="#myCarousel" data-slide-to="3"></li>
+	</ol>
+	<!--페이지-->
 
-<!-- 			<div -->
-<%-- 				style="background-image: url('${pageContext.request.contextPath}/resources/icon/rian.jpg'); width:100%; height:300px;"> --%>
-<!-- 				회사이미지 / 설명 등등</div> -->
-<!-- 			<hr> -->
+	<div class="carousel-inner">
+		<!--슬라이드1-->
+		<div class="item active"> 
+			<img src="http://cdn.acus.kr/pyungkang/menu/1439799254929458.jpg" style="width:100%; height:250px;" alt="First slide">
+			<div class="container">
+				<div class="carousel-caption">
+				</div>
+			</div>
+		</div>
+		<!--슬라이드1-->
 
+		<!--슬라이드2-->
+		<div class="item"> 
+			<img src="http://samoeng.co.kr/introduction/img/banner.jpg" style="width:100%; height:250px;" data-src="" alt="Second slide">
+			<div class="container">
+				<div class="carousel-caption">
+				</div>
+			</div>
+		</div>
+		<!--슬라이드2-->
+		
+		<div class="item"> 
+			<img src="http://www.woosunginc.biz/default/img/pintbox/images/subimg_01.jpg" style="width:100%; height:250px;" data-src="" alt="Second slide">
+			<div class="container">
+				<div class="carousel-caption">
+				</div>
+			</div>
+		</div>
+		
+		<!--슬라이드3-->
+		<div class="item"> 
+			<img src="http://seeqlive.com/image/C_banner_1.png" style="width:100%; height:250px;" data-src="" alt="Third slide">
+			<div class="container">
+				<div class="carousel-caption">
+				</div>
+			</div>
+		</div>
+		<!--슬라이드3-->
+	</div>
+	
+	<!--이전, 다음 버튼-->
+	<a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> 
+	<a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a> 
+	</div>
+<hr>
+		
 			<div class="row">
 				<div class="col-md-12">
 					<div class="box">
 						<div class="box-header with-border">
-							<h3 class="box-title">결재함</h3>
-							<c:if test="${waitCount>0}">
-							&emsp;<small>승인대기: <c:out value="${waitCount}"/></small>
-							</c:if>
+							<h3 class="box-title">Document Approval</h3>
+
+							
+							&emsp;&emsp;<span class="label label-danger">승인대기: <c:out value="${waitCount}"/></span>
+<%-- 							&emsp;<small>승인대기: <c:out value="${waitCount}"/></small> --%>
+							
 						
 
 							<div class="box-tools pull-right">
@@ -66,7 +120,6 @@
 							<table class="table table-hover">
 					<tbody>
 						<tr>
-							<!-- <th><input type="checkbox" name="firstbox" id="checkAll" value="" /></th> -->
 							<th width="10%">서류번호</th>
 							<th width="35%">제목</th>
 							<th width="20%">작성일</th>
@@ -75,7 +128,6 @@
 						</tr>
 						<c:forEach items="${list2}" var="vo">
 							<tr id="${vo.REPORT_NO}">
-								<!-- <th><input type="checkbox" name="box" value="#" /></th> -->
 								<td>${vo.REPORT_NO}</td>
 								<td>${vo.REG_TITLE}</td>
 								<td>${vo.REG_DATE}</td>
@@ -369,6 +421,116 @@
 				<!-- /.col -->
 
 				<div class="col-md-4">
+
+
+
+					<div class="box box-fault">
+						<div class="box-header with-border">
+							<h3 class="box-title">Today Schedule</h3>
+
+							<div class="box-tools pull-right">
+								<button type="button" class="btn btn-box-tool"
+									data-widget="collapse">
+									<i class="fa fa-minus"></i>
+								</button>
+								<button type="button" class="btn btn-box-tool"
+									onclick="location.href='/group/calendar/main'">
+									more<i class="fa fa-chevron-circle-right"></i>
+								</button>
+							</div>
+						</div>
+						<!-- /.box-header -->
+						<div class="box-body">
+							
+							<table class="table table-hover">
+							<tbody>
+							<tr>
+							    <td><table>
+							      <tr bgcolor="#FAF4C0">
+							      <td width="10%" align="center"><h4><label>${iTYear}년 ${iTMonth}월 ${iTDay}일</label></h4></td>
+							      </tr>
+					    		</table></td>
+					  		</tr>
+					  		<tr>
+					  			<td>
+					  			<table class="table table-hover">
+					  			<tbody>
+					  				<c:choose>
+												<c:when test="${calList==null}">오늘 일정이 없습니다.</c:when>
+												<c:otherwise>
+					  					<tr>
+											<th width="10%">분류</th>
+											<th width="20%">제목</th>
+											<th width="30%">내용</th>
+											<th width="20%">시작일</th>
+											<th width="20%">종료일</th>
+										</tr>
+											<c:forEach var="calList" items="${calList}" varStatus="status">
+													<tr>
+														<td><c:out value="${calList.calendar_kind}"/></td>
+														<td><c:out value="${calList.calendar_title}"/></td>
+														<td><c:out value="${calList.calendar_cont}"/></td>
+														<td><fmt:formatDate value="${calList.calendar_start}" pattern="yyyy-MM-dd" /></td>
+														<td><fmt:formatDate value="${calList.calendar_end}" pattern="yyyy-MM-dd" /></td>
+													</tr>
+												</c:forEach>
+											
+										</c:otherwise>
+										</c:choose>
+									</tbody>
+					  			</table>
+					  			</td>
+					  		</tr>
+					  		</tbody>
+							</table>
+							
+							
+							
+							
+							
+<!-- 							<table class="scheduleTable"> -->
+<!-- 							  <tr> -->
+<!-- 							    <td><table> -->
+<!-- 							      <tr> -->
+<%-- 							      <td width="73%" rowspan="2" align="center"><h4><label>${iTYear}년 ${iTMonth}월 ${iTDay}일</label></h4></td> --%>
+<!-- 							      </tr> -->
+<!-- 					    		</table></td> -->
+<!-- 					  		</tr> -->
+<!-- 					  		일정목록		 -->
+<!-- 							<tr> -->
+<!-- 								<td><table> -->
+<!-- 										<tbody> -->
+<%-- 											<c:choose> --%>
+<%-- 												<c:when test="${calList==null}">오늘 일정이 없습니다.</c:when> --%>
+<%-- 												<c:otherwise> --%>
+<!-- 													<tr> -->
+<!-- 														<th>분류</th> -->
+<!-- 														<th>제목</th> -->
+<!-- 														<th>내용</th> -->
+<!-- 														<th>시작일</th> -->
+<!-- 														<th>종료일</th> -->
+<!-- 													</tr> -->
+<%-- 												<c:forEach var="calList" items="${calList}" varStatus="status"> --%>
+<!-- 													<tr> -->
+<%-- 														<td><c:out value="${calList.calendar_kind}"/></td> --%>
+<%-- 														<td><c:out value="${calList.calendar_title}"/></td> --%>
+<%-- 														<td><c:out value="${calList.calendar_cont}"/></td> --%>
+<%-- 														<td><fmt:formatDate value="${calList.calendar_start}" pattern="yyyy-MM-dd" /></td> --%>
+<%-- 														<td><fmt:formatDate value="${calList.calendar_end}" pattern="yyyy-MM-dd" /></td> --%>
+<!-- 													</tr> -->
+<%-- 												</c:forEach> --%>
+<%-- 											</c:otherwise> --%>
+<%-- 											</c:choose> --%>
+<!-- 										</tbody> -->
+<!-- 									</table></td> -->
+<!-- 								</tr> -->
+<!-- 							</table> -->
+							</div>
+						<!-- /.box-body -->
+
+					</div>
+
+
 					<div class="box box-primary">
 						<div class="box-header with-border">
 							<h3 class="box-title">Calendar</h3>
@@ -379,7 +541,7 @@
 									<i class="fa fa-minus"></i>
 								</button>
 								<button type="button" class="btn btn-box-tool"
-									onclick="location.href='/group/'">
+									onclick="location.href='/group/calendar/main'">
 									more<i class="fa fa-chevron-circle-right"></i>
 								</button>
 							</div>
@@ -387,17 +549,32 @@
 						<!-- /.box-header -->
 						<div class="box-body">
 							<div class="row">
-								<form id="monthView" name="monthView">
-									<table class="tTable" width="100%">
+								<form id="monthView" name="monthView" action="home" method="post">
+									<input type="hidden" name="year" value="${iYear}">
+									<input type="hidden" name="month" value="${iMonth}">
+									<table class="tTable">
 										<tr>
 											<td><table class="tTable">
 													<tr>
+														<c:url value="/home" var="prevMonth">
+															<c:param name="iYear" value="${iYear}"/>
+															<c:param name="iMonth" value="${iMonth }"/>
+															<c:param name="option" value="prev"/>
+														</c:url>
+														<td><a href="${prevMonth}" ><input type="button" class="btn btn-primary btn-xs" value="이전달" ></a></td>
 														<td class="tMonth"><h3>&nbsp;${iYear}년
 																${iMonth}월&nbsp;</h3></td>
+															<c:url value="/home" var="nextMonth">
+																<c:param name="iYear" value="${iYear}"/>
+																<c:param name="iMonth" value="${iMonth }"/>
+																<c:param name="option" value="next"/>
+															</c:url>
+														<td><a href="${nextMonth}" ><input type="button" class="btn btn-primary btn-xs" value="다음달"></a></td>
+														
 													</tr>
 												</table></td>
 										<tr>
-											<td><table class="tTable">
+											<td><table class="table table-hover">
 													<tbody>
 														<tr>
 															<th>Sun</th>
@@ -443,107 +620,20 @@
 
 						<!-- /.footer -->
 					</div>
-					<!-- /.box -->
 
 
-					<div class="box box-fault">
-						<div class="box-header with-border">
-							<h3 class="box-title">오늘의 일정</h3>
-
-							<div class="box-tools pull-right">
-								<button type="button" class="btn btn-box-tool"
-									data-widget="collapse">
-									<i class="fa fa-minus"></i>
-								</button>
-								<button type="button" class="btn btn-box-tool"
-									onclick="location.href='/group/calendar/main'">
-									more<i class="fa fa-chevron-circle-right"></i>
-								</button>
-							</div>
-						</div>
-						<!-- /.box-header -->
-						<div class="box-body">
-							<table class="scheduleTable">
-							  <tr>
-							    <td><table>
-							      <tr>
-							      <td width="73%" rowspan="2" align="center"><h4><label>${iYear}년 ${iMonth}월 ${iTDay}일</label></h4></td>
-							      </tr>
-					    		</table></td>
-					  		</tr>
-					<!--   		일정목록		 -->
-							<tr>
-								<td><table>
-										<tbody>
-											<tr>
-												<th>분류</th>
-												<th>제목</th>
-												<th>내용</th>
-												<th>시작일</th>
-												<th>종료일</th>
-											</tr>
-											<c:choose>
-											<c:when test="${calList}==0">오늘 일정이 없습니다.</c:when>
-											<c:otherwise>
-												<c:forEach var="calList" items="${calList}" varStatus="status">
-													<tr>
-														<td><c:out value="${calList.calendar_kind}"/></td>
-														<td><c:out value="${calList.calendar_title}"/></td>
-														<td><c:out value="${calList.calendar_cont}"/></td>
-														<td><fmt:formatDate value="${calList.calendar_start}" pattern="yyyy-MM-dd" /></td>
-														<td><fmt:formatDate value="${calList.calendar_end}" pattern="yyyy-MM-dd" /></td>
-													</tr>
-												</c:forEach>
-											</c:otherwise>
-											</c:choose>
-											
-										</tbody>
-									</table></td>
-								</tr>
-							</table></div>
-						<!-- /.box-body -->
-
-					</div>
 
 
-					<div class="box box-fault">
-						<div class="box-header with-border">
-							<h3 class="box-title">?</h3>
 
-							<div class="box-tools pull-right">
-								<button type="button" class="btn btn-box-tool"
-									data-widget="collapse">
-									<i class="fa fa-minus"></i>
-								</button>
-								<button type="button" class="btn btn-box-tool"
-									onclick="location.href='/group/'">
-									more<i class="fa fa-chevron-circle-right"></i>
-								</button>
-							</div>
-						</div>
-						<!-- /.box-header -->
-						<div class="box-body">
-							
-						</div>
-						<!-- /.box-body -->
+
+
 
 					</div>
 					<!-- /.box -->
 
-
 					</div>
-
-				</div>
-				<!-- /.col -->
-
-
-
-
-			</div>
-			<!-- /.row -->
 
 		</section>
-
 
 
 	</section>
