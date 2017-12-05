@@ -130,7 +130,7 @@ function initSendMessageForm(){
 	      modal: true,
 	      buttons: {
 	        "전송하기": sendMessage,
-	        Cancel: function() {
+	        "취소": function() {
 	          dialog.dialog( "close" );
 	        }
 	      },

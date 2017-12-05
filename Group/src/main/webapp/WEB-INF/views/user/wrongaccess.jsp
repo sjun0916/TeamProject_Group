@@ -23,7 +23,7 @@
 
 </head>
 <body>
-	<br><br><br><br><br><br><br><br>
+	<br><br><br><br>
     <div id="home-sec">
         <div class="overlay">
             <div class="container">
@@ -36,6 +36,7 @@
                         <hr>
                         <p>
                      	       페이지 주소가 잘못 입력되었거나 변경되어 페이지를 찾을 수 없습니다.
+                     	       <br>
                      	       주소를 다시 확인해주세요.
                         </p>
                         <hr />

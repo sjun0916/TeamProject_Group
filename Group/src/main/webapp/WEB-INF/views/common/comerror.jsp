@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>404 오류</title>
+<title>오류</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
@@ -29,15 +29,15 @@
             <div class="container">
                 <div class="row text-center ">
                     <div class="col-md-5">
-                        <img src="${pageContext.request.contextPath}/resources/errorPage/icon/error.png" class="img-set" />
+                        <img src="${pageContext.request.contextPath}/resources/errorPage/icon/warning.png" class="img-set" />
                     </div>
                     <div class="col-md-5 col-md-offset-2 c-white">
-                        <h2>404<br>Page Not Found</h2>
+                        <h2>페이지 오류 안내</h2>
                         <hr>
                         <p>
-                     	       페이지 주소가 잘못 입력되었거나 변경되어 페이지를 찾을 수 없습니다.
+                     	       죄송합니다.
                      	       <br>
-                     	       주소를 다시 확인해주세요.
+                     	       잘못된 요청이거나 권한이 없습니다.
                         </p>
                         <hr />
                         <br />

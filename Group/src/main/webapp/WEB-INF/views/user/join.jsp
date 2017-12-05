@@ -38,11 +38,15 @@ function joinCheck(){
 		document.loginform.employeeName.focus();
 		return
 	}
-	if(document.loginform.email.value==""){
+
+	var checkEmail = /^[\w]{4,}@gmail.com$/;
+	var employeeEmail = $("#email").val();
+	if(checkEmail.test(employeeEmail)==false || employeeEmail==""){
 		alert("구글 이메일을 입력해 주세요.");
 		document.loginform.email.focus();
-		return
+		return false;
 	}
+	
 	if(document.loginform.password.value==""){
 		alert("비밀번호를 입력해 주세요.");
 		document.loginform.password.focus();
