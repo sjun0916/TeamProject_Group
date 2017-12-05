@@ -117,11 +117,20 @@
               	<div class="form-group">
 					<label>분류 선택:</label>
 					<div class="form-group-select">
-						<select name="kind" id="kind" disabled="">
+<%-- 						<c:choose> --%>
+<%-- 						<c:when test="${authUser.role == 'ADMIN' }"> --%>
+						<select id="kind" disabled="">
 							<option value="person" selected>개인</option>
-							<option value="person">부서</option>
-							<option value="person">회사</option>
+							<option value="team">부서</option>
+							<option value="compony">회사</option>
 						</select>
+<%-- 						</c:when> --%>
+<%-- 						<c:otherwise> --%>
+<!-- 						<select name="kind" disabled=""> -->
+<!-- 							<option value="person" selected>개인</option> -->
+<!-- 						</select> -->
+<%-- 						</c:otherwise> --%>
+<%-- 						</c:choose> --%>
 					</div>
                 <!-- /.input group -->
                 <div class="form-group">
@@ -201,9 +210,8 @@ function calView(desc){
 			       	success:function(data){
 			       		var state =data.state;
 			           	var datainfo = data.select;
-			           	
 			           	var userValue = "${authUser.role}";
-			           	alert(datainfo.calendar_kind);
+// 			           	alert(datainfo.calendar_kind);
 			           	if(userValue=="USER" && (datainfo.calendar_kind)!="person"){
 	           				$('#myModal3 #delete').attr("type","hidden");
 		           			$('#myModal3 #modify').attr("type","hidden");
@@ -401,9 +409,11 @@ String.prototype.string = function(len){var s = '', i = 0; while (i++ < len) { s
 String.prototype.zf = function(len){return "0".string(len - this.length) + this;};
 Number.prototype.zf = function(len){return this.toString().zf(len);};
 function edit(){
-	
+	var userValue = "${authUser.role}";
 	$('#myModal3 #settingcolor').removeAttr("disabled");
-	$('#myModal3 #kind').removeAttr("disabled");
+	if(userValue=="ADMIN"){
+		$('#myModal3 #kind').removeAttr("disabled");
+	}
 	$('#myModal3 #settingbg').removeAttr("disabled");
 	$('#myModal3 #reservationtime2').removeAttr("disabled");
 	$('#myModal3 #reservationtime3').removeAttr("disabled");
