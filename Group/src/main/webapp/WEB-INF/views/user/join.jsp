@@ -30,7 +30,7 @@
 <script src="${pageContext.servletContext.contextPath }/assets/js/join.js" type="text/javascript"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	    
-    <script>
+    <script type="text/javascript">
 
 function joinCheck(){
 	if(document.loginform.employeeName.value==""){
@@ -38,11 +38,15 @@ function joinCheck(){
 		document.loginform.employeeName.focus();
 		return
 	}
-	if(document.loginform.email.value==""){
+
+	var checkEmail = /^[\w]{4,}@gmail.com$/;
+	var employeeEmail = $("#email").val();
+	if(checkEmail.test(employeeEmail)==false || employeeEmail==""){
 		alert("구글 이메일을 입력해 주세요.");
 		document.loginform.email.focus();
-		return
+		return false;
 	}
+
 	if(document.loginform.password.value==""){
 		alert("비밀번호를 입력해 주세요.");
 		document.loginform.password.focus();
@@ -69,7 +73,7 @@ function joinCheck(){
            </div>
            <!-- Collect the nav links, forms, and other content for toggling -->
            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-               <ul class="nav navbar-nav navbar-right">
+               <!-- <ul class="nav navbar-nav navbar-right">
                    <li>
                        <a href="#about">About</a>
                    </li>
@@ -79,7 +83,7 @@ function joinCheck(){
                    <li>
                        <a href="#contact">Contact</a>
                    </li>
-               </ul>
+               </ul> -->
            </div>
            <!-- /.navbar-collapse -->
        </div>
@@ -101,9 +105,15 @@ function joinCheck(){
         </div>
         </div>
         <div class="form-group">
+            <label class="col-sm-3 control-label" for="employeeName">이름</label>
+          <div class="col-sm-6">
+            <input class="form-control" id="employeeName" name="employeeName" type="text" placeholder="이름">
+          </div>
+        </div>
+        <div class="form-group">
           <label class="col-sm-3 control-label" for="email">이메일</label>
         <div class="col-sm-6">
-          <input class="form-control" id="email" name="email" type="text" placeholder="구글 이메일">
+          <input class="form-control" id="email" name="email" type="email" placeholder="구글 이메일">
         </div>
         </div>
         <div class="form-group">
@@ -112,12 +122,6 @@ function joinCheck(){
           <input class="form-control" id="password" name="password" type="password" placeholder="비밀번호">
         <p class="help-block">숫자, 특수문자 포함 8자 이상</p>
         </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label" for="employeeName">이름</label>
-          <div class="col-sm-6">
-            <input class="form-control" id="employeeName" name="employeeName" type="text" placeholder="이름">
-          </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label" for="positionId">직급</label>

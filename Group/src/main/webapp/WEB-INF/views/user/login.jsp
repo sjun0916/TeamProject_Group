@@ -23,22 +23,17 @@
 	
 	<script src="<c:url value='/resources/loginCSS/resources/js/jquery-3.1.1.min.js'/>"></script>
 	
-	<script>
+  	<script>
 		function loginCheck(){
 			if(document.loginform.employeeNo.value==""){
 				alert("사원번호를 입력해 주세요.");
 				document.loginform.employeeNo.focus();
-				return
-			}
-			if(document.loginform.password.value==""){
-				alert("비밀번호를 입력해 주세요.");
-				document.loginform.password.focus();
-				return
+				return 
 			}
 			
 			document.loginform.submit();
 		}
-	</script>
+	</script> 
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
@@ -56,7 +51,7 @@
            <!-- Collect the nav links, forms, and other content for toggling -->
            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                <ul class="nav navbar-nav navbar-right">
-                   <li>
+                   <!-- <li>
                        <a href="#about">About</a>
                    </li>
                    <li>
@@ -64,7 +59,7 @@
                    </li>
                    <li>
                        <a href="#contact">Contact</a>
-                   </li>
+                   </li> -->
                </ul>
            </div>
            <!-- /.navbar-collapse -->
