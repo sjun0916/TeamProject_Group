@@ -2,6 +2,7 @@ package com.group.calendar.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,6 +62,10 @@ public class Calendar_Ajax {
 				endDate = dateFormat.format(vo.getCalendar_end());
 				map.put("title",vo.getCalendar_title());
 				map.put("start",startDate);
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(vo.getCalendar_end());
+				cal.add(Calendar.DATE, 1);
+				endDate = dateFormat.format(cal.getTime());
 				map.put("end", endDate);
 				map.put("backgroundColor",vo.getCalendar_color());
 				map.put("borderColor",vo.getCalendar_color());

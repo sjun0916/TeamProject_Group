@@ -4,6 +4,8 @@
 <script src="${pageContext.request.contextPath}/resources/plugins/jQuery/jQuery-2.2.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://files.codepedia.info/uploads/iScripts/html2canvas.js"></script>
+
+<!-- 서류 내용 불러오기 -->
 <script type="text/javascript">
 $(document).ready(function(){
 	var element = $("#previewImage");	

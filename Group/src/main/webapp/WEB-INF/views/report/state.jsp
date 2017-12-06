@@ -63,6 +63,7 @@
 		<div class="box">
 			<div class="box-header">
 				<h3 class="box-title">${title}</h3>
+				<!-- title 에 따라 요청서류 list, 승인대기서류 list 출력 변경 -->
 
 				<div class="box-tools" style="padding: 0px; text-align: right; float: left">
 					 <div class="input-group input-group-sm" style="width: 150px;">
@@ -152,6 +153,7 @@
 
 					</div>
 					<div class="modal-footer">
+						<!-- 승인 대기중 list 에서만 승인/반려 버튼 출력 -->
 						<c:if test="${title eq '승인대기중'}">
 							<button type="button" style="width: 25%" id="modify"
 								class="btn btn-primary" onclick="checkReport()">승인</button>
@@ -169,6 +171,7 @@
 			<!-- /.modal-dialog -->
 		</div>
 	</div>
+	<!-- 반려버튼 클릭시 생성 -->
 	<div class="modal" id="myModal4" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -230,7 +233,7 @@
 </body>
 <script type="text/javascript">
 	$(function() {
-		$("tr:has('td')").click(
+		$("tr:has('td')").click(	// 선택 서류 해당 행 클릭 시  동작
 						function(event) {
 							var data = $(this).parent().children().eq(1).text();
 							//var report_no = $("input[name=box]:checked").val();
@@ -250,48 +253,28 @@
 											if (state = "success") {
 												$("#NOT_reportNo").html(v.reportNo);
 												$("#regCont").val(v.regCont);
-												$("#modal3Title").text(
-														v.regTitle);
+												$("#modal3Title").text(v.regTitle);
+												//regState 의 상태에 따라 list 현황 출력상태 변경
 												if (v.regState== 0) {
-													$("#modal3StateColor")
-															.attr("class",
-																	"small-box bg-red");
-													$("#rollbackinfo").attr(
-															"class",
-															"info-box bg-red");
-													$("#modal3State").text(
-															"반려됨");
+													$("#modal3StateColor").attr("class","small-box bg-red");
+													$("#rollbackinfo").attr("class","info-box bg-red");
+													$("#modal3State").text("반려됨");
 												} else if (v.regState== 1) {
-													$("#modal3StateColor")
-															.attr("class",
-																	"small-box bg-blue");
-													$("#rollbackinfo").attr(
-															"class",
-															"info-box bg-blue");
-													$("#modal3State").text(
-															"등록됨");
+													$("#modal3StateColor").attr("class","small-box bg-blue");
+													$("#rollbackinfo").attr("class","info-box bg-blue");
+													$("#modal3State").text("등록됨");
 												} else if (v.regState== 2) {
-													$("#modal3StateColor")
-															.attr("class",
-																	"small-box bg-yellow");
-													$("#rollbackinfo")
-															.attr("class",
-																	"info-box bg-yellow");
-													$("#modal3State").text(
-															"처리대기중");
+													$("#modal3StateColor").attr("class","small-box bg-yellow");
+													$("#rollbackinfo").attr("class","info-box bg-yellow");
+													$("#modal3State").text("처리대기중");
 												} else if (v.regState== 3) {
-													$("#modal3StateColor")
-															.attr("class",
-																	"small-box bg-green");
-													$("#rollbackinfo")
-															.attr("class",
-																	"info-box bg-green");
-													$("#modal3State").text(
-															"처리완료");
+													$("#modal3StateColor").attr("class","small-box bg-green");
+													$("#rollbackinfo").attr("class","info-box bg-green");
+													$("#modal3State").text("처리완료");
 												}
-												$("#modal3No")
-														.text(v.reportNo);
+												$("#modal3No").text(v.reportNo);
 
+												// 결재자가 여러명일때 출력 내용
 												var html = " <dt>제목</dt>";
 												html += "<dd>";
 												html += v.regTitle;
@@ -304,55 +287,30 @@
 												html += "<dd>";
 												html += v.regDate;
 												html += "</dd>";
-												if (v.regManager1
-														&& v.regUpdate1) {
+												if (v.regManager1 && v.regUpdate1) {
 													html += "<dt>결재자1</dt>";
-													html += "<dd>"
-															+ v.regManager1
-															+ "</dd>";
-													html += "<dd>"
-															+ v.regUpdate1
-															+ "</dd>";
+													html += "<dd>"+ v.regManager1+ "</dd>";
+													html += "<dd>"+ v.regUpdate1+ "</dd>";
 												}
-												if (v.regManager2
-														&& v.regUpdate2) {
+												if (v.regManager2 && v.regUpdate2) {
 													html += "<dt>결재자2</dt>";
-													html += "<dd>"
-															+ v.regManager2
-															+ "</dd>";
-													html += "<dd>"
-															+ v.regUpdate2
-															+ "</dd>";
+													html += "<dd>"+ v.regManager2+ "</dd>";
+													html += "<dd>"+ v.regUpdate2+ "</dd>";
 												}
-												if (v.regManager3
-														&& v.regUpdate3) {
+												if (v.regManager3 && v.regUpdate3) {
 													html += "<dt>결재자3</dt>";
-													html += "<dd>"
-															+ v.regManager3
-															+ "</dd>";
-													html += "<dd>"
-															+ v.regUpdate3
-															+ "</dd>";
+													html += "<dd>" + v.regManager3 + "</dd>";
+													html += "<dd>" + v.regUpdate3 + "</dd>";
 												}
-												if (v.regManager4
-														&& v.regUpdate4) {
+												if (v.regManager4 && v.regUpdate4) {
 													html += "<dt>결재자4</dt>";
-													html += "<dd>"
-															+ v.regManager4
-															+ "</dd>";
-													html += "<dd>"
-															+ v.regUpdate4
-															+ "</dd>";
+													html += "<dd>" + v.regManager4 + "</dd>";
+													html += "<dd>" + v.regUpdate4 + "</dd>";
 												}
-												if (v.regManager5
-														&& v.regUpdate5) {
+												if (v.regManager5 && v.regUpdate5) {
 													html += "<dt>결재자5</dt>";
-													html += "<dd>"
-															+ v.regManager5
-															+ "</dd>";
-													html += "<dd>"
-															+ v.regUpdate5
-															+ "</dd>";
+													html += "<dd>" + v.regManager5 + "</dd>";
+													html += "<dd>" + v.regUpdate5 + "</dd>";
 												}
 												if (v.regComment) {
 													html += "<dt>기타사항</dt>";
@@ -378,30 +336,23 @@
 									});
 						});
 
-		/*///////////////////////////////////////  */
-
+		// 클릭시 현재 이벤트 기본 동작 중단
 		$("a[href='#']").click(function(e) {
-
 			e.preventDefault();
-
 		});
 
 	});
 	
-	/*  window.onload=function(){
-		 window.location.reload(true);
-		
-		} */
-	
-	
 	function reLoad(){
 		window.location=location.pathname;
 	}
-	
+	// 모달 창 설정
 	function changModal() {
 		$('#myModal3').modal('toggle');
 		$('#myModal4').modal();
 	}
+	
+	//반려 했을때 동작
 	function rollback() {
 		var datas = {
 			"regReason" : $("#inputError").val(),
@@ -423,6 +374,7 @@
 		});
 
 	}
+	//승인 시 동작
 	function checkReport() {
 		$.ajax({
 			type : "POST",
@@ -440,6 +392,7 @@
 		});
 
 	}
+	//서류 내용 불러오기
 	function doc() {
 		var frm = document.report;
 		var regCont = $("#regCont").val();

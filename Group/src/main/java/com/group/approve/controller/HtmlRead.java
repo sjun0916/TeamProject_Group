@@ -6,6 +6,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class HtmlRead {
+	//html(문서) 불러오기
 	 public static String getHTML(String urlToRead) {
 	      URL url; // The URL to read
 	      HttpURLConnection conn; // The actual connection to the web page

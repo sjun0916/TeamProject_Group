@@ -31,7 +31,8 @@ public class ReportSelectController {
 	
 	@Autowired
 	ReportService service;
-
+	
+	// 서류 기본 작성 후 에디터 작성
 	@RequestMapping(value = "/report/select/{form}",method=RequestMethod.GET)
 	public String formReport(@PathVariable String form, HttpServletRequest request,ReportVo reportVo) {
 		
@@ -47,14 +48,10 @@ public class ReportSelectController {
 		 StringBuffer formHtml = new StringBuffer();	
 
 		try {
-
-			
 			BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(file),"euc-kr"));
 			String line;
 
 			while ((line = in.readLine()) != null) {
-								
-			
 				formHtml.append(line);
 			}
 			in.close();
@@ -67,6 +64,7 @@ public class ReportSelectController {
 		return "report/reportEditor";
 	}
 	
+	// 에디터 작성 후 저장
 	@RequestMapping(value = "/report/select/{form}",method=RequestMethod.POST)
 	public String endReport(@PathVariable String form, HttpServletRequest request,ReportVo reportVo,@RequestParam("content")String content,
 								@AuthUser UserVO authUser){
@@ -82,7 +80,7 @@ public class ReportSelectController {
 		return "report/endReport";
 	}
 	
-	
+	// 이미지 저장하기(미완성)
 	@RequestMapping(value = "/report/image", method=RequestMethod.POST)
 	public String reportImage(Model model,@RequestParam("content")String content){
 		
@@ -91,7 +89,7 @@ public class ReportSelectController {
 		return "report/toImage";
 	}
 	
-	
+	// 서류 선택 보기
 	@RequestMapping(value = "/report/selectOne",method=RequestMethod.POST)
 	public @ResponseBody Map<String,Object> selectReport(int reportNo){
 		Map<String, Object> jsonObject = new HashMap<String, Object>();
@@ -108,7 +106,7 @@ public class ReportSelectController {
 		return jsonObject;
 	}
 	
-	
+	//서류 승인
 	@RequestMapping(value = "/report/check",method=RequestMethod.POST)
 	public @ResponseBody Map<String,Object> updateReport(int num){
 		Map<String, Object> jsonObject = new HashMap<String, Object>();
@@ -124,7 +122,7 @@ public class ReportSelectController {
 		return jsonObject;
 	}
 	
-	
+	//서류 반려
 	@RequestMapping(value = "/report/back",method=RequestMethod.POST)
 	public @ResponseBody Map<String,Object> updateReport(ReportVo vo){
 		System.out.println(vo.getReportNo());

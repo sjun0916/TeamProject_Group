@@ -119,7 +119,7 @@
 
 <script type="text/javascript">
 var title;
-	function writeReport() {
+	function writeReport() {	//새창으로 에디터 열기
 		var e = document.getElementById("type");
 		var reportType = e.options[e.selectedIndex].value;
 		document.getElementById("regType").value=reportType;
@@ -142,6 +142,7 @@ var title;
 			alert("제목을 입력하세요");
 		}
 	}
+	//결재자가 여러명일때
 	$(function() {
 		$('#submissionPersonnel')
 				.change(
