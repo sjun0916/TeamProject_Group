@@ -110,8 +110,8 @@
 						<tr align="center">
 							<th width="5%"><input type="checkbox" name="firstbox" id="checkAll" value="" /></th>
 							<th width="10%">발신자(사원번호)</th>
-							<th width="55%">메세지 내용</th>
-							<th width="10%">수신시간</th>
+							<th width="45%">메세지 내용</th>
+							<th width="20%">수신시간</th>
 							<th width="10%">답장</th>
 							<th width="10%">삭제</th>
 						</tr>

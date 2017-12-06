@@ -13,8 +13,8 @@
 
 			<!-- 메인 로고 -->
 			<a href="/group/home" class="logo"> <!-- 메인바가 미니가 되었을때 로고 형태 -->
-				<span class="logo-mini"><img src="${pageContext.request.contextPath }/resources/icon/penguin.png"></span> <!-- 로고 형태 --> <span
-				class="logo-lg">GroupWare  <img src="${pageContext.request.contextPath }/resources/icon/penguin.png"></span>
+				<span class="logo-mini"><img src="${pageContext.request.contextPath }/resources/icon/10.gif" width="50" height="50"></span> <!-- 로고 형태 --> <span
+				class="logo-lg">GroupWare  <img src="${pageContext.request.contextPath }/resources/icon/10.gif" width="50" height="50"></span>
 			</a>
 			<!-- 헤더 상단 네비바 -->
 			<nav class="navbar navbar-static-top" role="navigation">
@@ -125,7 +125,7 @@
 									class="user-image" alt="User Image">
 								</c:when>
 								<c:otherwise>
-								<img src="${pageContext.request.contextPath}/resources/icon/penguin.png" class="user-image" alt="User Image">
+								<img src="${pageContext.request.contextPath}/resources/icon/7.gif" class="user-image" alt="User Image">
 								</c:otherwise>
 								</c:choose>	
 							 <!-- hidden-xs hides the username on small devices so only the image appears. -->
@@ -141,7 +141,7 @@
 									class="img-circle" alt="User Image">
 								</c:when>
 								<c:otherwise>
-								<img src="${pageContext.request.contextPath}/resources/icon/penguin.png" class="img-circle" alt="User Image">
+								<img src="${pageContext.request.contextPath}/resources/icon/7.gif" class="img-circle" alt="User Image">
 								</c:otherwise>
 								</c:choose>	
 									<p>[${authUser.teamName }][${authUser.positionName }]
@@ -185,7 +185,7 @@
 									class="img-circle" alt="User Image">
 								</c:when>
 								<c:otherwise>
-								<img src="${pageContext.request.contextPath}/resources/icon/penguin.png" class="img-circle" alt="User Image">
+								<img src="${pageContext.request.contextPath}/resources/icon/7.gif" class="img-circle" alt="User Image">
 								</c:otherwise>
 								</c:choose>	
 					</div>

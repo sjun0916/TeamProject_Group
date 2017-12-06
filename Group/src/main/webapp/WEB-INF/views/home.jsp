@@ -444,17 +444,15 @@
 												<c:when test="${calList==null}">오늘 일정이 없습니다.</c:when>
 												<c:otherwise>
 					  					<tr>
-											<th width="10%">분류</th>
-											<th width="20%">제목</th>
-											<th width="30%">내용</th>
-											<th width="20%">시작일</th>
-											<th width="20%">종료일</th>
+											<th width="15%">분류</th>
+											<th width="35%">제목</th>
+											<th width="25%">시작일</th>
+											<th width="25%">종료일</th>
 										</tr>
 											<c:forEach var="calList" items="${calList}" varStatus="status">
 													<tr>
 														<td><c:out value="${calList.calendar_kind}"/></td>
 														<td><c:out value="${calList.calendar_title}"/></td>
-														<td><c:out value="${calList.calendar_cont}"/></td>
 														<td><fmt:formatDate value="${calList.calendar_start}" pattern="yyyy-MM-dd" /></td>
 														<td><fmt:formatDate value="${calList.calendar_end}" pattern="yyyy-MM-dd" /></td>
 													</tr>

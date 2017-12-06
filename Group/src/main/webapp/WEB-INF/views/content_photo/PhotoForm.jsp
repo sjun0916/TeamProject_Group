@@ -101,7 +101,7 @@
 								<c:out value="${listview.size2String()}" />
 								<br />
 							</c:forEach>
-							<input type="file" class="form-control" id="uploadfile"
+							<input type="file" id="uploadfile"
 								name="uploadfile" multiple="" />
 						</div>
 					</div>
