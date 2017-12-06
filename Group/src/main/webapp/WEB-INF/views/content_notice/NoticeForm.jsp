@@ -90,10 +90,10 @@
 								<c:out value="${listview.size2String()}" />
 								<br/>
 					</c:forEach>
-					<div class="btn btn-default btn-file">
-                  	<i class="fa fa-paperclip"></i> 첨부파일
+<!-- 					<div class="btn btn-default btn-file"> -->
+<!--                   	<i class="fa fa-paperclip"></i> 첨부파일 -->
                   	<input type="file" class="form-control" id="attach" name="uploadfile" multiple="" />
-                	</div>
+<!--                 	</div> -->
 <!-- 					<input type="file" class="form-control" id="attach" name="uploadfile" multiple="" /> -->
                   </div>
                 </div>
