@@ -54,8 +54,8 @@
 								<c:param name="photonum" value="${listview.photonum}" />
 								</c:url>
 								<td>
-								<img src="\group\imgUpload\2017\<c:out value="${listview.realname}"/>" width="150" height="150" />
-								<br><a href="${link}"><c:out value="${listview.title}" /></a>
+								<a href="${link}"><img src="\group\imgUpload\2017\<c:out value="${listview.realname}"/>" width="150" height="150" />
+								<br><c:out value="${listview.title}" /></a>
 								<br>
 								<c:if test="${listview.departname!=null}">
 								[<c:out value="${listview.departname}"/>]
