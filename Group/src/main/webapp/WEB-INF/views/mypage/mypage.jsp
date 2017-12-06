@@ -117,7 +117,8 @@
                 <div class="form-group">
                   <label for="password" class="col-sm-2 control-label">새로운 비밀번호</label>
                   <div class="col-sm-10">
-                    <input type="password" class="form-control" id="password" name="password" >
+                    <input type="password" class="form-control" id="password" name="password" 
+                    <c:if test="${password == null}">value="${authUser.password }"</c:if> >
                   </div>
                 </div>
               </div>
@@ -129,9 +130,8 @@
               <!-- /.box-footer -->
             </form>
           </div>
-
-	</section>
-	
+		
+	</section>	
 	
 	
 	

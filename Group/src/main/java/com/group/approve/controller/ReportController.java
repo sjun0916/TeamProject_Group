@@ -47,7 +47,7 @@ public class ReportController {
 	}
 	
 	
-//   서류 확인
+//   요청 서류 list
 	@RequestMapping("/report/state")
 	public String stateReport(HttpServletRequest request, @AuthUser UserVO authUser){
 		request.setAttribute("title", "서류 현황");
@@ -55,24 +55,8 @@ public class ReportController {
 		request.setAttribute("list",list);
 		return "report/state";
 	}
-	
-	
-//	 서류 권한신청
-	@RequestMapping("/report/apply")
-	public String applyReport(HttpServletRequest request){
-		request.setAttribute("title", "서류 권한 신청");
-		return "report/state";
-	}
-	
-	
-//	 권한 신청확인
-	@RequestMapping("/report/confirm")
-	public String confirmReport(HttpServletRequest request){
-		request.setAttribute("title", "권한 신청 현황");
-		return "report/state";
-	}
-	
-	
+
+//  승인대기 서류 list	
 	@RequestMapping("/report/waiting")
 	public String waitReport(HttpServletRequest request, @AuthUser UserVO authUser){
 		request.setAttribute("title", "승인대기중");
@@ -83,22 +67,6 @@ public class ReportController {
 	}
 	
 	
-/*	@RequestMapping(value="/report/make", method=RequestMethod.POST)
-	public String makeImage(HttpServletRequest request){
-		request.setAttribute("title", "서류만들기");
-		String path = request.getSession().getServletContext().getRealPath("/report");
-		File dir = new File(path);
-		File[] fileList = dir.listFiles();
-		List<String> fileNameList = new ArrayList<String>();
-		for(int i=0;i<fileList.length;i++){
-			File file = fileList[i];
-			if(file.isFile()){
-//				String fileName = file.getName();
-				fileNameList.add(file.getName().substring(0,file.getName().lastIndexOf(".")));
-			}
-		}
-		request.setAttribute("reportList", fileNameList);
-		return "report/update";
-	}*/
+
 	
 }
