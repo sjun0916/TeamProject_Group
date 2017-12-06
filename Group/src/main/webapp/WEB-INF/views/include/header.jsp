@@ -125,7 +125,7 @@
 									class="user-image" alt="User Image">
 								</c:when>
 								<c:otherwise>
-								<img src="${pageContext.request.contextPath}/resources/icon/person.png" class="user-image" alt="User Image">
+								<img src="${pageContext.request.contextPath}/resources/icon/penguin.png" class="user-image" alt="User Image">
 								</c:otherwise>
 								</c:choose>	
 							 <!-- hidden-xs hides the username on small devices so only the image appears. -->
@@ -141,7 +141,7 @@
 									class="img-circle" alt="User Image">
 								</c:when>
 								<c:otherwise>
-								<img src="${pageContext.request.contextPath}/resources/icon/person.png" class="img-circle" alt="User Image">
+								<img src="${pageContext.request.contextPath}/resources/icon/penguin.png" class="img-circle" alt="User Image">
 								</c:otherwise>
 								</c:choose>	
 									<p>[${authUser.teamName }][${authUser.positionName }]
@@ -185,7 +185,7 @@
 									class="img-circle" alt="User Image">
 								</c:when>
 								<c:otherwise>
-								<img src="${pageContext.request.contextPath}/resources/icon/person.png" class="img-circle" alt="User Image">
+								<img src="${pageContext.request.contextPath}/resources/icon/penguin.png" class="img-circle" alt="User Image">
 								</c:otherwise>
 								</c:choose>	
 					</div>

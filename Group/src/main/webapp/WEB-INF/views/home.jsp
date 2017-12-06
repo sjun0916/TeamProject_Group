@@ -87,7 +87,7 @@
 					<div class="box">
 						<div class="box-header with-border">
 							<h3 class="box-title">Document Approval</h3>
-							&emsp;&emsp;<span class="label label-danger">승인대기: <c:out value="${waitCount}"/></span>
+							&emsp;&emsp;<a href="/group/report/waiting"><span class="label label-danger">결재대기: <c:out value="${waitCount}"/></span></a>
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool"
 									data-widget="collapse">
