@@ -83,7 +83,7 @@
 							</ul>
 						</li>
 						<!-- 결재표시 (오른상단 네비) -->
-						<li class="dropdown tasks-menu open">
+						<li class="dropdown tasks-menu">
 							<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" aria-expanded="true"> <i
 								class="fa fa-flag-o"></i> <span class="label label-danger">N</span>
