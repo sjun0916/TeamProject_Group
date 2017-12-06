@@ -65,8 +65,7 @@
 	<!-- 관리권한이 없는 사원 리스트 -->
 	<select id="userlist" resultType="UserVO">
 		select * from EMPLOYEE,TEAM
-		where ROLE !='ADMIN'
-		and EMPLOYEE.TEAM_ID=TEAM.TEAM_ID
+		where EMPLOYEE.TEAM_ID=TEAM.TEAM_ID
 		order by EMPLOYEE.TEAM_ID
 	</select>
 	
