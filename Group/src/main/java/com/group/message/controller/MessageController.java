@@ -25,6 +25,12 @@ public class MessageController {
 	@Autowired
 	private MessageService messageService;
 	
+	/*
+	 * 쪽지를 작성하기 위한 폼
+	 * 기본키인 사원번호를 가져와서
+	 * 리스트 출력
+	 * 리스트에서 쪽지 보내기 버튼으로 보내기 가능
+	 */
 	@RequestMapping( "")
 	public String message(@AuthUser UserVO authUser, 
 											Model model) {
@@ -39,6 +45,7 @@ public class MessageController {
 		return "message/messageform";
 	}
 	
+	// 쪽지 상세보기
 	@RequestMapping(value="/view", method=RequestMethod.GET)
 	public String view(@RequestParam(value = "messageId", required = true) String messageId,
 			Model model) {
@@ -54,14 +61,14 @@ public class MessageController {
 		return "message/view";
 	}
 	
-	
+	// 쪽지 삭제
 	@RequestMapping( value="/deleteMessage", method=RequestMethod.POST)
 	public String deleteMessage(@ModelAttribute MessageVO messageVo) {
 		int count = messageService.deleteMessage(messageVo);
 		return "message/messageform";
 	}
 	
-	
+	// 쪽지 보내기
 	@ResponseBody
 	@RequestMapping( value="/sendMessage", method=RequestMethod.POST )
 	public JSONResult sendMessage(@ModelAttribute MessageVO messageVo) {
@@ -69,6 +76,7 @@ public class MessageController {
 		return JSONResult.success(count);
 	}
 	
+	// 답장 기능
 	@ResponseBody
 	@RequestMapping( value="/answerMessage", method=RequestMethod.POST )
 	public JSONResult answerMessage(@ModelAttribute MessageVO messageVo) {

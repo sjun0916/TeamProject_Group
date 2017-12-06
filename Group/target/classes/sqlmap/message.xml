@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="message">
+	<!-- 쪽지 답장 -->
 	<insert id="answerMessage" parameterType="messageVO">
 		INSERT INTO MESSAGE(
 		MESSAGE_ID,
@@ -17,7 +18,8 @@
 		SYSDATE
 		)
 	</insert>
-
+	
+	<!-- 쪽지 보내기 -->
 	<insert id="sendMessage" parameterType="messageVO">
 		INSERT INTO MESSAGE(
 		MESSAGE_ID,
@@ -34,8 +36,7 @@
 		)
 	</insert>
 
-
-
+	<!-- 쪽지 상세내용 -->
 	<select id="getDetailMessage" resultType="messageVO">
 		SELECT MESSAGE_CONTENT MESSAGE,
 			(SELECT EMPLOYEE_NO
@@ -47,7 +48,7 @@
 
 	</select>
 
-
+	<!-- 본인의 쪽지 받아오기 -->
 	<select id="getMessage" resultType="messageVO" parameterType="UserVO">
 		SELECT RECEIVER_EMPLOYEE_NO receiverEmployeeNo,
 		SENDER_EMPLOYEE_NO senderEmployeeNo,
@@ -62,8 +63,9 @@
 		WHERE RECEIVER_EMPLOYEE_NO = #{employeeNo}
 		ORDER
 		BY WRITEDATE DESC
-
 	</select>
+	
+	<!-- 메인 뷰 쪽지 받아오기 -->
 	<select id="getMessage2" resultType="messageVO" parameterType="UserVO">
 		SELECT RECEIVER_EMPLOYEE_NO receiverEmployeeNo,
 		SENDER_EMPLOYEE_NO senderEmployeeNo,
@@ -79,11 +81,9 @@
 		AND ROWNUM &lt;= 3
 		ORDER
 		BY WRITEDATE DESC
-
 	</select>
 	
-
-
+	<!-- 쪽지 삭제 -->
 	<delete id="deleteMessage" parameterType="messageVO">
 		<![CDATA[
 		DELETE FROM MESSAGE WHERE MESSAGE_ID = #{messageId}

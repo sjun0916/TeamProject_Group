@@ -3,6 +3,7 @@
 
 <mapper namespace="searchEmployee">
 
+	<!-- 사원목록 출력 -->
 	<select id="getEmployeeList" resultType="UserVO">
 	SELECT 
 	EMPLOYEE_NAME,
@@ -11,7 +12,7 @@
 	(SELECT POSITION_NAME FROM POSITION WHERE POSITION_ID = EMPLOYEE.POSITION_ID) POSITIONNAME, EMAIL
 	FROM EMPLOYEE
 	WHERE IS_AUTHORITY='Y'
-
+		<!-- 부서 또는 이름이 없을 경우 출력하지 않음 -->
 	  	 <if test="teamId != ''">
 	  	 <![CDATA[	
 			  	AND   TEAM_ID=#{teamId }

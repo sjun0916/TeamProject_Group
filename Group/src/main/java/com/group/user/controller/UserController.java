@@ -31,13 +31,19 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-
-	
+	// 회원가입 페이지 매핑
 	@RequestMapping( value="/join", method=RequestMethod.GET )
 	public String join() {
 		return "user/join";
 	}
 
+	/*
+	 * 회원가입
+	 * 프로필사진을 파일업로드
+	 * 사용자의 정보입력
+	 * 
+	 * 가입승인대기 상태
+	 */
 	@RequestMapping( value="/join", method=RequestMethod.POST )
 	public String join( @ModelAttribute UserVO userVo,
 			@RequestParam( "file" ) MultipartFile file, HttpServletRequest request) {
@@ -49,34 +55,38 @@ public class UserController {
 		return "redirect:/user/joinsuccess";
 	}
 	
+	// 로그인 페이지 매핑
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String login() {
 		return "user/login";
 	}
 	
-	
+	// 접근권한이 없을 경우 해당 페이지 출력
 	@RequestMapping( "/wrongaccess" )
 	public String wrongAccess() {
 		return "user/wrongaccess";
 	}
 	
+	// 승인이 되지 않았을 경우 해당 페이지 출력
 	@RequestMapping( "/notapproval" )
 	public String notApproval() {
 		return "user/notapproval";
 	}
 	
+	// 가입요청후 해당 페이지 출력
 	@RequestMapping( "/joinsuccess" )
 	public String joinSuccess() {
 		return "user/joinsuccess";
 	}
 	
+	// 로그인한 계정이 관리자일 경우 관리자 페이지 출력
 	@Auth(role=Auth.Role.ADMIN)
 	@RequestMapping( "/admin" )
 	public String adminPage() {
 		return "user/admin";
 	}
 	
-	
+	// 가입 승인되지 않은 사원목록을 출력
 	@ResponseBody
 	@RequestMapping( value="/searchnotapproved", method=RequestMethod.POST )
 	public JSONResult view(@ModelAttribute UserVO userVo) {
@@ -84,6 +94,7 @@ public class UserController {
 		return JSONResult.success(list);
 	}
 	
+	// 가입 승인이 된 사원목록 출력
 	@ResponseBody
 	@RequestMapping( value="/approve", method=RequestMethod.POST )
 	public JSONResult approveJoin(@ModelAttribute UserVO userVo) {

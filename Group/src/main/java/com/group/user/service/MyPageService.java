@@ -12,6 +12,7 @@ public class MyPageService {
 	@Autowired
 	private MyPageDao myPageDao;
 	
+	// 회원정보 수정
 	public int modify(UserVO userVo) {
 		int result = myPageDao.modify(userVo);
 		

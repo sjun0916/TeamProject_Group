@@ -10,12 +10,12 @@ public class UserVO {
 	private String email;
 	private String employeeName;
 	private String password;
-	private String positionId; // 직급
+	private String positionId;	// 직급
 	private String joinDate;
 	private String isAuthority; // 인증여부
-	private String role;
+	private String role;		// 관리자 권한
 	private String positionName;
-	private String imageUrl;
+	private String imageUrl;	// 프로필
 	
 
 	public String getTeamName() {

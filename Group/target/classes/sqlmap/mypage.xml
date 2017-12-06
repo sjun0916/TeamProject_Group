@@ -3,7 +3,7 @@
 
 <mapper namespace="mypage">
 
-
+	<!-- 회원정보 수정 -->
 	<update id="modify" parameterType="UserVO">
 			UPDATE EMPLOYEE
 			SET PASSWORD = #{password},

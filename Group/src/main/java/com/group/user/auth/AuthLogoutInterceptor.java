@@ -15,6 +15,7 @@ public class AuthLogoutInterceptor extends HandlerInterceptorAdapter {
 		Object handler)
 		throws Exception {
 		
+		// session 초기화
 		HttpSession session = request.getSession();
 		if( session != null ) {
 			session.removeAttribute( "authUser" );

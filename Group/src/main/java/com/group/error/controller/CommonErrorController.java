@@ -7,7 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+/*
+ * 보안을 위하여 
+ * 에러 페이지 처리
+ */
 @Controller
 @RequestMapping("/common/error")
 public class CommonErrorController {

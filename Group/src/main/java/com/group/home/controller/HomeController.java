@@ -151,6 +151,10 @@ public class HomeController {
 		return "home";
 	}
 
+	/*
+	 * 로그인 화면
+	 * 접속시 로그 남김
+	 */
 	@RequestMapping(value = "/", method = { RequestMethod.GET, RequestMethod.POST})
 	public String loginForm() throws Exception {
 

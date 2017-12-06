@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 
+/*
+ * 메일 발송 기능을 위한 Sender 작성
+ * Java Mail API의 MimeMessage를 이용해서 메일을 발송
+ */
 public class EmailSender {
 	
 	 @Autowired

@@ -19,6 +19,10 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	/*
+	 * 팀목록을 받아온다
+	 * JSON에 객체로 저장
+	 */
 	@ResponseBody
 	@RequestMapping( "/getTeamList" )
 	public JSONResult getTeamList() {
@@ -27,6 +31,10 @@ public class UserController {
 		return JSONResult.success( teamList );
 	}
 	
+	/*
+	 * 직급목록을 받아온다
+	 * JSON에 객체로 저장
+	 */
 	@ResponseBody
 	@RequestMapping( "/getPositionList" )
 	public JSONResult getPositionList() {

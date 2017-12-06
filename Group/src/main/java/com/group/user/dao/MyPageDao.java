@@ -12,6 +12,7 @@ public class MyPageDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	// 회원정보 수정
 	public int modify( UserVO userVo) {
 		return sqlSession.update("mypage.modify", userVo );
 		

@@ -12,11 +12,9 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.group.mail.dao.MailDao;
 import com.group.mail.service.MailService;
 import com.group.mail.vo.MailVo;
-import com.group.message.vo.MessageVO;
 import com.group.user.auth.AuthUser;
 import com.group.user.common.JSONResult;
 import com.group.user.vo.UserVO;
@@ -39,18 +36,16 @@ public class MailController {
 	@Resource
 	MailService service;	
 	
+	/*
+	 * 메일 작성을 위한 폼 가져오기
+	 * 세션에 추가 되어있는 정보의
+	 * email을 가져와서 등록
+	 */
 	@RequestMapping( "")
 	public String email(@AuthUser UserVO authUser, 
 											Model model) {
 		MailVo mailVo= new MailVo();
 		mailVo.setSenderMail(authUser.getEmail());
-		
-/*		int count = service.insert(mailVo);
-		
-		List<MailVo> list = 
-				service.getMail( mailVo );
-		
-		model.addAttribute( "list", list );*/
 		
 		System.out.println("메일함 열기 성공");
 		return "content_mail/mailForm";
@@ -66,7 +61,7 @@ public class MailController {
 
 		model.addAttribute("list", list);
 
-		System.out.println("보낸메일함 성공");
+		System.out.println("받은메일함 열기 성공");
 		return "content_mail/receivelist";
 	}
 	
@@ -80,24 +75,20 @@ public class MailController {
 
 		model.addAttribute("list", list);
 
-		System.out.println("00000");
+		System.out.println("보낸메일함 열기 성공");
 		return "content_mail/sendlist";
 	}
-	
-	
-	// mailForm
-/*	@RequestMapping(value = "/mailsend")
-	public JSONResult sendMailForm(@ModelAttribute MailVo mailVo) {
-		System.out.println("11111111111");
-		int count = service.insert(mailVo);
-		
-	    return JSONResult.success(count);
-	  } */
+
 	
 	
 	
 	
-	/** 메일 보내기 */
+	/*
+	 * 메일 보내기
+	 * 입력받은 받는사람 이메일, 제목, 내용
+	 * 
+	 * 구글 SMTP로 인증절차 거침
+	 */
 	@RequestMapping(value="/send", method=RequestMethod.POST)
 	public String sendMail(
 						  @RequestParam("receiverMail") String receiverMail
@@ -176,6 +167,9 @@ public class MailController {
 		return "content_mail/result";
 	}
 	
+	/*
+	 * 구글 SMTP
+	 */
 	private class SMTPAuthenticator extends javax.mail.Authenticator {
 
 		private MailVo vo = new MailVo();
@@ -197,7 +191,9 @@ public class MailController {
 		
 	}
 	
-	
+	/*
+	 * 메일을 상세내용 구현
+	 */
 	@RequestMapping(value="/view", method=RequestMethod.GET)
 	public String view(@RequestParam(value = "mailNum", required = true) int mailNum,
 			Model model) {

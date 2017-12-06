@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.group.mail.dao.MailDao;
 import com.group.mail.vo.MailVo;
-import com.group.message.vo.MessageVO;
 
 @Service
 public class MailService {

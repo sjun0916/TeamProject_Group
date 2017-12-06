@@ -13,6 +13,7 @@ public class SearchEmployeeDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	// 사원목록 출력
 	public List<UserVO> getEmployeeList(UserVO userVo ) {
 		return sqlSession.selectList( "searchEmployee.getEmployeeList",userVo );
 	}

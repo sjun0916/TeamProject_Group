@@ -1,5 +1,8 @@
 package com.group.home.controller;
-
+/*
+ * 사원번호 및 비밀번호 찾기
+ * 메일 전송 VO
+ */
 public class Email {
 	 
     private String subject;

@@ -27,25 +27,21 @@
 
 	<section class="content-header">
 
-		
-		<%-- 		<img src="${pageContext.request.contextPath}/resources/icon/rian.jpg" width="100%" height="300px"> --%>
 
 
 		<section class="content">
-		
-		
 			<div id="myCarousel" class="carousel slide" data-ride="carousel"> 
 	
-	<!--페이지-->
-	<ol class="carousel-indicators">
-		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-		<li data-target="#myCarousel" data-slide-to="1"></li>
-		<li data-target="#myCarousel" data-slide-to="2"></li>
-		<li data-target="#myCarousel" data-slide-to="3"></li>
-	</ol>
-	<!--페이지-->
-
-	<div class="carousel-inner">
+		<!--페이지-->
+		<ol class="carousel-indicators">
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1"></li>
+			<li data-target="#myCarousel" data-slide-to="2"></li>
+			<li data-target="#myCarousel" data-slide-to="3"></li>
+		</ol>
+		
+		<!--페이지-->
+		<div class="carousel-inner">
 		<!--슬라이드1-->
 		<div class="item active"> 
 			<img src="http://cdn.acus.kr/pyungkang/menu/1439799254929458.jpg" style="width:100%; height:250px;" alt="First slide">
@@ -96,13 +92,7 @@
 					<div class="box">
 						<div class="box-header with-border">
 							<h3 class="box-title">Document Approval</h3>
-
-							
 							&emsp;&emsp;<span class="label label-danger">승인대기: <c:out value="${waitCount}"/></span>
-<%-- 							&emsp;<small>승인대기: <c:out value="${waitCount}"/></small> --%>
-							
-						
-
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool"
 									data-widget="collapse">
@@ -483,48 +473,6 @@
 					  		</tr>
 					  		</tbody>
 							</table>
-							
-							
-							
-							
-							
-<!-- 							<table class="scheduleTable"> -->
-<!-- 							  <tr> -->
-<!-- 							    <td><table> -->
-<!-- 							      <tr> -->
-<%-- 							      <td width="73%" rowspan="2" align="center"><h4><label>${iTYear}년 ${iTMonth}월 ${iTDay}일</label></h4></td> --%>
-<!-- 							      </tr> -->
-<!-- 					    		</table></td> -->
-<!-- 					  		</tr> -->
-<!-- 					  		일정목록		 -->
-<!-- 							<tr> -->
-<!-- 								<td><table> -->
-<!-- 										<tbody> -->
-<%-- 											<c:choose> --%>
-<%-- 												<c:when test="${calList==null}">오늘 일정이 없습니다.</c:when> --%>
-<%-- 												<c:otherwise> --%>
-<!-- 													<tr> -->
-<!-- 														<th>분류</th> -->
-<!-- 														<th>제목</th> -->
-<!-- 														<th>내용</th> -->
-<!-- 														<th>시작일</th> -->
-<!-- 														<th>종료일</th> -->
-<!-- 													</tr> -->
-<%-- 												<c:forEach var="calList" items="${calList}" varStatus="status"> --%>
-<!-- 													<tr> -->
-<%-- 														<td><c:out value="${calList.calendar_kind}"/></td> --%>
-<%-- 														<td><c:out value="${calList.calendar_title}"/></td> --%>
-<%-- 														<td><c:out value="${calList.calendar_cont}"/></td> --%>
-<%-- 														<td><fmt:formatDate value="${calList.calendar_start}" pattern="yyyy-MM-dd" /></td> --%>
-<%-- 														<td><fmt:formatDate value="${calList.calendar_end}" pattern="yyyy-MM-dd" /></td> --%>
-<!-- 													</tr> -->
-<%-- 												</c:forEach> --%>
-<%-- 											</c:otherwise> --%>
-<%-- 											</c:choose> --%>
-<!-- 										</tbody> -->
-<!-- 									</table></td> -->
-<!-- 								</tr> -->
-<!-- 							</table> -->
 							</div>
 						<!-- /.box-body -->
 
@@ -615,22 +563,9 @@
 							<!-- /.row -->
 						</div>
 						<!-- /.box-body -->
-
-
-
-						<!-- /.footer -->
 					</div>
-
-
-
-
-
-
-
-
 					</div>
 					<!-- /.box -->
-
 					</div>
 
 		</section>

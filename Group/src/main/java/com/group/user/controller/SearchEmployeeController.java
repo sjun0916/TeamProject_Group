@@ -28,6 +28,7 @@ public class SearchEmployeeController {
 		return "searchemployee/employeelist";
 	}
 	
+	// 등록완료 된 모든 사원을 출력
 	@ResponseBody
 	@RequestMapping( value="", method=RequestMethod.POST )
 	public JSONResult view(@ModelAttribute UserVO userVo) {

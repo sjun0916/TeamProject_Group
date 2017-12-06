@@ -14,6 +14,7 @@ public class FileUploadService {
 	private static String PREFIX_URL = "C:\\Test\\images";
 	private String savePath = "";
 
+	// 파일저장
 	public String restore(MultipartFile multipartFile) {
 
 		String url = "";
@@ -45,9 +46,7 @@ public class FileUploadService {
 		return saveFileName;
 	}
 
-	/**
-     * 파일 저장 경로 생성.
-     */
+	// 파일 저장 경로 생성
     public void makeBasePath(String path) {
         File dir = new File(path); 
         if (!dir.exists()) {
@@ -65,7 +64,8 @@ public class FileUploadService {
 		fos.write( fileData );
 		fos.close();
 	}
-	 
+	
+	// 파일 이름 가져오기
 	private String genSaveFileName( String extName ) {
 		String fileName = "";
 		
@@ -81,7 +81,8 @@ public class FileUploadService {
 		
 		return fileName;
 	}
-
+	
+	// 저장 경로
 	public String getSavePath() {
 		return savePath;
 	}

@@ -2,14 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="user">
-
+	
+	<!-- 가입 승인 -->
 	<update id="approvejoin" parameterType="UserVO">
 			UPDATE EMPLOYEE
 			SET IS_AUTHORITY = 'Y'
 			WHERE EMAIL = #{email }
-
 	</update>
 
+	<!-- 가입되지않은 목록 가져오기 -->
 	<select id="getnotapproved"  resultType="UserVO">
 		SELECT EMPLOYEE_NAME EMPLOYEENAME,
 			   EMPLOYEE_NO EMPLOYEENO,
@@ -18,25 +19,23 @@
 			   EMAIL
 		FROM EMPLOYEE
 		WHERE IS_AUTHORITY='N'
-	
 	</select>
 	
-	
+	<!-- 팀목록 -->
 	<select id="getTeamList"  resultType="UserVO">
 		SELECT TEAM_ID TEAMID,TEAM_NAME TEAMNAME
 		FROM TEAM
-	
 	</select>
 
+	<!-- 직급목록 -->
 	<select id="getPositionList"  resultType="UserVO">
 	SELECT POSITION_ID POSITIONID,POSITION_NAME POSITIONNAME
 		FROM POSITION
-		ORDER BY TO_NUMBER(POSITION_ID) DESC
-		
-		</select>
+		ORDER BY TO_NUMBER(POSITION_ID) DESC	
+	</select>
 
+	<!-- 회원가입 -->
 	<insert id="insert" parameterType="UserVO">
-
 	INSERT INTO 
 		EMPLOYEE(
 				EMPLOYEE_NO,
@@ -61,17 +60,15 @@
 				'USER',
 				#{imageUrl}
 				)
-
 	</insert>
 	
-	<!-- 현아 추가 -->
+	<!-- 관리권한이 없는 사원 리스트 -->
 	<select id="userlist" resultType="UserVO">
 		select * from EMPLOYEE,TEAM
 		where ROLE !='ADMIN'
 		and EMPLOYEE.TEAM_ID=TEAM.TEAM_ID
 		order by EMPLOYEE.TEAM_ID
 	</select>
-
 	
 	<!-- 비밀번호 이메일 전송 -->
 	<select resultType="java.lang.String" parameterType="map"	id="getPw">
@@ -93,9 +90,7 @@
 	and EMAIL=#{email}
 	</select>
 
-
-
-
+	<!-- 세션에 등록하기 위한 사원번호와 비밀번호 -->
 	<select id="getByemployeeNoAndPassword" 
 			parameterType="map"
 			resultType="UserVO">
@@ -118,6 +113,7 @@
 		]]>
 	</select>
 
+	<!-- 사원번호에 대한 정보들 -->
 	<select id="getByNo" parameterType="long" resultType="UserVO">
 		<![CDATA[
 		SELECT EMPLOYEE_NO EMPLOYEENO,

@@ -37,7 +37,7 @@
 	<!-- ★★★★★★★★★★★여기에 추가★★★★★★★★★★★ -->
 	<!-- 컨텐트 메인 -->
 	<section class="content container-fluid">
-
+		<!-- admin.js추가 -->
 		 <div id="list_div">
 			<table id="list"></table>
 

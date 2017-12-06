@@ -32,6 +32,11 @@ public class MyPageController {
 		return "mypage/mypage";
 	}
 	
+	/*
+	 * 회원정보를 수정하기 위한 메소드
+	 * 프로필 사진을 불러와 출력하고
+	 * 바뀔 정보들을 업데이트
+	 */
 	@RequestMapping( value="/modify", method=RequestMethod.POST )
 	public String modify( @ModelAttribute UserVO userVo,
 			@RequestParam( "file" ) MultipartFile file, HttpServletRequest request) {
