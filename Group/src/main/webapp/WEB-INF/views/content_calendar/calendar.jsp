@@ -3,8 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,9 +25,10 @@
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-
+<!-- 			
+			일정 추가 화면
+ -->
 			<div class="col-md-3">
-
 				<div class="box box-solid">
 					<form id="list" name="calendarList" method="post"
 						onsubmit="return loadHtml(this, this.action, 'result')">
@@ -88,6 +87,9 @@
 				<button type="button" class="btn btn-block btn-info btn-lg"	onclick="submit();">일정 등록</button>
 			</div>
 			<!-- /.col -->
+<!-- 			
+			달력
+ -->
 			<div class="col-md-9">
 				<div class="box box-primary">
 					<div class="box-body no-padding">
@@ -103,6 +105,9 @@
 		<!-- /.row -->
 	</section>
 	<!-- /.content -->
+<!-- 	
+	일정 상세 화면/수정 화면
+ -->
 	<div class="example-modal">
         <div class="modal" id="myModal3" role="dialog">
           <div class="modal-dialog">
@@ -117,20 +122,11 @@
               	<div class="form-group">
 					<label>분류 선택:</label>
 					<div class="form-group-select">
-<%-- 						<c:choose> --%>
-<%-- 						<c:when test="${authUser.role == 'ADMIN' }"> --%>
 						<select id="kind" disabled="">
 							<option value="person" selected>개인</option>
 							<option value="team">부서</option>
 							<option value="compony">회사</option>
 						</select>
-<%-- 						</c:when> --%>
-<%-- 						<c:otherwise> --%>
-<!-- 						<select name="kind" disabled=""> -->
-<!-- 							<option value="person" selected>개인</option> -->
-<!-- 						</select> -->
-<%-- 						</c:otherwise> --%>
-<%-- 						</c:choose> --%>
 					</div>
                 <!-- /.input group -->
                 <div class="form-group">
@@ -180,11 +176,10 @@
 <%@ include file="/WEB-INF/views/content_calendar/calendarScript.jsp" %>
 
 <script>
-// function getSession(){
-<%-- 	var member = <%=(String)session.getAttribute("authUser")%> --%>
-// }
+/*---------------------------------------------
+ * 일정 데이터 가져오기
+ ---------------------------------------------*/
 function calView(desc){
-	
 	$('#calendar').fullCalendar(
 		{
 			header : {
@@ -197,7 +192,6 @@ function calView(desc){
 			},
 			//Random default events
 			events : '${pageContext.request.contextPath}/calendar/data',
-
 			editable : false,
 			droppable : false, // this allows things to be dropped onto the calendar !!!
 			eventClick : function(calEvent, jsEvent, view) {
@@ -251,7 +245,8 @@ function calView(desc){
 }
 
 $(function() {
-	/* initialize the external events
+	/*----------------------------------------------------------------- 
+	 * 이벤트 초기화
 	 -----------------------------------------------------------------*/
 	function ini_events(ele) {
 		ele.each(function() {
@@ -272,7 +267,8 @@ $(function() {
 		});
 	}
 	ini_events($('#external-events div.external-event'));
-	/* initialize the calendar
+	/*----------------------------------------------------------------
+	 * 캘린더 초기화
 	 -----------------------------------------------------------------*/
 	//Date for the calendar events (dummy data)
 	var date = new Date();
@@ -285,16 +281,12 @@ $(function() {
 		$(this).parents("#mark").remove("");
 	});
 	
-	//date picker
-	$('#reservation').daterangepicker();
-// 	Date range picker with time picker
-	
+	// 	Date range picker with time picker
  	$('#reservationtime1').daterangepicker({
 		timePicker : true,
 		timePickerIncrement : 30,
 		format : 'YYYY/MM/DD/ h:mm A'
 	});
-	
 	$('#reservationtime2').datepicker({
 		altFormat: 'YYYY/MM/DD/'
 	});
@@ -303,10 +295,6 @@ $(function() {
    	});
 	
 	//Date range as a button
-	
-// 	Colorpicker
-	$(".my-colorpicker1").colorpicker();		
-	$(".my-colorpicker2").colorpicker();
 	$('#datepicker').datepicker({
 		autoclose : true
 	});
@@ -314,12 +302,12 @@ $(function() {
 window.onload = function() {
 	$(".datepicker.datepicker-inline").hide();
 };
+/*---------------------------------------------------
+ * 일정 추가
+ --------------------------------------------------*/
 function submit() {
-	// 			e.preventDefault();
 	// 			Get value and make sure it is not null
 	var kind = $("select[name=kind]").val();
-	
-//		var bgcode = $("#bgcolor").val();
 	var dateCode = $("#reservationtime1").val();
 	var title = $("#new-event").val();
 	var cont = $("#cont").val();
@@ -338,7 +326,6 @@ function submit() {
 		return false;
 	}
 	else{
-		
 		htmlcode += '<div id="mark" class="box box-default box-solid collapsed-box">';
 		htmlcode += '<div class="box-header with-border">';
 		htmlcode += '<h3 class="box-title">' + title+ '</h3>';
@@ -365,6 +352,9 @@ function submit() {
 	}
 	oksign.click();
 }
+/*---------------------------------------------
+ * 일정 추가
+ ------------------------------------------------*/
 function loadHtml(form, action, targetid) {
 	// 파라미터의 취득
 	var fm = $(form);
@@ -383,10 +373,11 @@ function loadHtml(form, action, targetid) {
 	}
 }
 
-//when : event click
+/*---------------------------------------------------------------------------------------
+ * 날짜 형식
+ ---------------------------------------------------------------------------------------*/
 Date.prototype.format = function(f) {
     if (!this.valueOf()) return " ";
-	 
     var weekName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
     var d = this;
     return f.replace(/(yyyy|yy|MM|dd|E|hh|mm|ss|a\/p)/gi, function($1) {
@@ -408,6 +399,9 @@ Date.prototype.format = function(f) {
 String.prototype.string = function(len){var s = '', i = 0; while (i++ < len) { s += this; } return s;};
 String.prototype.zf = function(len){return "0".string(len - this.length) + this;};
 Number.prototype.zf = function(len){return this.toString().zf(len);};
+/*-----------------------------------------------------------------
+ * 일정 수정 화면
+ --------------------------------------------------------------------*/
 function edit(){
 	var userValue = "${authUser.role}";
 	$('#myModal3 #settingcolor').removeAttr("disabled");
@@ -424,6 +418,9 @@ function edit(){
 	$('#myModal3 #delete').attr("type","hidden");
 	$('#myModal3 #modify').val("수정완료");
 }
+/*-----------------------------------------------------------------
+ * 일정 수정
+ -------------------------------------------------------------------*/
 function cummitEdit(){
 	//커밋 ajax구현 부분
 	var date = $(".example-modal #reservationtime2").val().split("-");
@@ -466,7 +463,9 @@ function cummitEdit(){
 	    }  
 	});
 }
-//when : cancel click
+/*------------------------------------------------
+ * 일정 수정 취소
+ -------------------------------------------------*/
 function disable(){
 	$('#myModal3 .modal-footer #modify').val("수정");
 	$('#myModal3 #kind').attr("disabled","");
@@ -479,7 +478,9 @@ function disable(){
 	$('#myModal3 #delete').attr("type","button");
 	$('#myModal3 #modify').attr("onclick",'edit()');
 }
-// 	삭제
+/*-----------------------------------------------------
+ * 일정 삭제
+ ------------------------------------------------------*/
 function remove(){
 	var url='${pageContext.request.contextPath}/calendar/delete';  
    	var calendar_no=$(".example-modal #seq").val();
