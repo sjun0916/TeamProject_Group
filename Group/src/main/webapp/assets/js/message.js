@@ -85,8 +85,8 @@ function initSendMessageForm(){
 	      width: 350,
 	      modal: true,
 	      buttons: {
-	        "전송하기": sendMessage,
-	        Cancel: function() {
+	        "전송": sendMessage,
+	        "취소": function() {
 	          dialog.dialog( "close" );
 	        }
 	      },
@@ -98,7 +98,7 @@ function initSendMessageForm(){
 	 
 	    form = dialog.find( "form" ).on( "submit", function( event ) {
 	      event.preventDefault();
-	      sendMessage();
+	      answerMessage();
 	    });
 	 
 	    $( "#answer" ).button().on( "click", function() {

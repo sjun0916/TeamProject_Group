@@ -13,8 +13,8 @@
 
 			<!-- 메인 로고 -->
 			<a href="/group/home" class="logo"> <!-- 메인바가 미니가 되었을때 로고 형태 -->
-				<span class="logo-mini">GW</span> <!-- 로고 형태 --> <span
-				class="logo-lg">GroupWare</span>
+				<span class="logo-mini"><img src="${pageContext.request.contextPath }/resources/icon/penguin.png"></span> <!-- 로고 형태 --> <span
+				class="logo-lg">GroupWare  <img src="${pageContext.request.contextPath }/resources/icon/penguin.png"></span>
 			</a>
 			<!-- 헤더 상단 네비바 -->
 			<nav class="navbar navbar-static-top" role="navigation">
@@ -43,7 +43,7 @@
 											<!-- start message --> <a href="#">
 												<div class="pull-left">
 													<!-- User Image -->
-													<img src="dist/img/user2-160x160.jpg" class="img-circle"
+													<img src="#" class="img-circle"
 														alt="User Image">
 												</div> <!-- Message title and timestamp -->
 												<h4>
@@ -121,8 +121,7 @@
 							data-toggle="dropdown"> <!-- 유저 사진 경로 --> 
 								<c:choose>
 								<c:when test="${authUser.imageUrl!=null}">
-								<img
-									src="\group\profileImg\<c:out value="${authUser.imageUrl}"/>"
+								<img src="\group\profileImg\<c:out value="${authUser.imageUrl}"/>"
 									class="user-image" alt="User Image">
 								</c:when>
 								<c:otherwise>

@@ -129,7 +129,7 @@ function initSendMessageForm(){
 	      width: 350,
 	      modal: true,
 	      buttons: {
-	        "전송하기": sendMessage,
+	        "전송": sendMessage,
 	        "취소": function() {
 	          dialog.dialog( "close" );
 	        }
