@@ -30,24 +30,89 @@
 					<ul class="nav navbar-nav">
 						<!-- 메일표시 (오른상단 네비)-->
 						<li class="dropdown messages-menu">
-							<!-- 링크걸기 --> <a href="${pageContext.request.contextPath}/mail/receivelist" class="dropdown-toggle"
-							data-toggle="dropdown"> <i class="fa fa-envelope-o"></i> <span
-								class="label label-success">N</span>
+							<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
+							data-toggle="dropdown" aria-expanded="false"> <i
+								class="fa fa-envelope-o"></i> <span class="label label-success">N</span>
 						</a>
+							<ul class="dropdown-menu">
+								<li class="header">You have 4 messages</li>
+								<li>
+									<!-- inner menu: contains the messages -->
+									<ul class="menu">
+										<li>
+											<!-- start message --> <a href="#">
+												<div class="pull-left">
+													<!-- User Image -->
+													<img src="dist/img/user2-160x160.jpg" class="img-circle"
+														alt="User Image">
+												</div> <!-- Message title and timestamp -->
+												<h4>
+													Support Team <small><i class="fa fa-clock-o"></i> 5
+														mins</small>
+												</h4> <!-- The message -->
+												<p>Why not buy a new awesome theme?</p>
+										</a>
+										</li>
+										<!-- end message -->
+									</ul> <!-- /.menu -->
+								</li>
+								<li class="footer"><a href="#">See All Messages</a></li>
+							</ul>
 						</li>
 						<!-- 공지사항 숫자표시 (오른상단 네비) -->
 						<li class="dropdown notifications-menu">
-							<!-- 링크걸기 --> <a href="${pageContext.request.contextPath}/NoticeList" class="dropdown-toggle"
-							data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span
-								class="label label-warning">N</span>
+							<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
+							data-toggle="dropdown" aria-expanded="false"> <i
+								class="fa fa-bell-o"></i> <span class="label label-warning">N</span>
 						</a>
+							<ul class="dropdown-menu">
+								<li class="header">You have 10 notifications</li>
+								<li>
+									<!-- Inner Menu: contains the notifications -->
+									<ul class="menu">
+										<li>
+											<!-- start notification --> <a href="#"> <i
+												class="fa fa-users text-aqua"></i> 5 new members joined
+												today
+										</a>
+										</li>
+										<!-- end notification -->
+									</ul>
+								</li>
+								<li class="footer"><a href="#">View all</a></li>
+							</ul>
 						</li>
 						<!-- 결재표시 (오른상단 네비) -->
-						<li class="dropdown tasks-menu">
-							<!-- 링크걸기 --> <a href="${pageContext.request.contextPath}/report/state" class="dropdown-toggle"
-							data-toggle="dropdown"> <i class="fa fa-flag-o"></i> <span
-								class="label label-danger">N</span>
+						<li class="dropdown tasks-menu open">
+							<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle"
+							data-toggle="dropdown" aria-expanded="true"> <i
+								class="fa fa-flag-o"></i> <span class="label label-danger">N</span>
 						</a>
+							<ul class="dropdown-menu">
+								<li class="header">You have 9 tasks</li>
+								<li>
+									<!-- Inner menu: contains the tasks -->
+									<ul class="menu">
+										<li>
+											<!-- Task item --> <a href="#"> <!-- Task title and progress text -->
+												<h3>
+													Design some buttons <small class="pull-right">20%</small>
+												</h3> <!-- The progress bar -->
+												<div class="progress xs">
+													<!-- Change the css width attribute to simulate progress -->
+													<div class="progress-bar progress-bar-aqua"
+														style="width: 20%" role="progressbar" aria-valuenow="20"
+														aria-valuemin="0" aria-valuemax="100">
+														<span class="sr-only">20% Complete</span>
+													</div>
+												</div>
+										</a>
+										</li>
+										<!-- end task item -->
+									</ul>
+								</li>
+								<li class="footer"><a href="#">View all tasks</a></li>
+							</ul>
 						</li>
 
 						<!-- 유저 정보 (오른상단 네비) -->

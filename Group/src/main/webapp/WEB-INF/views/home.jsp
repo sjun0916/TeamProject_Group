@@ -11,11 +11,6 @@
 	href='<c:url value="/resources/boardCSS/NoticeList.css"/>'>
 <link rel='stylesheet' type='text/css'
 	href='<c:url value="assets/css/calendar.css"/>'>
-	
-<script>
-	// 	calendar submit()
-	
-</script>
 </head>
 
 <%@ include file="include/header.jsp"%>
