@@ -31,6 +31,7 @@ public class PhotoService {
 	    public List<?> selectPhotoList(SearchVO param) {
 	        return sqlSession.selectList("selectPhotoList", param);
 	    }
+	    //메인 뷰 사진첩 리스트 생성
 	    public List<?> selectPhotoList2() {
 	        return sqlSession.selectList("selectPhotoList2");
 	    }

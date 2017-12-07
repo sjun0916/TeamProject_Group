@@ -13,12 +13,12 @@ public class BoardVO {
     private String content; 
     private String regdate; 
     private String hit; 
-    private String brddeleteflag; 
+    private String brddeleteflag; //글삭제여부
     private String filecnt;
     private String replycnt;
     private String writerpos;
     private String departname;
-    private int membernum;
+    private int membernum; //작성자 사원번호
     
     /* 첨부파일 */
     private List<MultipartFile> uploadfile;

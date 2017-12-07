@@ -31,7 +31,7 @@ public class PhotoController {
 	 */
 	@RequestMapping(value = "/PhotoList")
 	public String photoList(SearchVO searchVO, ModelMap modelMap) {
-		searchVO.setDisplayRowCount(9);
+		searchVO.setDisplayRowCount(9); // 한페이지 출력될 게시글 수
 		searchVO.pageCalculate( photoSvc.selectPhotoCount(searchVO) ); // startRow, endRow
 
 		List<?> listview  = photoSvc.selectPhotoList(searchVO);

@@ -32,9 +32,11 @@ public class NoticeService {
 	        return sqlSession.selectList("selectNoticeList", param);
 	    }
 	    
+	    // 게시판 상단에 고정되는 공지 리스트
 	    public List<?> selectNoticeList2() {
 	        return sqlSession.selectList("selectNoticeList2");
 	    }
+	    // 메인뷰 공지리스트
 	    public List<?> selectNoticeList3() {
 	        return sqlSession.selectList("selectNoticeList3");
 	    }
